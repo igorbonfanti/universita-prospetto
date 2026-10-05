@@ -1,0 +1,268 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"></head><body>
+<title>Analisi di orientamento</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a tutor's dossier. Running text in a 70ch column; tables for the admissions-officer view; facts and judgments marked. */
+:root{
+  --bg:#f7f6f2; --panel:#ffffff; --fg:#1d1f1c; --muted:#5f655c; --line:#d9dbd3;
+  --accent:#1f5f8b; --accent-soft:#e3eef6; --fact:#2e6b3b; --fact-soft:#e6f1e8; --judg:#8a5a1a; --judg-soft:#f6ecd9;
+  --fra:#1f5f8b; --mar:#b5541c; --iac:#4a7c3f; --warn:#a33a2a;
+  --display:"IBM Plex Serif",Georgia,serif; --body:"IBM Plex Sans",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#17191a; --panel:#1f2224; --fg:#ebeae4; --muted:#a4a79e; --line:#363a3b;
+  --accent:#7fb3d9; --accent-soft:#223240; --fact:#7dc48a; --fact-soft:#1f2f23; --judg:#e0b36a; --judg-soft:#33291a;
+  --fra:#7fb3d9; --mar:#e3925e; --iac:#8fc47f; --warn:#e07a68; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#17191a; --panel:#1f2224; --fg:#ebeae4; --muted:#a4a79e; --line:#363a3b;
+  --accent:#7fb3d9; --accent-soft:#223240; --fact:#7dc48a; --fact-soft:#1f2f23; --judg:#e0b36a; --judg-soft:#33291a;
+  --fra:#7fb3d9; --mar:#e3925e; --iac:#8fc47f; --warn:#e07a68; color-scheme:dark }
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.55;margin:0;padding-block:0 60px;padding-inline:16px}
+.wrap{max-width:980px;margin:0 auto}
+header.top{padding-block:22px 14px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+h1{font-family:var(--display);font-weight:600;font-size:28px;line-height:1.15;margin:0 0 8px;text-wrap:balance}
+.lede{font-size:16px;color:var(--muted);max-width:70ch;margin:0}
+nav.toc{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:13px;padding:10px 0;border-bottom:1px solid var(--line);position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:3}
+nav.toc a{color:var(--muted);text-decoration:none;padding:4px 0}
+nav.toc a:hover{color:var(--accent)}
+nav.toc a.back{color:var(--accent);font-weight:500}
+section{padding-top:30px;scroll-margin-top:60px}
+h2{font-family:var(--display);font-weight:600;font-size:22px;margin:0 0 10px;text-wrap:balance}
+h3{font-size:16px;font-weight:600;margin:22px 0 6px}
+h4{font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:16px 0 6px;font-weight:600}
+p,li{max-width:72ch}
+ul,ol{padding-left:22px}
+li{margin:4px 0}
+.legend{display:flex;flex-wrap:wrap;gap:10px 18px;font-size:13px;margin:10px 0 0}
+.f,.g{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;padding:1px 6px;border-radius:3px;vertical-align:1px;font-weight:500}
+.f{background:var(--fact-soft);color:var(--fact)}
+.g{background:var(--judg-soft);color:var(--judg)}
+.child{border-left:4px solid var(--c);padding-left:14px;margin-top:34px}
+.child h2{margin-top:0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px 14px;margin:10px 0}
+.card.key{border-left:4px solid var(--accent)}
+.card.warn{border-left:4px solid var(--warn)}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--panel);margin:10px 0}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{padding:7px 9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--panel);white-space:nowrap}
+td.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+td.k{font-weight:600;white-space:nowrap}
+td.w{min-width:260px}
+.pill{display:inline-block;font-size:11px;font-weight:600;padding:1px 7px;border-radius:10px;background:var(--accent-soft);color:var(--accent);white-space:nowrap}
+.pill.hi{background:var(--fact-soft);color:var(--fact)} .pill.mid{background:var(--judg-soft);color:var(--judg)} .pill.lo{background:#f3e3e0;color:var(--warn)}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .pill.lo{background:#3a2420} }
+:root[data-theme="dark"] .pill.lo{background:#3a2420}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.steps li{margin:6px 0}
+.steps b{font-family:var(--mono);font-size:12px;color:var(--accent)}
+footer{margin-top:40px;padding-top:14px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+.src a{color:var(--accent);word-break:break-all}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <p class="eyebrow">Università · Francesca, Marco e Iacopo · 5 ottobre 2026</p>
+  <h1>Analisi di orientamento: dove ha senso puntare, visto dal tutor e dall'ufficio ammissioni</h1>
+  <p class="lede">Un parere professionale sui percorsi più adatti a ciascuno dei tre, costruito su ciò che la famiglia ha dichiarato, sui dati ufficiali degli atenei e sulle regole di ammissione in vigore. Ogni affermazione è marcata: <span class="f">fatto</span> quando viene da una fonte ufficiale o dalla famiglia, <span class="g">valutazione</span> quando è un giudizio mio. Il documento accompagna il <a href="index.html">prospetto degli esborsi</a>, che calcola costi e probabilità con gli stessi dati.</p>
+</header>
+<nav class="toc">
+  <a class="back" href="index.html">← Prospetto esborsi</a>
+  <a href="#metodo">Metodo</a><a href="#regole">Regole che valgono per tutti</a><a href="#francesca">Francesca</a><a href="#marco">Marco</a><a href="#iacopo">Iacopo</a><a href="#famiglia">Lettura di famiglia</a><a href="#verifiche">Verifiche aperte</a><a href="#fonti">Fonti</a>
+</nav>
+
+<section id="metodo">
+  <h2>Come è fatta questa analisi</h2>
+  <p>Ho letto tutto il lavoro svolto da luglio a oggi (documento master del 13 settembre, screening dei corsi rev. 2, guide ai corsi di Amsterdam e Copenhagen, note di progetto) e ho rifatto le verifiche sui siti ufficiali il 5 ottobre 2026. Per ogni ragazzo rispondo a tre domande in ordine:</p>
+  <ol>
+    <li><b>Che cosa vuole e che cosa porta</b>: i fatti dichiarati dalla famiglia, senza interpretazioni aggiunte.</li>
+    <li><b>Come lo vede un ufficio ammissioni</b>: ateneo per ateneo, che cosa guarda la selezione, come si presenta il suo dossier oggi e che cosa può ancora cambiare prima della scadenza.</li>
+    <li><b>Che cosa gli consiglierei da tutor</b>: il percorso più coerente con le sue inclinazioni e con le probabilità reali, non quello più prestigioso o più economico in astratto.</li>
+  </ol>
+  <div class="legend"><span><span class="f">fatto</span> fonte ufficiale o dichiarazione della famiglia</span><span><span class="g">valutazione</span> giudizio professionale, discutibile</span></div>
+  <div class="card warn"><b>Due limiti da tenere presenti.</b> Le percentuali di ammissione sono stime costruite sui criteri pubblicati (posti, candidati, soglie, pesi), non dati degli atenei: nessuna università europea pubblica la probabilità di ammissione di un singolo profilo. E le inclinazioni dei ragazzi le conosco solo per come le ha descritte il padre: dove un passaggio dipende da ciò che vogliono davvero, lo dico e lo lascio a loro.</div>
+</section>
+
+<section id="regole">
+  <h2>Le regole che valgono per tutti e tre</h2>
+  <div class="grid2">
+    <div class="card"><h3 style="margin-top:0">Cinque modi di entrare</h3>
+      <ul>
+        <li><b>A requisito</b>: chi ha i requisiti entra (Tilburg, Maastricht EBE, VU, UvA Econometrics, KU Leuven, TU/e Industrial Engineering). <span class="f">fatto</span></li>
+        <li><b>Solo esame</b>: i voti del liceo non contano (WU Vienna, Politecnico TOL, TU Delft, UvA EBE con test). <span class="f">fatto</span></li>
+        <li><b>Misto voti + test</b>: Bocconi 55% test / 45% media di 3ª e 4ª; TU/e 90% test / 10% media. <span class="f">fatto</span></li>
+        <li><b>Graduatoria sui voti</b>: Rotterdam IBEB e IBA, CAO irlandese (maturità), Quota 1 danese (maturità convertita). <span class="f">fatto</span></li>
+        <li><b>Olistica</b>: dossier, saggi, colloquio (Sciences Po, ESCP, Forward, IE, Maastricht IB, PPLE). <span class="f">fatto</span></li>
+      </ul></div>
+    <div class="card"><h3 style="margin-top:0">Vincoli strutturali</h3>
+      <ul>
+        <li>Paesi Bassi: <b>massimo due domande a numero chiuso</b> per anno su Studielink, scadenza 15 gennaio; i corsi a requisito non le consumano. <span class="f">fatto</span></li>
+        <li>Irlanda: una domanda CAO con dieci preferenze, punteggio dalla maturità (UCD Commerce ≈ 554 punti ≈ maturità 88; Trinity BESS 565 ≈ 100 e lode con la tabella TCD). <span class="f">fatto</span></li>
+        <li>Danimarca: una domanda con otto preferenze entro il 15 marzo; <b>chi si diploma nell'anno della domanda concorre a CBS solo in Quota 1</b>, cioè con la sola media del diploma convertita. <span class="f">fatto</span></li>
+        <li>Sciences Po: ci si candida una volta sola nella vita; retta calcolata sul reddito familiare (massimo 14.900 € sopra ~332.500 € di reddito lordo con 3,5 parts). <span class="f">fatto</span></li>
+        <li>Olanda, dopo l'ingresso: il primo anno ha un numero minimo di crediti da superare per restare iscritti (BSA, di norma 45-48 su 60). <span class="f">fatto</span></li>
+      </ul></div>
+  </div>
+  <div class="card key"><b>La regola di portafoglio</b> <span class="g">valutazione</span>: ogni ragazzo dovrebbe avere almeno una candidatura per famiglia e almeno una a requisito. Cinque domande tutte in graduatoria sui voti non sono cinque possibilità: è la stessa possibilità ripetuta cinque volte.</div>
+</section>
+
+<!-- ================= FRANCESCA ================= -->
+<section id="francesca" class="child" style="--c:var(--fra)">
+  <h2>Francesca · ingresso settembre 2027</h2>
+  <h3>Che cosa vuole e che cosa porta <span class="f">fatti dichiarati</span></h3>
+  <ul>
+    <li>Liceo scientifico bilingue quadriennale, ultimo anno in corso; diploma luglio 2027. Media 8,4-8,5. Inglese C1 certificato. Esperienze: college in Inghilterra, scambio a Chicago, corso estivo IE a Madrid.</li>
+    <li>Interessi: economia e management, economia politica, data science, finanza, scienze politiche in stile Sciences Po/PPE; la specializzazione la sceglierà durante gli studi.</li>
+    <li>Preferisce un percorso all'estero, in inglese, con esperienze internazionali: anche se ammessa, Bocconi non sarebbe la prima scelta.</li>
+    <li>Test Bocconi sostenuto il 24 settembre 2026 dopo poche settimane di preparazione: 25/50, con difficoltà soprattutto di tempo (ultime sei domande a caso). Candidatura a Forward College già inviata.</li>
+  </ul>
+
+  <h3>Come la vede l'ufficio ammissioni, ateneo per ateneo</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Ateneo · corso</th><th>Che cosa guarda la selezione</th><th class="w">Come appare il dossier oggi</th><th>Che cosa può cambiare entro la scadenza</th><th>Stima</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Rotterdam · IBEB</td><td>700 posti; i primi 350 per pura media, poi 50% media + 50% sorteggio; esonero dal test di matematica con mate ≥ 7 <span class="f">fatto</span></td><td class="w">Media 8,4-8,5 è in fascia alta tra i candidati con diploma estero; matematica 8 dichiarata. L'unico punto interrogativo è il diploma quadriennale, che l'ufficio deve riconoscere come equivalente al vwo. <span class="g">valutazione</span></td><td>Conferma scritta sul diploma (entro dicembre); Studielink entro il 15 gennaio 2027; è l'unica domanda a numero chiuso da spendere in Olanda.</td><td><span class="pill hi">~85%</span></td></tr>
+      <tr><td class="k">Sciences Po · Collège universitaire</td><td>Dossier scolastico, due scritti, lettere, orale (50% del punteggio); nel 2026 oltre 11.000 candidati e 1.249 ammessi, il 92% con media &gt; 16/20 <span class="f">fatto</span></td><td class="w">C1, esperienze all'estero e interessi politico-economici sono esattamente il profilo che Sciences Po descrive. La media 8,4 è però sotto quella tipica degli ammessi (16/20 ≈ 8/10 è la soglia bassa degli ammessi, non la mediana). Il dossier regge se gli scritti e l'orale sono forti. <span class="g">valutazione</span></td><td>Apertura prevista fine ottobre 2026, chiusura marzo 2027 (date 2027 ancora da pubblicare). Candidatura unica nella vita: va presentata solo quando il dossier è pronto.</td><td><span class="pill lo">~13%</span></td></tr>
+      <tr><td class="k">Bocconi · 4 preferenze</td><td>55% test (migliore tra Bocconi, SAT, ACT) + 45% media di 3ª e 4ª; nessun altro documento conta <span class="f">fatto</span></td><td class="w">La media è competitiva; il 25/50 no. Bocconi non pubblica soglie: i preparatori collocano un profilo con 8,5 in zona competitiva intorno a 35+ in Early/Winter (indicazione di settore, non dato). <span class="f">fatto</span> Il 45% è già scritto; tutto si gioca sul secondo tentativo. <span class="g">valutazione</span></td><td>Nuovo test entro il 21 gennaio 2027; domanda Winter entro il 26 gennaio, esito a metà marzo. In alternativa il SAT, se rende di più. Quattro preferenze tutte compilate (es. Economics, BIEM/Management, IPG, CLEAM).</td><td><span class="pill mid">~50%</span> con test rifatto</td></tr>
+      <tr><td class="k">HEC–Bocconi · doppia laurea</td><td>110 posti; stessa formula Bocconi + statement of purpose; 3 semestri a Milano e 3 a Jouy-en-Josas; 75.250 € di rette totali <span class="f">fatto</span></td><td class="w">È l'incrocio politica/dati/economia che descrive, con metà percorso all'estero: risponde sia all'interesse sia alla preferenza per l'estero. Più selettivo dei corsi ordinari, e più caro del Bocconi semplice. <span class="g">valutazione</span></td><td>Stesse sessioni; una delle quattro preferenze della stessa domanda.</td><td><span class="pill lo">~25%</span></td></tr>
+      <tr><td class="k">CBS Copenhagen</td><td>Per chi si diploma nel 2027: solo Quota 1, media convertita sulla scala danese; soglie 2026: IB 11,1/12, IBP 10,7, BADM 9,8, BASM 9,4 <span class="f">fatto</span></td><td class="w">Conta il voto di maturità convertito, e la tabella ufficiale Italia→7-trin non è pubblica. Con una maturità intorno a 90 i corsi BADM/BASM sono plausibili, IB e IBP difficilmente. <span class="g">valutazione</span></td><td>Open Day 29 gennaio 2027; domanda entro il 15 marzo 2027; diploma entro il 5 luglio. Otto preferenze: IBP in cima, poi BADM, BASM.</td><td><span class="pill mid">~30%</span></td></tr>
+      <tr><td class="k">WU Vienna · BBE</td><td>240 posti; esame scritto a Vienna (inglese B2, matematica, fondamenti di economia); i voti non contano; 2026: 2.872 presenti, ≈ 8% ammessi; tasse ≈ 52 €/anno <span class="f">fatto</span></td><td class="w">Un esame a scelta multipla di due ore su matematica, inglese e letture assegnate: le stesse abilità che sta allenando per il test Bocconi. La selettività è alta ma allenabile. <span class="g">valutazione</span></td><td>Registrazione marzo-maggio 2027 (dettagli 2027/28 a metà novembre 2026); esame a fine giugno/inizio luglio 2027: <b>da incrociare con il calendario della maturità</b>.</td><td><span class="pill mid">~30%</span></td></tr>
+      <tr><td class="k">UCD Dublino · Commerce / Economics</td><td>Punti CAO dalla maturità: Commerce 553-554, Economics 542-544; tabella CAO 90→574, 80→506 <span class="f">fatto</span></td><td class="w">Serve una maturità intorno a 88: con il suo rendimento è raggiungibile ma non scontata. Trinity BESS (565 punti, tabella TCD 100→553) richiede 100 e lode: fuori portata realistica. <span class="g">valutazione</span></td><td>CAO entro il 1° febbraio 2027 (early 20 gennaio), dieci preferenze; riordinabili fino al 1° luglio.</td><td><span class="pill hi">~70-85%</span> se maturità ≥ 88</td></tr>
+      <tr><td class="k">UvA · Econometrics &amp; Data Science</td><td>Senza numero chiuso; matematica livello vwo-B (altrimenti OMPT-D ≥ 70%); inglese C1; scadenza 1° maggio <span class="f">fatto</span></td><td class="w">Requisiti soddisfatti sulla carta; da verificare come UvA classifica il liceo scientifico quadriennale per la matematica. Corso molto matematico: risponde all'interesse per la data science solo se quell'interesse regge tre anni di econometria. <span class="g">valutazione</span></td><td>Non consuma slot olandesi; decisione a maggio, dopo tutti gli esiti.</td><td><span class="pill hi">~90%</span></td></tr>
+      <tr><td class="k">UvA · PPLE</td><td>Selezione in tre round (dossier, esame online, colloquio); diploma italiano minimo 85/100, esame integrativo di matematica; retta 5.660 € <span class="f">fatto</span></td><td class="w">Il corso più vicino al suo interesse "PPE" dentro una città grande. Il dossier è presentabile; posti e tasso di ammissione non sono pubblicati. <span class="g">valutazione</span></td><td>Round 1 dal 1° ottobre 2026 al 1° febbraio 2027; esame online 27 marzo; colloqui in aprile.</td><td><span class="pill mid">~30%</span></td></tr>
+      <tr><td class="k">ESCP · Forward · IE</td><td>Olistiche: dossier, colloquio; nessuna soglia di media dichiarata (IE: benchmark 7,5+) <span class="f">fatto</span></td><td class="w">Ammissione probabile; il tema non è entrare ma spendere 20-30.000 € l'anno di sola retta per un'offerta accademica che, in economia, non supera le pubbliche olandesi. <span class="g">valutazione</span></td><td>A scorrimento fino a primavera; Forward già inviata.</td><td><span class="pill hi">55-75%</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Che cosa le consiglierei da tutor <span class="g">valutazione</span></h3>
+  <p>Francesca ha un profilo che le graduatorie sui voti premiano e che i sistemi a test puniscono solo se non li prepara. La sua preferenza per l'estero è coerente con il suo dossier: non c'è tensione tra ciò che vuole e ciò che può ottenere. Il percorso più solido è questo, in ordine di priorità:</p>
+  <ol class="steps">
+    <li><b>Rotterdam IBEB</b> come candidatura principale: il miglior dipartimento di economia della lista a 2.771 € l'anno, in una città vera, con probabilità alta. Unica domanda a numero chiuso olandese.</li>
+    <li><b>Bocconi Winter con il test rifatto</b>, anche se non è la prima scelta: tiene aperta l'opzione di casa e la doppia laurea HEC–Bocconi, che è l'unica via "Bocconi" compatibile con la sua voglia di estero. Il tempo tra oggi e il 21 gennaio va usato per il test, non per altro: è l'investimento a rendimento più alto dei prossimi tre mesi.</li>
+    <li><b>Sciences Po</b> solo se gli scritti sono forti: la probabilità è bassa e la candidatura è unica nella vita. Il PEM con ESCP (40 posti) entra nella stessa domanda.</li>
+    <li><b>CBS e WU Vienna</b> come candidature "gratuite" (retta zero o quasi) in due città di qualità: CBS dipende dalla maturità, WU da un esame che prepara comunque per Bocconi. Verificare la sovrapposizione tra esame WU e maturità prima di registrarsi.</li>
+    <li><b>UCD via CAO</b> con le dieci preferenze piene e <b>UvA Econometrics o PPLE</b> come reti: la prima quasi certa e senza slot, la seconda ambiziosa ma nel suo campo.</li>
+  </ol>
+  <p>Tilburg e Maastricht EBE restano le garanzie tecniche, ma la famiglia ha escluso le città piccole: ha senso tenerle solo se Francesca stessa le accetta come piano di riserva. Da evitare: spendere la seconda domanda olandese su IBA (stessa città, criterio uguale, nessuna diversificazione) e candidarsi a Sciences Po con un dossier affrettato.</p>
+  <div class="card"><b>Costo del percorso più probabile</b> <span class="f">dal prospetto</span>: Rotterdam IBEB ≈ 103.000 € in 3-4 anni (31.000 €/anno con alloggio e vita; il doppio bachelor BSc² a 4 anni è contemplato al 35%). Costo atteso complessivo, pesando tutte le opzioni: ≈ 102.000 €.</div>
+</section>
+
+<!-- ================= MARCO ================= -->
+<section id="marco" class="child" style="--c:var(--mar)">
+  <h2>Marco · ingresso settembre 2028</h2>
+  <h3>Che cosa vuole e che cosa porta <span class="f">fatti dichiarati</span></h3>
+  <ul>
+    <li>Liceo scientifico quinquennale, 4ª nel 2026/27. Media poco sotto il 7 in 3ª; obiettivo 7,5 in 4ª. Inglese B2 con potenziale C1. Matematica capita bene, voti non allineati: obiettivo 8 in matematica, inglese e storia.</li>
+    <li>Preferisce l'estero, in città vere; Bocconi gradita con i limiti della media. Ha visitato Rotterdam (IBA e IBEB) il 3 ottobre 2026 con il padre; la famiglia ha deciso di tentare Rotterdam, orientandosi su IBA.</li>
+  </ul>
+
+  <h3>Come lo vede l'ufficio ammissioni</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Ateneo · corso</th><th>Che cosa guarda la selezione</th><th class="w">Come appare il dossier oggi</th><th>Che cosa può cambiare entro la scadenza</th><th>Stima</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Rotterdam · IBA</td><td>650 posti; 75% media del penultimo anno (non arrotondata) + 25% motivazione; minimi: media 6,5 NL, matematica 6-6,5; ultimo ammesso intorno al 1.280° con liste d'attesa <span class="f">fatto</span></td><td class="w">La media di 4ª è il 75% del punteggio: con 7-7,5 italiano converte vicino alla soglia, e il ranking decide tra chi è sopra la soglia. Le due risposte motivazionali pesano un quarto: è l'unico spazio di manovra oltre i voti. <span class="g">valutazione</span></td><td>Tutta la 4ª: ogni decimo di media del 2026/27 entra direttamente nel 75%. Studielink entro il 15 gennaio 2028, modulo OLAF entro il 31 gennaio.</td><td><span class="pill mid">~45%</span></td></tr>
+      <tr><td class="k">Bocconi · CLEAM / Management</td><td>55% test + 45% media di 3ª e 4ª; corsi in italiano meno affollati <span class="f">fatto</span></td><td class="w">Con una media 3ª-4ª intorno a 7,3 servirebbe un test nella fascia alta (indicativamente 35+): possibile per chi prepara seriamente, non probabile. <span class="g">valutazione</span></td><td>La 4ª alza la metà del 45%; test o SAT ripetibili tra settembre 2027 e gennaio 2028 (vale il migliore).</td><td><span class="pill lo">~25%</span></td></tr>
+      <tr><td class="k">WU Vienna · BBE</td><td>Solo esame; i voti non contano; ≈ 8% dei presenti nel 2026 <span class="f">fatto</span></td><td class="w">Il registro non entra: è la candidatura più "neutra" rispetto al suo punto debole. La resa dipende da quanto prepara matematica e inglese entro giugno 2028. <span class="g">valutazione</span></td><td>Dettagli 2028/29 a novembre 2027; esame giugno/luglio 2028, da incrociare con la maturità.</td><td><span class="pill lo">~25%</span></td></tr>
+      <tr><td class="k">Maastricht · IB (numero chiuso) e EBE (a requisito)</td><td>IB: essay 1/3, CV 1/3, voti penultimo anno 1/3; EBE: requisiti + matching <span class="f">fatto</span></td><td class="w">IB è l'unico numero chiuso in cui due terzi del punteggio non dipendono dai voti; EBE è quasi certa. Maastricht è una città media: va verificato che la accetti. <span class="g">valutazione</span></td><td>IB entro il 15 gennaio 2028 (seconda domanda a numero chiuso); EBE a maggio.</td><td><span class="pill mid">IB ~60%</span> · <span class="pill hi">EBE ~90%</span></td></tr>
+      <tr><td class="k">ESADE · BBA</td><td>Test ESADE/SAT + transcript di tre anni a pari peso; 21.300 €/anno per 4 anni <span class="f">fatto</span></td><td class="w">Il test può compensare il transcript; il conto è 85.000 € di sola retta più Barcellona. <span class="g">valutazione</span></td><td>Processo aperto fino a giugno 2028.</td><td><span class="pill mid">~45%</span></td></tr>
+      <tr><td class="k">UvA · EBE</td><td>550 posti dal 2027/28; selezione solo con test online <span class="f">fatto</span></td><td class="w">Buona per il profilo, ma sarebbe la terza domanda a numero chiuso: entra solo al posto di IBA o di Maastricht IB. <span class="g">valutazione</span></td><td>Scelta da fare entro il 15 gennaio 2028.</td><td><span class="pill mid">~60%</span></td></tr>
+      <tr><td class="k">Irlanda · Danimarca · Spagna</td><td>CAO: UCD Commerce ≈ maturità 88; CBS Quota 1: maturità convertita; Spagna: nota di ammissione da maturità + PCE (UPF Economia 10,58) <span class="f">fatto</span></td><td class="w">Tutte dipendono dalla maturità, non dalla pagella: se giugno 2028 va molto bene si aprono, altrimenti no. La Spagna è l'unica dove quattro punti su quattordici si guadagnano con due esami estivi. <span class="g">valutazione</span></td><td>CAO 1° febbraio 2028; optagelse 15 marzo 2028; UNEDasiss da febbraio, PCE maggio-giugno 2028.</td><td><span class="pill lo">basse</span> salvo maturità alta</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Che cosa gli consiglierei da tutor <span class="g">valutazione</span></h3>
+  <p>Marco è il caso in cui l'anno in corso vale più di qualsiasi strategia: la 4ª alimenta insieme Rotterdam (75%), Bocconi (metà del 45%) e Maastricht IB (un terzo). La scelta di tentare IBA è coerente con la sua preferenza e con la visita fatta; va sostenuta, sapendo che spende una delle due domande olandesi e che il risultato dipende dalla media di quest'anno. In ordine:</p>
+  <ol class="steps">
+    <li><b>Rotterdam IBA</b> come candidatura principale, con le due risposte motivazionali preparate con cura: sono il 25% che non dipende dal registro.</li>
+    <li><b>Maastricht IB</b> come seconda domanda a numero chiuso: diversifica il criterio (essay e CV), non la città. <b>EBE</b> in parallelo, senza slot, come garanzia.</li>
+    <li><b>Bocconi</b> con tutte e quattro le preferenze e test ripetuto (o SAT): tentativo consapevole, gradito, non piano.</li>
+    <li><b>WU Vienna</b>: la candidatura a costo zero in cui il suo punto debole non esiste. Da preparare insieme a Iacopo, con lo stesso materiale.</li>
+    <li><b>Spagna via PCE</b> se a fine 4ª la media non è salita: è l'unico sistema dove un'estate di studio sposta davvero il risultato.</li>
+  </ol>
+  <p>Tilburg resta la rete a requisito; vale lo stesso discorso di Francesca sulle città piccole. Trinity, IE e Forward non aggiungono probabilità o aggiungono solo costo.</p>
+  <div class="card"><b>Costo del percorso più probabile</b> <span class="f">dal prospetto</span>: Rotterdam IBA ≈ 94.000 € in 3 anni; WU Vienna sarebbe ≈ 63.000 €; costo atteso ≈ 103.000 € (ESADE al 15% pesa molto sulla media).</div>
+</section>
+
+<!-- ================= IACOPO ================= -->
+<section id="iacopo" class="child" style="--c:var(--iac)">
+  <h2>Iacopo · ingresso settembre 2028</h2>
+  <h3>Che cosa vuole e che cosa porta <span class="f">fatti dichiarati</span></h3>
+  <ul>
+    <li>Liceo scientifico quinquennale, 4ª nel 2026/27. Media sotto il 7, per poca voglia di studiare; forte attitudine logico-matematica e per la fisica; molto brillante nei colloqui e nei test attitudinali. Inglese B2 con potenziale C1.</li>
+    <li>La famiglia cerca per lui atenei dove contino colloquio o test più della media, e vuole valutare anche l'ingegneria (gestionale, informatica) oltre all'economia. Estero in città vere.</li>
+  </ul>
+
+  <h3>Come lo vede l'ufficio ammissioni</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Ateneo · corso</th><th>Che cosa guarda la selezione</th><th class="w">Come appare il dossier oggi</th><th>Che cosa può cambiare entro la scadenza</th><th>Stima</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Politecnico di Milano · Ing. Gestionale (680) / Informatica (720) / Matematica (340)</td><td>Solo TOL (logica-matematica, comprensione, fisica, inglese); i voti scolastici non contano; TOL anticipato in 4ª: con ≥ 75/100 immatricolazione garantita per l'anno dopo il diploma, 2 tentativi; retta massima 3.943 €, iscrizione al test 35 € <span class="f">fatto (edizione 2026; bando 2027 atteso a nov-dic)</span></td><td class="w">Il meccanismo è fatto per il suo profilo: nessun peso della pagella, prova allenabile, e la possibilità di chiudere la partita nella primavera 2027 con un anno di anticipo. Vive a casa. L'unico limite è la sua preferenza per l'estero. <span class="g">valutazione</span></td><td>Registrazione da febbraio 2027, finestre marzo-luglio 2027 (per analogia con il 2026). Preparazione mirata al TOL da gennaio 2027.</td><td><span class="pill hi">~85%</span></td></tr>
+      <tr><td class="k">TU Delft · Computer Science &amp; Engineering</td><td>590 posti; test cognitivo 50% matematica + 50% logica; tre fasce per punteggio, poi sorteggio; voti scolastici ignorati; laptop obbligatorio ~1.350 € <span class="f">fatto</span></td><td class="w">Selezione interamente attitudinale: è la candidatura estera dove il suo talento vale di più. La competizione è alta (migliaia di domande) e la fascia 1 dà il posto certo. Delft è una città universitaria di 105.000 abitanti a 10-15 minuti da L'Aia e Rotterdam: va chiesto a lui se la considera "città vera". <span class="g">valutazione</span></td><td>Studielink entro il 15 gennaio 2028 (una delle due domande a numero chiuso); test a febbraio-marzo.</td><td><span class="pill mid">~50%</span></td></tr>
+      <tr><td class="k">WU Vienna · BBE</td><td>Solo esame (inglese, matematica, fondamenti di economia); ≈ 8% dei presenti; tasse ≈ 52 €/anno <span class="f">fatto</span></td><td class="w">Stessa logica di Delft, lato economia: nessun peso della pagella, in una capitale, quasi gratis. <span class="g">valutazione</span></td><td>Registrazione marzo-maggio 2028, esame giugno/luglio 2028.</td><td><span class="pill mid">~35%</span></td></tr>
+      <tr><td class="k">UvA · EBE (test) e Econometrics &amp; Data Science (a requisito)</td><td>EBE: 550 posti, solo test online; EDS: senza numero chiuso, matematica vwo-B o OMPT-D ≥ 70%, inglese C1 <span class="f">fatto</span></td><td class="w">EBE è la seconda domanda a numero chiuso sensata (solo test). EDS non consuma slot ma richiede un C1 che oggi non ha e tre anni di matematica intensa: va scelto solo se lo vuole lui. <span class="g">valutazione</span></td><td>EBE entro il 15 gennaio 2028; EDS entro il 1° maggio, con OMPT-D e certificazione C1 da fare prima.</td><td><span class="pill hi">EBE ~70%</span> · <span class="pill hi">EDS ~70%</span></td></tr>
+      <tr><td class="k">TU Eindhoven · CSE / Industrial Engineering</td><td>CSE: 375 posti, 40% test logico + 40% algoritmico + 10% matematica + 10% media; Industrial Engineering: accesso aperto <span class="f">fatto</span></td><td class="w">CSE è la terza selezione a test dell'Olanda; Industrial Engineering è lo sbocco gestionale in inglese senza selezione. Eindhoven è una città media (250.000 abitanti). <span class="g">valutazione</span></td><td>Entrano solo al posto di Delft o UvA EBE (numero chiuso), oppure Industrial Engineering senza slot.</td><td><span class="pill mid">CSE ~60%</span> · <span class="pill hi">IE ~90%</span></td></tr>
+      <tr><td class="k">KU Leuven / UCLouvain · Business Engineering (Bruxelles)</td><td>Accesso aperto per diplomi UE + prova OMPT-D ≥ 60% + IELTS 6.5; retta ≈ 1.000-1.150 € <span class="f">fatto (retta stimata)</span></td><td class="w">Sbocco gestionale-ingegneristico in inglese, in una capitale, con l'unico filtro in una prova di matematica. <span class="g">valutazione</span></td><td>Scadenza circa 1° marzo 2028; IELTS da fare nel 2027.</td><td><span class="pill hi">~85%</span></td></tr>
+      <tr><td class="k">IE University · BBA</td><td>Test IE o SAT ≥ 1200 + video + colloquio; benchmark 7,5+; 29.000 €/anno per 4 anni + 6.350 € una tantum <span class="f">fatto</span></td><td class="w">L'unica privata dove colloquio e test pesano quanto la media. Il problema è il prezzo: 250.000 € di percorso contro 22.000 del Politecnico. <span class="g">valutazione</span></td><td>Round continui.</td><td><span class="pill mid">~60%</span></td></tr>
+      <tr><td class="k">Bocconi · CBS · Irlanda · DTU · TUM Informatics</td><td>Bocconi 45% media 3ª-4ª; CBS Quota 1; CAO dalla maturità (97-100 per ingegneria); DTU solo voti (cutoff 10,2/12); TUM Informatics in tedesco <span class="f">fatto</span></td><td class="w">Tutte selezionano su ciò che oggi non ha (pagella, maturità molto alta, tedesco). Bocconi resta possibile solo con un test eccezionale. <span class="g">valutazione</span></td><td>Solo la maturità del 2028 può riaprire Irlanda e Danimarca.</td><td><span class="pill lo">≤ 15%</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Che cosa gli consiglierei da tutor <span class="g">valutazione</span></h3>
+  <p>Iacopo ha un dossier sbilanciato: debole dove si guarda il passato (la pagella), forte dove si guarda una prova (test, colloquio). Il consiglio non è di "aggirare" i voti ma di scegliere sistemi che misurano ciò che sa fare. Due avvertenze oneste, perché il tutor le deve dire: la prima è che un'ammissione per esame non cambia il corso dopo l'ammissione, e in Olanda il primo anno ha un minimo di crediti da superare (BSA) che espelle chi non studia; la seconda è che tra economia e ingegneria la scelta deve essere sua, perché i due percorsi si assomigliano nell'ingresso ma non nei tre anni successivi.</p>
+  <ol class="steps">
+    <li><b>TOL anticipato al Politecnico nella primavera 2027</b>: costa 35 €, non guarda i voti e, con 75/100, mette in tasca un posto a Milano con un anno di anticipo. È la mossa a rendimento più alto di tutto il piano, anche se poi sceglierà l'estero: toglie pressione a tutto il resto. Gestionale o Informatica si decidono dopo, con lo stesso punteggio.</li>
+    <li><b>TU Delft CSE e UvA EBE</b> come le due domande olandesi a numero chiuso: entrambe decise da un test. Se preferisce il gestionale all'informatica, UvA EBE prima e TU/e Industrial Engineering (senza slot) come riserva.</li>
+    <li><b>WU Vienna</b>: la stessa preparazione di matematica serve per TOL, Delft, UvA e WU. Un unico programma di allenamento da gennaio 2027 copre quattro candidature.</li>
+    <li><b>KU Leuven Business Engineering a Bruxelles</b> come rete a requisito in una capitale; <b>UvA Econometrics</b> solo se vuole davvero la matematica e fa il C1 nel 2027.</li>
+    <li><b>IE</b> solo se il budget lo consente e se il colloquio lo convince: non è una scelta accademica migliore delle precedenti, è più cara.</li>
+  </ol>
+  <p>Bocconi va tenuta come tentativo consapevole, con Economia aziendale in italiano come ultima preferenza. Sciences Po, Trinity, CBS e DTU non premiano il suo profilo e non vale la pena costruirvi sopra un dossier.</p>
+  <div class="card"><b>Costo del percorso più probabile</b> <span class="f">dal prospetto</span>: TU Delft ≈ 84.000 € in 3 anni; Politecnico a casa ≈ 22.000 €; WU Vienna ≈ 63.000 €. Costo atteso ≈ 86.000 €.</div>
+</section>
+
+<section id="famiglia">
+  <h2>Lettura di famiglia <span class="g">valutazione</span></h2>
+  <div class="grid2">
+    <div class="card"><h3 style="margin-top:0">Il filo comune</h3><p>I tre profili chiedono tre strategie diverse ma condividono un fatto: le candidature con la probabilità più alta e il costo più basso sono quasi tutte pubbliche e fuori dall'Italia (Rotterdam, Vienna, Amsterdam, Bruxelles) o a Milano al Politecnico. Le private care (IE, ESADE, ESCP, Forward) non aggiungono probabilità di ammissione né qualità accademica in economia: aggiungono costo. Hanno senso solo se un ragazzo le preferisce per ragioni sue.</p></div>
+    <div class="card"><h3 style="margin-top:0">Il conto</h3><p>Costo atteso dei tre bachelor ≈ 292.000 € (prospetto rev. 4), con un intervallo realistico 225-440.000 €. Il picco è il 2029/30 con i tre fuori insieme (~95.000 €). Vienna abbassa il conto di Marco e Iacopo perché costa 60.000 € contro i 85-105.000 delle città olandesi.</p></div>
+    <div class="card"><h3 style="margin-top:0">La preparazione condivisa</h3><p>Marco e Iacopo preparano le stesse prove (matematica per TOL, WU, Delft, UvA; inglese per IELTS e WU) con un anno di anticipo: un unico percorso di allenamento da gennaio 2027, non due. Francesca prepara il test Bocconi e lo stesso lavoro le serve per l'esame WU.</p></div>
+    <div class="card"><h3 style="margin-top:0">Quando ricalcolare</h3><p>Dopo il test Bocconi di Francesca (entro il 21 gennaio 2027) e gli esiti di marzo; a giugno 2027 con le medie di 4ª dei gemelli e l'esito del TOL anticipato; a novembre 2026 e 2027 con le procedure WU; con la maturità 2027 e 2028. Gli input del prospetto si cambiano nella scheda Probabilità.</p></div>
+  </div>
+</section>
+
+<section id="verifiche">
+  <h2>Verifiche aperte, in ordine di urgenza</h2>
+  <ol>
+    <li><b>Diploma quadriennale di Francesca</b>: conferma scritta da Rotterdam, UvA, CBS, WU, UCD, Sciences Po entro dicembre 2026.</li>
+    <li><b>Retta Sciences Po sul reddito reale</b>: la formula ufficiale 2026/27 dà il massimo solo sopra ~332.500 € di reddito lordo familiare; sotto, la retta scende (es. 200.000 € → ~12.100 €). Da simulare e da chiedere quale documentazione serve a una famiglia non residente fiscalmente in Francia.</li>
+    <li><b>Calendario esame WU 2027 e 2028</b> contro le date della maturità: nel 2026 l'esame era il 30 giugno a Vienna, senza alternative.</li>
+    <li><b>Conversione della maturità italiana sulla scala danese</b>: tabella Eksamenshåndbogen non pubblica; chiedere a CBS Admissions o a ufs@ufsn.dk.</li>
+    <li><b>Matematica del liceo scientifico per UvA Econometrics e PPLE</b>: se serve l'OMPT-D, va prenotato in primavera.</li>
+    <li><b>Bando Politecnico 2027/28</b> (atteso novembre-dicembre 2026): date del TOL anticipato e conferma della validità per il 2028/29.</li>
+    <li><b>UvA EBE 550 posti</b>: confermare con l'ufficio ammissioni che la riduzione da 850 è definitiva per il 2027/28.</li>
+    <li><b>Delft, Maastricht, Tilburg, Eindhoven come "città vere"</b>: è un criterio dei ragazzi, non mio; va chiesto a loro guardando le città, non le classifiche.</li>
+  </ol>
+</section>
+
+<section id="fonti" class="src">
+  <h2>Fonti principali (consultate il 5 ottobre 2026)</h2>
+  <ul style="font-size:13px">
+    <li>Bocconi — ammissioni 2027/28 e test: <a href="https://www.unibocconi.it/en/applying-bocconi/bachelor-and-law-programs/application-and-admissions/admissions">unibocconi.it/…/admissions</a> · HEC–Bocconi fees: <a href="https://www.unibocconi.it/en/applying-bocconi/bachelor-and-law-programs/hec-bocconi-double-program-fees-funding-and-housing">unibocconi.it/…/hec-bocconi-double-program-fees</a></li>
+    <li>Politecnico — TOL e TOL anticipato: <a href="https://www.polimi.it/en/prospective-students/how-to-apply/admission-to-laurea-programmes/engineering/when-to-register-for-the-tol">polimi.it/…/when-to-register-for-the-tol</a></li>
+    <li>Rotterdam — IBEB regolamento 2026/27: <a href="https://www.eur.nl/en/media/2025-09-regulations-numerus-fixus-ibeb-2026-2027">eur.nl</a> · IBA ranking: <a href="https://admissions-support.rsm.nl/support/solutions/articles/80000891294-how-is-the-iba-ranking-determined-">rsm.nl</a></li>
+    <li>UvA — EBE 2027/28: <a href="https://www.uva.nl/en/programmes/bachelors/economics--business-economics/application-and-admission/international-prior-education/international-prior-education-english-track.html">uva.nl</a> · ranking 2026: <a href="https://www.uva.nl/en/programmes/bachelors/economics--business-economics/application-and-admission/selection-procedure/update-ranking-numbers.html">uva.nl</a> · EDS: <a href="https://www.uva.nl/en/programmes/bachelors/econometrics-and-data-science/application-and-admission/international-prior-education/entry-requirements.html">uva.nl</a> · PPLE: <a href="https://pple.uva.nl/how-to-apply/entry-requirements/requirements-per-diploma-type/your-entry-requirements.html">pple.uva.nl</a></li>
+    <li>TU Delft — CSE selection 2026/27: <a href="https://filelist.tudelft.nl/TUDelft/Onderwijs/Opleidingen/Bachelor/Computer%20science%20engineering/selectieprocedure/Regulation%20CSE%20M_S%202026-2027.pdf">tudelft.nl</a> · TU/e CSE: <a href="https://www.tue.nl/en/education/bachelor-college/bachelor-computer-science-and-engineering/selection-procedure">tue.nl</a></li>
+    <li>Maastricht — regolamento selezione 2026/27: <a href="https://www.maastrichtuniversity.nl/file/regulations-selection-bachelor%E2%80%99s-programmes-numerus-fixus-2026-2027pdf">maastrichtuniversity.nl</a></li>
+    <li>WU Vienna — procedura BBE: <a href="https://www.wu.ac.at/en/programs/bachelors-programs/business-and-economics/overview/selection-procedure-bbe-1">wu.ac.at</a> · registrazioni 2026: <a href="https://www.ots.at/presseaussendung/OTS_20260602_OTS0065/fast-13000-bewerberinnen-erneut-rekord-registrierungszahlen-fuer-wu-bachelorstudien">ots.at</a> · tasse UE: <a href="https://studyinaustria.at/en/plan-your-studies/tuition-fee">studyinaustria.at</a></li>
+    <li>CBS — diploma estero e Quota 1: <a href="https://www.cbs.dk/en/news/foreign-upper-secondary-exam-application-deadline-15-march">cbs.dk</a> · IB soglie: <a href="https://www.cbs.dk/en/study-programmes/bachelor-programmes/bsc-international-business">cbs.dk</a></li>
+    <li>Sciences Po — formula droits 2026/27: <a href="https://www.sciencespo.fr/students/sites/sciencespo.fr.students/files/droits-scolarite-explication-formule-fr.pdf">sciencespo.fr (PDF)</a> · procedura: <a href="https://www.sciencespo.fr/college/en/admission-procedures/">sciencespo.fr</a></li>
+    <li>Irlanda — punti UCD 2026: <a href="https://www.ucd.ie/myucd/t4media/LC_Points_2026.pdf">ucd.ie</a> · TCD punti e tabella Italia: <a href="https://www.tcd.ie/study/assets/pdfs/2025-cao-minimum-entry-points-final.pdf">tcd.ie</a>, <a href="https://www.tcd.ie/study/country/italy/">tcd.ie/study/country/italy</a> · CAO conversione UE: <a href="https://www2.cao.ie/downloads/documents/2025/Guidelines-EU-EFTA-UK-2025.pdf">cao.ie</a></li>
+    <li>KU Leuven — retta: <a href="https://www.kuleuven.be/english/education/student/fees/tuition-fee-breakdown">kuleuven.be</a> · IE fees: <a href="https://www.ie.edu/university/admission/payment-methods/">ie.edu</a> · ESADE fees: <a href="https://www.esade.edu/bachelor/en/degrees/tuition-fees">esade.edu</a></li>
+  </ul>
+</section>
+
+<footer>Analisi redatta il 5 ottobre 2026 sulla base dei documenti di progetto (master 13/9/2026, screening rev. 2, guide UvA e CBS) e di verifiche sui siti ufficiali. Le stime percentuali sono le stesse del prospetto (scheda Probabilità), dove si possono ricalcolare cambiando gli input dei profili. Le preferenze dei ragazzi sono riportate come dichiarate dalla famiglia e non sono state interpretate.</footer>
+</div>
+</body></html>

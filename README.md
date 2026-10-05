@@ -8,6 +8,10 @@ Stima degli esborsi della famiglia per i bachelor di Francesca, Marco e Iacopo, 
 - `index.html` è l'intera applicazione: nessun server, nessuna dipendenza (solo i font Google, con fallback di sistema).
 - Le modifiche fatte nella pagina (ordine delle cascate, profili, parametri) restano salvate nel browser di chi le fa; per renderle visibili a tutti si cambiano i valori iniziali in `index.html` (costanti `PROF_D`, `CASC_D`, `TUI_D`, `CITIES_D`, `PARAM_D`) e si fa commit: GitHub Pages ripubblica in un minuto.
 
+## Pagine
+- `index.html`: prospetto esborsi interattivo (probabilità, cascate, simulatore, parametri).
+- `analisi.html`: analisi di orientamento per Francesca, Marco e Iacopo (tutor e ufficio ammissioni).
+
 ## Come modificare
 1. Apri `index.html` su GitHub e premi la matita (Edit).
 2. Cambia i valori nelle costanti in cima allo script (rette, mantenimento, profili, regole).

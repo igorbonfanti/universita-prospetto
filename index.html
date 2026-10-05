@@ -97,13 +97,14 @@ th[title]{cursor:help;text-decoration:underline dotted var(--muted);text-underli
 
 <div class="wrap">
 <header class="top"><div class="wrap">
-  <div><h1>Prospetto esborsi bachelor</h1><p class="sub">Francesca, Marco e Iacopo · euro nominali · aggiornato 5 ottobre 2026</p></div>
+  <div><h1>Prospetto esborsi bachelor</h1><p class="sub">Francesca, Marco e Iacopo · euro nominali · aggiornato 5 ottobre 2026 (rev. 4)</p></div>
   <nav role="tablist">
     <button role="tab" data-v="prospetto" aria-selected="true">Prospetto ponderato</button>
     <button role="tab" data-v="prob" aria-selected="false">Probabilità</button>
     <button role="tab" data-v="sim" aria-selected="false">Simulatore</button>
     <button role="tab" data-v="param" aria-selected="false">Parametri</button>
     <button role="tab" data-v="fonti" aria-selected="false">Metodo e fonti</button>
+    <a href="analisi.html" style="font:inherit;font-weight:500;padding:8px 12px;color:var(--accent);text-decoration:none;border-bottom:3px solid transparent">Analisi di orientamento →</a>
   </nav>
 </div></header>
 
@@ -173,6 +174,8 @@ th[title]{cursor:help;text-decoration:underline dotted var(--muted);text-underli
     <li>Francesca entra nel 2027/28; Marco e Iacopo nel 2028/29. Nessun gap year né cambio di ateneo in corsa.</li>
     <li>Le probabilità di ammissione sono giudizi professionali costruiti su dati ufficiali (posti, candidati, soglie, tabelle di conversione dei voti) e sui profili: Francesca media 8,4-8,5, C1, test Bocconi di settembre 2026 da ripetere; Marco media 7-7,5 obiettivo, B2; Iacopo media sotto il 7, molto forte in test attitudinali e colloqui. La scheda Probabilità mostra la regola e il calcolo per ogni ateneo; si aggiornano cambiando gli input del profilo (dopo il nuovo test Bocconi di Francesca, a giugno 2027 con le medie di quarta dei gemelli, dopo i TOL anticipati).</li>
     <li>Per Iacopo la cascata mescola economia e ingegneria: Politecnico (solo TOL, i voti non contano; TOL anticipato in quarta con ≥75 dà il posto garantito), TU Delft e TU/e (selezione su test cognitivi, voti ignorati o al 10%), KU Leuven/UCLouvain Business Engineering a Bruxelles (accesso aperto con prova di matematica), VU Amsterdam CS/AI (accesso aperto). Esclusi perché selezionano solo sui voti: DTU, Trinity e UCD Engineering (servirebbe una maturità 97-100); TUM Informatics è in tedesco; TUM Management & Technology resta possibile (colloquio) ma a probabilità media.</li>
+    <li>Regola olandese: al massimo due domande a numero chiuso l'anno (Studielink). Le cascate rispettano il vincolo: Francesca una sola (IBEB); Marco due (IBA, Maastricht IB); Iacopo due (Delft CSE, UvA EBE). TU/e CSE, Maastricht IB per Iacopo e IBEB/IBA per gli altri restano nel catalogo per il simulatore, ma aggiungerli in cascata richiede di togliere un altro numerus fixus.</li>
+    <li>Aggiunte di ottobre 2026: WU Vienna BBE (solo esame, 240 posti, tasse ≈ 52 €/anno), doppia laurea HEC–Bocconi (110 posti, 75.250 € di rette totali), UvA Econometrics & Data Science (senza numero chiuso) e PPLE (retta 5.660 €). CBS: chi si diploma nell'anno della domanda concorre solo in Quota 1. UvA EBE: 550 posti dal 2027/28.</li>
     <li>Esclusi dal perimetro: master, anno all'estero con costi diversi dal campus base (Sciences Po 3° anno, ESCP Londra), spese sanitarie straordinarie, auto.</li>
   </ul>
   <h2>Fonti consultate (5 ottobre 2026)</h2>
@@ -200,6 +203,8 @@ const CITIES_D={
  'Barcellona':[27000,'Tra camera (800/mese → 25k) e studio (1.150/mese → 29k); Idealista 2026 camera 600, studio 960'],
  'Monaco di Baviera':[27000,'Camera 808, studio ~1.500 (HousingAnywhere 2026); TUM indica 1.300-2.000/mese; mercato affitti difficile'],
  'Bruxelles':[21000,'Camera mediana 590 spese incluse, studio ~750-950; vitto 4,2k, svago 3k, voli 0,8k, varie 1,5k'],
+ 'Vienna':[19000,'Camera WG mediana 605/mese o studio privato all-in 750-920 (studentati no-profit 280-480); vitto 300/mese; Jahreskarte Jugend 300/anno; voli Milano 300-700; stima 16-22k (ÖH 52 €/anno esclusi)'],
+ 'Jouy-en-Josas / Milano (HEC–Bocconi)':[11500,'Media di 1,5 anni a casa a Milano (2.800) e 1,5 anni a Jouy-en-Josas/Parigi (~20.000; HEC stima 1.200/mese)'],
  'Copenhagen':[24000,'Studio/kollegium ~900/mese incl. utenze, vitto e svago 970/mese, voli 1.000, arredo/bici 500. Con SU (lavoro 10-12 h/sett.) ~14-15k'],
  'Dublino':[30000,'Alloggio 1.200/mese (mediana UCD; Daft Q1 2026 camera 874-1.007), vitto/utenze/svago 1.275/mese, voli 1.000']
 };
@@ -207,6 +212,7 @@ const CITIES_D={
 const TUI_D={
  'Bocconi — CLEAM / Management / BIEM':['Milano',17000,2026,3,null,0,'Milano (a casa)','2026/27: 17.000 tutto compreso, uguale per tutti i bachelor (2025/26: 16.700)'],
  'Bocconi — BEMACS / BAI':['Milano',17000,2026,3,null,0,'Milano (a casa)','Stessa retta; corsi quantitativi (Economics-Management-CS; Mathematical & Computing Sciences for AI)'],
+ 'HEC–Bocconi — Doppia laurea IPG / Data, Society & Organisations':['Milano',25083,2026,3,null,100,'Jouy-en-Josas / Milano (HEC–Bocconi)','110 posti; 3 semestri Milano + 3 HEC; rette 2026/27: 23.000 + 25.750 + 26.500 = 75.250 (media 25.083/anno); stesse sessioni Bocconi + statement; domanda 100'],
  'Politecnico di Milano — Ing. Gestionale':['Milano',3943,2026,3,null,35,'Milano (a casa)','Contributo massimo 2026/27 (ISEE alto) incl. tassa regionale e bollo; 680 posti; solo TOL (iscrizione 35 €)'],
  'Politecnico di Milano — Ing. Informatica / Matematica':['Milano',3943,2026,3,null,35,'Milano (a casa)','Stessa retta e stesso TOL; Informatica 720 posti, Matematica 340'],
  'Cattolica Milano — Economia':['Milano',11500,2026,3,null,0,'Milano (a casa)','Fascia massima 2026/27 ricostruita dalla normativa (~11.440-11.790). Ripiego milanese'],
@@ -214,7 +220,9 @@ const TUI_D={
  'Rotterdam EUR — IBEB':['Olanda',2771,2027,3,null,0,'Rotterdam','Retta statutaria NL 2027/28 già fissata (2026/27: 2.694); numerus fixus 700 posti'],
  'Rotterdam EUR — BSc² Econometrics & Economics':['Olanda',2771,2027,4,null,0,'Rotterdam','4 anni (264 ECTS), statutaria anche il 4° anno (da confermare con ESSC)'],
  'Rotterdam RSM — IBA':['Olanda',2771,2027,3,null,0,'Rotterdam','Numerus fixus 650 posti; 75% media + 25% motivazione'],
- 'UvA Amsterdam — Economics & Business Economics':['Olanda',2771,2027,3,null,0,'Amsterdam','Numerus fixus 550 posti, selezione solo con test online'],
+ 'UvA Amsterdam — Economics & Business Economics':['Olanda',2771,2027,3,null,0,'Amsterdam','Numerus fixus: 850 posti nel 2026/27, ridotti a 550 per il 2027/28; selezione solo con test online (2026: offerte fino al 1.487° su ~1.500 partecipanti)'],
+ 'UvA Amsterdam — Econometrics & Data Science':['Olanda',2771,2027,3,null,0,'Amsterdam','Senza numerus fixus; richiede matematica vwo-B (o OMPT-D ≥70%) e inglese C1; scadenza 1 maggio'],
+ 'UvA Amsterdam — PPLE (Politics, Psychology, Law & Economics)':['Olanda',5660,2026,3,null,0,'Amsterdam','Retta propria 5.660 (2026/27); selezione in 3 round (dossier, esame online, colloquio); per diploma italiano minimo 85/100'],
  'VU Amsterdam — Economics & Business Economics':['Olanda',2771,2027,3,null,0,'Amsterdam','Solo requisiti (matematica livello A / OMPT-A)'],
  'VU Amsterdam — Computer Science / AI':['Olanda',2771,2027,3,null,100,'Amsterdam','Accesso aperto (verifica matematica + inglese), in inglese; application fee 100 €'],
  'Tilburg — Economics / IBA':['Olanda',2771,2027,3,null,0,'Tilburg','Solo requisiti + matching'],
@@ -224,13 +232,14 @@ const TUI_D={
  'TU Delft — Aerospace Engineering':['Olanda',2771,2027,3,null,1350,'Delft','Numerus fixus 440 posti (~3.500 domande); 60% esame mate/fisica/aerospace + 40% questionario'],
  'TU Eindhoven — Computer Science & Engineering':['Olanda',2771,2027,3,null,0,'Eindhoven','Numerus fixus 375 posti; 40% test logico + 40% algoritmico + 10% mate + 10% media'],
  'TU Eindhoven — Industrial Engineering':['Olanda',2771,2027,3,null,0,'Eindhoven','Accesso aperto (solo matching); sbocco gestionale, in inglese'],
- 'Sciences Po — Bachelor Collège universitaire':['Francia',14900,2026,3,null,0,'Parigi','Fascia massima 2026/27; 3° anno all\'estero con retta Sciences Po. Campus Reims: mantenimento ~8k/anno in meno'],
+ 'Sciences Po — Bachelor Collège universitaire':['Francia',14900,2026,3,null,0,'Parigi','Massimo 2026/27 = 14.900, dovuto sopra ~332.500 € di reddito lordo familiare (formula su revenu brut global / 3,5 parts; es. 150k → ~8.800, 200k → ~12.100): da simulare. 3° anno all\'estero con retta Sciences Po. Campus Reims: ~8k/anno in meno'],
  'ESCP — Bachelor in Management':['Francia',20800,2027,3,null,80,'ESCP (media 3 campus)','Intake 2027: 17.900 + 2.900 fees, uguale per tutti i campus; application fee 80'],
  'Forward College — Business & Management':['Francia',21850,2027,3,0.05,70,'Forward College (Lisbona/Parigi/Berlino)','2027/28 UE: 21.850, +5%/anno dichiarato; early bird non considerato'],
  'IE University Madrid — BBA':['Spagna',29000,2026,4,0.029,6350,'Madrid','2026/27: 29.000 (Economics 26.500), +2,9%/anno fisso; una tantum: admission 150 + reservation 5.000 + Foundation 1.200'],
  'ESADE Barcellona — BBA / GGELO':['Spagna',21300,2027,4,null,0,'Barcellona','Prezzo 2027/28 già pubblicato; aumenti ≤ inflazione; scambi e lingue inclusi'],
  'UC3M Madrid — Economics / ADE (inglese)':['Spagna',1045,2026,4,null,250,'Madrid','Pubblica: 16,92 €/credito × 60 + tasse; una tantum UNEDasiss + PCE'],
  'UPF Barcellona — Economia / IBE':['Spagna',1202,2026,4,null,250,'Barcellona','Pubblica catalana: 17,69 €/credito × 60 + tasse'],
+ 'WU Vienna — Business and Economics (BBE)':['Austria',52,2026,3,null,50,'Vienna','Studenti UE: nessuna retta (solo ÖH 26,20 €/semestre) entro 6+2 semestri, poi 363 €/sem.; registrazione 50 €; 240 posti, esame in presenza a Vienna a fine giugno/luglio'],
  'TUM Monaco — Management & Technology':['Germania',194,2026,3,null,0,'Monaco di Baviera','Nessuna retta UE, solo contributo semestrale ~97 €; selezione su punteggio diploma + eventuale colloquio'],
  'KU Leuven / UCLouvain — Business Engineering (Bruxelles)':['Belgio',1100,2026,3,null,0,'Bruxelles','Retta stimata 2026/27 (2023/24: 978,60); accesso aperto + OMPT-D ≥60% + IELTS 6.5; in inglese'],
  'KU Leuven — Engineering Technology (Lovanio)':['Belgio',1100,2026,3,null,0,'Bruxelles','Stessa retta; Lovanio è a 25 min da Bruxelles (mantenimento simile)'],
@@ -243,9 +252,12 @@ const CASC_D={
  fra:[
   ['Sciences Po — Bachelor Collège universitaire',0.15,'Parcoursup 2025: ~10% ammessi, 92% con media >16/20; procedura internazionale <200 posti. Media 8,5 sotto la mediana; C1 e dossier aiutano.'],
   ['Rotterdam EUR — IBEB',0.85,'Numerus fixus 700 posti: i primi 350 per pura media (mate ≥7). Con 8,5 è in fascia alta; residuo: diploma quadriennale e sorteggio. La quota BSc² (Parametri) allunga la durata attesa.',true],
-  ['CBS Copenhagen — BSc (IB / BADM / BASM)',0.45,'Kvote 1: IB richiede 11,1/12 (quasi solo 95-100); BADM/BASM 9,4-9,8 raggiungibili con 8,5 (~9-10 danese). Kvote 2 possibile.'],
+  ['CBS Copenhagen — BSc (IB / BADM / BASM)',0.45,''],
+  ['WU Vienna — Business and Economics (BBE)',0.3,''],
+  ['HEC–Bocconi — Doppia laurea IPG / Data, Society & Organisations',0.25,''],
   ['Bocconi — CLEAM / Management / BIEM',0.55,'55% test / 45% media 3ª-4ª: media 8,4-8,5 sopra la mediana stimata; serve rifare il test a 30+/50 in Early 2026.'],
-  ['UCD Dublino — Commerce / Economics',0.70,'Punti CAO 2025-26: Commerce 553-554, Economics 542-544 ≈ maturità 87-88 (tabella CAO). Diploma quadriennale da far riconoscere.'],
+  ['UCD Dublino — Commerce / Economics',0.70,''],
+  ['UvA Amsterdam — Econometrics & Data Science',0.9,''],
   ['IE University Madrid — BBA',0.75,'Test IE/SAT ≥1200 + colloquio; benchmark Bachillerato 7,5+; tasso non ufficiale 30-40%.'],
   ['ESCP — Bachelor in Management',0.65,'Valutazione olistica (transcript, statement, CV, C1, colloquio), nessun test obbligatorio.'],
   ['Forward College — Business & Management',0.55,'Candidatura già inviata; ~1 su 8 offerte; dossier + colloquio; requisito UoL ≈ ABB.'],
@@ -253,23 +265,24 @@ const CASC_D={
  ],
  mar:[
   ['Rotterdam RSM — IBA',0.45,'Numerus fixus 650 posti, 75% media + 25% motivazione; ultimo ammesso ~1.280° con liste d\'attesa. Media 7-7,5 vicina alla soglia 6,5 NL: motivazione decisiva.'],
-  ['Bocconi — CLEAM / Management / BIEM',0.25,'Con media 7-7,5 serve un test ≥35/50: possibile ma non probabile. Solo corsi in italiano.'],
-  ['ESADE Barcellona — BBA / GGELO',0.45,'Test ESADE/SAT + transcript a pari peso; benchmark IB 34+. Compensabile con un test forte.'],
-  ['Maastricht SBE — International Business',0.65,'Selezione 1/3 essay, 1/3 CV, 1/3 voti penultimo anno; ~67% dei candidati selezionati.'],
-  ['UvA Amsterdam — Economics & Business Economics',0.85,'Numerus fixus con solo test online: nel 2026 offerte fino al 1.487° su ~1.500 partecipanti.'],
-  ['Tilburg — Economics / IBA',0.90,'Solo requisiti + matching.'],
+  ['Bocconi — CLEAM / Management / BIEM',0.25,''],
+  ['WU Vienna — Business and Economics (BBE)',0.24,''],
+  ['ESADE Barcellona — BBA / GGELO',0.45,''],
+  ['Maastricht SBE — International Business',0.65,''],
+  ['Maastricht SBE — Economics & Business Economics',0.9,''],
+  ['Tilburg — Economics / IBA',0.90,''],
   ['Cattolica Milano — Economia',1,'Ripiego a Milano.']
  ],
  iac:[
-  ['TU Delft — Computer Science & Engineering',0.50,'590 posti; test cognitivo (mate + logica) e sorteggio per fasce; i voti non contano. Profilo ideale, competizione alta. Max 2 domande numerus fixus NL l\'anno (Delft + TU/e le esauriscono).'],
-  ['UvA Amsterdam — Economics & Business Economics',0.80,'Selezione solo con test online di matematica/economia (2026: quasi tutti ammessi). Rischio: requisito matematica sul diploma.'],
-  ['TU Eindhoven — Computer Science & Engineering',0.60,'375 posti; 90% del punteggio è test (logico, algoritmico, mate), la media pesa solo 10%.'],
-  ['Politecnico di Milano — Ing. Gestionale',0.85,'Solo TOL (logica/mate/fisica), nessun peso dei voti; TOL anticipato in 4ª (primavera 2027) con ≥75/100 = posto garantito. Costo minimo, vive a casa.'],
-  ['IE University Madrid — BBA',0.55,'Test attitudinale + video + colloquio pesano quanto la media; media <7 sotto i benchmark ma recuperabile.'],
-  ['Maastricht SBE — International Business',0.50,'Essay e CV valgono 2/3; voti del penultimo anno 1/3.'],
-  ['KU Leuven / UCLouvain — Business Engineering (Bruxelles)',0.90,'Accesso aperto per diplomi UE; unico scoglio la prova OMPT-D di matematica (≥60%), per lui una formalità.'],
-  ['Bocconi — CLEAM / Management / BIEM',0.15,'Media <7 in 3ª-4ª: servirebbe un test eccezionale (≥40/50).'],
-  ['Tilburg — Economics / IBA',0.80,'Solo requisiti + matching; rischio solo sul requisito di matematica.'],
+  ['TU Delft — Computer Science & Engineering',0.50,''],
+  ['WU Vienna — Business and Economics (BBE)',0.34,''],
+  ['UvA Amsterdam — Economics & Business Economics',0.70,''],
+  ['UvA Amsterdam — Econometrics & Data Science',0.7,''],
+  ['Politecnico di Milano — Ing. Gestionale',0.85,''],
+  ['IE University Madrid — BBA',0.55,''],
+  ['KU Leuven / UCLouvain — Business Engineering (Bruxelles)',0.90,''],
+  ['Bocconi — CLEAM / Management / BIEM',0.15,''],
+  ['Tilburg — Economics / IBA',0.80,''],
   ['Cattolica Milano — Economia',1,'Ripiego a Milano.']
  ]
 };
@@ -322,14 +335,26 @@ const FONTI=[
  ['Trinity','Punti CAO 2025 e tabella maturità','https://www.tcd.ie/study/assets/pdfs/2025-cao-minimum-entry-points-final.pdf'],
  ['CAO','Conversione diplomi UE 2025','https://www2.cao.ie/downloads/documents/2025/Guidelines-EU-EFTA-UK-2025.pdf'],
  ['Dublino','Daft rental report Q1 2026','https://www.rte.ie/documents/news/2026/05/daft.ie-rental-report-2026q1.pdf'],
- ['Milano','Tariffe ATM 2026','https://www.atm.it/it/ViaggiaConNoi/Documents/TARIFFE%20ATM.pdf']
+ ['Milano','Tariffe ATM 2026','https://www.atm.it/it/ViaggiaConNoi/Documents/TARIFFE%20ATM.pdf'],
+ ['WU Vienna','Procedura di selezione BBE','https://www.wu.ac.at/en/programs/bachelors-programs/business-and-economics/overview/selection-procedure-bbe-1'],
+ ['WU Vienna','Comunicato registrazioni 2026 (~3.900 per 240 posti)','https://www.ots.at/presseaussendung/OTS_20260602_OTS0065/fast-13000-bewerberinnen-erneut-rekord-registrierungszahlen-fuer-wu-bachelorstudien'],
+ ['Austria','Tasse universitarie studenti UE','https://studyinaustria.at/en/plan-your-studies/tuition-fee'],
+ ['Vienna','Alloggio WU / studentati','https://www.wu.ac.at/en/programs/international-and-exchange-students/international-students/welcome-to-vienna/accommodation-1'],
+ ['HEC–Bocconi','Fees doppia laurea','https://www.unibocconi.it/en/applying-bocconi/bachelor-and-law-programs/hec-bocconi-double-program-fees-funding-and-housing'],
+ ['Bocconi','Ammissioni 2027/28 (posti, sessioni)','https://www.unibocconi.it/en/applying-bocconi/bachelor-and-law-programs/application-and-admissions/admissions'],
+ ['UvA','EBE English track 2027/28 (550 posti)','https://www.uva.nl/en/programmes/bachelors/economics--business-economics/application-and-admission/international-prior-education/international-prior-education-english-track.html'],
+ ['UvA','Econometrics & Data Science requisiti','https://www.uva.nl/en/programmes/bachelors/econometrics-and-data-science/application-and-admission/international-prior-education/entry-requirements.html'],
+ ['UvA','PPLE requisiti per diploma e retta','https://pple.uva.nl/how-to-apply/entry-requirements/requirements-per-diploma-type/your-entry-requirements.html'],
+ ['CBS','Diploma estero: solo Quota 1 per chi si diploma nell\'anno','https://www.cbs.dk/en/news/foreign-upper-secondary-exam-application-deadline-15-march'],
+ ['Sciences Po','Formula droits de scolarité 2026/27 (PDF)','https://www.sciencespo.fr/students/sites/sciencespo.fr.students/files/droits-scolarite-explication-formule-fr.pdf'],
+ ['Politecnico','TOL anticipato: date e soglia 75','https://www.polimi.it/en/prospective-students/how-to-apply/admission-to-laurea-programmes/engineering/when-to-register-for-the-tol']
 ];
 
 
 // ---------- profili e motore delle probabilità ----------
 const PROF_D={
  fra:{media:8.4,mate:8,matur:90,c1:1,pLog:0.75,pBoc:0.65,pCol:0.70,
-      note:'Media 8,4-8,5 (liceo quadriennale bilingue), inglese C1 certificato, esperienze all\'estero. Test Bocconi di settembre 2026 andato male per mancanza di tempo: la resa attesa (65%) presuppone un secondo tentativo preparato.'},
+      note:'Media 8,4-8,5 (liceo quadriennale bilingue), inglese C1 certificato, esperienze all\'estero. Test Bocconi del 24/9/2026: 25/50 (soglia di valutabilità 17; le indicazioni dei preparatori collocano il posizionamento competitivo con media 8,5 intorno a 35+): la resa attesa 0,65 presuppone un secondo tentativo preparato entro il 21/1/2027 (Winter).'},
  mar:{media:7.3,mate:7.5,matur:78,c1:0,pLog:0.60,pBoc:0.55,pCol:0.50,
       note:'Media 3ª-4ª stimata 7,3 (poco meno di 7 in 3ª, obiettivo 7,5 in 4ª), matematica verso l\'8, inglese B2 con potenziale C1. Resa media nei test, colloquio nella norma.'},
  iac:{media:6.6,mate:7,matur:72,c1:0,pLog:0.85,pBoc:0.70,pCol:0.75,
@@ -365,8 +390,8 @@ const RULES={
    fn:q=>{const s=W(q.media,7,9),m=q.mate>=8?1:0.6;return {p:cl(s*m*0.85+0.05),calc:`W(media 7→9)=${r2(s)} × mate≥8? ${m} × 0,85 + 0,05`}}},
  'Rotterdam RSM — IBA':{dati:'Numerus fixus 650 posti; ranking 75% media (non arrotondata) + 25% motivazione; ultimo ammesso ~1.280° con liste d\'attesa; minimi media 6,5 NL e mate 6-6,5',
    fn:q=>{const s=W(q.media,6.5,8.2);return {p:cl(0.85*s+0.1*q.pCol),calc:`0,85 × W(media 6,5→8,2)=${r2(s)} + 0,10 × resa motivazione ${q.pCol}`}}},
- 'UvA Amsterdam — Economics & Business Economics':{dati:'Numerus fixus 550 posti, selezione solo con test online; nel 2026 offerte fino al 1.487° su ~1.500 partecipanti',
-   fn:q=>{const m=q.mate>=6?1:0.85;return {p:(0.75+0.15*q.pLog)*m,calc:`(0,75 + 0,15 × resa test ${q.pLog}) × requisito mate ${m}`}}},
+ 'UvA Amsterdam — Economics & Business Economics':{dati:'Numerus fixus: 850 posti nel 2026/27 (offerte fino al 1.487° su ~1.500 partecipanti), ridotti a 550 dal 2027/28; selezione solo con test online di 2,5 h (mate, economia); top 300 per punteggio, poi sorteggio',
+   fn:q=>{const m=q.mate>=6?1:0.85;return {p:(0.45+0.3*q.pLog)*m,calc:`(0,45 + 0,3 × resa test ${q.pLog}) × requisito mate ${m} — ricalibrato su 550 posti`}}},
  'VU Amsterdam — Economics & Business Economics':{dati:'Solo requisiti (matematica livello A / OMPT-A) + matching',fn:q=>{const m=q.mate>=6?1:0.7;return {p:0.9*m,calc:`0,9 × requisito matematica ${m}`}}},
  'VU Amsterdam — Computer Science / AI':{dati:'Accesso aperto con verifica matematica e inglese',fn:q=>{const m=q.mate>=6?1:0.7;return {p:0.9*m,calc:`0,9 × requisito matematica ${m}`}}},
  'Tilburg — Economics / IBA':{dati:'Solo requisiti (matematica all\'esame finale, IELTS 6.0) + matching',fn:q=>{const m=q.mate>=6?1:0.7;return {p:0.9*m,calc:`0,9 × requisito matematica ${m}`}}},
@@ -394,13 +419,21 @@ const RULES={
    fn:q=>{const n=5+(q.media-6)*2.25+3.2*q.pLog,p=cl((n-9.5)/2.5)*0.9;return {p,calc:`nota stimata ${r2(n)} = 5 + (media−6)×2,25 + 3,2 × resa PCE ${q.pLog}; P = W(nota 9,5→12) × 0,9`}}},
  'UPF Barcellona — Economia / IBE':{dati:'Notes de tall 2025: Economia 10,58, ADE 10,97, IBE 12,39',
    fn:q=>{const n=5+(q.media-6)*2.25+3.2*q.pLog,p=cl((n-9)/2)*0.9;return {p,calc:`nota stimata ${r2(n)}; P = W(nota 9→11) × 0,9 (Economia; IBE molto più alta)`}}},
+ 'WU Vienna — Business and Economics (BBE)':{dati:'240 posti; 2026: ~3.900 registrati, 2.872 presenti all\'esame (≈8% ammessi); esame scritto a scelta multipla di 2 ore a Vienna (inglese B2, matematica, fondamenti di economia da letture assegnate); i voti scolastici non contano in alcuna forma; nessun tedesco',
+   fn:q=>({p:0.4*q.pLog,calc:`0,4 (esame allenabile, ~8% dei presenti ma molti impreparati) × resa test ${q.pLog}`})},
+ 'HEC–Bocconi — Doppia laurea IPG / Data, Society & Organisations':{dati:'110 posti; stessa formula Bocconi (55% test, 45% media) + statement of purpose; prima coorte 2024/25; più selettivo dei corsi ordinari',
+   fn:q=>{const w=W(q.media,7,9.5);return {p:cl(q.pBoc*w*0.7),calc:`resa test Bocconi ${q.pBoc} × W(media 7→9,5)=${r2(w)} × 0,7 (110 posti)`}}},
+ 'UvA Amsterdam — Econometrics & Data Science':{dati:'Senza numerus fixus: si entra con i requisiti (matematica vwo-B o OMPT-D ≥70%, inglese C1); corso molto matematico',
+   fn:q=>{const m=q.mate>=7.5?1:0.5+0.5*q.pLog,e=q.c1?1:0.85;return {p:cl(0.9*m*e),calc:`0,9 × requisito mate (≥7,5: 1, altrimenti 0,5+0,5×resa test) ${r2(m)} × C1? ${e}`}}},
+ 'UvA Amsterdam — PPLE (Politics, Psychology, Law & Economics)':{dati:'Selezione propria in 3 round: dossier (transcript, CV, statement), esame online, colloquio; diploma italiano: minimo 85/100, inglese 10 o certificazione, esame integrativo di matematica; posti non pubblicati',
+   fn:q=>{const w=W(q.matur,85,97);return {p:cl(w*(0.5*q.pCol+0.3*q.pLog+0.2)),calc:`W(maturità 85→97)=${r2(w)} × (0,5 × resa colloquio ${q.pCol} + 0,3 × resa esame ${q.pLog} + 0,2)`}}},
  'TUM Monaco — Management & Technology':{dati:'Fase 1 punteggio = 65% voto diploma + 35% materie; ≥88 diretto, altrimenti colloquio 10\' (50% media + 50% colloquio, serve ≥70)',
    fn:q=>{const w=W(q.media,6,9);return {p:cl(0.3*w+0.5*q.pCol),calc:`0,3 × W(media 6→9)=${r2(w)} + 0,5 × resa colloquio ${q.pCol}`}}},
  'KU Leuven / UCLouvain — Business Engineering (Bruxelles)':{dati:'Accesso aperto per diplomi UE + prova di matematica OMPT-D ≥60% + IELTS 6.5',
    fn:q=>({p:0.9*(0.7+0.3*q.pLog),calc:`0,9 × (0,7 + 0,3 × resa test ${q.pLog}) — l\'OMPT-D è l\'unico filtro`})},
  'KU Leuven — Engineering Technology (Lovanio)':{dati:'Accesso aperto + OMPT-D ≥60% + inglese',fn:q=>({p:0.9*(0.7+0.3*q.pLog),calc:`0,9 × (0,7 + 0,3 × resa test ${q.pLog})`})},
- 'CBS Copenhagen — BSc (IB / BADM / BASM)':{dati:'Kvote 1 (60%) su media convertita: IB 11,1/12, BADM 9,8, BASM 9,4; kvote 2 (40%) motivazione + esperienze; maturità 90 ≈ 10, 80 ≈ 7 sulla scala danese',
-   fn:q=>{const w=W(q.matur,78,96);return {p:cl(0.45*w+0.15*q.pCol),calc:`0,45 × W(maturità 78→96)=${r2(w)} (kvote 1 BADM/BASM) + 0,15 × resa kvote 2 ${q.pCol}`}}},
+ 'CBS Copenhagen — BSc (IB / BADM / BASM)':{dati:'Chi si diploma nell\'anno della domanda concorre SOLO in kvote 1 (CBS): conta la media del diploma convertita sulla scala danese 7-trin. Soglie 2026: IB 11,1/12, IBP 10,7, BADM 9,8, BASM 9,4. Tabella ufficiale Italia→7-trin non pubblica (stima: 90 ≈ 10, 80 ≈ 7)',
+   fn:q=>{const w=W(q.matur,80,96);return {p:cl(0.5*w),calc:`0,5 × W(maturità 80→96)=${r2(w)} (kvote 1 BADM/BASM; IB/IBP richiedono di più)`}}},
  'UCD Dublino — Commerce / Economics':{dati:'Punti CAO 2025-26: Commerce 553-554, Economics 542-544; tabella CAO: maturità 90→574, 80→506 (≈88 richiesto)',
    fn:q=>{const w=W(q.matur,82,90);return {p:cl(0.85*w),calc:`0,85 (riconoscimento diploma) × W(maturità 82→90)=${r2(w)}`}}},
  'Trinity Dublino — BESS / PPES':{dati:'Punti 2025: BESS 565, PPES 581; tabella TCD: 100→553, 100 e lode→600: serve il massimo',
@@ -418,13 +451,13 @@ function defaultState(){
     slots:{}};
 }
 let S=defaultState();
-try{const raw=localStorage.getItem('prospetto-v3');if(raw){const l=JSON.parse(raw);
+try{const raw=localStorage.getItem('prospetto-v4');if(raw){const l=JSON.parse(raw);
   // merge: keep saved values, add any new keys from defaults
   S.param=Object.assign(S.param,l.param||{});if(l.prof)for(const c in l.prof)S.prof[c]=Object.assign(S.prof[c],l.prof[c]);S.cities=Object.assign(S.cities,l.cities||{});
   for(const k in l.tui||{}) if(S.tui[k]) S.tui[k]=Object.assign(S.tui[k],l.tui[k]);
   if(l.casc) for(const c in l.casc) if(l.casc[c].every(r=>S.tui[r.key])) S.casc[c]=l.casc[c];
   if(l.sim) S.sim=Object.assign(S.sim,l.sim); if(l.slots) S.slots=l.slots; }}catch(e){}
-function save(){try{localStorage.setItem('prospetto-v3',JSON.stringify(S))}catch(e){}}
+function save(){try{localStorage.setItem('prospetto-v4',JSON.stringify(S))}catch(e){}}
 
 // ---------- model ----------
 const fmt=n=>Math.round(n).toLocaleString('it-IT');
