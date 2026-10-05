@@ -57,7 +57,7 @@ Aggiornato al 5 ottobre 2026. Tutto ciò che segue è stato dichiarato da Igor o
 - **set 2026**: *screening-corsi-atenei-rev2.html* (64 corsi per area); serie "Guida ai corsi" (Rotterdam IBA/IBEB da screenshot, *amsterdam-uva.html*, *copenhagen-cbs.html*) pensata per essere letta dai ragazzi.
 - **24/9/2026**: test Bocconi di Francesca, 25/50.
 - **3/10/2026**: Open Day Rotterdam con Marco; decisione IBA.
-- **5/10/2026**: prospetto esborsi (prima in Excel, poi HTML interattivo con probabilità dal profilo, simulatore, tooltip, sezione "In breve"); repository GitHub + Pages; analisi di orientamento; aggiunta di WU Vienna, HEC–Bocconi, UvA EDS/PPLE, ingegneria per Iacopo; correzioni CBS Quota 1 e UvA 550 posti; interruttore tema.
+- **5/10/2026**: prospetto esborsi (prima una versione Excel, scartata perché conteneva Forward College, poi HTML interattivo con probabilità dal profilo, simulatore, tooltip, sezione "In breve"); repository GitHub + Pages; analisi di orientamento; aggiunta di WU Vienna, HEC–Bocconi, UvA EDS/PPLE, ingegneria per Iacopo; correzioni CBS Quota 1 e UvA 550 posti; interruttore tema.
 
 ## Correzioni già fatte (non ripetere gli errori)
 

@@ -12,7 +12,6 @@ Lingua di lavoro: **italiano**. Igor usa Claude come consulente professionale di
 | `analisi.html` | **Analisi di orientamento** (5/10/2026): per ciascun ragazzo i fatti dichiarati, la lettura dell'ufficio ammissioni ateneo per ateneo con stima %, il consiglio da tutor, verifiche aperte, fonti. Ogni affermazione è marcata "fatto" o "valutazione". |
 | `docs/progetto/` | I documenti HTML prodotti nelle fasi precedenti, copiati integralmente dal Project claude.ai con una "nota di archivio" in testa dove i dati sono stati poi corretti. In ordine cronologico: `mappa-candidature-economia-2027.html`, `scala-ponderata-atenei-2027.html`, `marco-iacopo-ingresso-2028.html` (22/8/2026); `Piano_Universita_Bonfanti_Master.html` (13/9/2026, il master che li supera); `Marco_Universita_2028_Book_Completo.html`; `amsterdam-uva.html`, `copenhagen-cbs.html` (schede ateneo); `screening-corsi-atenei-rev2.html` (screening corsi). Riferimento storico: dove contraddicono `index.html`/`analisi.html` vale la versione più recente. |
 | `docs/ricerche/` | Note di ricerca con cifre e URL (rette, costo della vita, selettività, ingegneria, Vienna e verifiche di ottobre 2026). |
-| `docs/legacy/` | Versione Excel del prospetto (prima iterazione, 5/10/2026) e lo script Python che la generava. Superata dall'HTML. |
 | `docs/CONTESTO.md` | Tutti i fatti sulla famiglia, i vincoli, le decisioni e le correzioni, in ordine cronologico. **Leggerlo prima di qualsiasi modifica di contenuto.** |
 
 ## Come è fatto il modello (`index.html`)

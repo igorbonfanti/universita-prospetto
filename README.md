@@ -24,4 +24,3 @@ Fonti e metodo sono nella scheda "Metodo e fonti" della pagina.
 - `docs/CONTESTO.md`: tutti i fatti sulla famiglia, i vincoli, le decisioni e le correzioni.
 - `docs/ricerche/`: cifre e URL raccolti (rette, costo della vita, selettività, ingegneria, Vienna).
 - `docs/progetto/`: i documenti HTML delle fasi precedenti (archivio).
-- `docs/legacy/`: la prima versione Excel del prospetto.
