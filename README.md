@@ -18,3 +18,10 @@ Stima degli esborsi della famiglia per i bachelor di Francesca, Marco e Iacopo, 
 3. "Commit changes": la pagina si aggiorna da sola.
 
 Fonti e metodo sono nella scheda "Metodo e fonti" della pagina.
+
+## Documentazione per chi lavora sul repository (anche con Claude Code)
+- `CLAUDE.md`: punto di ingresso — struttura, modello di calcolo, test, regole di contenuto.
+- `docs/CONTESTO.md`: tutti i fatti sulla famiglia, i vincoli, le decisioni e le correzioni.
+- `docs/ricerche/`: cifre e URL raccolti (rette, costo della vita, selettività, ingegneria, Vienna).
+- `docs/progetto/`: i documenti HTML delle fasi precedenti (archivio).
+- `docs/legacy/`: la prima versione Excel del prospetto.

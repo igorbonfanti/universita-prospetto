@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>Università di Amsterdam — Guida ai corsi</title>
+<style>
+:root{
+  --paper:#FBF8F3; --card:#FFFFFF; --ink:#2B2621; --soft:#6B6158; --line:#E6DED3; --tint:#F4EEE5;
+  --a:#6A4C93; --b:#2F5F8A; --c:#A23B4B; --warn:#A23B4B; --ok:#2E7D6B;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,"Times New Roman",serif;
+  --sans:"Segoe UI","Helvetica Neue",Calibri,Arial,sans-serif;
+  color-scheme:light;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--paper)}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.6}
+a{color:inherit;text-underline-offset:3px;text-decoration-color:var(--line)}
+a:focus-visible{outline:2px solid var(--a);outline-offset:2px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+header{padding:64px 0 34px;border-bottom:1px solid var(--line)}
+.kicker{font-family:var(--sans);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin:0 0 14px}
+h1{font-weight:400;font-size:clamp(34px,5.5vw,54px);line-height:1.1;margin:0 0 18px;letter-spacing:-.01em}
+h1 em{color:var(--a)}
+.intro{font-size:19px;max-width:62ch;margin:0;color:#3d362f}
+nav.toc{font-family:var(--sans);font-size:14.5px;padding:18px 0;border-bottom:1px solid var(--line)}
+nav.toc ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px 22px}
+nav.toc a{text-decoration:none;color:var(--soft)}
+section{padding:52px 0 0}
+h2{font-weight:400;font-size:32px;line-height:1.2;margin:0 0 8px}
+h3{font-weight:600}
+.lead{color:var(--soft);margin:0 0 24px;max-width:64ch}
+
+.facts{display:grid;grid-template-columns:repeat(3,1fr);border-top:2px solid var(--ink)}
+.facts div{padding:16px 16px 16px 0;border-bottom:1px solid var(--line)}
+.facts b{display:block;font-size:24px;font-weight:400;line-height:1.2}
+.facts span{font-family:var(--sans);font-size:14px;color:var(--soft)}
+
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.prog{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--a);border-radius:6px;padding:18px 20px}
+.prog.b{border-top-color:var(--b)} .prog.c{border-top-color:var(--c)}
+.prog .code{font-family:var(--sans);font-weight:700;font-size:13px;letter-spacing:.06em;color:var(--a)}
+.prog.b .code{color:var(--b)} .prog.c .code{color:var(--c)}
+.prog h3{font-size:21px;margin:4px 0 8px;line-height:1.25}
+.prog p{margin:0 0 10px;font-size:16.5px}
+.prog .fit{font-family:var(--sans);font-size:14px;color:var(--soft);margin:10px 0 0;padding-top:10px;border-top:1px solid var(--line)}
+
+.course-block{margin-top:44px}
+.course-block > h3{font-size:26px;margin:0 0 4px}
+.course-block .sub{font-family:var(--sans);font-size:14px;color:var(--soft);margin:0 0 16px}
+.course-block.a > h3{color:var(--a)} .course-block.b > h3{color:var(--b)} .course-block.c > h3{color:var(--c)}
+.years{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.years.two-col{grid-template-columns:1fr 1fr}
+.year{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:16px 18px}
+.year h4{font-family:var(--sans);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);margin:0 0 8px;font-weight:600}
+dl{margin:0}
+dl div{padding:7px 0;border-top:1px solid var(--line)}
+dl div:first-child{border-top:0;padding-top:0}
+dt{font-weight:600;font-size:16.5px;line-height:1.35}
+dd{margin:2px 0 0;font-size:15px;color:var(--soft)}
+.callout{background:var(--tint);border-radius:6px;padding:14px 18px;margin-top:16px;font-size:16.5px}
+.callout b{font-weight:600}
+
+.others{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.other{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:14px 18px}
+.other h4{margin:0 0 4px;font-size:17.5px}
+.other p{margin:0;font-size:15.5px}
+.other .tag{font-family:var(--sans);font-size:12.5px;color:var(--soft);margin-top:6px;display:block}
+
+ol.tl{list-style:none;margin:0;padding:0;border-top:2px solid var(--ink)}
+ol.tl li{display:grid;grid-template-columns:190px 1fr;gap:18px;padding:14px 0;border-bottom:1px solid var(--line)}
+ol.tl .when{font-family:var(--sans);font-weight:700;font-size:15px}
+ol.tl .when.key{color:var(--c)}
+ol.tl b{display:block;font-weight:600}
+ol.tl p{margin:2px 0 0;font-size:16.5px}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.two h3{font-size:20px;margin:0 0 8px}
+ul.clean{margin:0;padding-left:20px}
+ul.clean li{margin:7px 0;font-size:16.5px}
+
+table.cmp{width:100%;border-collapse:collapse;font-size:16px}
+table.cmp th,table.cmp td{text-align:left;padding:11px 12px 11px 0;border-bottom:1px solid var(--line);vertical-align:top}
+table.cmp thead th{font-family:var(--sans);font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);border-bottom:2px solid var(--ink);font-weight:600}
+table.cmp tbody th{font-weight:600;width:24%}
+
+.note{font-family:var(--sans);font-size:13.5px;color:var(--soft)}
+.warn{color:var(--warn);font-weight:600}
+.good{color:var(--ok);font-weight:600}
+footer{padding:56px 0 64px;margin-top:56px;border-top:1px solid var(--line);font-family:var(--sans);font-size:13px;color:var(--soft)}
+
+@media (max-width:860px){
+  body{font-size:17px} header{padding-top:40px}
+  .three,.years,.years.two-col,.two,.others{grid-template-columns:1fr}
+  .facts{grid-template-columns:1fr 1fr}
+  ol.tl li{grid-template-columns:1fr;gap:2px}
+  table.cmp,table.cmp tbody,table.cmp tr,table.cmp td,table.cmp th{display:block;width:auto}
+  table.cmp thead{display:none}
+  table.cmp tr{border-bottom:1px solid var(--line);padding:10px 0}
+  table.cmp td,table.cmp th{border:0;padding:3px 0}
+}
+@media print{nav.toc{display:none}.prog,.year,.other,.openday,ol.tl li{break-inside:avoid}body{font-size:11pt}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <p class="kicker">Guida ai corsi · Amsterdam</p>
+  <h1>Università di Amsterdam: <em>econometria, economia e il corso che mescola quattro materie</em></h1>
+  <p class="intro">UvA è la più grande università dei Paesi Bassi e sta dentro una città vera, non in un campus isolato in mezzo alla campagna. Qui trovate i tre bachelor che ci interessano: cosa si studia davvero anno per anno, come si entra (e sono tre strade molto diverse fra loro) e per chi è fatto ciascuno. Le spiegazioni "in parole semplici" sono nostre, per capire di cosa parla un insegnamento dal suo titolo.</p>
+</header>
+<nav class="toc" aria-label="Indice"><ul>
+  <li><a href="#breve">In breve</a></li>
+  <li><a href="#corsi">I tre corsi</a></li>
+  <li><a href="#eds">Econometria e Data Science</a></li>
+  <li><a href="#ebe">Economia e Business</a></li>
+  <li><a href="#pple">PPLE</a></li>
+  <li><a href="#quale">Quale fa per te</a></li>
+  <li><a href="#entrare">Come si entra</a></li>
+  <li><a href="#vita">Vivere ad Amsterdam</a></li>
+</ul></nav>
+
+<section id="breve">
+  <h2>In breve</h2>
+  <div class="facts">
+    <div><b>3 anni</b><span>36 mesi, a tempo pieno, 180 crediti</span></div>
+    <div><b>Tutto in inglese</b><span>per i tre corsi che ci interessano</span></div>
+    <div><b>Roeterseiland</b><span>campus in centro città, non fuori Amsterdam</span></div>
+    <div><b>#60 al mondo</b><span>classifica QS 2027</span></div>
+    <div><b>100+ nazionalità</b><span>tra gli studenti dell'ateneo</span></div>
+    <div><b>Città top 10</b><span>tra le più vivibili al mondo</span></div>
+  </div>
+  <div class="callout"><b>La cosa più importante di questa pagina:</b> i tre corsi si entrano in tre modi completamente diversi. Econometria non ha numero chiuso e si chiude il 1° maggio. Economia in inglese ha numero chiuso a 850 posti e chiude molto prima, il <b>15 gennaio</b>. PPLE ha una selezione tutta sua ed è il più difficile dei tre. Sbagliare la data significa perdere l'anno, quindi le date contano quanto i programmi.</div>
+  <div class="callout"><b>Aggiornamento ottobre 2026:</b> per l'ingresso 2027/28 i posti di Economics and Business Economics (English track) sono stati ridotti a <b>550</b>; la retta PPLE è 5.660 €/anno; per il diploma italiano PPLE richiede almeno 85/100. Vedi <code>docs/ricerche/2026-10-05-vienna-e-verifiche.md</code>.</div>
+</section>
+
+<section id="corsi">
+  <h2>I tre corsi che fanno per noi</h2>
+  <p class="lead">Stessa università, stesso quartiere, tre modi diversissimi di occuparsi di economia.</p>
+  <div class="three">
+    <div class="prog"><div class="code">EDS</div><h3>Econometrics and Data Science</h3>
+      <p>Si costruiscono modelli matematici per rispondere a domande economiche e si imparano a trattare grandi quantità di dati. Dal secondo anno si sceglie il ramo <b>Econometrics</b> o il ramo <b>Data Science</b>.</p>
+      <p>I primi due anni sono quasi in comune con il bachelor di Scienze attuariali: se ci si accorge di preferire l'altro, il passaggio non è un salto nel vuoto.</p>
+      <p class="fit">Il più matematico dei tre. Gruppi di lezione piccoli. <span class="good">Niente numero chiuso.</span></p></div>
+    <div class="prog b"><div class="code">EBE</div><h3>Economics and Business Economics</h3>
+      <p>Il primo anno tocca cinque grandi temi: contabilità, microeconomia, macroeconomia, finanza ed economia dei mercati e delle organizzazioni. Poi si sceglie l'indirizzo <b>Economics</b> o <b>Business Economics</b>.</p>
+      <p>Il terzo anno lo si compone da sé, scegliendo tra corsi avanzati, minor, semestre all'estero o tirocinio.</p>
+      <p class="fit">Il più simile a IBEB di Rotterdam. <span class="warn">Numero chiuso: 850 posti, domanda entro il 15 gennaio.</span></p></div>
+    <div class="prog c"><div class="code">PPLE</div><h3>Politics, Psychology, Law and Economics</h3>
+      <p>L'unico corso in Europa che mette insieme queste quattro discipline in un unico percorso. Si studia un problema reale — disuguaglianza, diritti umani, regolamentazione — guardandolo con quattro paia di occhiali diversi.</p>
+      <p>Dal secondo anno si sceglie un <b>major</b>: quello che ci interessa è Economics. Metà del percorso resta però interdisciplinare.</p>
+      <p class="fit">Un college piccolo dentro una grande università. <span class="warn">Selezione propria, chiede una media eccellente.</span></p></div>
+  </div>
+</section>
+
+<section id="eds">
+  <h2>Econometrics and Data Science</h2>
+  <p class="lead">Il corso per chi ama la matematica e vuole usarla per capire l'economia, non per farla in astratto.</p>
+
+  <div class="course-block a">
+    <h3>Cosa si studia</h3>
+    <p class="sub">Tre anni · inglese · Roeterseiland · niente numero chiuso</p>
+    <div class="years">
+      <div class="year"><h4>Primo anno — le basi</h4>
+        <dl>
+          <div><dt>Mathematics: Calculus</dt><dd>Analisi matematica: derivate, integrali, funzioni. È lo strumento con cui si scrive tutto il resto.</dd></div>
+          <div><dt>Probability Theory and Statistics</dt><dd>Come si ragiona quando i dati sono incerti: probabilità, distribuzioni, stime.</dd></div>
+          <div><dt>Macroeconomics</dt><dd>L'economia vista dall'alto: crescita, inflazione, disoccupazione, banche centrali.</dd></div>
+          <div><dt>Finance for AE</dt><dd>Finanza applicata all'economia: come si valuta un investimento, come si prezza il rischio.</dd></div>
+        </dl>
+      </div>
+      <div class="year"><h4>Secondo anno — la scelta</h4>
+        <dl>
+          <div><dt>Si sceglie il ramo</dt><dd><b>Econometrics</b>: modelli per stimare relazioni economiche a partire dai dati reali. <b>Data Science</b>: metodi per lavorare su grandi quantità di dati, anche non economici.</dd></div>
+          <div><dt>Ancora in comune con Actuarial Science</dt><dd>I primi due anni coincidono quasi del tutto con il bachelor di Scienze attuariali (assicurazioni, pensioni, rischio).</dd></div>
+          <div><dt>Gruppi piccoli</dt><dd>Le lezioni sono in classi ridotte: si fanno esercizi e si viene seguiti, non si sta in un'aula da trecento.</dd></div>
+        </dl>
+      </div>
+      <div class="year"><h4>Terzo anno — specializzazione</h4>
+        <dl>
+          <div><dt>Corsi avanzati del proprio ramo</dt><dd>Si va a fondo su econometria o data science.</dd></div>
+          <div><dt>Spazio per l'estero o un minor</dt><dd>Come negli altri bachelor olandesi, c'è un semestre libero da usare per uno scambio o per approfondire altro.</dd></div>
+          <div><dt>Tesi</dt><dd>Un lavoro proprio su dati veri, che è poi quello che si mostra nei colloqui.</dd></div>
+        </dl>
+      </div>
+    </div>
+    <div class="callout"><b>Dopo la laurea.</b> UvA indica come sbocchi tipici i ministeri e gli enti pubblici, le multinazionali, le banche, le società di consulenza, oppure mettersi in proprio. I master naturali dopo questo corso sono <b>Econometrics</b>, <b>Business Economics</b>, <b>Entrepreneurship</b> e <b>Actuarial Science and Mathematical Finance</b>.</div>
+  </div>
+</section>
+
+<section id="ebe">
+  <h2>Economics and Business Economics</h2>
+  <p class="lead">Il percorso classico: prima si guarda tutta l'economia, poi si sceglie da che parte stare.</p>
+
+  <div class="course-block b">
+    <h3>Cosa si studia</h3>
+    <p class="sub">Tre anni · inglese · Roeterseiland · <span class="warn">numero chiuso, 850 posti</span></p>
+    <div class="years">
+      <div class="year"><h4>Primo anno — cinque grandi temi</h4>
+        <dl>
+          <div><dt>Accounting</dt><dd>Come si leggono i conti di un'azienda: bilancio, costi, ricavi.</dd></div>
+          <div><dt>Microeconomics</dt><dd>Le scelte dei singoli: consumatori, imprese, prezzi, concorrenza.</dd></div>
+          <div><dt>Macroeconomics</dt><dd>Il quadro d'insieme: PIL, inflazione, politica monetaria e fiscale.</dd></div>
+          <div><dt>Finance</dt><dd>Come le imprese si finanziano e come si valutano gli investimenti.</dd></div>
+          <div><dt>Economics of Markets and Organisations</dt><dd>Perché le aziende esistono, come si organizzano, come funzionano i mercati.</dd></div>
+        </dl>
+      </div>
+      <div class="year"><h4>Secondo anno — l'indirizzo</h4>
+        <dl>
+          <div><dt>Economics</dt><dd>L'economia come disciplina: teoria, politica economica, analisi dei dati. Più vicino a chi pensa a un master in economia o a un percorso di ricerca.</dd></div>
+          <div><dt>Business Economics</dt><dd>L'economia dentro l'impresa: finanza aziendale, organizzazione, contabilità direzionale. Più vicino a chi pensa a un lavoro in azienda o in consulenza.</dd></div>
+          <div><dt>Si può cambiare idea</dt><dd>La scelta arriva dopo un anno intero in cui si sono già viste tutte e cinque le aree: non si sceglie al buio a diciotto anni.</dd></div>
+        </dl>
+      </div>
+      <div class="year"><h4>Terzo anno — lo si compone da sé</h4>
+        <dl>
+          <div><dt>Corsi avanzati</dt><dd>Si approfondisce l'indirizzo scelto.</dd></div>
+          <div><dt>Minor, estero o tirocinio</dt><dd>Il terzo anno è progettato per essere personalizzato: è qui che si costruisce il profilo che si porterà al master.</dd></div>
+          <div><dt>Tesi</dt><dd>Chiude il percorso.</dd></div>
+        </dl>
+      </div>
+    </div>
+    <div class="callout"><b>Attenzione alla versione olandese.</b> Lo stesso corso esiste anche in lingua olandese, e quella <b>non</b> ha numero chiuso. La versione in inglese invece sì: 850 posti e domanda entro il <b>15 gennaio</b>, cioè quasi quattro mesi prima della scadenza normale del 1° maggio. Per noi conta solo la versione inglese, quindi conta solo il 15 gennaio.</div>
+    <div class="callout"><b>Dopo la laurea.</b> UvA cita multinazionali, banche e assicurazioni, imprese di ogni dimensione, ministeri e società di consulenza. I master collegati sono <b>Accountancy and Control</b>, <b>Business Economics</b>, <b>Finance</b> ed <b>Economics</b>.</div>
+  </div>
+</section>
+
+<section id="pple">
+  <h2>PPLE — Politics, Psychology, Law and Economics</h2>
+  <p class="lead">Non è un corso di economia con qualche materia in più: è un corso costruito apposta perché le quattro materie si parlino fra loro.</p>
+
+  <div class="course-block c">
+    <h3>Cosa si studia</h3>
+    <p class="sub">Tre anni · inglese · college a piccoli numeri · <span class="warn">selezione propria</span></p>
+
+    <div class="years">
+      <div class="year"><h4>Primo anno — il tronco comune</h4>
+        <dl>
+          <div><dt>Doing Research: An Introduction</dt><dd>Come si imposta una ricerca seria: domande, fonti, prove.</dd></div>
+          <div><dt>Politics, Power and Governance I</dt><dd>Chi decide, come si decide, chi controlla chi.</dd></div>
+          <div><dt>What you don't learn in school</dt><dd>Un corso sulle cose che la scuola dà per scontate: come si legge un testo difficile, come si argomenta.</dd></div>
+          <div><dt>Law, Justice and Morality</dt><dd>Diritto e filosofia morale insieme: cosa rende una legge giusta.</dd></div>
+          <div><dt>Rhetoric</dt><dd>Come si costruisce e si smonta un discorso persuasivo. Si impara parlando.</dd></div>
+          <div><dt>Integrative seminar I — Human Rights</dt><dd>Un tema unico guardato con tutte e quattro le discipline. È il marchio di fabbrica del corso.</dd></div>
+          <div><dt>Economics for a Changing World I</dt><dd>Economia impostata sui problemi veri: disuguaglianza, clima, lavoro.</dd></div>
+          <div><dt>Philosophy of the Social Sciences</dt><dd>Perché le scienze sociali funzionano diversamente dalla fisica. Qui sta la filosofia che ci interessa.</dd></div>
+          <div><dt>Introduction to Statistical Analysis</dt><dd>I numeri: come si misura un fenomeno sociale senza raccontarsi storie.</dd></div>
+          <div><dt>Psychology and Society I</dt><dd>Come le persone decidono davvero, che è spesso diverso da come i modelli dicono che decidano.</dd></div>
+          <div><dt>Integrative seminar II — Solidarity</dt><dd>Secondo seminario integrato, su un tema nuovo.</dd></div>
+        </dl>
+      </div>
+      <div class="year"><h4>Secondo anno — il major Economics</h4>
+        <dl>
+          <div><dt>Metà major, metà interdisciplinare</dt><dd>Si sceglie una delle quattro discipline come major, ma circa metà dei corsi resta comune: non si diventa monotematici.</dd></div>
+          <div><dt>Economics for a Changing World II</dt><dd>Prosecuzione del corso del primo anno.</dd></div>
+          <div><dt>Mathematics</dt><dd>Gli strumenti matematici necessari per i corsi avanzati.</dd></div>
+          <div><dt>Organisations and Markets</dt><dd>Come funzionano imprese e mercati.</dd></div>
+          <div><dt>Finance</dt><dd>Finanza di base.</dd></div>
+          <div><dt>Intermediate Macroeconomics</dt><dd>Macroeconomia a livello intermedio.</dd></div>
+          <div><dt>Statistics and Probability</dt><dd>Statistica e probabilità, più avanzate del primo anno.</dd></div>
+        </dl>
+      </div>
+      <div class="year"><h4>Terzo anno — livello avanzato</h4>
+        <dl>
+          <div><dt>Econometric Analysis</dt><dd>Stimare relazioni economiche dai dati. È il ponte verso i master quantitativi.</dd></div>
+          <div><dt>Economics of Money and Banking</dt><dd>Moneta, banche, banche centrali.</dd></div>
+          <div><dt>Intermediate Microeconomics</dt><dd>Microeconomia avanzata.</dd></div>
+          <div><dt>Political Economy</dt><dd>Dove economia e politica si incontrano: è il cuore di quello che cerchiamo.</dd></div>
+          <div><dt>Marketing Management</dt><dd>Il lato commerciale dell'impresa.</dd></div>
+          <div><dt>Transnational Governance</dt><dd>Come si governa quello che non sta dentro un solo Stato.</dd></div>
+          <div><dt>Psychology and Society II</dt><dd>Prosecuzione del corso di psicologia.</dd></div>
+          <div><dt>Research Lab</dt><dd>Ricerca vera, in gruppo, con un docente.</dd></div>
+          <div><dt>Elettivi liberi — 12 crediti</dt><dd>Corsi scelti liberamente, anche fuori dal proprio major.</dd></div>
+          <div><dt>Tesi — 12 crediti</dt><dd>Il lavoro finale, di peso: un quinto dell'anno.</dd></div>
+        </dl>
+      </div>
+    </div>
+    <div class="callout"><b>Come si entra.</b> PPLE non si entra con la sola domanda: ha una procedura di selezione sua. Chiede una <b>media eccellente</b>, i requisiti di matematica e inglese, un interesse reale per i temi socio-economici e una motivazione alta. Le scadenze sono diverse da quelle degli altri corsi e vanno verificate sul sito del programma appena esce il calendario dell'anno giusto.</div>
+  </div>
+</section>
+
+<section id="quale">
+  <h2>Quale fa per te</h2>
+  <p class="lead">Tre domande oneste, da farsi prima di guardare le scadenze.</p>
+  <table class="cmp">
+    <thead><tr><th>&nbsp;</th><th>Econometrics &amp; Data Science</th><th>Economics &amp; Business Economics</th><th>PPLE</th></tr></thead>
+    <tbody>
+      <tr><th>Quanta matematica</th><td>Tantissima, è la materia stessa</td><td>Abbastanza, come strumento</td><td>Poca nel primo anno, molta di più se scegli Economics</td></tr>
+      <tr><th>Quanto è largo</th><td>Stretto e profondo</td><td>Largo il primo anno, poi si restringe</td><td>Largo per tutti e tre gli anni</td></tr>
+      <tr><th>Come si studia</th><td>Gruppi piccoli, molti esercizi</td><td>Corso grande, struttura classica</td><td>Seminari, discussione, scrittura</td></tr>
+      <tr><th>È per te se…</th><td>ti piace risolvere problemi con i numeri e vedere un modello funzionare</td><td>vuoi capire come funziona l'economia prima di decidere quale parte ti interessa</td><td>ti piace discutere, leggere, e ti annoia guardare un problema da un lato solo</td></tr>
+      <tr><th>Difficoltà d'ingresso</th><td class="good">Bassa: nessun numero chiuso</td><td>Media: 850 posti, ma scadenza anticipata</td><td class="warn">Alta: selezione propria, media eccellente</td></tr>
+      <tr><th>Data da ricordare</th><td>1° maggio</td><td class="warn">15 gennaio</td><td>Da verificare, sempre anticipata</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="entrare">
+  <h2>Come si entra</h2>
+  <p class="lead">Le regole olandesi valgono anche qui, ma ogni corso aggiunge le sue.</p>
+
+  <h3 style="font-size:20px;margin:22px 0 10px">Quello che serve per tutti e tre</h3>
+  <ol class="tl">
+    <li><span class="when">Diploma</span><div><b>Diploma di scuola superiore riconosciuto equivalente al vwo olandese</b><p>La maturità italiana viene valutata dall'università. Per il diploma quadriennale serve conferma scritta specifica: va chiesta a UvA per iscritto, non data per scontata.</p></div></li>
+    <li><span class="when">Inglese</span><div><b>Prova di conoscenza dell'inglese</b><p>IELTS, TOEFL o equivalente. Il livello richiesto cambia da corso a corso: va controllato sul singolo programma.</p></div></li>
+    <li><span class="when">Matematica</span><div><b>Prova di conoscenza della matematica</b><p>Per Econometria il requisito è il più alto dei tre. Se il programma del liceo non basta, esistono esami integrativi da sostenere prima dell'iscrizione.</p></div></li>
+    <li><span class="when">UvA Matching</span><div><b>Una giornata (o un modulo online) obbligatoria di orientamento</b><p>Non è un esame e non si può essere bocciati: serve a capire se il corso è davvero quello giusto. È però <b>obbligatoria</b>: chi non la fa perde il posto.</p></div></li>
+    <li><span class="when">Studielink</span><div><b>La domanda si fa sul portale nazionale olandese</b><p>Lo stesso sistema di Rotterdam. Vale anche qui la regola dei <b>due corsi a numero chiuso al massimo</b> in tutti i Paesi Bassi in un anno.</p></div></li>
+  </ol>
+
+  <div class="callout"><b>La regola dei due posti, applicata a noi.</b> Econometria ad Amsterdam <b>non</b> ha numero chiuso, quindi non consuma nessuno dei due slot: si può chiedere insieme a due corsi a numero chiuso altrove. Economics and Business Economics in inglese <b>sì</b>: se la si chiede, uno dei due slot è occupato. Questo cambia la strategia complessiva e va incrociato con le scelte di Rotterdam.</div>
+
+  <h3 style="font-size:20px;margin:30px 0 10px">Le tre scadenze, in ordine</h3>
+  <ol class="tl">
+    <li><span class="when key">15 gennaio</span><div><b>Economics and Business Economics (inglese)</b><p>Numero chiuso, 850 posti. Dopo questa data non si entra più, punto. È la data da segnare per prima perché è quella che arriva mentre a scuola si è ancora in mezzo al quadrimestre.</p></div></li>
+    <li><span class="when key">Da verificare</span><div><b>PPLE</b><p>Procedura di selezione propria, con scadenze anticipate rispetto al 1° maggio. Il calendario esce sul sito del programma e va controllato in autunno.</p></div></li>
+    <li><span class="when">1° maggio</span><div><b>Econometrics and Data Science</b><p>Nessun numero chiuso: chi ha i requisiti entra. La scadenza è quella ordinaria olandese.</p></div></li>
+    <li><span class="when">Estate</span><div><b>UvA Matching e iscrizione definitiva</b><p>Dopo l'ammissione: matching, caricamento del diploma, pagamento della retta, ricerca dell'alloggio.</p></div></li>
+  </ol>
+</section>
+
+<section id="vita">
+  <h2>Vivere ad Amsterdam</h2>
+  <div class="two">
+    <div>
+      <h3>Il campus</h3>
+      <ul class="clean">
+        <li>Tutti e tre i corsi stanno a <b>Roeterseiland</b>, il campus di economia e scienze sociali, dentro Amsterdam e non fuori città.</li>
+        <li>Ci si arriva in bicicletta o in tram dalla maggior parte dei quartieri: è la zona a est del centro, vicino a Plantage e all'Amstel.</li>
+        <li>È un campus urbano moderno, ristrutturato: biblioteche, spazi studio, mense, non palazzi storici sparsi.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>La città</h3>
+      <ul class="clean">
+        <li>Amsterdam è stabilmente nella <b>top 10</b> delle città più vivibili al mondo, ed è una città vera con vita propria, non un paese universitario.</li>
+        <li>Più di <b>100 nazionalità</b> in ateneo: l'inglese è la lingua normale, l'olandese non serve per studiare.</li>
+        <li>Schiphol è a venti minuti di treno: Milano è a un'ora e mezza di volo.</li>
+        <li><b>L'alloggio è il problema vero.</b> Ad Amsterdam trovare una stanza è difficile e caro: va affrontato appena arriva l'ammissione, non a settembre.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout"><b>Amsterdam e Rotterdam insieme.</b> Le due città sono a quaranta minuti di treno. Chi studia in una può andare a trovare gli altri nell'altra senza pensarci: nel nostro caso, con più fratelli che guardano entrambe le università, non è un dettaglio da poco.</div>
+</section>
+
+<footer>
+  <p>Guida ai corsi — Università di Amsterdam. Dati ricavati dalle pagine ufficiali dei tre programmi. Le spiegazioni in italiano dei singoli insegnamenti sono nostre e servono solo a capire di cosa si tratta: il contenuto ufficiale è quello dei siti dei corsi.</p>
+  <p><b>Da verificare prima di decidere:</b> le scadenze esatte di PPLE per l'anno di riferimento; il livello di matematica e inglese richiesto da ciascun corso; il riconoscimento del diploma quadriennale, per iscritto; se e quando UvA organizza Open Day o giornate di orientamento online.</p>
+</footer>
+</div>
+</body>
+</html>

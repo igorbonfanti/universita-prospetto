@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mappa candidature — Economia, ingresso settembre 2027 (v2, senza UK)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14203A; --ink-soft:#41506B; --paper:#F0F1EC; --card:#FFFFFF; --rule:#CFD3D8;
+    --red:#B0281E; --gold:#8A6A1F; --green:#1C5E56; --violet:#4A3A7A;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --sans:'Archivo',system-ui,sans-serif;
+    --serif:'Newsreader',Georgia,serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:17px;line-height:1.55}
+  .wrap{max-width:820px;margin:0 auto;padding:0 20px 80px}
+
+  header{padding:44px 0 28px;border-bottom:2px solid var(--ink)}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 14px}
+  h1{font-family:var(--sans);font-weight:700;font-size:clamp(28px,7vw,44px);line-height:1.05;letter-spacing:-.02em;margin:0 0 14px}
+  .lede{font-size:18px;color:var(--ink-soft);margin:0;max-width:60ch}
+  .assump{margin-top:20px;padding:12px 14px;background:#fff;border-left:3px solid var(--gold);font-size:15px;color:var(--ink-soft)}
+  .archive{background:#fff;border:1px solid var(--rule);border-left:4px solid var(--gold);padding:14px 16px;margin:22px 0;font-size:15px}
+
+  section{padding-top:44px}
+  h2{font-family:var(--sans);font-weight:700;font-size:clamp(20px,4.5vw,27px);letter-spacing:-.01em;margin:0 0 6px}
+  h2 .num{font-family:var(--mono);font-size:13px;color:var(--red);vertical-align:6px;margin-right:8px}
+  .sub{color:var(--ink-soft);font-size:16px;margin:0 0 22px;max-width:62ch}
+
+  /* scala dei costi — elemento firma */
+  .ladder{background:#fff;border:1px solid var(--rule);padding:20px 18px}
+  .lrow{display:grid;grid-template-columns:150px 1fr;gap:12px;align-items:center;padding:9px 0}
+  .lrow .name{font-family:var(--sans);font-weight:600;font-size:14.5px;line-height:1.25}
+  .lrow .name em{display:block;font-family:var(--mono);font-style:normal;font-size:10.5px;color:var(--ink-soft);letter-spacing:.06em;text-transform:uppercase;margin-top:2px}
+  .bar{position:relative;height:26px;background:#F3F4F0}
+  .bar span{position:absolute;left:0;top:0;bottom:0;background:var(--ink);opacity:.86}
+  .bar.cheap span{background:var(--green)}
+  .bar.mid span{background:var(--gold)}
+  .bar.dear span{background:var(--red)}
+  .bar b{position:absolute;right:8px;top:0;line-height:26px;font-family:var(--mono);font-size:11.5px;color:var(--ink)}
+  .lnote{font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin:14px 0 0;line-height:1.6}
+
+  .tl{position:relative;margin-top:8px;padding-left:104px}
+  .tl::before{content:"";position:absolute;left:88px;top:6px;bottom:6px;width:2px;background:var(--rule)}
+  .stop{position:relative;padding:0 0 26px}
+  .stop .when{position:absolute;left:-104px;width:76px;text-align:right;font-family:var(--mono);font-size:11.5px;line-height:1.35;color:var(--ink-soft);padding-top:2px}
+  .stop::before{content:"";position:absolute;left:-20px;top:7px;width:11px;height:11px;border-radius:50%;background:var(--paper);border:2px solid var(--ink-soft)}
+  .stop.hard::before{background:var(--red);border-color:var(--red)}
+  .stop.test::before{background:var(--gold);border-color:var(--gold)}
+  .stop.open::before{background:var(--paper);border-color:var(--green)}
+  .stop b{font-family:var(--sans);font-weight:600;font-size:16px;display:block;line-height:1.3}
+  .stop p{margin:3px 0 0;font-size:15px;color:var(--ink-soft)}
+  .tag{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:2px 6px;margin-bottom:5px}
+  .t-red{background:#F6E4E2;color:var(--red)}
+  .t-gold{background:#F5EEDC;color:var(--gold)}
+  .t-green{background:#DFEDEA;color:var(--green)}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin:0 0 24px}
+  .legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}
+
+  .route{background:var(--card);border:1px solid var(--rule);margin-bottom:18px}
+  .route > summary{list-style:none;cursor:pointer;padding:18px 20px;display:block;position:relative}
+  .route > summary::-webkit-details-marker{display:none}
+  .route > summary::after{content:"+";position:absolute;right:20px;top:16px;font-family:var(--mono);font-size:20px;color:var(--ink-soft)}
+  .route[open] > summary::after{content:"–"}
+  .flag{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:4px}
+  .route h3{font-family:var(--sans);font-weight:700;font-size:20px;margin:0 0 4px;padding-right:30px;letter-spacing:-.01em}
+  .oneline{margin:0;font-size:15.5px;color:var(--ink-soft);padding-right:30px}
+  .body{padding:0 20px 20px;border-top:1px solid var(--rule);margin-top:4px}
+  .row{padding:14px 0;border-bottom:1px dotted var(--rule);display:grid;grid-template-columns:104px 1fr;gap:14px}
+  .row:last-child{border-bottom:none}
+  .row dt{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);padding-top:3px}
+  .row dd{margin:0;font-size:15.5px}
+  .row dd ul{margin:0;padding-left:18px}
+  .row dd li{margin-bottom:4px}
+  .redline{color:var(--red)}
+  dl{margin:0}
+
+  .matrix{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--rule);background:#fff}
+  table{border-collapse:collapse;width:100%;min-width:560px;font-size:14.5px}
+  th,td{padding:11px 12px;text-align:left;border-bottom:1px solid var(--rule);vertical-align:top}
+  thead th{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);background:#F7F8F5}
+  tbody th{font-family:var(--sans);font-weight:600;font-size:15px}
+  .yes{color:var(--green);font-family:var(--sans);font-weight:600}
+  .no{color:var(--red);font-family:var(--sans);font-weight:600}
+  .hint{font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin:8px 0 0}
+
+  .tier{background:#fff;border:1px solid var(--rule);padding:16px 18px;margin-bottom:12px}
+  .tier b{font-family:var(--sans);font-size:13px;letter-spacing:.06em;text-transform:uppercase;display:block;margin-bottom:6px}
+  .tier.a b{color:var(--red)} .tier.b b{color:var(--gold)} .tier.c b{color:var(--green)}
+  .tier p{margin:0;font-size:15.5px;color:var(--ink-soft)}
+
+  .check{background:#fff;border:1px solid var(--rule);padding:6px 18px}
+  .check li{padding:12px 0;border-bottom:1px dotted var(--rule);font-size:15.5px}
+  .check li:last-child{border-bottom:none}
+  .check ul{margin:0;padding:0;list-style:none}
+  .check .q{font-family:var(--sans);font-weight:600;display:block}
+
+  .callout{background:var(--ink);color:#F0F1EC;padding:22px;margin:24px 0}
+  .callout h3{font-family:var(--sans);font-size:15px;letter-spacing:.1em;text-transform:uppercase;margin:0 0 12px;color:#E3B23C}
+  .callout p{margin:0 0 12px;color:#DDE3EC;font-size:16px}
+  .callout p:last-child{margin-bottom:0}
+  .callout strong{color:#fff}
+
+  footer{margin-top:52px;padding-top:22px;border-top:2px solid var(--ink);font-size:14px;color:var(--ink-soft)}
+
+  @media (max-width:560px){
+    body{font-size:16px}
+    .tl{padding-left:0}
+    .tl::before{left:5px}
+    .stop{padding-left:26px}
+    .stop::before{left:0}
+    .stop .when{position:static;width:auto;text-align:left;display:block;margin-bottom:2px}
+    .row{grid-template-columns:1fr;gap:4px}
+    .lrow{grid-template-columns:1fr;gap:5px}
+  }
+  a{color:var(--ink)}
+  :focus-visible{outline:2px solid var(--red);outline-offset:2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">Francesca · ingresso settembre 2027 · versione 2 · Regno Unito escluso</p>
+  <h1>Le rotte che restano,<br>ordinate per costo</h1>
+  <p class="lede">Tolto il Regno Unito, la mappa cambia forma: sparisce l'unica scadenza di ottobre, entrano ESCP e l'Irlanda, e diventa possibile costruire un piano C serio — con una via d'uscita al secondo anno.</p>
+  <div class="assump">
+    <b>Cosa è cambiato dalla versione 1:</b> via UK; dentro ESCP con i suoi tre bachelor, dentro l'Irlanda come sostituto anglofono a prezzo europeo, dentro l'Italia pubblica come rete di sicurezza. E una sezione nuova sui trasferimenti al secondo anno.
+  </div>
+</header>
+
+<div class="archive"><b>Nota di archivio (ottobre 2026):</b> documento del 22/8/2026, superato dal master del 13/9/2026 e dal prospetto (index.html). Contiene dati poi corretti: la retta Bocconi è 17.000 €/anno di listino (non 3.000-16.000 secondo ISEE); la Spagna pubblica richiede la credenziale UNEDasiss, non l'omologazione; Maastricht IB è a numerus fixus (EBE no); la retta ESCP per l'intake 2027 è stata poi rilevata a 21.000 €/anno; Sciences Po ha una formula sul reddito (max 14.550 €, vedi docs/ricerche). Conservato per la logica del piano C (trasferimenti al secondo anno) e del calendario.</div>
+
+<section>
+  <h2><span class="num">01</span>La scala dei costi</h2>
+  <p class="sub">È il vincolo che ora comanda su tutto il resto. Solo rette, per studente UE, per anno accademico. Alloggio e vita escluse.</p>
+
+  <div class="ladder">
+    <div class="lrow"><div class="name">Italia pubblica<em>Bologna · Ca' Foscari · Trento</em></div><div class="bar cheap"><span style="width:8%"></span><b>0 – 4.000 €</b></div></div>
+    <div class="lrow"><div class="name">Spagna pubblica<em>UPF · UC3M</em></div><div class="bar cheap"><span style="width:9%"></span><b>1.500 – 3.000 €</b></div></div>
+    <div class="lrow"><div class="name">Irlanda<em>Trinity · UCD</em></div><div class="bar cheap"><span style="width:9%"></span><b>~2.500 €</b></div></div>
+    <div class="lrow"><div class="name">Paesi Bassi<em>Rotterdam · Tilburg · Maastricht</em></div><div class="bar cheap"><span style="width:10%"></span><b>~2.600 €</b></div></div>
+    <div class="lrow"><div class="name">Sciences Po<em>calcolata sul reddito</em></div><div class="bar mid"><span style="width:54%"></span><b>0 – 14.500 €</b></div></div>
+    <div class="lrow"><div class="name">Bocconi<em>modulata su ISEE</em></div><div class="bar mid"><span style="width:60%"></span><b>~3.000 – 16.000 €</b></div></div>
+    <div class="lrow"><div class="name">ESCP<em>retta + servizi, tariffa UE</em></div><div class="bar dear"><span style="width:78%"></span><b>20.800 €</b></div></div>
+    <div class="lrow"><div class="name">IE · ESADE<em>private spagnole</em></div><div class="bar dear"><span style="width:94%"></span><b>~25.000 €</b></div></div>
+  </div>
+  <p class="lnote">Le prime quattro righe sono sostanzialmente gratuite: il costo vero è l'alloggio.<br>Le due centrali dipendono dal reddito familiare e vanno simulate, non stimate.<br>Le ultime due sono decisioni finanziarie, non accademiche.</p>
+
+  <div class="callout">
+    <h3>Il punto che cambia la strategia</h3>
+    <p>ESCP costa <strong>più di Bocconi con ISEE medio</strong> e quasi otto volte Rotterdam. Se il Regno Unito è fuori per ragioni economiche, ESCP e IE vanno guardate con lo stesso metro: sono nella stessa fascia di spesa, non in quella intermedia.</p>
+    <p>Quello che compri con ESCP non è la ricerca accademica — è il triennio in tre paesi, la rete alumni e il collocamento aziendale. Vale il prezzo solo se quello è davvero l'obiettivo.</p>
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">02</span>Chi sostituisce il Regno Unito</h2>
+  <p class="sub">Il Regno Unito dava due cose. Vanno rimpiazzate separatamente, perché nessun singolo ateneo le dà entrambe.</p>
+
+  <div class="tier a">
+    <b>Se serviva l'economia accademica di alto livello</b>
+    <p>Pompeu Fabra e Tilburg sono i due dipartimenti continentali più vicini allo standard LSE, e costano quanto una palestra. Erasmus Rotterdam per l'econometria. Bocconi Economics se resta a Milano. Nessuno di questi ha il nome di LSE, ma per chi punta a un master forte o al dottorato, quello che conta è il dipartimento — e il master lo si fa dove si vuole.</p>
+  </div>
+  <div class="tier b">
+    <b>Se serviva l'inglese e il PPE</b>
+    <p><b>Irlanda.</b> È la risposta più diretta e la più trascurata dalle famiglie italiane: università anglofone, dentro l'Unione, con la retta europea. Trinity offre BESS (economia, business e scienze sociali) e PPES (il PPE irlandese). Si passa dal CAO, si concorre a punti convertiti dalla maturità, la scadenza è il 1° febbraio.</p>
+  </div>
+  <div class="tier c">
+    <b>Da non sottovalutare</b>
+    <p><b>Maastricht.</b> Insegna in inglese, costa la tariffa olandese, e la School of Business and Economics non è a numero chiuso come Rotterdam — quindi non consuma una delle due domande a numerus fixus. Il metodo è a piccoli gruppi, molto diverso dalla lezione frontale: piace molto o per niente.</p>
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">03</span>ESCP, che mancava</h2>
+  <p class="sub">Non è un'università ma una grande école, con sei campus. Ha tre bachelor, e due sono usciti proprio ora.</p>
+
+  <details class="route" open>
+    <summary>
+      <span class="flag">Francia · 5 campus, incluso Torino</span>
+      <h3>ESCP — i tre bachelor</h3>
+      <p class="oneline">Ammissioni continue tutto l'anno, colloquio, nessun test standardizzato. Retta 20.800 € per gli studenti UE.</p>
+    </summary>
+    <div class="body">
+      <dl>
+        <div class="row"><dt>Bachelor in Management</dt><dd>Tre anni in tre paesi tra Berlino, Londra, Madrid, Parigi e Torino. 180 ECTS, in inglese con qualche corso in francese. Il primo anno ha microeconomia, matematica e statistica, quindi è un curriculum <b>trasferibile</b>. Terzo anno con major a scelta: fra queste, Trading &amp; Investment a Londra e Corporate Finance a Torino.</dd></div>
+        <div class="row"><dt>Management, Science &amp; Technology</dt><dd>Prima coorte a settembre 2027. È la risposta ESCP alla domanda data science, ma essendo al primo anno di vita non ha ancora storia di placement: si entra al buio.</dd></div>
+        <div class="row"><dt>PEM</dt><dd><b>Bachelor in Politics, Economics and Management</b>, doppia laurea Sciences Po × ESCP. Quattro anni, tutto in inglese, prima coorte settembre 2027, circa <b>40 posti in tutto il mondo</b>. Primi due anni a Sciences Po Reims, quarto anno su un campus ESCP europeo. Si esce con entrambi i diplomi. È letteralmente la combinazione che stai cercando — scienze politiche più economia più management — ma con 40 posti va trattato come una lotteria, non come un piano.</dd></div>
+        <div class="row"><dt>Come si entra</dt><dd>Domanda diretta sul sito ESCP oppure via UCAS o Common App — <b>un portale solo</b>. Servono pagelle degli ultimi tre anni tradotte, personal statement, CV, inglese IELTS 6.5 o equivalente. Poi colloquio online con almeno due persone, di cui un docente. Quota domanda 80 €, caparra 3.500 € all'ammissione.</dd></div>
+        <div class="row"><dt>Nota utile</dt><dd>Il campus di Londra si paga alla tariffa ESCP, non a quella britannica. È l'unico modo rimasto per far studiare Francesca a Londra senza le rette post-Brexit.</dd></div>
+        <div class="row"><dt>Costo reale</dt><dd>20.800 € di retta più un alloggio che cambia ogni anno con il campus. Torino costa 500–900 € al mese, Londra 900–1.400 sterline. Borse dal 10% al 50% sulla sola retta.</dd></div>
+      </dl>
+    </div>
+  </details>
+</section>
+
+<section>
+  <h2><span class="num">04</span>Il piano C, e la porta del secondo anno</h2>
+  <p class="sub">La domanda giusta non è "dove ripiego", ma "quale primo anno mi lascia più porte aperte l'anno dopo". Sono due cose diverse.</p>
+
+  <p style="font-size:16px;color:var(--ink-soft);max-width:62ch">Il trasferimento al secondo anno non funziona ovunque. Prima di scegliere il piano C conviene sapere dove la porta esiste davvero e dove è murata.</p>
+
+  <div class="matrix" style="margin-top:18px">
+    <table>
+      <thead>
+        <tr><th>Destinazione</th><th>Ingresso al 2° anno?</th><th>A quali condizioni</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>ESCP</th>
+          <td class="yes">Sì, procedura dedicata</td>
+          <td>Ha una <b>Second Year Direct Admission</b>. Le domande per settembre 2027 aprono a gennaio 2027. Servono 60 ECTS conseguiti e microeconomia già sostenuta, in un bachelor di management, economia o finanza. È la porta più chiara e meglio documentata di tutte.</td>
+        </tr>
+        <tr>
+          <th>Bocconi</th>
+          <td class="yes">Sì, ma si rifà tutto</td>
+          <td>Si rientra nella selezione ordinaria — quindi <b>di nuovo test e di nuovo la media del liceo</b>, che nel frattempo non è cambiata. Ammessi, si chiede il riconoscimento crediti: se vengono riconosciuti almeno 24 CFU si può scegliere il secondo anno. L'esito arriva a fine settembre, a ridosso dell'inizio.</td>
+        </tr>
+        <tr>
+          <th>Spagna pubblica</th>
+          <td class="yes">Sì, traslado de expediente</td>
+          <td>Serve un numero minimo di crediti riconosciuti e ci sono pochi posti, assegnati in estate. Funziona meglio verso corsi affini.</td>
+        </tr>
+        <tr>
+          <th>Italia pubblica</th>
+          <td class="yes">Sì, di routine</td>
+          <td>Passaggi e trasferimenti sono normali, con bandi annuali per gli anni successivi al primo. È il sistema più permeabile d'Europa.</td>
+        </tr>
+        <tr>
+          <th>Paesi Bassi — IBEB</th>
+          <td class="no">No</td>
+          <td>Rotterdam scrive esplicitamente che <b>non esistono opzioni di trasferimento</b> per chi studia già economia altrove: si deve entrare al primo anno. Se l'Olanda interessa, va vinta subito.</td>
+        </tr>
+        <tr>
+          <th>Sciences Po</th>
+          <td class="no">No</td>
+          <td>L'ammissione al collegio universitario è solo al primo anno, e ci si candida <b>una volta sola nella vita</b>. Nessuna seconda chiamata.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="hint">Scorri la tabella lateralmente.</p>
+
+  <div class="callout">
+    <h3>Come si costruisce un piano C che funziona</h3>
+    <p>Il ripiego deve avere tre proprietà insieme: <strong>decidersi tardi</strong>, così non consuma scelte; <strong>costare poco</strong>, così un anno eventualmente perso non pesa; e avere un <strong>primo anno trasferibile</strong>, cioè microeconomia, matematica e statistica messi subito.</p>
+    <p>Il candidato che le ha tutte e tre è <strong>un triennio di economia in un'università italiana pubblica, in inglese, con ingresso via TOLC-E in primavera-estate 2027</strong>. Bologna in testa, con Ca' Foscari, Trento e Padova dietro. Costa quasi nulla, si decide dopo tutti gli altri, e il primo anno è esattamente quello che ESCP e Bocconi chiedono per il passaggio.</p>
+    <p>Regola pratica per il piano di studi del primo anno: scegliere il curriculum <strong>più standard e più quantitativo</strong> disponibile, mai quello più originale. I corsi di nicchia sono quelli che non vengono riconosciuti.</p>
+  </div>
+
+  <div class="tier b" style="margin-top:24px">
+    <b>L'obiezione onesta</b>
+    <p>Trasferirsi al secondo anno costa quasi sempre qualcosa: i crediti raramente combaciano al cento per cento, si arriva in una classe già formata e si salta il primo ciclo di stage. È un'opzione, non una strategia. Chi la usa bene la usa come rete, non come trampolino.</p>
+  </div>
+
+  <div class="tier c">
+    <b>Il momento giusto per riottimizzare</b>
+    <p>Non è il secondo anno: è il <b>master</b>. Un triennio italiano o olandese a costo quasi zero, seguito da un master a LSE, Bocconi, Rotterdam o Sciences Po, costa in tutto molto meno di un triennio a 21 mila euro l'anno — e sul curriculum finale pesa di più, perché il titolo che i selezionatori guardano è l'ultimo. Se il vincolo è economico, questa è la mossa a maggior rendimento di tutta la mappa.</p>
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">05</span>Il calendario aggiornato</h2>
+  <p class="sub">Senza il Regno Unito resta una sola vera urgenza a settembre. Tutto il resto si concentra tra novembre e febbraio.</p>
+
+  <p class="legend">
+    <span><i style="background:#B0281E"></i>scadenza rigida</span>
+    <span><i style="background:#8A6A1F"></i>test o prova</span>
+    <span><i style="background:#F0F1EC;border:2px solid #1C5E56"></i>apertura</span>
+  </p>
+
+  <div class="tl">
+    <div class="stop open">
+      <span class="when">metà set<br>2026</span>
+      <span class="tag t-green">apre</span>
+      <b>Sciences Po — percorso internazionale</b>
+      <p>Include le doppie lauree, e quindi anche il nuovo PEM con ESCP. Fino a due programmi nella stessa domanda.</p>
+    </div>
+    <div class="stop hard">
+      <span class="when">2–29 set<br>2026</span>
+      <span class="tag t-red">Bocconi</span>
+      <b>Early Session — chiude il 29 settembre, ore 15:00</b>
+      <p>L'unica scadenza davvero imminente. Serve il punteggio del test già in mano. Se manca, si punta senza drammi alla Winter.</p>
+    </div>
+    <div class="stop open">
+      <span class="when">set–ott<br>2026</span>
+      <span class="tag t-green">apre</span>
+      <b>ESCP — domande per l'intake 2027</b>
+      <p>Ammissioni a scorrimento: non c'è una scadenza, ma i posti sui campus si esauriscono. Chi arriva tardi non sceglie il campus.</p>
+    </div>
+    <div class="stop open">
+      <span class="when">1 ott<br>2026</span>
+      <span class="tag t-green">apre</span>
+      <b>Studielink — Paesi Bassi</b>
+      <p>Rotterdam, Tilburg, Maastricht. Maastricht non è a numero chiuso: non consuma una delle due domande.</p>
+    </div>
+    <div class="stop open">
+      <span class="when">nov<br>2026</span>
+      <span class="tag t-green">apre</span>
+      <b>CAO — Irlanda</b>
+      <p>Fino a dieci corsi in ordine di preferenza, su tutte le università irlandesi.</p>
+    </div>
+    <div class="stop open">
+      <span class="when">25 nov<br>2026</span>
+      <span class="tag t-green">apre</span>
+      <b>Bocconi — Winter Session</b>
+      <p>Seconda e ultima chiamata per il 2027-28.</p>
+    </div>
+    <div class="stop hard">
+      <span class="when">15 gen<br>2027</span>
+      <span class="tag t-red">Olanda</span>
+      <b>Numerus fixus — registrazione su Studielink</b>
+      <p>Data secca. Massimo <span class="redline">due</span> programmi a numero chiuso in tutto il paese.</p>
+    </div>
+    <div class="stop open">
+      <span class="when">gen<br>2027</span>
+      <span class="tag t-green">apre</span>
+      <b>ESCP — ammissione diretta al secondo anno</b>
+      <p>Da tenere d'occhio anche se quest'anno non serve: è la porta di riserva per il 2028.</p>
+    </div>
+    <div class="stop hard">
+      <span class="when">26 gen<br>2027</span>
+      <span class="tag t-red">Bocconi</span>
+      <b>Winter Session — chiude, ore 15:00</b>
+      <p>Ultimo test utile intorno al 21 gennaio. Esito a metà marzo.</p>
+    </div>
+    <div class="stop hard">
+      <span class="when">31 gen<br>2027</span>
+      <span class="tag t-red">Rotterdam</span>
+      <b>RSM — modulo OLAF per IBA</b>
+      <p>Voti 75%, motivazione 25%.</p>
+    </div>
+    <div class="stop hard">
+      <span class="when">1 feb<br>2027</span>
+      <span class="tag t-red">Irlanda</span>
+      <b>CAO — chiusura, ore 17:00</b>
+      <p>Le preferenze si possono riordinare fino a maggio, ma i corsi vanno inseriti entro oggi.</p>
+    </div>
+    <div class="stop hard">
+      <span class="when">fine feb<br>2027</span>
+      <span class="tag t-red">Sciences Po</span>
+      <b>Chiusura del dossier internazionale</b>
+      <p>Data da confermare quando esce il calendario ufficiale a settembre.</p>
+    </div>
+    <div class="stop test">
+      <span class="when">inizio mar<br>2027</span>
+      <span class="tag t-gold">Rotterdam</span>
+      <b>Prova curriculare IBEB</b>
+      <p>Primi 350 posti per merito, il resto a lotteria pesata.</p>
+    </div>
+    <div class="stop test">
+      <span class="when">mar–apr<br>2027</span>
+      <span class="tag t-gold">Spagna</span>
+      <b>UNEDasiss e scelta delle PCE</b>
+      <p>L'omologazione del diploma va però avviata già in inverno: richiede mesi.</p>
+    </div>
+    <div class="stop test">
+      <span class="when">apr–lug<br>2027</span>
+      <span class="tag t-gold">Italia</span>
+      <b>TOLC-E — sessioni multiple</b>
+      <p>La rete di sicurezza. Si può ripetere più volte e si decide dopo tutti gli altri.</p>
+    </div>
+    <div class="stop hard">
+      <span class="when">giu 2027</span>
+      <span class="tag t-red">Italia</span>
+      <b>Maturità</b>
+      <p>Quasi tutte le offerte estere sono condizionate al voto finale.</p>
+    </div>
+    <div class="stop">
+      <span class="when">ago 2027</span>
+      <span class="tag t-green">esiti</span>
+      <b>Offerte irlandesi e graduatorie italiane</b>
+      <p>Ultimo momento utile per cambiare idea senza perdere l'anno.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">06</span>Il portafoglio che consiglierei</h2>
+  <p class="sub">Cinque candidature, costo complessivo delle domande sotto i 400 euro, nessuna in conflitto con le altre.</p>
+  <div class="check">
+    <ul>
+      <li><span class="q">Bocconi — Winter Session</span>L'opzione di casa. Zero costo di alloggio, il miglior placement italiano, retta modulata sull'ISEE. Esito a marzo, in tempo per decidere il resto.</li>
+      <li><span class="q">Rotterdam IBEB oppure Tilburg</span>Uno dei due, non entrambi: la quota olandese è di due domande e conviene tenerne una libera. Economia forte a 2.600 € l'anno.</li>
+      <li><span class="q">Maastricht — School of Business and Economics</span>Non è a numero chiuso, quindi è gratis in termini di quota. Stessa retta olandese.</li>
+      <li><span class="q">Trinity Dublin — BESS o PPES</span>Il PPE in inglese a prezzo europeo. Via CAO entro il 1° febbraio, insieme ad altre nove preferenze irlandesi che non costano nulla in più.</li>
+      <li><span class="q">Sciences Po, con PEM come seconda scelta nella stessa domanda</span>Retta calcolata sul reddito, quindi potenzialmente molto bassa. E il PEM entra nella stessa candidatura senza costi aggiuntivi: vale la pena tentarlo proprio perché non toglie niente.</li>
+      <li><span class="q">Piano C: TOLC-E in primavera per un triennio italiano in inglese</span>Da fare comunque, in parallelo, anche se le altre vanno bene. Costa un pomeriggio e trenta euro.</li>
+    </ul>
+  </div>
+  <p class="hint">ESCP e IE restano fuori da questa lista solo per il costo. Se la situazione economica cambia, ESCP rientra — ed è comunque raggiungibile al secondo anno.</p>
+</section>
+
+<section>
+  <h2><span class="num">07</span>Cosa verificare</h2>
+  <div class="check">
+    <ul>
+      <li><span class="q">Data di chiusura Sciences Po e procedura PEM</span>Il calendario 2027 esce a metà settembre. Chiedere se il PEM segue la stessa domanda o ne ha una dedicata.</li>
+      <li><span class="q">Tabella di conversione Trinity per la maturità italiana</span>Trinity pubblica una pagina apposita per l'Italia con i punti indicativi e i requisiti di matematica per BESS.</li>
+      <li><span class="q">Requisiti di matematica olandesi per la maturità</span>Dipendono dall'indirizzo di liceo: vanno verificati caso per caso.</li>
+      <li><span class="q">Simulazione ISEE per Bocconi e reddito per Sciences Po</span>Sono le due voci che possono spostare la scelta di diecimila euro l'anno. Vanno calcolate, non stimate.</li>
+      <li><span class="q">Bandi TOLC-E 2027</span>Escono in primavera. Segnare le date di Bologna appena pubblicate.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  Versione 2, 22 agosto 2026. Regno Unito escluso su richiesta. Fonti ufficiali degli atenei per scadenze e procedure; gli importi delle rette sono ordini di grandezza da confermare sulle pagine fees, tranne quello ESCP che è pubblicato per l'intake 2027.
+</footer>
+
+</div>
+</body>
+</html>

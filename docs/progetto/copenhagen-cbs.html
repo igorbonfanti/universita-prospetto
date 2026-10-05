@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>Copenhagen Business School — Guida ai corsi</title>
+<style>
+:root{
+  --paper:#FBF8F3; --card:#FFFFFF; --ink:#2B2621; --soft:#6B6158; --line:#E6DED3; --tint:#F4EEE5;
+  --a:#2F5F8A; --b:#B0561E; --c:#2E7D6B; --warn:#A23B4B;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,"Times New Roman",serif;
+  --sans:"Segoe UI","Helvetica Neue",Calibri,Arial,sans-serif;
+  color-scheme:light;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--paper)}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.6}
+a{color:inherit;text-underline-offset:3px;text-decoration-color:var(--line)}
+a:focus-visible{outline:2px solid var(--a);outline-offset:2px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+header{padding:64px 0 34px;border-bottom:1px solid var(--line)}
+.kicker{font-family:var(--sans);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin:0 0 14px}
+h1{font-weight:400;font-size:clamp(34px,5.5vw,54px);line-height:1.1;margin:0 0 18px;letter-spacing:-.01em}
+h1 em{color:var(--b)}
+.intro{font-size:19px;max-width:62ch;margin:0;color:#3d362f}
+nav.toc{font-family:var(--sans);font-size:14.5px;padding:18px 0;border-bottom:1px solid var(--line)}
+nav.toc ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px 22px}
+nav.toc a{text-decoration:none;color:var(--soft)}
+section{padding:52px 0 0}
+h2{font-weight:400;font-size:32px;line-height:1.2;margin:0 0 8px}
+h3{font-weight:600}
+.lead{color:var(--soft);margin:0 0 24px;max-width:64ch}
+
+.facts{display:grid;grid-template-columns:repeat(3,1fr);border-top:2px solid var(--ink)}
+.facts div{padding:16px 16px 16px 0;border-bottom:1px solid var(--line)}
+.facts b{display:block;font-size:24px;font-weight:400;line-height:1.2}
+.facts span{font-family:var(--sans);font-size:14px;color:var(--soft)}
+
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.prog{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--a);border-radius:6px;padding:18px 20px}
+.prog.b{border-top-color:var(--b)} .prog.c{border-top-color:var(--c)}
+.prog .code{font-family:var(--sans);font-weight:700;font-size:13px;letter-spacing:.06em;color:var(--a)}
+.prog.b .code{color:var(--b)} .prog.c .code{color:var(--c)}
+.prog h3{font-size:21px;margin:4px 0 8px;line-height:1.25}
+.prog p{margin:0 0 10px;font-size:16.5px}
+.prog .fit{font-family:var(--sans);font-size:14px;color:var(--soft);margin:10px 0 0;padding-top:10px;border-top:1px solid var(--line)}
+
+.course-block{margin-top:40px}
+.course-block > h3{font-size:26px;margin:0 0 4px}
+.course-block .sub{font-family:var(--sans);font-size:14px;color:var(--soft);margin:0 0 16px}
+.course-block.a > h3{color:var(--a)} .course-block.b > h3{color:var(--b)} .course-block.c > h3{color:var(--c)}
+.years{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.year{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:16px 18px}
+.year h4{font-family:var(--sans);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);margin:0 0 8px;font-weight:600}
+dl{margin:0}
+dl div{padding:7px 0;border-top:1px solid var(--line)}
+dl div:first-child{border-top:0;padding-top:0}
+dt{font-weight:600;font-size:16.5px;line-height:1.35}
+dd{margin:2px 0 0;font-size:15px;color:var(--soft)}
+.callout{background:var(--tint);border-radius:6px;padding:14px 18px;margin-top:16px;font-size:16.5px}
+.callout b{font-weight:600}
+
+.others{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.other{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:14px 18px}
+.other h4{margin:0 0 4px;font-size:17.5px}
+.other p{margin:0;font-size:15.5px}
+.other .tag{font-family:var(--sans);font-size:12.5px;color:var(--soft);margin-top:6px;display:block}
+
+ol.tl{list-style:none;margin:0;padding:0;border-top:2px solid var(--ink)}
+ol.tl li{display:grid;grid-template-columns:190px 1fr;gap:18px;padding:14px 0;border-bottom:1px solid var(--line)}
+ol.tl .when{font-family:var(--sans);font-weight:700;font-size:15px}
+ol.tl .when.key{color:var(--b)}
+ol.tl b{display:block;font-weight:600}
+ol.tl p{margin:2px 0 0;font-size:16.5px}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.two h3{font-size:20px;margin:0 0 8px}
+ul.clean{margin:0;padding-left:20px}
+ul.clean li{margin:7px 0;font-size:16.5px}
+
+.openday{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--b);border-radius:6px;padding:22px 26px}
+.openday .when{font-size:28px;line-height:1.2;margin:0}
+.openday .where{font-family:var(--sans);font-size:15px;color:var(--soft);margin:6px 0 16px}
+.openday h3{font-size:19px;margin:18px 0 6px}
+.note{font-family:var(--sans);font-size:13.5px;color:var(--soft)}
+.warn{color:var(--warn);font-weight:600}
+footer{padding:56px 0 64px;margin-top:56px;border-top:1px solid var(--line);font-family:var(--sans);font-size:13px;color:var(--soft)}
+
+@media (max-width:860px){
+  body{font-size:17px} header{padding-top:40px}
+  .three,.years,.two,.others{grid-template-columns:1fr}
+  .facts{grid-template-columns:1fr 1fr}
+  ol.tl li{grid-template-columns:1fr;gap:2px}
+}
+@media print{nav.toc{display:none}.prog,.year,.other,.openday,ol.tl li{break-inside:avoid}body{font-size:11pt}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <p class="kicker">Guida ai corsi · Copenhagen</p>
+  <h1>Copenhagen Business School: <em>economia, politica e digitale</em> in una delle città più vivibili d'Europa</h1>
+  <p class="intro">CBS ha quindici bachelor, di cui alcuni in inglese. Qui trovate i tre più vicini a quello che ci interessa, cosa si studia anno per anno, come si entra e cosa aspettarsi all'Open Day. Le spiegazioni "in parole semplici" dei corsi sono nostre, per capire di cosa parla un insegnamento dal suo titolo.</p>
+</header>
+<nav class="toc" aria-label="Indice"><ul>
+  <li><a href="#breve">In breve</a></li><li><a href="#corsi">I tre corsi</a></li><li><a href="#ibp">IBP</a></li><li><a href="#ib">IB</a></li><li><a href="#dm">DM</a></li><li><a href="#altri">Altri corsi</a></li><li><a href="#entrare">Come si entra</a></li><li><a href="#openday">Open Day</a></li>
+</ul></nav>
+
+<section id="breve">
+  <h2>In breve</h2>
+  <div class="facts">
+    <div><b>3 anni</b><span>tutto in inglese, 180 crediti</span></div>
+    <div><b>Gratis</b><span>nessuna retta per gli studenti UE</span></div>
+    <div><b>15 marzo</b><span>scadenza per chi ha un diploma estero</span></div>
+    <div><b>optagelse.dk</b><span>un'unica domanda nazionale, fino a otto preferenze</span></div>
+    <div><b>Frederiksberg</b><span>campus in città, a pochi minuti dal centro</span></div>
+    <div><b>Molto internazionale</b><span>in IB un terzo degli studenti viene dall'estero</span></div>
+  </div>
+  <div class="callout"><b>Aggiornamento ottobre 2026 (verificato):</b> chi si diploma nell'anno della domanda può candidarsi a CBS <b>solo in Quota 1</b>, cioè con la sola media del diploma convertita. Soglie 2026: IB 11,1, IBP 10,7, BADM 9,8, BASM 9,4 (scala 7-trin, massimo 12). La tabella ufficiale di conversione della maturità italiana non è pubblica: chiederla a CBS Admissions.</div>
+</section>
+
+<section id="corsi">
+  <h2>I tre corsi che fanno per noi</h2>
+  <p class="lead">Stessa scuola, stesso campus, tre modi di guardare l'economia.</p>
+  <div class="three">
+    <div class="prog b"><div class="code">IBP</div><h3>International Business and Politics</h3>
+      <p>Come le forze economiche e politiche danno forma al mondo globale, e come le aziende adattano le loro strategie alle sfide politiche.</p>
+      <p>Quattro filoni: politica ed economia politica, business, economia, metodi.</p>
+      <p class="fit">Il più vicino all'economia politica. C'è anche filosofia delle scienze sociali al secondo anno.</p></div>
+    <div class="prog"><div class="code">IB</div><h3>International Business</h3>
+      <p>Economia e strategia d'impresa in un contesto globale: come le aziende trovano opportunità, gestiscono i rischi e adattano le strategie quando operano all'estero.</p>
+      <p>245 posti l'anno, età media 20,8 anni, 33% stranieri. Possibilità di passare tre semestri tra Stati Uniti, Asia e Canada.</p>
+      <p class="fit">Il più "aziendale" dei tre, e il più selettivo: media minima 11,1 su 12 nel 2026.</p></div>
+    <div class="prog c"><div class="code">DM</div><h3>Business Administration and Digital Management</h3>
+      <p>Le possibilità e le sfide che il digitale crea per le aziende: strategia, dati e tecnologie per guidare le trasformazioni digitali.</p>
+      <p>Tre aree: business, tecnologie e dati, prospettiva sociale e organizzativa.</p>
+      <p class="fit">Il più vicino alla data science, ma dal lato del business: non è un corso di programmazione.</p></div>
+  </div>
+</section>
+
+<section id="ibp">
+  <div class="course-block b">
+    <h3>IBP — International Business and Politics</h3>
+    <p class="sub">Piano di studi ufficiale più recente pubblicato; i nomi dei corsi possono cambiare leggermente.</p>
+    <div class="years">
+      <div class="year"><h4>1° anno</h4><dl>
+        <div><dt>Political Science</dt><dd>Come funzionano stati, istituzioni e potere. Qui si impara anche a scrivere un lavoro accademico.</dd></div>
+        <div><dt>Political and Economic Thought</dt><dd>Le grandi idee di politica ed economia.</dd></div>
+        <div><dt>Applied Microeconomics</dt><dd>Come decidono consumatori e imprese.</dd></div>
+        <div><dt>Macroeconomics</dt><dd>Crescita, inflazione, disoccupazione.</dd></div>
+        <div><dt>Financial Accounting and Reporting</dt><dd>Leggere il bilancio di un'azienda.</dd></div>
+        <div><dt>EU Business and Politics</dt><dd>Come l'Unione europea influenza le imprese.</dd></div>
+        <div><dt>Quantitative Methods</dt><dd>Statistica per economia e scienze sociali.</dd></div>
+      </dl></div>
+      <div class="year"><h4>2° anno</h4><dl>
+        <div><dt>International Economics</dt><dd>Commercio tra paesi e tassi di cambio.</dd></div>
+        <div><dt>International Political Economy</dt><dd>Come politica ed economia si intrecciano a livello mondiale.</dd></div>
+        <div><dt>Comparative Political Economy</dt><dd>Perché i paesi organizzano l'economia in modi diversi.</dd></div>
+        <div><dt>International Business Strategy</dt><dd>Come un'azienda decide dove e come competere.</dd></div>
+        <div><dt>Corporate Finance</dt><dd>Come le aziende si finanziano e investono.</dd></div>
+        <div><dt>Organizational Analysis</dt><dd>Come funzionano le organizzazioni.</dd></div>
+        <div><dt>Qualitative Methods</dt><dd>Interviste, casi, analisi di testi.</dd></div>
+        <div><dt>Philosophy of Social Science e progetto</dt><dd>Le domande di fondo su come si conosce il mondo sociale, e il primo progetto di ricerca.</dd></div>
+      </dl></div>
+      <div class="year"><h4>3° anno</h4><dl>
+        <div><dt>Quinto semestre libero</dt><dd>30 crediti tra esami a scelta, scambio all'estero o tirocinio.</dd></div>
+        <div><dt>Business and Global Governance</dt><dd>Le regole globali che valgono per le imprese.</dd></div>
+        <div><dt>Political Economy of Development</dt><dd>Perché alcuni paesi crescono e altri no.</dd></div>
+        <div><dt>Bachelor Project</dt><dd>La tesi finale, che mette insieme tutti i filoni.</dd></div>
+      </dl></div>
+    </div>
+    <div class="callout">Sostenibilità e disuguaglianze attraversano gran parte del corso. Molto lavoro è in gruppo.</div>
+  </div>
+</section>
+
+<section id="ib">
+  <div class="course-block">
+    <h3>IB — International Business</h3>
+    <p class="sub">Piano ufficiale per semestre, dalla pagina del corso. Ogni esame vale 7,5 crediti salvo dove indicato.</p>
+    <div class="facts" style="margin-bottom:22px">
+      <div><b>245</b><span>posti ogni anno</span></div>
+      <div><b>3.069</b><span>domande, di cui 2.528 in Quota 2</span></div>
+      <div><b>11,1</b><span>media minima 2026, su una scala che arriva a 12</span></div>
+    </div>
+    <div class="years">
+      <div class="year"><h4>1° anno</h4><dl>
+        <div><dt>International Business Environment</dt><dd>Il contesto in cui operano le multinazionali.</dd></div>
+        <div><dt>Statistics</dt><dd>Analizzare i dati.</dd></div>
+        <div><dt>Microeconomics</dt><dd>Come decidono consumatori e imprese.</dd></div>
+        <div><dt>Founder's Dilemmas: Anticipate and Avoid Startup Pitfalls</dt><dd>Gli errori tipici di chi fonda una startup, e come evitarli.</dd></div>
+        <div><dt>Industrial Organizational Analysis</dt><dd>Come competono le imprese in un settore.</dd></div>
+        <div><dt>Principles of International Marketing</dt><dd>Vendere in mercati diversi.</dd></div>
+        <div><dt>Corporate Governance</dt><dd>Chi controlla un'azienda e come.</dd></div>
+        <div><dt>Macroeconomics</dt><dd>L'economia di un paese nel suo insieme.</dd></div>
+      </dl></div>
+      <div class="year"><h4>2° anno</h4><dl>
+        <div><dt>International Economics</dt><dd>Commercio e scambi tra paesi.</dd></div>
+        <div><dt>Organizational Behaviour</dt><dd>Le persone dentro le organizzazioni.</dd></div>
+        <div><dt>Financial Accounting</dt><dd>Leggere un bilancio.</dd></div>
+        <div><dt>Business Research Methodology</dt><dd>Come si fa una ricerca sul business.</dd></div>
+        <div><dt>Corporate Finance</dt><dd>Come le aziende si finanziano e investono.</dd></div>
+        <div><dt>Global Supply Chain Management</dt><dd>Produzione e logistica su scala mondiale.</dd></div>
+        <div><dt>Risk Management of Multinational Enterprise</dt><dd>Come una multinazionale gestisce i rischi globali.</dd></div>
+        <div><dt>Innovation and Disruptive Technologies in International Business</dt><dd>Le tecnologie che cambiano le regole del gioco.</dd></div>
+      </dl></div>
+      <div class="year"><h4>3° anno</h4><dl>
+        <div><dt>Quinto semestre libero (30 crediti)</dt><dd>Esami a scelta, scambio all'estero o tirocinio.</dd></div>
+        <div><dt>Contemporary Issues in International Business</dt><dd>I temi di attualità del business globale.</dd></div>
+        <div><dt>Global Strategy and Geopolitics</dt><dd>Come la geopolitica cambia le strategie delle aziende.</dd></div>
+        <div><dt>International Business Thesis (15 crediti)</dt><dd>La tesi finale.</dd></div>
+      </dl></div>
+    </div>
+
+    <div class="two" style="margin-top:22px">
+      <div class="callout" style="margin:0"><b>Com'è fatto il corso.</b> Secondo CBS: economia e matematica 45%, commercio e logistica 30%, organizzazione e management 15%, innovazione e imprenditorialità 10%.</div>
+      <div class="callout" style="margin:0"><b>La matematica è uno strumento.</b> Si usa in circa metà dei corsi obbligatori, a livello pratico e mai oltre il requisito d'ingresso. CBS avverte: finanza e contabilità ci sono ma non sono centrali; chi punta a una magistrale in finanza può trovare corsi più adatti.</div>
+    </div>
+
+    <h4 style="font-size:20px;margin:30px 0 10px">Le opzioni durante il corso</h4>
+    <div class="others">
+      <div class="other"><h4>Scambio al quinto semestre</h4><p>In una delle oltre 300 università partner di CBS. Di norma non si pagano le lezioni all'università straniera.</p></div>
+      <div class="other"><h4>Tirocinio accademico</h4><p>Sostituisce parte degli esami a scelta: un periodo di lavoro in azienda, in Danimarca o all'estero, chiuso da un report.</p></div>
+      <div class="other"><h4>TREBLE — tre continenti in 18 mesi</h4><p>Con Singapore Management University e University of North Carolina at Chapel Hill. Un gruppo di 45 studenti, 15 per università, che vive e studia insieme: terzo semestre in North Carolina, quarto a Singapore, quinto a Copenhagen. Si fa domanda a fine primo semestre; contano voti, colloqui individuali e di gruppo, motivazione. Solo per studenti IB.</p></div>
+      <div class="other"><h4>Global Supply Chain and Logistics Management</h4><p>Con University of British Columbia (Vancouver) e Chinese University of Hong Kong (Shenzhen). Terzo semestre a Copenhagen, quarto a Vancouver, quinto a Shenzhen. Scadenza il 1° gennaio del primo anno. Posti molto limitati.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="dm">
+  <div class="course-block c">
+    <h3>DM — Business Administration and Digital Management</h3>
+    <p class="sub">Piano ufficiale per semestre; il sesto semestre non è dettagliato nella versione consultata.</p>
+    <div class="years">
+      <div class="year"><h4>1° anno</h4><dl>
+        <div><dt>Digital Technologies and Data-Driven Business</dt><dd>Il corso più grande: come i dati cambiano il modo di fare impresa.</dd></div>
+        <div><dt>Managing Innovation in Organizations</dt><dd>Come le aziende innovano.</dd></div>
+        <div><dt>Regulation and Governance of Digital Business</dt><dd>Le regole del digitale: privacy, piattaforme, responsabilità.</dd></div>
+        <div><dt>Economics and Strategy in the Digital Age</dt><dd>L'economia delle piattaforme e dei mercati digitali.</dd></div>
+        <div><dt>Managing Communication, Marketing and Relations</dt><dd>Marketing e comunicazione nell'era digitale.</dd></div>
+        <div><dt>Business Data Analytics, Quantitative Methods and Visualisation</dt><dd>Analizzare i dati e mostrarli con grafici.</dd></div>
+      </dl></div>
+      <div class="year"><h4>2° anno</h4><dl>
+        <div><dt>Performance: Finance and Accounting</dt><dd>Numeri e conti dell'azienda.</dd></div>
+        <div><dt>Globalisation, Outsourcing and Virtual Organising</dt><dd>Lavorare tra paesi e a distanza.</dd></div>
+        <div><dt>Information and Knowledge Management</dt><dd>Come un'azienda gestisce ciò che sa.</dd></div>
+        <div><dt>Business Models and Value Chains in the Digital Economy</dt><dd>Come si guadagna nell'economia digitale.</dd></div>
+        <div><dt>Digital Organising · Leadership and Project Management</dt><dd>Organizzare persone e progetti.</dd></div>
+        <div><dt>Technology and Societal Transformations</dt><dd>Come la tecnologia cambia la società.</dd></div>
+      </dl></div>
+      <div class="year"><h4>3° anno</h4><dl>
+        <div><dt>Quinto semestre libero</dt><dd>30 crediti tra esami a scelta e tirocinio.</dd></div>
+        <div><dt>Sesto semestre e tesi</dt><dd>Da verificare nel piano 2027-28.</dd></div>
+      </dl></div>
+    </div>
+    <div class="callout">Attenzione: DM non è un corso di data science "tecnica". La data science vera e propria a CBS si studia in inglese solo alla magistrale (Business Administration and Data Science).</div>
+  </div>
+</section>
+
+<section id="altri">
+  <h2>Gli altri corsi in inglese</h2>
+  <p class="lead">Meno vicini ai nostri criteri, ma utili da conoscere: nella domanda si possono mettere fino a otto preferenze.</p>
+  <div class="others">
+    <div class="other"><h4>Business Administration and Sociology</h4><p>Decisioni d'impresa responsabili, unendo la prospettiva economica e quella sociale.</p><span class="tag">Tra i temi c'è anche filosofia e sociologia</span></div>
+    <div class="other"><h4>Business Administration and Service Management</h4><p>Come si vende e si organizza un servizio, in Danimarca e all'estero.</p><span class="tag">Economia, organizzazione, cultura</span></div>
+    <div class="other"><h4>International Shipping and Trade</h4><p>Strategie dell'industria marittima e gestione delle operazioni di trasporto.</p><span class="tag">Commercio e logistica</span></div>
+  </div>
+</section>
+
+<section id="entrare">
+  <h2>Come si entra</h2>
+  <p class="lead">Si fa una sola domanda sul portale nazionale danese, indicando i corsi in ordine di preferenza. Le lezioni iniziano una volta l'anno, a settembre.</p>
+  <ol class="tl">
+    <li><div class="when">1 febbraio</div><div><b>Si apre optagelse.dk</b><p>Il portale nazionale per tutte le università danesi.</p></div></li>
+    <li><div class="when key">15 marzo, ore 12</div><div><b>Scadenza per chi ha un diploma estero</b><p>Vale sia per la Quota 1 sia per la Quota 2. Entro la stessa data vanno caricati tutti i documenti della Quota 2. Senza MitID, per ogni corso si firma una pagina da mandare via email.</p></div></li>
+    <li><div class="when key">5 luglio, ore 12</div><div><b>Ultimo giorno per dimostrare i requisiti</b><p>Voti finali e certificati mancanti. Nessuna proroga: i documenti arrivati dopo non vengono accettati.</p></div></li>
+    <li><div class="when">fine luglio</div><div><b>Risposte</b><p>Arrivano per tutti lo stesso giorno.</p></div></li>
+    <li><div class="when">settembre</div><div><b>Inizio delle lezioni</b></div></li>
+  </ol>
+
+  <div class="two" style="margin-top:28px">
+    <div><h3>Quota 1 e Quota 2</h3><ul class="clean">
+      <li><b>Quota 1</b>: conta solo la media del diploma, convertita nella scala danese.</li>
+      <li><b>Quota 2</b>: contano i voti ma anche le attività fatte dopo il diploma. Per alcuni corsi serve una lettera motivazionale. Chi fa domanda in Quota 2 viene valutato anche in Quota 1.</li>
+      <li><span class="warn">Verificato (ott. 2026):</span> chi si diploma nello stesso anno della domanda può candidarsi a CBS solo in Quota 1. Per noi vuol dire che conta la media della maturità convertita.</li>
+    </ul></div>
+    <div><h3>Requisiti da avere</h3><ul class="clean">
+      <li>Un diploma che dà accesso all'università, con una media convertibile nella scala danese.</li>
+      <li>Inglese al livello richiesto (English A): se il diploma non basta, si dimostra con un certificato, per esempio Cambridge.</li>
+      <li>Requisiti di materia per ogni corso. Per IB: inglese livello B con almeno 6,0 (più il requisito linguistico A), matematica B, e storia, scienze sociali o economia internazionale B. Come li copre il liceo italiano va verificato nella pagina di CBS per l'Italia.</li>
+      <li>Le medie minime sono molto alte: per IB 11,1 su 12 nel 2026. Con un diploma italiano serve un voto di maturità alto; la tabella di conversione è da verificare.</li>
+      <li>Niente corsi di recupero in estate: tutto va dimostrato entro il 5 luglio.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section id="openday">
+  <h2>Open Day 2027</h2>
+  <div class="openday">
+    <p class="when">Venerdì 29 gennaio 2027, 10:15–17:00</p>
+    <p class="where">Solbjerg Plads 3, 2000 Frederiksberg · in presenza · in inglese e danese · replica identica mercoledì 24 febbraio 2027</p>
+    <h3>Cosa si fa</h3>
+    <ul class="clean">
+      <li>Presentazioni su CBS e sui singoli bachelor, lungo tutta la giornata.</li>
+      <li>Incontri con studenti attuali e con l'ufficio ammissioni e orientamento.</li>
+      <li>Per chi viene dall'estero: studenti internazionali con cui parlare di vita a Copenhagen, e personale per domande su alloggio e costo della vita.</li>
+      <li>Incontri informativi dedicati all'ammissione.</li>
+    </ul>
+    <h3>Come prepararsi</h3>
+    <ul class="clean">
+      <li>Il programma della giornata esce a novembre: conviene scegliere prima le presentazioni di IBP, IB e DM, perché la giornata è piena.</li>
+      <li>Portare le domande scritte, da fare agli studenti e all'ufficio ammissioni.</li>
+      <li>CBS rilascia un modulo di giustificazione dell'assenza da scuola, da consegnare al liceo.</li>
+    </ul>
+    <h3>Domande da fare</h3>
+    <ul class="clean">
+      <li>Come viene convertito il voto di maturità italiano nella scala danese? A che voto corrisponde l'11,1 richiesto da IB nel 2026 e il 10,7 di IBP?</li>
+      <li>Che livello di matematica serve per ciascun corso, e il liceo italiano lo copre?</li>
+      <li>Quanto costa vivere a Copenhagen, e come si trova casa da studente internazionale?</li>
+      <li>Che possibilità ci sono di scambio all'estero nel quinto semestre?</li>
+    </ul>
+    <p class="note" style="margin-top:14px">La data di fine gennaio cade subito prima dell'apertura delle domande (1 febbraio) e con sei settimane di anticipo sulla scadenza del 15 marzo: il momento giusto per decidere le preferenze.</p>
+  </div>
+</section>
+
+<footer>Fonti: cbs.dk (pagine dei bachelor, Open Day 2027, ammissione e scadenze) e studieordninger.cbs.dk (piani di studio ufficiali), consultati a settembre 2026; verifica Quota 1 del 5 ottobre 2026. I piani di studio riportati sono le versioni più recenti pubblicate e possono essere aggiornati; prima di candidarsi verificare sempre sul sito dell'università.</footer>
+</div>
+</body>
+</html>
