@@ -25,16 +25,15 @@ Tutto è in costanti JS in cima allo `<script>`:
 - `CASC_D` — cascata di preferenze per ragazzo: riga 1 = dove andrebbe se ammesso ovunque; P(iscrizione) = P(ammesso qui) × Π(1 − P righe sopra); l'ultima riga è il ripiego (Cattolica Milano, P = 1). Le cascate rispettano la regola olandese di **max 2 domande a numerus fixus** (Francesca: IBEB; Marco: IBA + Maastricht IB; Iacopo: Delft CSE + UvA EBE).
 - `PARAM_D` — crescita rette 2,5%/anno (IE 2,9% dichiarato), mantenimento +3%/anno dal 2026, anni di ingresso, quota BSc² (35%: se Francesca entra a Rotterdam, probabilità che scelga il doppio bachelor a 4 anni), soglia 5% per gli scenari economico/caro.
 - Costo annuo = retta × (1+g)^(anno − anno base) + mantenimento città × 1,03^(anno − 2026) + una tantum nel primo anno; durate frazionarie pesano l'anno extra per la frazione. Orizzonte 2027/28 → 2032/33.
-- Risultati al 5/10/2026 (rev. 4b): atteso Francesca ≈ 102k (Rotterdam IBEB 74%), Marco ≈ 103k (IBA 45%), Iacopo ≈ 86k (Delft 51%), famiglia ≈ 292k; intervallo economico/caro ≈ 225-440k; picco 2029/30 ≈ 95k.
+- Risultati al 5/10/2026 (rev. 4b): atteso Francesca ≈ 102k (Rotterdam IBEB 74%), Marco ≈ 103k (IBA 45%), Iacopo ≈ 86k (Delft 51%), famiglia ≈ 292k; intervallo economico/caro ≈ 228-441k; picco 2029/30 ≈ 92k (verificati con `node tests/verifica.js`).
 
 ### Test rapido dopo ogni modifica
 
 ```bash
-python3 -c "import re;h=open('index.html').read();open('/tmp/p.js','w').write(re.search(r'<script>(.*)</script>',h,re.S).group(1))" && node --check /tmp/p.js
-# con jsdom (npm i jsdom) si può caricare la pagina e verificare che non ci siano errori, che ogni TUI_D abbia RULES e città, e che la somma delle P(iscrizione) sia 1 per ogni ragazzo
+node tests/verifica.js
 ```
 
-Pattern usato finora: in Node, stub minimale di `document`/`localStorage`, `new Function('module', js + ';module.exports={cascadeCalc,CH,RULES,TUI_D,CITIES_D}')`, poi `cascadeCalc('fra'|'mar'|'iac')`.
+Lo script (solo Node, nessuna dipendenza) estrae lo script **principale** di `index.html` — il più lungo: in `<head>` c'è anche lo script del tema, per questo la vecchia regex "dal primo `<script>` all'ultimo `</script>`" non funziona più —, ne controlla la sintassi, lo carica con un DOM minimo e verifica che ogni voce di `TUI_D` abbia regola e città, che ogni regola abbia la sua voce e che la somma delle P(iscrizione) sia 1 per ogni ragazzo. Stampa costo atteso per ragazzo, famiglia, scenari economico/caro e picco; esce con codice 1 se trova errori.
 
 ## Pubblicazione
 
