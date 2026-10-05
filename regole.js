@@ -25,6 +25,8 @@ const pTestBoc = q => q.sat ? 1 - (1 - q.pBoc) * (1 - q.pSat) : q.pBoc;
 function controlloInglese(req, q) {
   if (!req || req.esente) return {gate: null, flag: null};
   const c = q.en || {};
+  // decisione della famiglia (6/10/2026): inglese considerato soddisfatto; restano segnalate solo le soglie più alte
+  if (q.enOk) return {gate: null, flag: (req.ces >= 185 || (req.sez || 0) >= 180) ? 'inglese considerato ok: verificare il minimo (' + req.testo + ')' : null};
   if (!c.ces) return {gate: `certificazione d'inglese mancante (${req.testo})`, flag: null};
   if (c.ces < req.ces) return {gate: `certificazione sotto il minimo (${req.testo})`, flag: null};
   if (req.sez && c.sez != null && c.sez < req.sez) return {gate: `abilità sotto il minimo per sezione (${req.testo})`, flag: null};

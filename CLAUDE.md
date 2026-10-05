@@ -26,7 +26,8 @@ Lingua di lavoro: **italiano**. Igor usa Claude come consulente professionale di
 3. **Scala**: utilità = `U[voto]` (1 = 30, 2 = 65, 3 = 100) − `lambda` × costo del percorso / 10.000 €; ordine per utilità; si sceglie l'insieme di domande che massimizza utilità attesa − `mu` × ore, rispettando `GRUPPI` (2 fixus e 4 domande Studielink, 4 preferenze Bocconi, Sciences Po una volta, CAO 10, optagelse 8) e `maxDomande`. Il ripiego (`pref.ripiego`) è sempre incluso.
 4. **Preparazioni**: valore = differenza di utilità attesa con e senza (scala riottimizzata); "netto" sottrae `mu` × ore.
 5. **Costi**: retta × (1+g)^(anno − anno base) + mantenimento × 1,03^(anno − 2026) + una tantum nel primo anno, pesati con P(finire qui).
-- Risultati al 6/10/2026 con le impostazioni iniziali: Francesca preferito 15% / gradito 90% (IBEB 62% di finirci), costo ≈ 87k; Marco 7% / 99% (con media di 4ª a 8: 56%), ≈ 84k; Iacopo 59% / 100% (Delft CSE 59%), ≈ 61k; famiglia ≈ 232k, picco 2029/30 ≈ 78k.
+- Inglese: `enOk: true` nei profili (decisione della famiglia del 6/10/2026) → i requisiti d'inglese non escludono corsi; restano segnalate le soglie ≥185 o ≥180 per abilità.
+- Risultati al 6/10/2026 con le impostazioni iniziali: Francesca preferito 15% / gradito 90% (IBEB 58% di finirci), costo ≈ 86k; Marco 7% / 99% (con media di 4ª a 8: 56%), ≈ 84k; Iacopo 59% / 100% (Delft CSE 59%), ≈ 61k; famiglia ≈ 231k, picco 2029/30 ≈ 77k.
 
 ### Test rapido dopo ogni modifica
 

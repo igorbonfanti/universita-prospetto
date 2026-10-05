@@ -13,7 +13,7 @@ Aggiornato al 6 ottobre 2026 (regole di ammissione riverificate sui siti ufficia
 
 ### Francesca — ingresso settembre 2027
 - Liceo scientifico **bilingue quadriennale**; ultimo anno 2026/27; diploma luglio 2027. Il diploma quadriennale (12 anni di scolarità) richiede conferma scritta di riconoscimento da ogni ateneo.
-- Media 8,4-8,5 (media ai fini Bocconi: 8,4). Inglese **C1** certificato: **Cambridge C1 Advanced** (dichiarato 5/10/2026; anno di conseguimento e punteggio sulla Cambridge English Scale *da verificare*). Matematica dichiarata ~8.
+- Media 8,4-8,5 (media ai fini Bocconi: 8,4). Inglese **C1** certificato: **Cambridge C1 Advanced conseguito nel 2026** (dichiarato 6/10/2026; punteggi per abilità non noti). Matematica dichiarata ~8.
 - Esperienze: college in Inghilterra, scambio a Chicago, corso estivo IE a Madrid.
 - Interessi: economia e management, economia politica, data science, finanza, scienze politiche stile Sciences Po/PPE; la specializzazione la sceglierà durante gli studi.
 - **Preferisce un percorso all'estero**, in inglese, con esperienze internazionali; anche se ammessa, Bocconi non sarebbe la prima scelta.
@@ -21,13 +21,13 @@ Aggiornato al 6 ottobre 2026 (regole di ammissione riverificate sui siti ufficia
 - Shortlist storica (lug-ago 2026): Bocconi, HEC Paris, Sciences Po, IE, ESADE, ESCP; poi allargata a Olanda (Rotterdam) e UK stile PPE (UK poi escluso per costi). Visita a Parigi prevista in autunno 2026.
 
 ### Marco — ingresso settembre 2028
-- Liceo scientifico quinquennale, 4ª nel 2026/27. Media poco sotto il 7 in 3ª; obiettivo 7,5 in 4ª. Inglese B2 con potenziale C1. Capisce bene la matematica, voti non allineati; obiettivo 8 in matematica, inglese e storia.
+- Liceo scientifico quinquennale, 4ª nel 2026/27. Media poco sotto il 7 in 3ª; obiettivo 7,5 in 4ª. Inglese: **Cambridge B2 First del 2026**; farà a breve l'IELTS Academic. Capisce bene la matematica, voti non allineati; obiettivo 8 in matematica, inglese e storia.
 - Preferisce l'estero (città vere); **Bocconi gradita** con i limiti della media.
 - Open Day Rotterdam (RSM/ESE) il **3/10/2026** con Igor (pernottamento ad Amsterdam); **deciso di tentare Rotterdam, orientandosi su IBA** (intake più grande, selezione con motivazione).
 - Email: marco.bonfanti689@gmail.com. Ad aprile 2026 era stato fornito aiuto per un essay Bocconi.
 
 ### Iacopo — ingresso settembre 2028
-- Liceo scientifico quinquennale, 4ª nel 2026/27. **Media sotto il 7** per poca voglia di studiare; **forte attitudine logico-matematica e per la fisica; molto brillante in colloqui e test attitudinali**. Inglese B2 con potenziale C1.
+- Liceo scientifico quinquennale, 4ª nel 2026/27. **Media sotto il 7** per poca voglia di studiare; **forte attitudine logico-matematica e per la fisica; molto brillante in colloqui e test attitudinali**. Inglese: **Cambridge B2 First del 2026**; farà a breve l'IELTS Academic.
 - La famiglia cerca atenei dove contino colloquio/test più della media; vuole valutare **anche ingegneria** (gestionale, informatica) oltre all'economia. In passato TU Delft CSE era stata identificata come buon fit; risorse locali al Politecnico di Milano. Igor cerca per lui (e per Marco) corsi di economia/storia economica per liceali per testare l'interesse.
 
 ## Vincoli e perimetro
@@ -88,7 +88,7 @@ Aggiornato al 6 ottobre 2026 (regole di ammissione riverificate sui siti ufficia
 ## Verifiche aperte (ottobre 2026; dettaglio e indirizzi in `report.html` §10)
 
 1. **Diploma quadriennale di Francesca**: conferma scritta e "penultimo anno" da ESE, RSM, UvA, VU, Maastricht, Tilburg, Sciences Po, WU, ESCP, IE, ESADE, Bocconi (anni del curriculum), CBS/Aarhus, CAO.
-2. **Cambridge C1 Advanced di Francesca**: punteggi per abilità e data (UvA vuole 180 in ogni abilità e test dopo settembre 2025; molti olandesi ≤2 anni). Se non basta, IELTS entro dicembre 2026.
+2. ~~Inglese~~: **decisione di Igor (6/10/2026): l'inglese è considerato soddisfatto per tutti e tre** (Francesca CAE 2026; gemelli B2 First 2026 + IELTS a breve). Da controllare solo se entrano corsi con soglie alte (PPLE 185, CBS 185, ESADE 190, UvA 180 per abilità).
 3. Sciences Po: prima o seconda finestra (4/11 o 13/1); documentazione del reddito per titolare di S.r.l.
 4. Date esame WU 2027/2028 contro la maturità; data di fine lavori della commissione 2027 (vincolo danese del 5/7).
 5. Bando Politecnico 2027/28: date del TOL anticipato e validità 2028/29.

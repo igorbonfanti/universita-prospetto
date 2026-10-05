@@ -200,17 +200,17 @@ const DOMANDE = {
 const PROFILI = {
   fra: {ciclo: 2027, mediaPen: [8.4, 8.4], mediaBoc: [8.4, 8.4], mate: 8, matur: 90,
     pLog: [0.65, 0.75], pBoc: [0.45, 0.65], pSat: 0.55, pCol: [0.6, 0.7], ompt: [0.6, 0.75],
-    en: {ces: 180, sez: null, recente: null, tipo: 'Cambridge C1 Advanced'}, enObiettivo: {ces: 185, sez: 180, recente: true},
+    en: {ces: 180, sez: null, recente: true, tipo: 'Cambridge C1 Advanced (2026)'}, enOk: true, enObiettivo: {ces: 185, sez: 180, recente: true},
     pDiploma: 0.9,
-    note: 'Liceo scientifico bilingue quadriennale, diploma luglio 2027. Media 8,4-8,5 dichiarata: il penultimo anno è la 3ª (2025/26, già chiusa) e per Bocconi contano verosimilmente 2ª e 3ª (da confermare). Cambridge C1 Advanced: punteggio e data da verificare (molti atenei olandesi chiedono un test di non più di 2 anni). Test Bocconi del 24/9/2026: 25/50. pDiploma = probabilità che gli atenei esteri accettino il diploma quadriennale (nessuno lo menziona: valutazione 0,9 finché non arrivano conferme scritte).'},
+    note: 'Liceo scientifico bilingue quadriennale, diploma luglio 2027. Media 8,4-8,5 dichiarata: il penultimo anno è la 3ª (2025/26, già chiusa) e per Bocconi contano verosimilmente 2ª e 3ª (da confermare). Cambridge C1 Advanced del 2026 (punteggi per abilità non noti): inglese considerato soddisfatto (decisione della famiglia, 6/10/2026). Test Bocconi del 24/9/2026: 25/50. pDiploma = probabilità che gli atenei esteri accettino il diploma quadriennale (nessuno lo menziona: valutazione 0,9 finché non arrivano conferme scritte).'},
   mar: {ciclo: 2028, mediaPen: [7.3, 8.0], mediaBoc: [7.1, 7.45], mate: 7.5, matur: 78,
     pLog: [0.5, 0.6], pBoc: [0.4, 0.55], pSat: 0.45, pCol: [0.45, 0.55], ompt: [0.45, 0.6],
-    en: {ces: null, sez: null, recente: null, tipo: 'nessuna (B2 dichiarato)'}, enObiettivo: {ces: 180, sez: 176, recente: true},
+    en: {ces: 170, sez: null, recente: true, tipo: 'Cambridge B2 First (2026); IELTS Academic a breve'}, enOk: true, enObiettivo: {ces: 180, sez: 176, recente: true},
     pDiploma: 1,
     note: 'Liceo scientifico, 4ª nel 2026/27 (= penultimo anno per l\'Olanda). 3ª poco sotto il 7, obiettivo 7,5 in 4ª. La media di 4ª "con preparazione" (8,0) è la soglia RSM per i punti voto IBA: è un obiettivo, non una previsione.'},
   iac: {ciclo: 2028, mediaPen: [6.6, 7.3], mediaBoc: [6.5, 6.85], mate: 7, matur: 72,
     pLog: [0.75, 0.85], pBoc: [0.55, 0.7], pSat: 0.65, pCol: [0.7, 0.75], ompt: [0.65, 0.8],
-    en: {ces: null, sez: null, recente: null, tipo: 'nessuna (B2 dichiarato)'}, enObiettivo: {ces: 180, sez: 176, recente: true},
+    en: {ces: 170, sez: null, recente: true, tipo: 'Cambridge B2 First (2026); IELTS Academic a breve'}, enOk: true, enObiettivo: {ces: 180, sez: 176, recente: true},
     pDiploma: 1,
     note: 'Liceo scientifico, 4ª nel 2026/27. Media sotto il 7; forte attitudine logico-matematica e per la fisica, brillante in test e colloqui (dichiarato): rese alte nei test.'}
 };
@@ -230,7 +230,7 @@ const PREPARAZIONI = {
     descr: 'Vale per Bocconi (equivalente al test, conta il migliore), Politecnico (alternativa al TOL, anche anticipato), IE (≥1300), ESADE, PPLE (Math ≥600), Sciences Po (facoltativo). Calcolatrice ammessa, nessuna penalità: utile a chi soffre il tempo. Date: 7/11 e 5/12/2026; 6/3, 1/5, 5/6/2027; 111 $.',
     effetto: (q, p) => { q.sat = true; q.pSat = p.pSat; },
     corsi: ['boc-man', 'boc-ea', 'boc-fin', 'boc-eco', 'boc-ipg', 'boc-mcs', 'boc-ai', 'hec-boc', 'ie-bba', 'esade', 'uva-pple', 'polimi-ges', 'polimi-inf', 'polimi-mat']},
-  cert_en: {nome: 'Certificazione d\'inglese (IELTS Academic / C1 Advanced)', ore: 25, euro: 290,
+  cert_en: {nome: 'Certificazione d\'inglese (IELTS Academic / C1 Advanced)', ore: 25, euro: 290, salta: p => p.enOk,
     descr: 'Un solo certificato recente copre quasi tutto: IELTS 7.0 senza parti sotto 6.5 copre anche PPLE; C1 Advanced ≥180 in ogni abilità copre UvA, VU, Delft, TU/e, KU Leuven. Validità di 2 anni per molti atenei: gemelli tra primavera e autunno 2027; Francesca entro il 15/1/2027 se il suo certificato è precedente a settembre 2025.',
     effetto: (q, p) => { q.en = Object.assign({}, p.enObiettivo); },
     corsi: ['eur-ibeb', 'eur-bsc2', 'rsm-iba', 'uva-ebe', 'uva-eds', 'uva-pple', 'vu-ebe', 'vu-cs', 'til-eco', 'til-eor', 'delft-cse', 'delft-ae', 'tue-cse', 'tue-ie', 'kul-bbe', 'kul-bet', 'escp', 'ie-bba', 'esade', 'cbs', 'aarhus', 'ucd', 'tcd']},
@@ -249,7 +249,7 @@ const PREPARAZIONI = {
 };
 
 // preparazioni pianificate di default (modificabili nella scheda Preparazione)
-const PREP_D = {fra: ['logica', 'boc', 'colloqui'], mar: ['logica', 'cert_en', 'colloqui'], iac: ['logica', 'cert_en']};
+const PREP_D = {fra: ['logica', 'boc', 'colloqui'], mar: ['logica', 'colloqui'], iac: ['logica']};
 
 // ---------- preferenze di partenza (IPOTESI da confermare con i ragazzi) ----------
 // voto: 0 = escluso, 1 = accettabile, 2 = gradito, 3 = preferito. citta: 'si' | 'no' | 'dd' (da decidere).
@@ -298,7 +298,6 @@ const EVENTI = [
   {d: '2026-11-15', chi: 'tutti', corsi: ['wu-bbe'], cosa: 'WU pubblica la procedura BBE 2027/28 (data esame)', stato: 'S'},
   {d: '2026-11-25', a: '2027-01-26', chi: 'fra', corsi: ['boc-man', 'boc-ea', 'boc-fin', 'boc-eco', 'boc-ipg', 'boc-mcs', 'boc-ai', 'hec-boc'], cosa: 'Bocconi Winter e HEC round II: domande (ultimo test 21/1)', stato: 'F'},
   {d: '2026-12-01', chi: 'tutti', corsi: ['polimi-ges', 'polimi-inf', 'polimi-mat', 'polimi-es'], cosa: 'Bando Politecnico 2027/28 e fase anticipata 2028/29 (atteso nov-dic)', stato: 'S'},
-  {d: '2026-12-15', chi: 'fra', prep: 'cert_en', cosa: 'Ultimo momento utile per un nuovo test d\'inglese valido per UvA/ESE (test prima del 15/1)', stato: 'S'},
   {d: '2027-01-15', chi: 'fra', corsi: ['eur-ibeb', 'rsm-iba', 'uva-ebe', 'mst-ib', 'delft-cse', 'delft-ae', 'tue-cse'], cosa: 'Studielink: scadenza numerus fixus (ESE: dossier completo con inglese e matematica)', stato: 'F'},
   {d: '2027-01-15', chi: 'fra', corsi: ['mst-ebe'], cosa: 'Maastricht EBE: scadenza "early" per l\'essay (ultima 15/3)', stato: 'F'},
   {d: '2027-01-20', chi: 'fra', corsi: ['ucd', 'tcd'], cosa: 'CAO early (normale 1/2)', stato: 'F'},
@@ -327,7 +326,7 @@ const EVENTI = [
   {d: '2027-03-06', chi: 'gem', prep: 'sat', cosa: 'SAT in 4ª (anche 1/5 e 5/6/2027): unico test Bocconi-valido sostenibile prima del ciclo 2028/29', stato: 'F'},
   {d: '2027-03-11', a: '2027-07-16', chi: 'gem', corsi: ['polimi-ges', 'polimi-inf', 'polimi-mat'], cosa: 'TOL anticipato (2 finestre, 1 tentativo ciascuna): ≥75 = posto garantito nei corsi in italiano per il 2028/29', stato: 'S'},
   {d: '2027-04-15', a: '2027-07-06', chi: 'gem', corsi: ['bicocca'], cosa: 'Bicocca: ammissione anticipata dal penultimo anno (TOLC-E + domanda; bando atteso ~marzo 2027)', stato: 'S'},
-  {d: '2027-05-01', a: '2027-11-30', chi: 'gem', prep: 'cert_en', cosa: 'Certificazione d\'inglese: finestra utile (≤2 anni al 15/1/2028; ≥180 in ogni abilità per UvA)', stato: 'S'},
+  {d: '2026-11-01', a: '2027-12-31', chi: 'gem', cosa: 'IELTS Academic (previsto a breve): ≤2 anni alle scadenze (15/1/2028 per i fixus; per VU sostenuto dopo l\'1/9/2026); 7.0 senza parti sotto 6.5 copre anche PPLE, IE, ESADE, CBS', stato: 'S'},
   {d: '2027-07-15', chi: 'gem', prep: 'boc', cosa: 'Apre il test Bocconi del ciclo 2028/29 (4 tentativi)', stato: 'S'},
   {d: '2027-09-17', chi: 'gem', corsi: ['ie-bba'], cosa: 'IE: Early Round 2028/29', stato: 'F'},
   {d: '2027-09-01', a: '2027-09-29', chi: 'gem', corsi: ['boc-man', 'boc-ea', 'boc-fin', 'boc-eco', 'boc-ipg', 'boc-mcs', 'boc-ai', 'hec-boc'], cosa: 'Bocconi Early 2028/29 (servono i voti finali di 4ª)', stato: 'S'},

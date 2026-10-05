@@ -187,6 +187,7 @@ function valorePreparazioni(kid,pref,param,prep,opts){
   for(const id of Object.keys(PREPARAZIONI)){
     const A=PREPARAZIONI[id]; 
     if(A.solo&&!A.solo.includes(kid))continue;
+    if(A.salta&&A.salta(profiloDi(kid)))continue;
     const has=prep.includes(id);
     const alt=ottimizza(kid,pref,param,has?prep.filter(x=>x!==id):[...prep,id],opts);
     const con=has?base:alt,senza=has?alt:base;
