@@ -1,4 +1,4 @@
-<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"></head><body>
+<!doctype html><html lang="it"><head><script>try{var t=localStorage.getItem("tema");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}</script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"></head><body>
 <title>Prospetto esborsi bachelor</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
@@ -22,6 +22,7 @@ body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:14px
 .wrap{max-width:1180px;margin:0 auto}
 header.top{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:5;border-bottom:1px solid var(--line);padding-block:14px 0;margin-inline:-16px;padding-inline:16px}
 header.top .wrap{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:8px 20px}
+header.top .theme{align-self:center;margin-left:0}
 h1{font-family:var(--display);font-weight:600;font-size:22px;margin:0;text-wrap:balance}
 .sub{color:var(--muted);font-size:13px;margin:2px 0 0}
 nav{display:flex;gap:2px;flex-wrap:wrap}
@@ -93,6 +94,11 @@ th[title]{cursor:help;text-decoration:underline dotted var(--muted);text-underli
 .gloss dd{margin:2px 0 0 0;color:var(--muted);font-size:13px;max-width:80ch}
 @media (prefers-reduced-motion:no-preference){ .btn{transition:border-color .15s} }
 @media (max-width:600px){ h1{font-size:19px} .why{min-width:200px} }
+
+.theme{display:flex;gap:2px;align-items:center;margin-left:auto}
+.theme button{font:inherit;font-size:12px;padding:3px 9px;border:1px solid var(--line);background:var(--panel);color:var(--muted);cursor:pointer}
+.theme button:first-child{border-radius:4px 0 0 4px}.theme button:last-child{border-radius:0 4px 4px 0}
+.theme button[aria-pressed="true"]{background:var(--accent);color:#fff;border-color:var(--accent)}
 </style>
 
 <div class="wrap">
@@ -106,6 +112,7 @@ th[title]{cursor:help;text-decoration:underline dotted var(--muted);text-underli
     <button role="tab" data-v="fonti" aria-selected="false">Metodo e fonti</button>
     <a href="analisi.html" style="font:inherit;font-weight:500;padding:8px 12px;color:var(--accent);text-decoration:none;border-bottom:3px solid transparent">Analisi di orientamento →</a>
   </nav>
+  <div class="theme" role="group" aria-label="Tema"><button type="button" data-tema="light">Chiaro</button><button type="button" data-tema="system">Sistema</button><button type="button" data-tema="dark">Scuro</button></div>
 </div></header>
 
 <!-- ============ PROSPETTO ============ -->
@@ -708,5 +715,11 @@ document.getElementById('resetParam').onclick=()=>{const d=defaultState();S.para
 document.querySelectorAll('nav [role=tab]').forEach(b=>b.onclick=()=>{document.querySelectorAll('nav [role=tab]').forEach(x=>x.setAttribute('aria-selected',x===b));document.querySelectorAll('section.view').forEach(s=>s.hidden=s.id!=='v-'+b.dataset.v);try{localStorage.setItem('prospetto-tab',b.dataset.v)}catch(e){}});
 try{const t=localStorage.getItem('prospetto-tab');if(t){const b=document.querySelector(`nav [data-v="${t}"]`);if(b)b.click();}}catch(e){}
 renderAll();renderFonti();
+</script>
+<script>
+(function(){var root=document.documentElement;function cur(){try{return localStorage.getItem("tema")||"system"}catch(e){return "system"}}
+function apply(t){if(t==="light"||t==="dark")root.setAttribute("data-theme",t);else root.removeAttribute("data-theme");try{if(t==="system")localStorage.removeItem("tema");else localStorage.setItem("tema",t)}catch(e){}
+document.querySelectorAll(".theme button").forEach(function(b){b.setAttribute("aria-pressed",String(b.dataset.tema===t))});}
+document.querySelectorAll(".theme button").forEach(function(b){b.addEventListener("click",function(){apply(b.dataset.tema)})});apply(cur());})();
 </script>
 </body></html>
