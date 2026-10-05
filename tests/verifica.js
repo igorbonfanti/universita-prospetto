@@ -1,56 +1,75 @@
-// Test rapido di index.html, senza dipendenze: node tests/verifica.js
-// Estrae lo script principale (il più lungo: in <head> c'è anche lo script del tema),
-// controlla la sintassi, carica il modello con un DOM minimo e verifica gli invarianti.
+// Test rapido, senza dipendenze: node tests/verifica.js
+// Carica dati.js, regole.js e modello.js come fa la pagina, controlla la sintassi degli script di index.html
+// e verifica gli invarianti del catalogo e del modello. Esce con codice 1 se trova errori.
 'use strict';
 const fs = require('fs');
 const path = require('path');
 const vm = require('vm');
 
-const html = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
-const scripts = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(m => m[1]);
-const js = scripts.sort((a, b) => b.length - a.length)[0];
+const dir = path.join(__dirname, '..');
 let errori = 0;
 const ko = msg => { errori++; console.log('ERRORE  ' + msg); };
 
-try { new vm.Script(js, { filename: 'index.html#script' }); }
-catch (e) { console.log('ERRORE  sintassi: ' + e.message); process.exit(1); }
+// 1. sintassi degli script inline di index.html e report.html
+for (const pagina of ['index.html', 'report.html']) {
+  const f = path.join(dir, pagina);
+  if (!fs.existsSync(f)) { if (pagina === 'index.html') ko('index.html mancante'); continue; }
+  const html = fs.readFileSync(f, 'utf8');
+  [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].forEach((m, i) => {
+    try { new vm.Script(m[1], {filename: `${pagina}#script${i}`}); } catch (e) { ko(`${pagina}, script ${i}: ${e.message}`); }
+  });
+}
+for (const s of ['dati.js', 'regole.js', 'modello.js'])
+  if (!fs.readFileSync(path.join(dir, 'index.html'), 'utf8').includes(`<script src="${s}">`)) ko(`index.html non carica ${s}`);
 
-// DOM minimo: ogni elemento accetta qualsiasi proprietà e metodo
-const el = () => new Proxy({}, {
-  get: (t, k) => k === 'classList' ? { add() {}, remove() {}, toggle() {}, contains: () => false }
-    : k === 'dataset' ? {} : (k in t ? t[k] : (typeof k === 'string' ? () => el() : undefined)),
-  set: (t, k, v) => (t[k] = v, true)
-});
-const ctx = {
-  console, Math, JSON, Object, Array, Number, String, Date, Set, Map, Proxy, isNaN, parseFloat, setTimeout, clearTimeout,
-  localStorage: { getItem: () => null, setItem() {}, removeItem() {} },
-  matchMedia: () => ({ matches: false, addEventListener() {}, addListener() {} }),
-  document: { documentElement: el(), body: el(), getElementById: () => el(), querySelector: () => null, querySelectorAll: () => [] }
-};
-ctx.window = ctx;
+// 2. caricamento del modello (stesso ordine della pagina)
+const ctx = {console, Math, JSON, Object, Array, Set, Map, Number, String, Date, Float64Array, Uint8Array, Infinity, isNaN};
 vm.createContext(ctx);
-try { vm.runInContext(js + ';globalThis.__M={cascadeCalc,CH,RULES,TUI_D,CITIES_D,YEARS};', ctx); }
-catch (e) { console.log('ERRORE  caricamento: ' + e.message); process.exit(1); }
-const { cascadeCalc, CH, RULES, TUI_D, CITIES_D, YEARS } = ctx.__M;
-
-for (const k in TUI_D) {
-  if (!RULES[k]) ko(`"${k}" senza regola in RULES`);
-  if (!CITIES_D[TUI_D[k][6]]) ko(`"${k}" con città inesistente "${TUI_D[k][6]}"`);
+for (const f of ['dati.js', 'regole.js', 'modello.js']) {
+  try { vm.runInContext(fs.readFileSync(path.join(dir, f), 'utf8'), ctx, {filename: f}); }
+  catch (e) { console.log(`ERRORE  ${f}: ${e.message}`); process.exit(1); }
 }
-for (const k in RULES) if (!TUI_D[k]) ko(`regola "${k}" senza voce in TUI_D`);
+const M = vm.runInContext('({RAGAZZI,PROGRAMMI,CITTA,DOMANDE,GRUPPI,RULES,PROFILI,PREPARAZIONI,PREP_D,PREF_D,PARAM_D,EVENTI,CASC_V4,ANNI,ottimizza,valorePreparazioni,costoPercorso,probabilita,profiloEffettivo})', ctx);
 
+// 3. invarianti del catalogo
+for (const [id, P] of Object.entries(M.PROGRAMMI)) {
+  if (!M.RULES[id]) ko(`${id}: manca la regola in RULES`);
+  if (!M.CITTA[P.citta]) ko(`${id}: città inesistente "${P.citta}"`);
+  if (P.domanda && !M.DOMANDE[P.domanda]) ko(`${id}: domanda "${P.domanda}" non definita in DOMANDE`);
+  if (!P.en || !P.en.testo) ko(`${id}: requisito d'inglese mancante`);
+  for (const g of P.gruppi || []) if (!M.GRUPPI[g]) ko(`${id}: gruppo "${g}" inesistente`);
+  if (!(P.retta >= 0) || !(P.anni > 0)) ko(`${id}: retta o durata non valide`);
+}
+for (const id of Object.keys(M.RULES)) if (!M.PROGRAMMI[id]) ko(`regola "${id}" senza corso`);
+for (const k of Object.keys(M.PREF_D)) {
+  for (const id of Object.keys(M.PREF_D[k].voti)) if (!M.PROGRAMMI[id]) ko(`PREF_D.${k}: corso "${id}" inesistente`);
+  if (!M.PROGRAMMI[M.PREF_D[k].ripiego]) ko(`PREF_D.${k}: ripiego inesistente`);
+  for (const id of M.CASC_V4[k]) if (!M.PROGRAMMI[id]) ko(`CASC_V4.${k}: "${id}" inesistente`);
+  for (const a of M.PREP_D[k]) if (!M.PREPARAZIONI[a]) ko(`PREP_D.${k}: preparazione "${a}" inesistente`);
+}
+for (const a of Object.values(M.PREPARAZIONI)) for (const id of a.corsi) if (!M.PROGRAMMI[id]) ko(`preparazione "${a.nome}": corso "${id}" inesistente`);
+for (const e of M.EVENTI) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(e.d) || (e.a && !/^\d{4}-\d{2}-\d{2}$/.test(e.a))) ko(`evento "${e.cosa}": data non valida`);
+  for (const id of e.corsi || []) if (!M.PROGRAMMI[id]) ko(`evento "${e.cosa}": corso "${id}" inesistente`);
+  if (e.prep && !M.PREPARAZIONI[e.prep]) ko(`evento "${e.cosa}": preparazione "${e.prep}" inesistente`);
+}
+
+// 4. modello: probabilità, vincoli, somma delle probabilità
+const pct = p => (p * 100).toFixed(0).padStart(3) + '%';
 const fmt = n => Math.round(n).toLocaleString('it-IT');
-const fam = YEARS.map(() => 0);
-let tot = 0, eco = 0, caro = 0;
-for (const c of CH) {
-  const R = cascadeCalc(c.id);
-  if (Math.abs(R.sumP - 1) > 1e-6) ko(`${c.name}: somma P(iscrizione) = ${R.sumP}`);
-  R.expSer.forEach((v, i) => fam[i] += v);
-  tot += R.exp; eco += R.eco.tot; caro += R.caro.tot;
-  console.log(`${c.name.padEnd(10)} atteso € ${fmt(R.exp).padStart(8)}  più probabile: ${R.prob.key} (${(R.prob.pisc * 100).toFixed(1)}%)`);
+let fam = 0;
+for (const k of M.RAGAZZI) {
+  const r = M.ottimizza(k.id, M.PREF_D[k.id], Object.assign({}, M.PARAM_D), M.PREP_D[k.id]);
+  for (const o of r.sim.info) if (!(o.p >= 0 && o.p <= 1)) ko(`${k.nome}: probabilità fuori da [0,1]`);
+  const somma = r.val.pf.reduce((a, b) => a + b, 0) + r.val.pNessuno;
+  if (Math.abs(somma - 1) > 1e-9) ko(`${k.nome}: somma delle probabilità = ${somma}`);
+  const cnt = {};
+  for (const id of r.scala) for (const g of M.PROGRAMMI[id].gruppi || []) cnt[g] = (cnt[g] || 0) + 1;
+  for (const g in cnt) if (cnt[g] > M.GRUPPI[g].max) ko(`${k.nome}: vincolo "${g}" violato (${cnt[g]})`);
+  fam += r.val.costo;
+  console.log(`\n${k.nome}: preferito ${pct(r.val.pTop)}, gradito ${pct(r.val.pGood)}, nessuna ammissione ${(r.val.pNessuno * 100).toFixed(1)}%, costo atteso € ${fmt(r.val.costo)}, ${r.scala.length} domande, ${Math.round(r.ore)} ore`);
+  r.scala.forEach((id, i) => console.log(`  ${String(i + 1).padStart(2)}. ${pct(r.sim.info[r.sim.idx[id]].p)} amm. ${(r.val.pf[i] * 100).toFixed(1).padStart(5)}% qui  ${id}`));
 }
-const iPk = fam.indexOf(Math.max(...fam));
-console.log(`Famiglia   atteso € ${fmt(tot).padStart(8)}  economico € ${fmt(eco)}  caro € ${fmt(caro)}`);
-console.log(`Picco      ${YEARS[iPk]}/${String(YEARS[iPk] + 1).slice(2)} € ${fmt(fam[iPk])}`);
+console.log(`\nFamiglia: costo atteso € ${fmt(fam)}`);
 console.log(errori ? `\n${errori} errori` : '\nOK');
 process.exit(errori ? 1 : 0);

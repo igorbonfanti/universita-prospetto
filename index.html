@@ -1,720 +1,397 @@
-<!doctype html><html lang="it"><head><script>try{var t=localStorage.getItem("tema");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}</script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"></head><body>
-<title>Prospetto esborsi bachelor</title>
+<!doctype html><html lang="it"><head><script>try{var t=localStorage.getItem("tema");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}</script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Piano di candidatura</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: a ledger. One sticky nav with four views; tables carry the content; numbers in mono, tabular. */
 :root{
   --bg:#f7f6f2; --panel:#ffffff; --fg:#1d1f1c; --muted:#5f655c; --line:#d9dbd3;
   --accent:#1f5f8b; --accent-soft:#e3eef6; --input:#fff7cc; --input-line:#d9c25c;
-  --fra:#1f5f8b; --mar:#b5541c; --iac:#4a7c3f; --warn:#a33a2a; --ok:#2e6b3b;
+  --fra:#1f5f8b; --mar:#b5541c; --iac:#4a7c3f; --warn:#a33a2a; --ok:#2e6b3b; --dd:#8a6d00;
   --display:"IBM Plex Serif",Georgia,serif; --body:"IBM Plex Sans",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
 }
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
   --bg:#17191a; --panel:#1f2224; --fg:#ebeae4; --muted:#a4a79e; --line:#363a3b;
   --accent:#7fb3d9; --accent-soft:#223240; --input:#3a3516; --input-line:#8a7a2c;
-  --fra:#7fb3d9; --mar:#e3925e; --iac:#8fc47f; --warn:#e07a68; --ok:#7dc48a; color-scheme:dark } }
+  --fra:#7fb3d9; --mar:#e3925e; --iac:#8fc47f; --warn:#e07a68; --ok:#7dc48a; --dd:#e0c060; color-scheme:dark } }
 :root[data-theme="dark"]{
   --bg:#17191a; --panel:#1f2224; --fg:#ebeae4; --muted:#a4a79e; --line:#363a3b;
   --accent:#7fb3d9; --accent-soft:#223240; --input:#3a3516; --input-line:#8a7a2c;
-  --fra:#7fb3d9; --mar:#e3925e; --iac:#8fc47f; --warn:#e07a68; --ok:#7dc48a; color-scheme:dark }
+  --fra:#7fb3d9; --mar:#e3925e; --iac:#8fc47f; --warn:#e07a68; --ok:#7dc48a; --dd:#e0c060; color-scheme:dark }
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:14px;line-height:1.45;margin:0;padding-block:0 48px;padding-inline:16px}
 .wrap{max-width:1180px;margin:0 auto}
 header.top{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:5;border-bottom:1px solid var(--line);padding-block:14px 0;margin-inline:-16px;padding-inline:16px}
 header.top .wrap{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:8px 20px}
-header.top .theme{align-self:center;margin-left:0}
 h1{font-family:var(--display);font-weight:600;font-size:22px;margin:0;text-wrap:balance}
 .sub{color:var(--muted);font-size:13px;margin:2px 0 0}
 nav{display:flex;gap:2px;flex-wrap:wrap}
-nav button{background:none;border:0;border-bottom:3px solid transparent;color:var(--muted);font:inherit;font-weight:500;padding:8px 12px;cursor:pointer}
+nav button,nav a{background:none;border:0;border-bottom:3px solid transparent;color:var(--muted);font:inherit;font-weight:500;padding:8px 10px;cursor:pointer;text-decoration:none}
 nav button[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent)}
-nav button:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+nav a{color:var(--accent)}
+button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
 section.view{padding-top:20px}
 h2{font-family:var(--display);font-weight:600;font-size:18px;margin:26px 0 8px;text-wrap:balance}
 h2:first-child{margin-top:0}
 h3{font-size:14px;font-weight:600;margin:18px 0 6px;letter-spacing:.02em}
-p{max-width:72ch}
-.note{color:var(--muted);font-size:13px;max-width:80ch}
-.tag{display:inline-block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:3px;background:var(--accent-soft);color:var(--accent);font-weight:600}
+p{max-width:80ch}
+.note{color:var(--muted);font-size:13px;max-width:90ch}
+.tag{display:inline-block;font-size:11px;letter-spacing:.04em;padding:1px 6px;border-radius:3px;background:var(--accent-soft);color:var(--accent);font-weight:600;white-space:nowrap}
+.tag.w{background:transparent;border:1px solid var(--warn);color:var(--warn)}
+.tag.ok{background:transparent;border:1px solid var(--ok);color:var(--ok)}
+.tag.dd{background:transparent;border:1px solid var(--dd);color:var(--dd)}
+.tag.m{background:transparent;border:1px solid var(--line);color:var(--muted)}
 .tbl{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--panel)}
 table{border-collapse:collapse;width:100%;font-size:13px}
-th,td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle;white-space:nowrap}
-th{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--panel);position:sticky;top:0}
-td.n,th.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
-td.name{white-space:normal;min-width:220px}
+th,td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--panel);white-space:nowrap}
+td.n,th.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+td.name{min-width:220px}
+td.small{font-size:12px;color:var(--muted);min-width:220px}
 tr.total td{font-weight:600;border-top:2px solid var(--line)}
-tr.dim td{color:var(--muted)}
-tr.scen td{background:var(--accent-soft)}
+tr.off td{color:var(--muted)}
+tr.past td{opacity:.55}
+tr.soon td{background:var(--accent-soft)}
 input[type=number],select,input[type=text]{font:inherit;font-family:var(--mono);font-size:13px;padding:3px 5px;border:1px solid var(--line);border-radius:4px;background:var(--panel);color:var(--fg);min-width:0}
 input.in{background:var(--input);border-color:var(--input-line);width:64px;text-align:right}
-input.in.w{width:92px}
-select{font-family:var(--body);max-width:100%}
+select.in{background:var(--input);border-color:var(--input-line);font-family:var(--body)}
 .btn{font:inherit;font-size:12px;padding:4px 9px;border:1px solid var(--line);border-radius:4px;background:var(--panel);color:var(--fg);cursor:pointer}
 .btn:hover{border-color:var(--accent)}
-.btn.sm{padding:1px 6px;font-size:12px;line-height:1.3}
-.btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn.on{background:var(--accent);color:#fff;border-color:var(--accent)}
 .row{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin:8px 0}
 .row label{font-size:13px;color:var(--muted)}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:10px 0 4px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:10px 0 4px}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:10px 12px;min-width:0}
 .card .k{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
 .card .v{font-family:var(--mono);font-size:20px;font-weight:500;font-variant-numeric:tabular-nums;margin-top:2px}
-.card .s{font-size:12px;color:var(--muted);white-space:normal}
+.card .s{font-size:12px;color:var(--muted)}
 .child{border-left:4px solid var(--c);padding-left:12px;margin:22px 0}
 .child h2{margin-top:0}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;margin:10px 0}
+.box{background:var(--panel);border:1px solid var(--line);border-top:4px solid var(--c,var(--accent));border-radius:6px;padding:12px;min-width:0}
+.box h3{margin-top:0}
+.box ol,.box ul{margin:6px 0;padding-left:20px}
+.box li{margin:3px 0}
+.f{display:grid;grid-template-columns:1fr auto auto;gap:6px 8px;align-items:center;font-size:13px}
+.f.two{grid-template-columns:1fr auto}
 .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin:6px 0}
 .legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--c);margin-right:5px;vertical-align:-1px}
 .chart{width:100%;height:auto;max-width:100%;display:block;margin:6px 0}
-.why{white-space:normal;font-size:12px;color:var(--muted);max-width:420px;min-width:260px}
-.kbd{font-family:var(--mono);background:var(--accent-soft);padding:0 4px;border-radius:3px}
-.src a{color:var(--accent)}
-.src li{margin:3px 0}
+.bar{display:inline-block;height:8px;border-radius:2px;background:var(--c,var(--accent));vertical-align:middle}
+.src li{margin:4px 0}
+.src a,.lnk{color:var(--accent)}
 details{margin:8px 0}
 summary{cursor:pointer;font-weight:500}
-.sim-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;margin:10px 0}
-.sim-card{background:var(--panel);border:1px solid var(--line);border-top:4px solid var(--c);border-radius:6px;padding:12px;min-width:0}
-.sim-card h3{margin-top:0}
-.sim-card .f{display:grid;grid-template-columns:auto 1fr;gap:6px 10px;align-items:center;font-size:13px}
-.sim-card select{width:100%}
-.sim-card .out{margin-top:10px;font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:13px}
-.sim-card .out div{display:flex;justify-content:space-between;gap:10px;padding:2px 0;border-bottom:1px dotted var(--line)}
-.sim-card .out div.t{font-weight:600;border-bottom:0;border-top:1px solid var(--line);margin-top:4px;padding-top:4px}
-.warnp{color:var(--warn);font-weight:500}
-.okp{color:var(--ok);font-weight:500}
-th[title]{cursor:help;text-decoration:underline dotted var(--muted);text-underline-offset:3px}
-#tip{position:fixed;left:16px;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--panel);color:var(--fg);border:1px solid var(--accent);border-radius:6px;padding:10px 12px;font-size:13px;z-index:20;box-shadow:0 4px 18px rgba(0,0,0,.18);max-width:560px;margin:0 auto}
-#tip b{color:var(--accent)}
-#tip button{float:right;margin-left:10px}
-.status{font-size:12px;color:var(--ok);margin:4px 0 0}
-.brief{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:6px;padding:12px 14px;margin:10px 0}
-.brief p{margin:6px 0;max-width:90ch}
-.brief ul{margin:6px 0;padding-left:20px;max-width:90ch}
-.brief li{margin:4px 0}
-.gloss dt{font-weight:600;margin-top:8px}
-.gloss dd{margin:2px 0 0 0;color:var(--muted);font-size:13px;max-width:80ch}
-@media (prefers-reduced-motion:no-preference){ .btn{transition:border-color .15s} }
-@media (max-width:600px){ h1{font-size:19px} .why{min-width:200px} }
-
-.theme{display:flex;gap:2px;align-items:center;margin-left:auto}
+.warn{color:var(--warn)}
+.okc{color:var(--ok)}
+.busy{color:var(--muted);font-style:italic}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.theme{display:flex;gap:2px;align-items:center}
 .theme button{font:inherit;font-size:12px;padding:3px 9px;border:1px solid var(--line);background:var(--panel);color:var(--muted);cursor:pointer}
 .theme button:first-child{border-radius:4px 0 0 4px}.theme button:last-child{border-radius:0 4px 4px 0}
 .theme button[aria-pressed="true"]{background:var(--accent);color:#fff;border-color:var(--accent)}
-</style>
-
-<div class="wrap">
+@media (max-width:900px){ header.top{position:static} nav{flex-wrap:nowrap;overflow-x:auto;width:100%;scrollbar-width:thin} nav button,nav a{white-space:nowrap;padding:8px 8px} }
+@media (max-width:600px){ h1{font-size:19px} td.name{min-width:170px} .theme{order:3} }
+</style></head><body>
 <header class="top"><div class="wrap">
-  <div><h1>Prospetto esborsi bachelor</h1><p class="sub">Francesca, Marco e Iacopo · euro nominali · aggiornato 5 ottobre 2026 (rev. 4b)</p></div>
-  <nav role="tablist">
-    <button role="tab" data-v="prospetto" aria-selected="true">Prospetto ponderato</button>
-    <button role="tab" data-v="prob" aria-selected="false">Probabilità</button>
-    <button role="tab" data-v="sim" aria-selected="false">Simulatore</button>
-    <button role="tab" data-v="param" aria-selected="false">Parametri</button>
-    <button role="tab" data-v="fonti" aria-selected="false">Metodo e fonti</button>
-    <a href="analisi.html" style="font:inherit;font-weight:500;padding:8px 12px;color:var(--accent);text-decoration:none;border-bottom:3px solid transparent">Analisi di orientamento →</a>
-  </nav>
+  <div><h1>Piano di candidatura</h1><p class="sub">Francesca (ingresso 2027) · Marco e Iacopo (ingresso 2028) · fonti verificate il 5-6 ottobre 2026</p></div>
   <div class="theme" role="group" aria-label="Tema"><button type="button" data-tema="light">Chiaro</button><button type="button" data-tema="system">Sistema</button><button type="button" data-tema="dark">Scuro</button></div>
+  <nav role="tablist" aria-label="Sezioni">
+    <button role="tab" data-v="breve" aria-selected="true">In breve</button>
+    <button role="tab" data-v="pref" aria-selected="false">Preferenze</button>
+    <button role="tab" data-v="prob" aria-selected="false">Profili e probabilità</button>
+    <button role="tab" data-v="scala" aria-selected="false">Scala consigliata</button>
+    <button role="tab" data-v="prep" aria-selected="false">Preparazione</button>
+    <button role="tab" data-v="cal" aria-selected="false">Calendario</button>
+    <button role="tab" data-v="costi" aria-selected="false">Esborsi</button>
+    <button role="tab" data-v="metodo" aria-selected="false">Metodo e fonti</button>
+    <a href="report.html">Report →</a>
+  </nav>
 </div></header>
+<div class="wrap">
 
-<!-- ============ PROSPETTO ============ -->
-<section class="view" id="v-prospetto">
-  <div class="brief" id="brief"></div>
-  <details><summary>Come si legge questa pagina (per chi la apre per la prima volta)</summary>
-   <dl class="gloss">
-    <dt>Cos'è</dt><dd>Una stima di quanto costerà alla famiglia il bachelor (la laurea triennale, o quadriennale dove è così) di Francesca, Marco e Iacopo, anno per anno. Include la retta dell'università e, per chi va fuori Milano, il costo di viverci: affitto, vitto, viaggi di rientro, libri. I master non sono inclusi.</dd>
-    <dt>Perché "ponderato"</dt><dd>Nessuno sa oggi dove verrà ammesso ciascuno. Per ogni ragazzo abbiamo messo in fila le università nell'ordine in cui le sceglierebbe (la "cascata"), stimato la probabilità di entrare in ciascuna e calcolato quanto è probabile finire davvero in ognuna. Il "valore atteso" è la media dei costi pesata con queste probabilità: non è una cifra che pagheremo esattamente, è il punto di equilibrio. Per vedere il range reale guardare lo scenario economico e quello caro.</dd>
-    <dt>Da dove vengono le probabilità</dt><dd>Dalla scheda <b>Probabilità</b>: per ogni ragazzo pochi dati (media, matematica, inglese, quanto rende nei test e nei colloqui) e per ogni università una regola basata sui suoi criteri ufficiali di selezione. Se la media o la preparazione ai test cambiano, si cambia lì e tutto si ricalcola.</dd>
-    <dt>Cosa si può toccare qui</dt><dd>Le frecce ▲▼ cambiano l'ordine di preferenza; il menu a tendina cambia l'università di una riga (la probabilità si aggiorna da sola). I costi si cambiano nella scheda <b>Parametri</b>; le scelte "a mano", senza probabilità, nel <b>Simulatore</b>. Tutto resta salvato sul dispositivo che si usa.</dd>
-    <dt>Intestazioni di colonna</dt><dd>Passando il mouse (o toccando sul telefono) su un'intestazione sottolineata compare la spiegazione di cosa contiene e come è calcolata.</dd>
-   </dl>
-  </details>
-  <div id="summary"></div>
-  <div id="cum"></div>
-  <div id="cascades"></div>
-  <div class="row"><button class="btn" id="resetCasc">Ripristina l'ordine iniziale delle cascate</button><span class="status" id="status"></span></div>
+<section class="view" id="v-breve"><div id="breve"></div></section>
+
+<section class="view" id="v-pref" hidden>
+  <h2>Preferenze dei ragazzi</h2>
+  <p class="note">I valori iniziali sono <b>ipotesi di partenza</b> ricavate da quanto dichiarato finora (CONTESTO): vanno confermati con i ragazzi. Voto: 0 = escluso, 1 = accettabile, 2 = gradito, 3 = preferito. Città: sì, no o da decidere (le città "da decidere" restano in gioco ma sono segnalate). "Forza" include o esclude un corso a prescindere dal calcolo. Ogni modifica ricalcola tutto e resta salvata in questo browser.</p>
+  <div class="box" style="--c:var(--accent)"><h3>Criteri per la scala (valgono per tutti)</h3><div id="pgen"></div></div>
+  <div id="pref"></div>
 </section>
 
-<div id="tip" hidden><button class="btn sm" id="tipClose">chiudi</button><b id="tipT"></b><div id="tipB"></div></div>
-
-<!-- ============ PROBABILITA ============ -->
 <section class="view" id="v-prob" hidden>
-  <p class="note">Le probabilità di ammissione non si impostano a mano: derivano dal <b>profilo</b> di ciascun ragazzo (media, matematica, maturità stimata, inglese, resa attesa nei test e nei colloqui) attraverso una <b>regola dichiarata per ogni ateneo</b>, costruita sui criteri di selezione ufficiali. Cambia gli input del profilo e tutte le probabilità, le cascate e gli esborsi si ricalcolano; ogni riga mostra il calcolo con i numeri.</p>
-  <div id="profiles"></div>
-  <div id="probtables"></div>
-  <div class="row"><button class="btn" id="resetProf">Ripristina profili iniziali</button><span class="note">Ogni modifica agli input ricalcola subito prospetto, scenari e simulatore.</span></div>
+  <h2>Profili e probabilità di ammissione</h2>
+  <p class="note">Le probabilità derivano dalle regole di ciascun ateneo (scheda Metodo) applicate al profilo: si cambiano modificando gli input, mai i numeri. Le coppie di valori sono "senza / con" la preparazione mirata (scheda Preparazione). Tutte le rese sono valutazioni del consulente; voti, certificati e date sono fatti da confermare.</p>
+  <div id="prof" class="grid3"></div>
+  <div class="row"><button class="btn" id="resetProf">Ripristina i profili iniziali</button></div>
+  <div id="probtab"></div>
 </section>
 
-<!-- ============ SIMULATORE ============ -->
-<section class="view" id="v-sim" hidden>
-  <p class="note">Qui si sceglie a mano ateneo e corso per ciascuno, senza probabilità: il costo è quello pieno del percorso scelto. Si possono cambiare anno di ingresso e durata (es. un anno fuori corso, un double degree). Con <b>Salva in A/B/C</b> si confrontano fino a tre combinazioni.</p>
-  <div class="sim-grid" id="simcards"></div>
-  <h2>Esborso della combinazione corrente</h2>
-  <div id="simout"></div>
-  <div class="row">
-    <button class="btn primary" data-slot="A">Salva in A</button>
-    <button class="btn primary" data-slot="B">Salva in B</button>
-    <button class="btn primary" data-slot="C">Salva in C</button>
-    <button class="btn" id="simClear">Svuota confronto</button>
-  </div>
-  <h2>Confronto combinazioni salvate</h2>
-  <div id="simcmp"></div>
-</section>
+<section class="view" id="v-scala" hidden><div id="scala"></div></section>
+<section class="view" id="v-prep" hidden><div id="prep"></div></section>
+<section class="view" id="v-cal" hidden><div id="cal"></div></section>
+<section class="view" id="v-costi" hidden><div id="costi"></div></section>
 
-<!-- ============ PARAMETRI ============ -->
-<section class="view" id="v-param" hidden>
-  <p class="note">Tutti i numeri del modello. Rette e mantenimento sono valori base con il loro anno di riferimento; il modello li indicizza anno per anno con i tassi qui sotto. Le modifiche si applicano a prospetto e simulatore.</p>
-  <h2>Tassi e anni</h2>
-  <div id="pgen"></div>
-  <h2>Mantenimento annuo per città <span class="tag">base 2026 · 12 mesi · escluse rette</span></h2>
-  <p class="note">Alloggio di buona qualità (studio o camera in studentato/privato), vitto e tempo libero senza economie estreme, libri, polizza integrativa, trasporti locali, 4-5 rientri a Milano l'anno, arredo/depositi del primo anno. "Milano (a casa)" = solo le spese aggiuntive di chi vive in famiglia.</p>
-  <div id="pliv"></div>
-  <h2>Rette per ateneo e corso <span class="tag">fascia massima · studente UE</span></h2>
-  <div id="ptui"></div>
-  <div class="row"><button class="btn" id="resetParam">Ripristina parametri iniziali</button><span class="note">Ogni modifica ricalcola subito prospetto (compresi scenario economico e caro) e simulatore.</span></div>
-</section>
-
-<!-- ============ FONTI ============ -->
-<section class="view" id="v-fonti" hidden>
-  <h2>Come è costruita la stima</h2>
-  <ul class="note" style="max-width:80ch">
-    <li>Costo annuo di un'opzione = retta base × (1+g<sub>rette</sub>)<sup>anno − anno base</sup> + mantenimento base città × (1+g<sub>mant</sub>)<sup>anno − 2026</sup> + una tantum nel primo anno. Durate frazionarie (es. 3,35 anni) pesano il quarto anno per la frazione.</li>
-    <li>Famiglia in fascia contributiva massima ovunque; esclusi borse, SU danese, SUSI irlandese, early bird e sconti.</li>
-    <li>Francesca entra nel 2027/28; Marco e Iacopo nel 2028/29. Nessun gap year né cambio di ateneo in corsa.</li>
-    <li>Le probabilità di ammissione sono giudizi professionali costruiti su dati ufficiali (posti, candidati, soglie, tabelle di conversione dei voti) e sui profili: Francesca media 8,4-8,5, C1, test Bocconi di settembre 2026 da ripetere; Marco media 7-7,5 obiettivo, B2; Iacopo media sotto il 7, molto forte in test attitudinali e colloqui. La scheda Probabilità mostra la regola e il calcolo per ogni ateneo; si aggiornano cambiando gli input del profilo (dopo il nuovo test Bocconi di Francesca, a giugno 2027 con le medie di quarta dei gemelli, dopo i TOL anticipati).</li>
-    <li>Per Iacopo la cascata mescola economia e ingegneria: Politecnico (solo TOL, i voti non contano; TOL anticipato in quarta con ≥75 dà il posto garantito), TU Delft e TU/e (selezione su test cognitivi, voti ignorati o al 10%), KU Leuven/UCLouvain Business Engineering a Bruxelles (accesso aperto con prova di matematica), VU Amsterdam CS/AI (accesso aperto). Esclusi perché selezionano solo sui voti: DTU, Trinity e UCD Engineering (servirebbe una maturità 97-100); TUM Informatics è in tedesco; TUM Management & Technology resta possibile (colloquio) ma a probabilità media.</li>
-    <li>Regola olandese: al massimo due domande a numero chiuso l'anno (Studielink). Le cascate rispettano il vincolo: Francesca una sola (IBEB); Marco due (IBA, Maastricht IB); Iacopo due (Delft CSE, UvA EBE). TU/e CSE, Maastricht IB per Iacopo e IBEB/IBA per gli altri restano nel catalogo per il simulatore, ma aggiungerli in cascata richiede di togliere un altro numerus fixus.</li>
-    <li>Aggiunte di ottobre 2026: WU Vienna BBE (solo esame, 240 posti, tasse ≈ 52 €/anno), doppia laurea HEC–Bocconi (110 posti, 75.250 € di rette totali), UvA Econometrics & Data Science (senza numero chiuso) e PPLE (retta 5.660 €). CBS: chi si diploma nell'anno della domanda concorre solo in Quota 1. UvA EBE: 550 posti dal 2027/28.</li>
-    <li>Esclusi dal perimetro: master, anno all'estero con costi diversi dal campus base (Sciences Po 3° anno, ESCP Londra), spese sanitarie straordinarie, auto.</li>
+<section class="view" id="v-metodo" hidden>
+  <h2>Metodo</h2>
+  <ol>
+    <li><b>Catalogo</b> (<code>dati.js</code>): <span id="ncorsi"></span> con retta, città, requisiti d'inglese, quote di candidatura, ore di lavoro e vincoli di sistema. Ogni cifra viene dalle ricerche del 5-6/10/2026 sui siti ufficiali (file sotto).</li>
+    <li><b>Probabilità di ammissione</b> (<code>regole.js</code>): per ogni corso una regola costruita sui pesi ufficiali (es. IBA 75% media + 25% motivazione, con la soglia ≥8 per il diploma italiano; UvA solo test; Bocconi 55/45) applicata al profilo. Danimarca e Irlanda usano le tabelle ufficiali di conversione della maturità, con un'incertezza di ±4 punti sulla maturità stimata. Requisiti mancanti (inglese, OMPT) azzerano la probabilità e indicano la preparazione che li sblocca.</li>
+    <li><b>Correlazione</b>: gli esiti che dipendono dalla stessa leva (test logici, test Bocconi, colloqui, voti, maturità) sono correlati; per Francesca il riconoscimento del diploma quadriennale è un unico evento comune a tutti gli atenei esteri. Si simulano 3.000 scenari: la probabilità di ogni singolo corso resta quella della regola.</li>
+    <li><b>Scala consigliata</b>: l'ordine segue il voto del ragazzo (a parità di voto: costo, poi probabilità). Si sceglie quali domande presentare massimizzando "utilità attesa − valore del tempo × ore", rispettando i vincoli (2 numerus fixus e 4 domande su Studielink, 4 preferenze Bocconi, Sciences Po una volta, CAO, optagelse). Utilità: preferito 100, gradito 65, accettabile 30 punti, meno la sensibilità al costo per ogni 10.000 € di percorso.</li>
+    <li><b>Preparazioni</b>: ogni preparazione cambia il profilo (resa nei test, certificato, OMPT, media di 4ª). Il suo valore è la differenza di utilità attesa con e senza, con la scala riottimizzata; il "netto" sottrae il valore del tempo.</li>
+    <li><b>Esborsi</b>: retta × (1+crescita)^anni + mantenimento della città × 1,03^anni + spese del primo anno, pesati con la probabilità di finire in ciascun corso.</li>
+  </ol>
+  <h3>Limiti dichiarati</h3>
+  <ul class="note">
+    <li>Nessun ateneo europeo pubblica la probabilità di ammissione di un profilo: le percentuali sono stime su regole dichiarate e vanno lette come ordini di grandezza.</li>
+    <li>Le preferenze iniziali sono ipotesi; le rese nei test e nei colloqui sono valutazioni; la maturità e la media di 4ª dei gemelli non sono ancora note.</li>
+    <li>Le date 2028 sono stime per analogia con il 2027 (calendario: stato "S").</li>
   </ul>
-  <h2>Fonti consultate (5 ottobre 2026)</h2>
-  <div class="src" id="fonti"></div>
+  <h2>Fonti</h2>
+  <ul class="src" id="fonti"></ul>
+  <h2>Salvataggio</h2>
+  <p class="note">Le scelte fatte nella pagina restano nel browser che le ha fatte. Per portarle su un altro dispositivo o condividerle si esporta un file e lo si importa dall'altra parte; per renderle i valori iniziali per tutti si modificano <code>PREF_D</code>, <code>PROFILI</code> e <code>PREP_D</code> in <code>dati.js</code>.</p>
+  <div class="row"><button class="btn" id="exp">Esporta le impostazioni (.json)</button><label class="btn" for="imp">Importa…</label><input type="file" id="imp" accept="application/json" hidden><button class="btn" id="resetAll">Ripristina tutto</button><span class="note" id="impmsg"></span></div>
 </section>
 </div>
 
+<script src="dati.js"></script>
+<script src="regole.js"></script>
+<script src="modello.js"></script>
 <script>
 'use strict';
-const YEARS=[2027,2028,2029,2030,2031,2032];
-const CH=[{id:'fra',name:'Francesca',cls:'--fra',start:'yFra'},{id:'mar',name:'Marco',cls:'--mar',start:'yBoys'},{id:'iac',name:'Iacopo',cls:'--iac',start:'yBoys'}];
-const CITIES_D={
- 'Milano (a casa)':[2800,'ATM under 27 ~200, libri 400-700, pasti fuori 1.000-1.400, telefono, svago (Federconsumatori 2025)'],
- 'Rotterdam':[26000,'Studio/camera di qualità ~1.050/mese (Kamernet: camera 700-790, studio 1.250+), vitto e svago 750/mese, libri/assicurazione/bici 2.000, voli 900, extra 1.500'],
- 'Amsterdam':[30000,'Studio ~1.400/mese (kamer.nl 1.408; camera 850-990), vitto e svago 800/mese, 2.000, voli 900, extra 1.500'],
- 'Delft':[22500,'Camera/studio in studentato ~800/mese (camera mediana 650), vitto 700, 2.000, voli 900, extra 1.500; L\'Aia e Rotterdam a 10-15 min di treno'],
- 'Eindhoven':[23000,'Camera mediana 567, studio 900-1.100; vitto 4,2k, svago 3k, voli (Eindhoven-Bergamo) 0,7k, varie 1,5k'],
- 'Tilburg':[23000,'Studio ~850/mese (camera 535-592), vitto 700/mese, 2.000, voli 900, extra 1.500'],
- 'Maastricht':[23500,'Studio ~900/mese (camera 565-625), vitto 700/mese, 2.000, voli 900, extra 1.500'],
- 'Parigi':[24000,'Studio 1.000-1.100/mese (LocService: 917-962), vitto/trasporti/svago 900-1.000/mese, voli 700-900'],
- 'Reims':[16000,'Studio 500-600/mese (T1 461), resto 750-850/mese. Campus Sciences Po in alternativa a Parigi'],
- 'ESCP (media 3 campus)':[23000,'Media di Parigi 24k, Londra ~29k, Torino/Madrid/Berlino 16-20k: un anno per campus'],
- 'Madrid':[26000,'Tra camera (750/mese → 24k) e studio (1.100/mese → 28k); Idealista 2026 camera 550, studio 976'],
- 'Barcellona':[27000,'Tra camera (800/mese → 25k) e studio (1.150/mese → 29k); Idealista 2026 camera 600, studio 960'],
- 'Monaco di Baviera':[27000,'Camera 808, studio ~1.500 (HousingAnywhere 2026); TUM indica 1.300-2.000/mese; mercato affitti difficile'],
- 'Bruxelles':[21000,'Camera mediana 590 spese incluse, studio ~750-950; vitto 4,2k, svago 3k, voli 0,8k, varie 1,5k'],
- 'Vienna':[19000,'Camera WG mediana 605/mese o studio privato all-in 750-920 (studentati no-profit 280-480); vitto 300/mese; Jahreskarte Jugend 300/anno; voli Milano 300-700; stima 16-22k (ÖH 52 €/anno esclusi)'],
- 'Jouy-en-Josas / Milano (HEC–Bocconi)':[11500,'Media di 1,5 anni a casa a Milano (2.800) e 1,5 anni a Jouy-en-Josas/Parigi (~20.000; HEC stima 1.200/mese)'],
- 'Copenhagen':[24000,'Studio/kollegium ~900/mese incl. utenze, vitto e svago 970/mese, voli 1.000, arredo/bici 500. Con SU (lavoro 10-12 h/sett.) ~14-15k'],
- 'Dublino':[30000,'Alloggio 1.200/mese (mediana UCD; Daft Q1 2026 camera 874-1.007), vitto/utenze/svago 1.275/mese, voli 1.000']
-};
-// key: [area, retta base, anno base, anni, crescita (null=default), una tantum, città, nota]
-const TUI_D={
- 'Bocconi — CLEAM / Management / BIEM':['Milano',17000,2026,3,null,0,'Milano (a casa)','2026/27: 17.000 tutto compreso, uguale per tutti i bachelor (2025/26: 16.700)'],
- 'Bocconi — BEMACS / BAI':['Milano',17000,2026,3,null,0,'Milano (a casa)','Stessa retta; corsi quantitativi (Economics-Management-CS; Mathematical & Computing Sciences for AI)'],
- 'HEC–Bocconi — Doppia laurea IPG / Data, Society & Organisations':['Milano',25083,2026,3,null,100,'Jouy-en-Josas / Milano (HEC–Bocconi)','110 posti; 3 semestri Milano + 3 HEC; rette 2026/27: 23.000 + 25.750 + 26.500 = 75.250 (media 25.083/anno); stesse sessioni Bocconi + statement; domanda 100'],
- 'Politecnico di Milano — Ing. Gestionale':['Milano',3943,2026,3,null,35,'Milano (a casa)','Contributo massimo 2026/27 (ISEE alto) incl. tassa regionale e bollo; 680 posti; solo TOL (iscrizione 35 €)'],
- 'Politecnico di Milano — Ing. Informatica / Matematica':['Milano',3943,2026,3,null,35,'Milano (a casa)','Stessa retta e stesso TOL; Informatica 720 posti, Matematica 340'],
- 'Cattolica Milano — Economia':['Milano',11500,2026,3,null,0,'Milano (a casa)','Fascia massima 2026/27 ricostruita dalla normativa (~11.440-11.790). Ripiego milanese'],
- 'Statale Milano — Economia / Scienze politiche':['Milano',3410,2026,3,null,0,'Milano (a casa)','ISEE >80.000: 3.204 + tassa regionale 190 + bollo 16'],
- 'Rotterdam EUR — IBEB':['Olanda',2771,2027,3,null,0,'Rotterdam','Retta statutaria NL 2027/28 già fissata (2026/27: 2.694); numerus fixus 700 posti'],
- 'Rotterdam EUR — BSc² Econometrics & Economics':['Olanda',2771,2027,4,null,0,'Rotterdam','4 anni (264 ECTS), statutaria anche il 4° anno (da confermare con ESSC)'],
- 'Rotterdam RSM — IBA':['Olanda',2771,2027,3,null,0,'Rotterdam','Numerus fixus 650 posti; 75% media + 25% motivazione'],
- 'UvA Amsterdam — Economics & Business Economics':['Olanda',2771,2027,3,null,0,'Amsterdam','Numerus fixus: 850 posti nel 2026/27, ridotti a 550 per il 2027/28; selezione solo con test online (2026: offerte fino al 1.487° su ~1.500 partecipanti)'],
- 'UvA Amsterdam — Econometrics & Data Science':['Olanda',2771,2027,3,null,0,'Amsterdam','Senza numerus fixus; richiede matematica vwo-B (o OMPT-D ≥70%) e inglese C1; scadenza 1 maggio'],
- 'UvA Amsterdam — PPLE (Politics, Psychology, Law & Economics)':['Olanda',5660,2026,3,null,0,'Amsterdam','Retta propria 5.660 (2026/27); selezione in 3 round (dossier, esame online, colloquio); per diploma italiano minimo 85/100'],
- 'VU Amsterdam — Economics & Business Economics':['Olanda',2771,2027,3,null,0,'Amsterdam','Solo requisiti (matematica livello A / OMPT-A)'],
- 'VU Amsterdam — Computer Science / AI':['Olanda',2771,2027,3,null,100,'Amsterdam','Accesso aperto (verifica matematica + inglese), in inglese; application fee 100 €'],
- 'Tilburg — Economics / IBA':['Olanda',2771,2027,3,null,0,'Tilburg','Solo requisiti + matching'],
- 'Maastricht SBE — International Business':['Olanda',2771,2027,3,null,0,'Maastricht','Numerus fixus: essay 1/3, CV 1/3, voti penultimo anno 1/3'],
- 'Maastricht SBE — Economics & Business Economics':['Olanda',2771,2027,3,null,0,'Maastricht','Solo requisiti + matching'],
- 'TU Delft — Computer Science & Engineering':['Olanda',2771,2027,3,null,1350,'Delft','Numerus fixus 590 posti; test cognitivo 50% mate + 50% logica, voti ignorati; laptop obbligatorio ~1.350'],
- 'TU Delft — Aerospace Engineering':['Olanda',2771,2027,3,null,1350,'Delft','Numerus fixus 440 posti (~3.500 domande); 60% esame mate/fisica/aerospace + 40% questionario'],
- 'TU Eindhoven — Computer Science & Engineering':['Olanda',2771,2027,3,null,0,'Eindhoven','Numerus fixus 375 posti; 40% test logico + 40% algoritmico + 10% mate + 10% media'],
- 'TU Eindhoven — Industrial Engineering':['Olanda',2771,2027,3,null,0,'Eindhoven','Accesso aperto (solo matching); sbocco gestionale, in inglese'],
- 'Sciences Po — Bachelor Collège universitaire':['Francia',14900,2026,3,null,0,'Parigi','Massimo 2026/27 = 14.900, dovuto sopra ~332.500 € di reddito lordo familiare (formula su revenu brut global / 3,5 parts; es. 150k → ~8.800, 200k → ~12.100): da simulare. 3° anno all\'estero con retta Sciences Po. Campus Reims: ~8k/anno in meno'],
- 'ESCP — Bachelor in Management':['Francia',20800,2027,3,null,80,'ESCP (media 3 campus)','Intake 2027: 17.900 + 2.900 fees, uguale per tutti i campus; application fee 80'],
- 'IE University Madrid — BBA':['Spagna',29000,2026,4,0.029,6350,'Madrid','2026/27: 29.000 (Economics 26.500), +2,9%/anno fisso; una tantum: admission 150 + reservation 5.000 + Foundation 1.200'],
- 'ESADE Barcellona — BBA / GGELO':['Spagna',21300,2027,4,null,0,'Barcellona','Prezzo 2027/28 già pubblicato; aumenti ≤ inflazione; scambi e lingue inclusi'],
- 'UC3M Madrid — Economics / ADE (inglese)':['Spagna',1045,2026,4,null,250,'Madrid','Pubblica: 16,92 €/credito × 60 + tasse; una tantum UNEDasiss + PCE'],
- 'UPF Barcellona — Economia / IBE':['Spagna',1202,2026,4,null,250,'Barcellona','Pubblica catalana: 17,69 €/credito × 60 + tasse'],
- 'WU Vienna — Business and Economics (BBE)':['Austria',52,2026,3,null,50,'Vienna','Studenti UE: nessuna retta (solo ÖH 26,20 €/semestre) entro 6+2 semestri, poi 363 €/sem.; registrazione 50 €; 240 posti, esame in presenza a Vienna a fine giugno/luglio'],
- 'TUM Monaco — Management & Technology':['Germania',194,2026,3,null,0,'Monaco di Baviera','Nessuna retta UE, solo contributo semestrale ~97 €; selezione su punteggio diploma + eventuale colloquio'],
- 'KU Leuven / UCLouvain — Business Engineering (Bruxelles)':['Belgio',1100,2026,3,null,0,'Bruxelles','Retta stimata 2026/27 (2023/24: 978,60); accesso aperto + OMPT-D ≥60% + IELTS 6.5; in inglese'],
- 'KU Leuven — Engineering Technology (Lovanio)':['Belgio',1100,2026,3,null,0,'Bruxelles','Stessa retta; Lovanio è a 25 min da Bruxelles (mantenimento simile)'],
- 'CBS Copenhagen — BSc (IB / BADM / BASM)':['Danimarca',0,2026,3,null,500,'Copenhagen','Studenti UE: nessuna retta né application fee'],
- 'UCD Dublino — Commerce / Economics':['Irlanda',2754,2026,3,null,0,'Dublino','Free Fees + Student Contribution 2.500 + levy 254 (2026/27)'],
- 'Trinity Dublino — BESS / PPES':['Irlanda',2713,2026,4,null,0,'Dublino','Student Contribution 2.500 + levies 212,75; 4 anni; richiede ~100 e lode']
-};
-const PARAM_D={gRette:0.025,gMant:0.03,yBaseM:2026,yFra:2027,yBoys:2028,qBsc2:0.35,soglia:0.05};
-const CASC_D={
- fra:[
-  ['Sciences Po — Bachelor Collège universitaire',0.15,'Parcoursup 2025: ~10% ammessi, 92% con media >16/20; procedura internazionale <200 posti. Media 8,5 sotto la mediana; C1 e dossier aiutano.'],
-  ['Rotterdam EUR — IBEB',0.85,'Numerus fixus 700 posti: i primi 350 per pura media (mate ≥7). Con 8,5 è in fascia alta; residuo: diploma quadriennale e sorteggio. La quota BSc² (Parametri) allunga la durata attesa.',true],
-  ['CBS Copenhagen — BSc (IB / BADM / BASM)',0.45,''],
-  ['WU Vienna — Business and Economics (BBE)',0.3,''],
-  ['HEC–Bocconi — Doppia laurea IPG / Data, Society & Organisations',0.25,''],
-  ['Bocconi — CLEAM / Management / BIEM',0.55,'55% test / 45% media 3ª-4ª: media 8,4-8,5 sopra la mediana stimata; serve rifare il test a 30+/50 in Early 2026.'],
-  ['UCD Dublino — Commerce / Economics',0.70,''],
-  ['UvA Amsterdam — Econometrics & Data Science',0.9,''],
-  ['IE University Madrid — BBA',0.75,'Test IE/SAT ≥1200 + colloquio; benchmark Bachillerato 7,5+; tasso non ufficiale 30-40%.'],
-  ['ESCP — Bachelor in Management',0.65,'Valutazione olistica (transcript, statement, CV, C1, colloquio), nessun test obbligatorio.'],
-  ['Cattolica Milano — Economia',1,'Ripiego a Milano.']
- ],
- mar:[
-  ['Rotterdam RSM — IBA',0.45,'Numerus fixus 650 posti, 75% media + 25% motivazione; ultimo ammesso ~1.280° con liste d\'attesa. Media 7-7,5 vicina alla soglia 6,5 NL: motivazione decisiva.'],
-  ['Bocconi — CLEAM / Management / BIEM',0.25,''],
-  ['WU Vienna — Business and Economics (BBE)',0.24,''],
-  ['ESADE Barcellona — BBA / GGELO',0.45,''],
-  ['Maastricht SBE — International Business',0.65,''],
-  ['Maastricht SBE — Economics & Business Economics',0.9,''],
-  ['Tilburg — Economics / IBA',0.90,''],
-  ['Cattolica Milano — Economia',1,'Ripiego a Milano.']
- ],
- iac:[
-  ['TU Delft — Computer Science & Engineering',0.50,''],
-  ['WU Vienna — Business and Economics (BBE)',0.34,''],
-  ['UvA Amsterdam — Economics & Business Economics',0.70,''],
-  ['UvA Amsterdam — Econometrics & Data Science',0.7,''],
-  ['Politecnico di Milano — Ing. Gestionale',0.85,''],
-  ['IE University Madrid — BBA',0.55,''],
-  ['KU Leuven / UCLouvain — Business Engineering (Bruxelles)',0.90,''],
-  ['Bocconi — CLEAM / Management / BIEM',0.15,''],
-  ['Tilburg — Economics / IBA',0.80,''],
-  ['Cattolica Milano — Economia',1,'Ripiego a Milano.']
- ]
-};
-const FONTI=[
- ['Bocconi','Tasse e contributi 2026/27 (17.000 €)','https://www.unibocconi.it/it/entrare-bocconi/corsi-di-laurea-triennale-e-giurisprudenza/tasse-e-contributi'],
- ['Bocconi','Ammissione: 55% test / 45% media','https://www.unibocconi.it/it/entrare-bocconi/corsi-di-laurea-triennale-e-giurisprudenza/ammissione/ammissione'],
- ['Politecnico','Test TOL: struttura e preparazione','https://www.polimi.it/en/prospective-students/how-to-apply/admission-to-laurea-programmes/engineering/what-the-tol-consists-of-and-how-to-prepare'],
- ['Politecnico','Posti disponibili 2026/27','https://www.polimi.it/en/prospective-students/how-to-apply/admission-to-laurea-programmes/available-places'],
- ['Politecnico','Regolamento contribuzione 2026/27','https://www.normativa.polimi.it/fileadmin/user_upload/regolamenti/studenti/D.r._regolamento_contribuzione_studentesca_2026-2027.pdf'],
- ['Cattolica','Normativa contributi 1° anno 2026/27','https://studenticattolica.unicatt.it/2026-2027%20Normativa%20tasse%20primo%20anno%20di%20corso.pdf'],
- ['Statale','Regolamento tasse 2026/27','https://www.unimi.it/sites/default/files/regolamenti/Regolamento%20tasse%20e%20contributi%202026_2027_signed.pdf'],
- ['Olanda','Retta statutaria (DUO)','https://www.duo.nl/particulier/collegegeld.jsp'],
- ['Olanda','Retta 2027/28 = 2.771 € (TU Delft)','https://www.tudelft.nl/en/education/study-programme-orientation/practical-matters/tuition-fee-finances'],
- ['Rotterdam','IBEB regolamento numerus fixus 2026/27','https://www.eur.nl/en/media/2025-09-regulations-numerus-fixus-ibeb-2026-2027'],
- ['Rotterdam','IBA ranking e lista d\'attesa','https://admissions-support.rsm.nl/support/solutions/articles/80000880316-i-am-on-the-iba-waiting-list-what-are-my-chances-of-getting-an-offer-for-the-programme-'],
- ['Rotterdam','BSc² facts & figures','https://www.eur.nl/en/bachelor/double-bachelor-bsc2-econometrics-and-economics/facts-figures'],
- ['Rotterdam','Costo della vita (EUR)','https://www.eur.nl/en/education/practical-matters/orientation-arrival/costs-living-nl'],
- ['TU Delft','CSE regolamento selezione 2026/27','https://filelist.tudelft.nl/TUDelft/Onderwijs/Opleidingen/Bachelor/Computer%20science%20engineering/selectieprocedure/Regulation%20CSE%20M_S%202026-2027.pdf'],
- ['TU Eindhoven','CSE procedura di selezione','https://www.tue.nl/en/education/bachelor-college/bachelor-computer-science-and-engineering/selection-procedure'],
- ['TU Eindhoven','Industrial Engineering requisiti','https://www.tue.nl/en/education/admission-what-criteria-do-you-need-to-meet-if-you-want-to-be-admitted-to-the-industrial-engineering-program'],
- ['UvA','EBE selezione e ranking 2026','https://www.uva.nl/en/programmes/bachelors/economics--business-economics/application-and-admission/selection-procedure/update-ranking-numbers.html'],
- ['VU','Computer Science ammissione','https://vu.nl/en/education/bachelor/computer-science/admissions'],
- ['Amsterdam','Costo della vita (AUAS)','https://www.amsterdamuas.com/study/international-admissions/financial-matters/cost-of-living'],
- ['Tilburg','Tuition e costo della vita','https://www.tilburguniversity.edu/education/bachelors-programs/tuition-fees-and-monthly-cost-living'],
- ['Maastricht','Regolamento selezione 2026/27','https://www.maastrichtuniversity.nl/file/regulations-selection-bachelor%E2%80%99s-programmes-numerus-fixus-2026-2027pdf'],
- ['Affitti NL','Kamernet rapporto Q3 2025','https://kamernet.nl/tips/verhuurders/huurprijs/verhuurrapportage-q3-2025'],
- ['Sciences Po','Droits de scolarité','https://www.sciencespo.fr/en/admissions-and-financial-aid/tuition-fees/'],
- ['Sciences Po','Procedure di ammissione','https://www.sciencespo.fr/college/en/admission-procedures/'],
- ['ESCP','Bachelor in Management, fees 2027','https://escp.eu/programmes/bachelor-in-management-BSc'],
- ['Parigi','LocService affitti studenti','https://www.locservice.fr/paris-75/logement-etudiant-paris.html'],
- ['IE University','Fees e payment methods','https://www.ie.edu/university/admission/payment-methods/'],
- ['IE University','Cost of living Madrid','https://docs.ie.edu/student-services/IEU_COST_OF_LIVING_MADRID.pdf'],
- ['ESADE','Tuition fees 2027/28','https://www.esade.edu/bachelor/en/degrees/tuition-fees'],
- ['UC3M','Prezzi matricola','https://www.uc3m.es/grado/admision/solicitud/matricula/precios-matricula'],
- ['UPF','Preus / notes de tall','https://www.upf.edu/web/graus/preus'],
- ['Spagna','Idealista affitti camere 2026','https://www.idealista.com/news/inmobiliario/vivienda/2026/04/09/892181-la-oferta-de-habitaciones-crece-un-22-y-el-precio-solo-aumenta-un-2-en-el-primer'],
- ['Spagna','Conversione nota de admisión (BOE 2025)','https://www.boe.es/buscar/doc.php?id=BOE-A-2025-10777'],
- ['TUM','Fees (UE esenti)','https://www.tum.de/en/studies/fees/tuition'],
- ['TUM','Management & Technology: regolamento ammissione','https://www.mgt.tum.de/fileadmin/mgt.tum.de/downloads/Bachelor-Admission-Satzung-Englisch.pdf'],
- ['KU Leuven','Struttura retta','https://www.kuleuven.be/english/education/student/fees/tuition-fee-breakdown'],
- ['DTU','General Engineering, quote e cutoff','https://www.dtu.dk/english/education/undergraduate/general-engineering/admission-and-deadlines/how-to-apply/quotas'],
- ['CBS','International applicants (no tuition UE)','https://cbs.dk/en/study/bachelor/admission/how-to-apply/international-applicants'],
- ['CBS','BSc International Business (kvote 11,1)','https://www.cbs.dk/en/study-programmes/bachelor-programmes/bsc-international-business'],
- ['Copenhagen','Affitti medi (Comune)','https://international.kk.dk/live/housing/finding-a-place-to-live/average-renting-costs'],
- ['UCD','Fees 2026/27','https://www.ucd.ie/students/fees/eucoursefees/euundergraduatefees202627/'],
- ['UCD','Living costs e residenze','https://www.ucd.ie/global/study-at-ucd/scholarshipsfinances/livingcosts/'],
- ['UCD','Punti CAO 2026','https://www.ucd.ie/myucd/t4media/LC_Points_2026.pdf'],
- ['Trinity','Fees e levies','https://www.tcd.ie/courses/undergraduate/fees/'],
- ['Trinity','Punti CAO 2025 e tabella maturità','https://www.tcd.ie/study/assets/pdfs/2025-cao-minimum-entry-points-final.pdf'],
- ['CAO','Conversione diplomi UE 2025','https://www2.cao.ie/downloads/documents/2025/Guidelines-EU-EFTA-UK-2025.pdf'],
- ['Dublino','Daft rental report Q1 2026','https://www.rte.ie/documents/news/2026/05/daft.ie-rental-report-2026q1.pdf'],
- ['Milano','Tariffe ATM 2026','https://www.atm.it/it/ViaggiaConNoi/Documents/TARIFFE%20ATM.pdf'],
- ['WU Vienna','Procedura di selezione BBE','https://www.wu.ac.at/en/programs/bachelors-programs/business-and-economics/overview/selection-procedure-bbe-1'],
- ['WU Vienna','Comunicato registrazioni 2026 (~3.900 per 240 posti)','https://www.ots.at/presseaussendung/OTS_20260602_OTS0065/fast-13000-bewerberinnen-erneut-rekord-registrierungszahlen-fuer-wu-bachelorstudien'],
- ['Austria','Tasse universitarie studenti UE','https://studyinaustria.at/en/plan-your-studies/tuition-fee'],
- ['Vienna','Alloggio WU / studentati','https://www.wu.ac.at/en/programs/international-and-exchange-students/international-students/welcome-to-vienna/accommodation-1'],
- ['HEC–Bocconi','Fees doppia laurea','https://www.unibocconi.it/en/applying-bocconi/bachelor-and-law-programs/hec-bocconi-double-program-fees-funding-and-housing'],
- ['Bocconi','Ammissioni 2027/28 (posti, sessioni)','https://www.unibocconi.it/en/applying-bocconi/bachelor-and-law-programs/application-and-admissions/admissions'],
- ['UvA','EBE English track 2027/28 (550 posti)','https://www.uva.nl/en/programmes/bachelors/economics--business-economics/application-and-admission/international-prior-education/international-prior-education-english-track.html'],
- ['UvA','Econometrics & Data Science requisiti','https://www.uva.nl/en/programmes/bachelors/econometrics-and-data-science/application-and-admission/international-prior-education/entry-requirements.html'],
- ['UvA','PPLE requisiti per diploma e retta','https://pple.uva.nl/how-to-apply/entry-requirements/requirements-per-diploma-type/your-entry-requirements.html'],
- ['CBS','Diploma estero: solo Quota 1 per chi si diploma nell\'anno','https://www.cbs.dk/en/news/foreign-upper-secondary-exam-application-deadline-15-march'],
- ['Sciences Po','Formula droits de scolarité 2026/27 (PDF)','https://www.sciencespo.fr/students/sites/sciencespo.fr.students/files/droits-scolarite-explication-formule-fr.pdf'],
- ['Politecnico','TOL anticipato: date e soglia 75','https://www.polimi.it/en/prospective-students/how-to-apply/admission-to-laurea-programmes/engineering/when-to-register-for-the-tol']
-];
-
-
-// ---------- profili e motore delle probabilità ----------
-const PROF_D={
- fra:{media:8.4,mate:8,matur:90,c1:1,pLog:0.75,pBoc:0.65,pCol:0.70,
-      note:'Media 8,4-8,5 (liceo quadriennale bilingue), inglese C1 certificato, esperienze all\'estero. Test Bocconi del 24/9/2026: 25/50 (soglia di valutabilità 17; le indicazioni dei preparatori collocano il posizionamento competitivo con media 8,5 intorno a 35+): la resa attesa 0,65 presuppone un secondo tentativo preparato entro il 21/1/2027 (Winter).'},
- mar:{media:7.3,mate:7.5,matur:78,c1:0,pLog:0.60,pBoc:0.55,pCol:0.50,
-      note:'Media 3ª-4ª stimata 7,3 (poco meno di 7 in 3ª, obiettivo 7,5 in 4ª), matematica verso l\'8, inglese B2 con potenziale C1. Resa media nei test, colloquio nella norma.'},
- iac:{media:6.6,mate:7,matur:72,c1:0,pLog:0.85,pBoc:0.70,pCol:0.75,
-      note:'Media sotto il 7 per scarso impegno, ma forte attitudine logico-matematica: alta resa attesa nei test attitudinali (TOL, test cognitivi olandesi, test IE/ESADE) e nei colloqui. Inglese B2.'}
-};
-const PROF_FIELDS=[
- ['media','Media scolastica (3ª-4ª / candidatura)',0,10,0.1,'Pesa nelle selezioni su dossier e nelle formule ufficiali (Bocconi 45%, IBA 75%, IBEB 100% per i primi 350)'],
- ['mate','Voto di matematica',0,10,0.5,'Requisito d\'accesso in Olanda (IBEB ≥7 per l\'esonero dal test) e in Belgio/VU'],
- ['matur','Voto di maturità stimato (/100)',60,100,1,'Usato dove si converte il diploma: CAO Irlanda, kvote 1 Danimarca'],
- ['c1','Inglese C1 certificato (1 = sì, 0 = B2)',0,1,1,'Premiato da Sciences Po ed ESCP; B2 basta ovunque altrove'],
- ['pLog','Resa attesa nei test logico-matematici (0-1)',0,1,0.05,'Probabilità di un buon risultato in TOL, test cognitivi Delft/TU-e/UvA, test IE/ESADE, PCE'],
- ['pBoc','Resa attesa nel test Bocconi (0-1)',0,1,0.05,'Test specifico (comprensione, matematica, logica, inglese) con forte pressione di tempo'],
- ['pCol','Resa attesa in colloqui, essay e dossier (0-1)',0,1,0.05,'Sciences Po, ESCP, IE, Maastricht IB, TUM, PPLE']
-];
-const cl=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
-const r2=x=>Math.round(x*100)/100;
-const W=(m,lo,hi)=>cl((m-lo)/(hi-lo));
-// Each rule: dati (selectivity facts) + fn(profile) -> {p, calc}
-const RULES={
- 'Bocconi — CLEAM / Management / BIEM':{dati:'~3.000 posti, candidati ≈4× i posti; formula ufficiale 55% test + 45% media 3ª-4ª; nessuna media minima; corsi in italiano meno selettivi',
-   fn:q=>{const w=W(q.media,6,9);return {p:q.pBoc*w,calc:`resa test Bocconi ${q.pBoc} × peso media W(media 6→9)=${r2(w)}`}}},
- 'Bocconi — BEMACS / BAI':{dati:'Stessa formula; corsi quantitativi più selettivi (stime non ufficiali 15-22% ammessi)',
-   fn:q=>{const w=W(q.media,6,9);return {p:q.pBoc*w*0.6,calc:`resa test ${q.pBoc} × W(media 6→9)=${r2(w)} × 0,6 (selettività maggiore)`}}},
- 'Politecnico di Milano — Ing. Gestionale':{dati:'680 posti; solo TOL (logica/mate/fisica/inglese), i voti scolastici non contano; TOL anticipato in 4ª: ≥75/100 = posto garantito; 4 tentativi',
-   fn:q=>({p:q.pLog,calc:`= resa test logico-matematici ${q.pLog} (la media non entra)`})},
- 'Politecnico di Milano — Ing. Informatica / Matematica':{dati:'Informatica 720 posti, Matematica 340 (cutoff più alto); stesso TOL',
-   fn:q=>({p:q.pLog*0.9,calc:`resa test ${q.pLog} × 0,9 (cutoff di graduatoria più alto per Matematica)`})},
- 'Cattolica Milano — Economia':{dati:'Accesso con test non selettivo',fn:q=>({p:1,calc:'ripiego: ammissione pressoché certa'})},
- 'Statale Milano — Economia / Scienze politiche':{dati:'Accesso libero o test non selettivo',fn:q=>({p:1,calc:'ammissione pressoché certa'})},
- 'Rotterdam EUR — IBEB':{dati:'Numerus fixus 700 posti: top 350 per pura media; dal 351° 50% media + 50% sorteggio; liceo scientifico esonerato dal test di matematica solo con mate ≥7',
-   fn:q=>{const s=W(q.media,6.5,8),m=q.mate>=7?1:0.6;return {p:cl(s*m*0.85),calc:`W(media 6,5→8)=${r2(s)} × mate≥7? ${m} × 0,85 (diploma/sorteggio)`}}},
- 'Rotterdam EUR — BSc² Econometrics & Economics':{dati:'Non fixus, selezione individuale su matematica, inglese, motivazione; corso molto quantitativo',
-   fn:q=>{const s=W(q.media,7,9),m=q.mate>=8?1:0.6;return {p:cl(s*m*0.85+0.05),calc:`W(media 7→9)=${r2(s)} × mate≥8? ${m} × 0,85 + 0,05`}}},
- 'Rotterdam RSM — IBA':{dati:'Numerus fixus 650 posti; ranking 75% media (non arrotondata) + 25% motivazione; ultimo ammesso ~1.280° con liste d\'attesa; minimi media 6,5 NL e mate 6-6,5',
-   fn:q=>{const s=W(q.media,6.5,8.2);return {p:cl(0.85*s+0.1*q.pCol),calc:`0,85 × W(media 6,5→8,2)=${r2(s)} + 0,10 × resa motivazione ${q.pCol}`}}},
- 'UvA Amsterdam — Economics & Business Economics':{dati:'Numerus fixus: 850 posti nel 2026/27 (offerte fino al 1.487° su ~1.500 partecipanti), ridotti a 550 dal 2027/28; selezione solo con test online di 2,5 h (mate, economia); top 300 per punteggio, poi sorteggio',
-   fn:q=>{const m=q.mate>=6?1:0.85;return {p:(0.45+0.3*q.pLog)*m,calc:`(0,45 + 0,3 × resa test ${q.pLog}) × requisito mate ${m} — ricalibrato su 550 posti`}}},
- 'VU Amsterdam — Economics & Business Economics':{dati:'Solo requisiti (matematica livello A / OMPT-A) + matching',fn:q=>{const m=q.mate>=6?1:0.7;return {p:0.9*m,calc:`0,9 × requisito matematica ${m}`}}},
- 'VU Amsterdam — Computer Science / AI':{dati:'Accesso aperto con verifica matematica e inglese',fn:q=>{const m=q.mate>=6?1:0.7;return {p:0.9*m,calc:`0,9 × requisito matematica ${m}`}}},
- 'Tilburg — Economics / IBA':{dati:'Solo requisiti (matematica all\'esame finale, IELTS 6.0) + matching',fn:q=>{const m=q.mate>=6?1:0.7;return {p:0.9*m,calc:`0,9 × requisito matematica ${m}`}}},
- 'Maastricht SBE — International Business':{dati:'Numerus fixus con selezione: essay 1/3 (eliminatorio), CV 1/3, voti penultimo anno 1/3; ~67% selezionati',
-   fn:q=>{const w=W(q.media,6,9);return {p:cl(0.35*q.pCol+0.3*w+0.3),calc:`0,35 × resa essay ${q.pCol} + 0,30 × W(media 6→9)=${r2(w)} + 0,30 (CV/esperienze)`}}},
- 'Maastricht SBE — Economics & Business Economics':{dati:'Solo requisiti + matching',fn:q=>{const m=q.mate>=6?1:0.7;return {p:0.9*m,calc:`0,9 × requisito matematica ${m}`}}},
- 'TU Delft — Computer Science & Engineering':{dati:'Numerus fixus 590 posti; test cognitivo 50% mate + 50% logica; candidati in 3 fasce per punteggio poi sorteggio; voti scolastici ignorati; migliaia di domande',
-   fn:q=>({p:0.6*q.pLog,calc:`0,6 (posti/candidati idonei) × resa test ${q.pLog}`})},
- 'TU Delft — Aerospace Engineering':{dati:'440 posti, ~3.500 domande (~12%); 60% esame mate/fisica/aerospace + 40% questionario',
-   fn:q=>({p:0.35*q.pLog,calc:`0,35 × resa test ${q.pLog}`})},
- 'TU Eindhoven — Computer Science & Engineering':{dati:'Numerus fixus 375 posti; 40% test logico + 40% algoritmico + 10% mate + 10% media',
-   fn:q=>{const w=W(q.media,6,9);return {p:cl(0.7*q.pLog+0.1*w),calc:`0,7 × resa test ${q.pLog} + 0,1 × W(media 6→9)=${r2(w)}`}}},
- 'TU Eindhoven — Industrial Engineering':{dati:'Accesso aperto (solo matching), Math B + inglese',fn:q=>{const m=q.mate>=6?1:0.7;return {p:0.9*m,calc:`0,9 × requisito matematica ${m}`}}},
- 'Sciences Po — Bachelor Collège universitaire':{dati:'Parcoursup 2025: ~10% ammessi, 92% con media >16/20; procedura internazionale <200 posti; orale = 50% del punteggio dal 2025',
-   fn:q=>{const w=W(q.media,7.5,9),e=q.c1?1:0.7;return {p:cl(0.5*q.pCol*w*w*e),calc:`0,5 × resa orale/dossier ${q.pCol} × W(media 7,5→9)²=${r2(w*w)} × inglese C1? ${e}`}}},
- 'ESCP — Bachelor in Management':{dati:'Rolling, valutazione olistica: transcript, statement, CV, inglese C1, colloquio; nessun test obbligatorio',
-   fn:q=>{const w=W(q.media,6,9);return {p:cl(0.5*q.pCol+0.3*w+(q.c1?0.1:0)),calc:`0,5 × resa colloquio ${q.pCol} + 0,3 × W(media 6→9)=${r2(w)} + C1 ${q.c1?0.1:0}`}}},
- 'IE University Madrid — BBA':{dati:'Test IE (verbale/logico/numerico) o SAT ≥1200 + video + colloquio; benchmark Bachillerato 7,5+; tasso non ufficiale 30-40%',
-   fn:q=>{const w=W(q.media,6,9);return {p:cl(0.45*q.pLog+0.25*q.pCol+0.3*w),calc:`0,45 × resa test ${q.pLog} + 0,25 × resa colloquio ${q.pCol} + 0,3 × W(media 6→9)=${r2(w)}`}}},
- 'ESADE Barcellona — BBA / GGELO':{dati:'Test ESADE/SAT (media ammessi ~1.350) + transcript 3 anni a pari peso; intake ~450',
-   fn:q=>{const w=W(q.media,6,9);return {p:cl(0.5*q.pLog+0.4*w),calc:`0,5 × resa test ${q.pLog} + 0,4 × W(media 6→9)=${r2(w)}`}}},
- 'UC3M Madrid — Economics / ADE (inglese)':{dati:'Nota de corte 2025: Economía 11,26, ADE 11,52 (su 14); nota = conversione maturità (BOE 2025) + fino a 2 PCE × 0,2',
-   fn:q=>{const n=5+(q.media-6)*2.25+3.2*q.pLog,p=cl((n-9.5)/2.5)*0.9;return {p,calc:`nota stimata ${r2(n)} = 5 + (media−6)×2,25 + 3,2 × resa PCE ${q.pLog}; P = W(nota 9,5→12) × 0,9`}}},
- 'UPF Barcellona — Economia / IBE':{dati:'Notes de tall 2025: Economia 10,58, ADE 10,97, IBE 12,39',
-   fn:q=>{const n=5+(q.media-6)*2.25+3.2*q.pLog,p=cl((n-9)/2)*0.9;return {p,calc:`nota stimata ${r2(n)}; P = W(nota 9→11) × 0,9 (Economia; IBE molto più alta)`}}},
- 'WU Vienna — Business and Economics (BBE)':{dati:'240 posti; 2026: ~3.900 registrati, 2.872 presenti all\'esame (≈8% ammessi); esame scritto a scelta multipla di 2 ore a Vienna (inglese B2, matematica, fondamenti di economia da letture assegnate); i voti scolastici non contano in alcuna forma; nessun tedesco',
-   fn:q=>({p:0.4*q.pLog,calc:`0,4 (esame allenabile, ~8% dei presenti ma molti impreparati) × resa test ${q.pLog}`})},
- 'HEC–Bocconi — Doppia laurea IPG / Data, Society & Organisations':{dati:'110 posti; stessa formula Bocconi (55% test, 45% media) + statement of purpose; prima coorte 2024/25; più selettivo dei corsi ordinari',
-   fn:q=>{const w=W(q.media,7,9.5);return {p:cl(q.pBoc*w*0.7),calc:`resa test Bocconi ${q.pBoc} × W(media 7→9,5)=${r2(w)} × 0,7 (110 posti)`}}},
- 'UvA Amsterdam — Econometrics & Data Science':{dati:'Senza numerus fixus: si entra con i requisiti (matematica vwo-B o OMPT-D ≥70%, inglese C1); corso molto matematico',
-   fn:q=>{const m=q.mate>=7.5?1:0.5+0.5*q.pLog,e=q.c1?1:0.85;return {p:cl(0.9*m*e),calc:`0,9 × requisito mate (≥7,5: 1, altrimenti 0,5+0,5×resa test) ${r2(m)} × C1? ${e}`}}},
- 'UvA Amsterdam — PPLE (Politics, Psychology, Law & Economics)':{dati:'Selezione propria in 3 round: dossier (transcript, CV, statement), esame online, colloquio; diploma italiano: minimo 85/100, inglese 10 o certificazione, esame integrativo di matematica; posti non pubblicati',
-   fn:q=>{const w=W(q.matur,85,97);return {p:cl(w*(0.5*q.pCol+0.3*q.pLog+0.2)),calc:`W(maturità 85→97)=${r2(w)} × (0,5 × resa colloquio ${q.pCol} + 0,3 × resa esame ${q.pLog} + 0,2)`}}},
- 'TUM Monaco — Management & Technology':{dati:'Fase 1 punteggio = 65% voto diploma + 35% materie; ≥88 diretto, altrimenti colloquio 10\' (50% media + 50% colloquio, serve ≥70)',
-   fn:q=>{const w=W(q.media,6,9);return {p:cl(0.3*w+0.5*q.pCol),calc:`0,3 × W(media 6→9)=${r2(w)} + 0,5 × resa colloquio ${q.pCol}`}}},
- 'KU Leuven / UCLouvain — Business Engineering (Bruxelles)':{dati:'Accesso aperto per diplomi UE + prova di matematica OMPT-D ≥60% + IELTS 6.5',
-   fn:q=>({p:0.9*(0.7+0.3*q.pLog),calc:`0,9 × (0,7 + 0,3 × resa test ${q.pLog}) — l\'OMPT-D è l\'unico filtro`})},
- 'KU Leuven — Engineering Technology (Lovanio)':{dati:'Accesso aperto + OMPT-D ≥60% + inglese',fn:q=>({p:0.9*(0.7+0.3*q.pLog),calc:`0,9 × (0,7 + 0,3 × resa test ${q.pLog})`})},
- 'CBS Copenhagen — BSc (IB / BADM / BASM)':{dati:'Chi si diploma nell\'anno della domanda concorre SOLO in kvote 1 (CBS): conta la media del diploma convertita sulla scala danese 7-trin. Soglie 2026: IB 11,1/12, IBP 10,7, BADM 9,8, BASM 9,4. Tabella ufficiale Italia→7-trin non pubblica (stima: 90 ≈ 10, 80 ≈ 7)',
-   fn:q=>{const w=W(q.matur,80,96);return {p:cl(0.5*w),calc:`0,5 × W(maturità 80→96)=${r2(w)} (kvote 1 BADM/BASM; IB/IBP richiedono di più)`}}},
- 'UCD Dublino — Commerce / Economics':{dati:'Punti CAO 2025-26: Commerce 553-554, Economics 542-544; tabella CAO: maturità 90→574, 80→506 (≈88 richiesto)',
-   fn:q=>{const w=W(q.matur,82,90);return {p:cl(0.85*w),calc:`0,85 (riconoscimento diploma) × W(maturità 82→90)=${r2(w)}`}}},
- 'Trinity Dublino — BESS / PPES':{dati:'Punti 2025: BESS 565, PPES 581; tabella TCD: 100→553, 100 e lode→600: serve il massimo',
-   fn:q=>{const w=W(q.matur,96,100);return {p:cl(0.6*w),calc:`0,6 × W(maturità 96→100)=${r2(w)}`}}}
-};
-function probFor(c,key){const q=S.prof[c];const r=RULES[key];if(!r)return {p:0.5,calc:'regola non definita'};const o=r.fn(q);return {p:cl(o.p),calc:o.calc,dati:r.dati}}
-
-// ---------- state ----------
+// ---------- stato ----------
 const clone=o=>JSON.parse(JSON.stringify(o));
-function defaultState(){
-  return {param:clone(PARAM_D),prof:clone(PROF_D),cities:Object.fromEntries(Object.entries(CITIES_D).map(([k,v])=>[k,v[0]])),
-    tui:Object.fromEntries(Object.entries(TUI_D).map(([k,v])=>[k,{retta:v[1],yb:v[2],anni:v[3],g:v[4],once:v[5],city:v[6]}])),
-    casc:Object.fromEntries(Object.entries(CASC_D).map(([c,rows])=>[c,rows.map(r=>({key:r[0],why:r[2],bsc2:!!r[3]}))])),
-    sim:{fra:{key:'Rotterdam EUR — IBEB',start:2027,anni:''},mar:{key:'Rotterdam RSM — IBA',start:2028,anni:''},iac:{key:'Politecnico di Milano — Ing. Gestionale',start:2028,anni:''}},
-    slots:{}};
-}
-let S=defaultState();
-try{const raw=localStorage.getItem('prospetto-v4');if(raw){const l=JSON.parse(raw);
-  // merge: keep saved values, add any new keys from defaults
-  S.param=Object.assign(S.param,l.param||{});if(l.prof)for(const c in l.prof)S.prof[c]=Object.assign(S.prof[c],l.prof[c]);S.cities=Object.assign(S.cities,l.cities||{});
-  for(const k in l.tui||{}) if(S.tui[k]) S.tui[k]=Object.assign(S.tui[k],l.tui[k]);
-  if(l.casc) for(const c in l.casc) if(l.casc[c].every(r=>S.tui[r.key])) S.casc[c]=l.casc[c];
-  if(l.sim) S.sim=Object.assign(S.sim,l.sim); if(l.slots) S.slots=l.slots; }}catch(e){}
-function save(){try{localStorage.setItem('prospetto-v4',JSON.stringify(S))}catch(e){}}
+const CHIAVE='piano-v5';
+function statoIniziale(){return {pref:clone(PREF_D),prof:{fra:{},mar:{},iac:{}},prep:clone(PREP_D),param:{lambda:PARAM_D.lambda,mu:PARAM_D.mu,maxDomande:PARAM_D.maxDomande},cal:'tutti'}}
+let S=statoIniziale();
+try{const raw=localStorage.getItem(CHIAVE);if(raw){const l=JSON.parse(raw);
+  for(const k of ['fra','mar','iac']){if(l.pref&&l.pref[k]){const p=l.pref[k];Object.assign(S.pref[k].voti,p.voti||{});Object.assign(S.pref[k].citta,p.citta||{});if(p.ripiego&&PROGRAMMI[p.ripiego])S.pref[k].ripiego=p.ripiego;S.pref[k].forza=p.forza||{};}
+    if(l.prof&&l.prof[k])S.prof[k]=l.prof[k]; if(l.prep&&l.prep[k])S.prep[k]=l.prep[k].filter(x=>PREPARAZIONI[x]);}
+  if(l.param)Object.assign(S.param,l.param); if(l.cal)S.cal=l.cal;}}catch(e){}
+function salva(){try{localStorage.setItem(CHIAVE,JSON.stringify(S))}catch(e){}}
+// profilo con le modifiche dell'utente
+profiloDi=kid=>{const b=PROFILI[kid],o=S.prof[kid]||{};const r=Object.assign({},b);
+  for(const k in o){if(k==='en')r.en=Object.assign({},b.en,o.en);else r[k]=o[k];} return r;};
+const param=()=>Object.assign({},PARAM_D,S.param);
 
-// ---------- model ----------
+// ---------- formati ----------
 const fmt=n=>Math.round(n).toLocaleString('it-IT');
-const pct=p=>(p*100).toLocaleString('it-IT',{maximumFractionDigits:1})+'%';
-function growth(t){return t.g==null?S.param.gRette:t.g}
-function costYear(key,year,start,anni){
-  const t=S.tui[key]; if(!t) return 0; if(year<start) return 0;
-  const k=year-start+1; const frac=Math.max(0,Math.min(1,anni-k+1)); if(frac<=0) return 0;
-  const retta=t.retta*Math.pow(1+growth(t),year-t.yb);
-  const mant=(S.cities[t.city]||0)*Math.pow(1+S.param.gMant,year-S.param.yBaseM);
-  return frac*(retta+mant+(k===1?t.once:0));
-}
-function costSeries(key,start,anni){return YEARS.map(y=>costYear(key,y,start,anni))}
-function anniOf(row){return S.tui[row.key].anni+(row.bsc2?S.param.qBsc2:0)}
-function cascadeCalc(c){
-  const start=S.param[CH.find(x=>x.id===c).start]; let surv=1; const rows=[];
-  for(const r of S.casc[c]){const pr=probFor(c,r.key);const pisc=pr.p*surv; const anni=anniOf(r); const ser=costSeries(r.key,start,anni);
-    const tot=ser.reduce((a,b)=>a+b,0); rows.push({...r,p:pr.p,calc:pr.calc,dati:pr.dati,anni,pisc,ser,tot,exp:tot*pisc,expSer:ser.map(v=>v*pisc)}); surv*=(1-pr.p);}
-  const expSer=YEARS.map((_,i)=>rows.reduce((a,r)=>a+r.expSer[i],0));
-  const sumP=rows.reduce((a,r)=>a+r.pisc,0);
-  const elig=rows.filter(r=>r.pisc>=S.param.soglia);
-  const prob=rows.reduce((a,r)=>r.pisc>a.pisc?r:a,rows[0]);
-  const eco=elig.length?elig.reduce((a,r)=>r.tot<a.tot?r:a,elig[0]):prob;
-  const caro=elig.length?elig.reduce((a,r)=>r.tot>a.tot?r:a,elig[0]):prob;
-  return {rows,expSer,exp:expSer.reduce((a,b)=>a+b,0),sumP,prob,eco,caro,start};
-}
+const pct=(p,d=0)=>(p*100).toLocaleString('it-IT',{maximumFractionDigits:d,minimumFractionDigits:d})+'%';
+const pp=x=>(x>=0?'+':'−')+Math.abs(x*100).toLocaleString('it-IT',{maximumFractionDigits:1})+' pp';
+const nome=id=>{const P=PROGRAMMI[id];return `${P.ateneo} — ${P.corso}`};
+const breveNome=id=>{const P=PROGRAMMI[id];return P.ateneo+' '+P.corso.split(' (')[0]};
+const VOTI=['0 escluso','1 accettabile','2 gradito','3 preferito'];
+const vtag=v=>v>=3?'<span class="tag ok">preferito</span>':v===2?'<span class="tag">gradito</span>':v===1?'<span class="tag m">accettabile</span>':'<span class="tag w">escluso</span>';
+const dataIt=s=>{const [y,m,d]=s.split('-');return `${+d}/${+m}/${y}`};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
-// ---------- render: prospetto ----------
-function optionSelect(id,val,cls){
-  const areas=[...new Set(Object.values(TUI_D).map(v=>v[0]))];
-  let h=`<select id="${id}" class="${cls||''}">`;
-  for(const a of areas){h+=`<optgroup label="${a}">`;for(const k in TUI_D) if(TUI_D[k][0]===a) h+=`<option value="${k}" ${k===val?'selected':''}>${k}</option>`;h+='</optgroup>';}
-  return h+'</select>';
-}
-function yearHead(){return YEARS.map(y=>`<th class="n">${y}/${String(y+1).slice(2)}</th>`).join('')}
-function renderProspetto(){
-  const R={}; for(const c of CH) R[c.id]=cascadeCalc(c.id);
-  // summary cards + cumulative
-  const famExp=YEARS.map((_,i)=>CH.reduce((a,c)=>a+R[c.id].expSer[i],0));
-  const totExp=famExp.reduce((a,b)=>a+b,0);
-  const scen=(sel)=>{const ser=YEARS.map((_,i)=>CH.reduce((a,c)=>a+R[c.id][sel].ser[i],0));return {ser,tot:ser.reduce((a,b)=>a+b,0)}};
-  const sProb=scen('prob'),sEco=scen('eco'),sCaro=scen('caro');
-  document.getElementById('summary').innerHTML=`
-   <div class="cards">
-    <div class="card"><div class="k">Valore atteso · 3 bachelor</div><div class="v">€ ${fmt(totExp)}</div><div class="s">media ponderata su tutte le opzioni</div></div>
-    <div class="card"><div class="k">Scenario più probabile</div><div class="v">€ ${fmt(sProb.tot)}</div><div class="s">${CH.map(c=>R[c.id].prob.key.split(' — ')[0]).join(' · ')}</div></div>
-    <div class="card"><div class="k">Scenario economico</div><div class="v">€ ${fmt(sEco.tot)}</div><div class="s">opzioni con P ≥ ${pct(S.param.soglia)}</div></div>
-    <div class="card"><div class="k">Scenario caro</div><div class="v">€ ${fmt(sCaro.tot)}</div><div class="s">opzioni con P ≥ ${pct(S.param.soglia)}</div></div>
-    <div class="card"><div class="k">Picco annuo atteso</div><div class="v">€ ${fmt(Math.max(...famExp))}</div><div class="s">${(()=>{const i=famExp.indexOf(Math.max(...famExp));return YEARS[i]+'/'+String(YEARS[i]+1).slice(2)})()}</div></div>
-   </div>`;
-  let cum=0;
-  const cumRow=famExp.map(v=>{cum+=v;return cum});
-  let h=`<h2>Esborso atteso per anno accademico</h2>${chart(R)}<div class="tbl"><table><thead><tr><th>Valore atteso</th>${yearHead()}<th class="n">Totale</th></tr></thead><tbody>`;
-  for(const c of CH) h+=`<tr><td>${c.name}</td>${R[c.id].expSer.map(v=>`<td class="n">${fmt(v)}</td>`).join('')}<td class="n">${fmt(R[c.id].exp)}</td></tr>`;
-  h+=`<tr class="total"><td>Famiglia</td>${famExp.map(v=>`<td class="n">${fmt(v)}</td>`).join('')}<td class="n">${fmt(totExp)}</td></tr>`;
-  h+=`<tr class="dim"><td>Cumulato progressivo</td>${cumRow.map(v=>`<td class="n">${fmt(v)}</td>`).join('')}<td></td></tr>`;
-  h+=`</tbody></table></div>`;
-  h+=`<h3>Scenari di confronto (non ponderati)</h3><div class="tbl"><table><thead><tr><th>Scenario</th><th>Chi dove</th>${yearHead()}<th class="n">Totale</th></tr></thead><tbody>`;
-  for(const [lab,sc,sel] of [['Più probabile',sProb,'prob'],['Economico',sEco,'eco'],['Caro',sCaro,'caro']])
-    h+=`<tr><td>${lab}</td><td style="white-space:normal;font-size:12px;min-width:240px">${CH.map(c=>`<b>${c.name[0]}</b> ${R[c.id][sel].key}`).join('<br>')}</td>${sc.ser.map(v=>`<td class="n">${fmt(v)}</td>`).join('')}<td class="n">${fmt(sc.tot)}</td></tr>`;
-  h+='</tbody></table></div>';
-  document.getElementById('cum').innerHTML=h;
-  // cascades
-  let cs='';
-  for(const c of CH){const r=R[c.id];
-    cs+=`<div class="child" style="--c:var(${c.cls})"><h2>${c.name} <span class="tag">ingresso ${r.start}/${String(r.start+1).slice(2)}</span></h2>
-    <div class="cards"><div class="card"><div class="k">Costo atteso</div><div class="v">€ ${fmt(r.exp)}</div></div>
-    <div class="card"><div class="k">Più probabile</div><div class="v">${pct(r.prob.pisc)}</div><div class="s">${r.prob.key}</div></div>
-    <div class="card"><div class="k">Somma prob. di finire qui</div><div class="v ${Math.abs(r.sumP-1)>0.001?'warnp':'okp'}">${pct(r.sumP)}</div><div class="s">${Math.abs(r.sumP-1)>0.001?'l\'ultima riga deve essere un ripiego al 100%':'ok'}</div></div></div>
-    <div class="tbl"><table><thead><tr><th></th><th>#</th><th>Opzione</th><th class="n">Anni</th><th class="n">Prob. ammissione</th><th class="n">Prob. di finire qui</th><th class="n">1° anno</th><th class="n">Percorso intero</th><th class="n">Costo atteso</th>${yearHead()}<th>Come è calcolata la probabilità di ammissione</th></tr></thead><tbody>`;
-    r.rows.forEach((row,i)=>{
-      cs+=`<tr><td><button class="btn sm" data-mv="${c.id}:${i}:-1" title="su">▲</button> <button class="btn sm" data-mv="${c.id}:${i}:1" title="giù">▼</button></td><td class="n">${i+1}</td>
-      <td class="name">${optionSelect(`sel-${c.id}-${i}`,row.key)}${row.bsc2?'<div class="note">+ quota BSc² (Parametri)</div>':''}</td>
-      <td class="n">${row.anni.toLocaleString('it-IT',{maximumFractionDigits:2})}</td>
-      <td class="n">${pct(row.p)}</td>
-      <td class="n">${pct(row.pisc)}</td><td class="n">${fmt(row.ser[Math.max(0,YEARS.indexOf(r.start))]||0)}</td><td class="n">${fmt(row.tot)}</td><td class="n"><b>${fmt(row.exp)}</b></td>
-      ${row.ser.map(v=>`<td class="n">${v?fmt(v):'–'}</td>`).join('')}<td class="why"><b>Calcolo:</b> ${row.calc} → ${pct(row.p)}<br><span style="opacity:.85">${row.dati||''}</span></td></tr>`;});
-    cs+=`<tr class="total"><td></td><td></td><td>Totale atteso</td><td></td><td></td><td class="n">${pct(r.sumP)}</td><td></td><td></td><td class="n">${fmt(r.exp)}</td>${r.expSer.map(v=>`<td class="n">${fmt(v)}</td>`).join('')}<td></td></tr>`;
-    for(const [lab,row] of [['Più probabile',r.prob],['Economico (P ≥ soglia)',r.eco],['Caro (P ≥ soglia)',r.caro]])
-      cs+=`<tr class="scen"><td></td><td></td><td class="name">${lab}: <b>${row.key}</b></td><td class="n">${row.anni.toLocaleString('it-IT',{maximumFractionDigits:2})}</td><td></td><td class="n">${pct(row.pisc)}</td><td></td><td class="n">${fmt(row.tot)}</td><td></td>${row.ser.map(v=>`<td class="n">${v?fmt(v):'–'}</td>`).join('')}<td></td></tr>`;
-    cs+=`</tbody></table></div><div class="row"><button class="btn" data-add="${c.id}">+ Aggiungi riga</button><button class="btn" data-del="${c.id}">− Elimina ultima riga non di ripiego</button></div></div>`;
-  }
-  document.getElementById('cascades').innerHTML=cs;
-  document.getElementById('brief').innerHTML=brief(R,famExp,totExp,sProb,sEco,sCaro);
-  // listeners
-  document.querySelectorAll('[data-mv]').forEach(b=>b.onclick=()=>{const [c,i,d]=b.dataset.mv.split(':');const a=S.casc[c];const j=+i+ +d;if(j<0||j>=a.length)return;[a[+i],a[j]]=[a[j],a[+i]];save();renderProspetto();tipify();stamp();});
-  document.querySelectorAll('[data-add]').forEach(b=>b.onclick=()=>{const a=S.casc[b.dataset.add];a.splice(a.length-1,0,{key:'Tilburg — Economics / IBA',why:'',bsc2:false});save();renderProspetto();tipify();stamp();});
-  document.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{const a=S.casc[b.dataset.del];if(a.length>2)a.splice(a.length-2,1);save();renderProspetto();tipify();stamp();});
-  for(const c of CH) S.casc[c.id].forEach((row,i)=>{
-    const s=document.getElementById(`sel-${c.id}-${i}`); s.onchange=()=>{row.key=s.value;save();renderProspetto();tipify();stamp();};
-  });
-}
+// ---------- calcolo ----------
+let R={},V={},firmaV='';
+function calcola(){const pa=param();for(const k of RAGAZZI)R[k.id]=ottimizza(k.id,S.pref[k.id],pa,S.prep[k.id]);}
+function serieAttesa(r){const pa=param();const s=ANNI.map(()=>0);r.scala.forEach((id,i)=>{const c=costoPercorso(id,r.kid,pa);c.ser.forEach((v,j)=>s[j]+=v*r.val.pf[i]);});return s;}
+function eventiDi(kid){const r=R[kid];const twin=kid!=='fra';
+  return EVENTI.filter(e=>(e.chi===kid||e.chi==='tutti'||(e.chi==='gem'&&twin))&&(e.chi!=='tutti'||!e.corsi||e.corsi.some(c=>r.scala.includes(c)))
+    &&((!e.corsi&&!e.prep)||(e.corsi&&e.corsi.some(c=>r.scala.includes(c)))||(e.prep&&S.prep[kid].includes(e.prep))))
+    .filter(e=>!(e.chi==='tutti'&&kid!=='fra'&&e.d<'2027-06-30'&&!e.corsi)).sort((a,b)=>a.d.localeCompare(b.d));}
 
-function yr(y){return y+'/'+String(y+1).slice(2)}
-function brief(R,famExp,totExp,sProb,sEco,sCaro){
-  const peakI=famExp.indexOf(Math.max(...famExp));
-  let h=`<h2 style="margin:0 0 4px">In breve</h2><p>Mettendo insieme dove ciascuno vorrebbe andare e quante possibilità ha di entrarci, i tre bachelor dovrebbero costare alla famiglia intorno a <b>€ ${fmt(totExp)}</b> in tutto, con un intervallo realistico tra <b>€ ${fmt(sEco.tot)}</b> (se ognuno finisce nell'opzione meno cara tra quelle plausibili) e <b>€ ${fmt(sCaro.tot)}</b> (se ognuno finisce nella più cara). L'anno più pesante è il <b>${yr(YEARS[peakI])}</b> con circa <b>€ ${fmt(famExp[peakI])}</b>, quando i tre sono all'università insieme.</p><ul>`;
-  for(const c of CH){const r=R[c.id];const p=r.prob;const perYear=p.tot/p.anni;
-    const second=[...r.rows].sort((a,b)=>b.pisc-a.pisc)[1];
-    h+=`<li><b style="color:var(${c.cls})">${c.name}</b> (ingresso ${yr(r.start)}): la strada più probabile è <b>${p.key}</b> (${pct(p.pisc)} di finire lì), che costa circa € ${fmt(perYear)} l'anno per ${p.anni.toLocaleString('it-IT',{maximumFractionDigits:2})} anni, cioè € ${fmt(p.tot)} in tutto. ${second&&second.pisc>=0.05?`La seconda possibilità è ${second.key} (${pct(second.pisc)}, € ${fmt(second.tot)}).`:''} Il costo atteso, mettendo insieme tutte le possibilità, è € ${fmt(r.exp)}.</li>`;}
-  h+=`</ul><p class="note">Ordini di grandezza utili: vivere a casa a Milano costa circa € 3.000 l'anno di spese extra; una città olandese 23-30.000; Parigi, Madrid, Copenhagen 24-27.000; Dublino 30.000. Le rette vanno da zero (Danimarca) a 2.800 (Olanda), 15-21.000 (Sciences Po, ESCP, ESADE), 17.000 (Bocconi), 29.000 (IE).</p>`;
-  return h;
-}
-const TIPS={
- 'Opzione':['Università e corso','Si cambia dal menu. La probabilità di ammissione si ricalcola subito dal profilo del ragazzo (scheda Probabilità).'],
- 'Anni':['Durata del percorso','Anni accademici del corso. Un valore come 3,35 vuol dire 3 anni più il 35% di probabilità di un quarto anno (doppio bachelor di Rotterdam, quota in Parametri).'],
- 'Prob. ammissione':['Probabilità di essere ammessi','Stimata dal profilo del ragazzo (media, matematica, maturità, inglese, resa nei test e nei colloqui) con la regola propria di ogni università, costruita sui suoi criteri ufficiali. Il calcolo con i numeri è nell\'ultima colonna e nella scheda Probabilità.'],
- 'Prob. di finire qui':['Probabilità di iscriversi davvero qui','= probabilità di essere ammessi qui × probabilità di NON essere ammessi in tutte le righe sopra (che preferirebbe). Per questo le righe sommano a 100%: l\'ultima è il ripiego sicuro.'],
- '1° anno':['Costo del primo anno','Retta + mantenimento + spese una tantum del primo anno (deposito, arredo, tasse di candidatura), già indicizzati all\'anno di ingresso.'],
- 'Percorso intero':['Costo dell\'intero percorso','Somma di tutti gli anni del corso, in euro nominali (cioè con gli aumenti annui di rette e affitti già inclusi).'],
- 'Costo atteso':['Costo atteso di questa riga','Costo del percorso intero × probabilità di finire qui. La somma della colonna è il costo atteso del ragazzo.'],
- 'Come è calcolata la probabilità di ammissione':['Regola e calcolo','La formula della regola con i valori del profilo sostituiti, seguita dai dati di selettività (posti, candidati, soglie) su cui la regola è costruita.'],
- 'Valore atteso':['Valore atteso','Per ogni anno: somma su tutte le opzioni di (costo di quell\'anno × probabilità di finire lì). Media pesata, non una cifra certa.'],
- 'Totale':['Totale del percorso','Somma delle colonne degli anni.'],
- 'Totale percorso':['Totale del percorso','Somma delle colonne degli anni.'],
- 'Scenario':['Scenari di confronto','Più probabile: ciascuno nell\'opzione con la probabilità più alta di finirci. Economico/Caro: ciascuno nell\'opzione meno/più cara tra quelle con probabilità almeno pari alla soglia (Parametri, default 5%). Non sono ponderati: servono a leggere il range.'],
- 'Chi dove':['Chi va dove','F = Francesca, M = Marco, I = Iacopo.'],
- 'Ateneo e corso':['Università e corso','Tutte le opzioni del catalogo, in ordine di probabilità per questo ragazzo.'],
- 'Calcolo con i valori del profilo':['Calcolo','La regola con i numeri del profilo sostituiti. W(x a→b) vale 0 sotto a, 1 sopra b, lineare in mezzo.'],
- 'Criteri di selezione (dati)':['Dati di selettività','Posti, candidati, soglie e pesi ufficiali da cui è costruita la regola. Fonti nella scheda Metodo e fonti.'],
- 'Retta base €':['Retta annua base','Retta in fascia massima (nessuna agevolazione) nell\'anno base indicato; il modello la aumenta ogni anno del tasso di crescita.'],
- 'Anno base':['Anno base della retta','Anno accademico a cui si riferisce la retta base (2026 = 2026/27).'],
- 'Crescita':['Crescita annua della retta','Vuoto = tasso di default (Parametri). IE dichiara +2,9%/anno.'],
- 'Una tantum €':['Spese una tantum','Pagate solo il primo anno: tasse di candidatura, prenotazione del posto, laptop obbligatorio, accreditamento PCE.'],
- 'Città (mantenimento)':['Città per il mantenimento','La città usata per il costo della vita di questa opzione (tabella sopra).'],
- '€/anno base 2026':['Mantenimento annuo base','Costo di vivere nella città per 12 mesi nel 2026, escluse rette; aumenta ogni anno del tasso di crescita del mantenimento.'],
- 'Valore':['Valore del parametro','Modificabile: ogni cambiamento ricalcola tutto.'],
- 'Combinazione corrente':['Combinazione scelta a mano','Costo pieno, senza probabilità, dei percorsi selezionati nelle schede sopra.'],
- 'Slot':['Combinazioni salvate','Fino a tre combinazioni (A, B, C) salvate con il pulsante "Salva in", per confrontarle.'],
- 'Scelte':['Scelte della combinazione','Università e anno di ingresso per ciascuno.']
-};
-function tipify(){
-  document.querySelectorAll('th').forEach(th=>{const t=th.textContent.trim();let tip=TIPS[t];
-    if(!tip&&/^\d{4}\/\d{2}$/.test(t))tip=['Anno accademico '+t,'Esborso di cassa in quell\'anno accademico (da settembre ad agosto) per questo percorso: retta + mantenimento (+ una tantum il primo anno), indicizzati. Nella tabella del valore atteso ogni cella è già moltiplicata per la probabilità.'];
-    if(!tip)return; th.title=tip[0]+': '+tip[1]; th.onclick=()=>showTip(tip[0],tip[1]);});
-}
-function showTip(t,b){document.getElementById('tipT').textContent=t;document.getElementById('tipB').textContent=b;document.getElementById('tip').hidden=false;}
-document.getElementById('tipClose').onclick=()=>{document.getElementById('tip').hidden=true;};
-function stamp(){const el=document.getElementById('status');if(!el)return;el.textContent='Ricalcolato alle '+new Date().toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit',second:'2-digit'});}
+// ---------- In breve ----------
+function renderBreve(){
+  let fam=0,famSer=ANNI.map(()=>0);
+  let h=`<h2>In breve</h2><p class="note">Sintesi calcolata dalle preferenze, dai profili e dalle preparazioni pianificate (schede successive). Tutte le percentuali sono stime da regole dichiarate; le preferenze iniziali sono ipotesi da confermare con i ragazzi.</p><div class="grid3">`;
+  for(const k of RAGAZZI){const r=R[k.id],pref=S.pref[k.id];const ser=serieAttesa(r);ser.forEach((v,i)=>famSer[i]+=v);fam+=r.val.costo;
+    const best=r.scala.map((id,i)=>({id,p:r.val.pf[i]})).sort((a,b)=>b.p-a.p);
+    const avvisi=[];
+    for(const id in pref.voti){if(pref.voti[id]>=2&&r.esclusi[id]&&r.esclusi[id].startsWith('requisito'))avvisi.push(`<b>${breveNome(id)}</b>: ${r.esclusi[id].replace('requisito: ','')}`);}
+    r.scala.forEach(id=>{const o=r.sim.info[r.sim.idx[id]];if(o.flag)avvisi.push(`<b>${breveNome(id)}</b>: ${o.flag}`);if(pref.citta[PROGRAMMI[id].citta]==='dd')avvisi.push(`<b>${breveNome(id)}</b>: città "${PROGRAMMI[id].citta}" da decidere con ${k.nome}`);});
+    const prossimi=eventiDi(k.id).filter(e=>(e.a||e.d)>=OGGI).slice(0,6);
+    const vp=V[k.id];
+    h+=`<div class="box" style="--c:var(${k.cls})"><h3>${k.nome} <span class="tag m">ingresso ${PROFILI[k.id].ciclo}</span></h3>
+      <div class="cards" style="grid-template-columns:repeat(3,1fr)"><div class="card"><div class="k">In un corso preferito</div><div class="v">${pct(r.val.pTop)}</div></div>
+      <div class="card"><div class="k">Preferito o gradito</div><div class="v">${pct(r.val.pGood)}</div></div><div class="card"><div class="k">Costo atteso</div><div class="v">${fmt(r.val.costo/1000)}k</div></div></div>
+      <p style="margin:6px 0"><b>Esito più probabile:</b> ${nome(best[0].id)} (${pct(best[0].p)})${best[1]&&best[1].p>=0.05?`; poi ${breveNome(best[1].id)} (${pct(best[1].p)})`:''}.</p>
+      <p style="margin:6px 0"><b>Domande consigliate</b> (${r.scala.length}, ${Math.round(r.ore)} ore di lavoro, ${fmt(r.fee)} € di quote):</p>
+      <ol>${r.scala.map((id,i)=>`<li>${breveNome(id)} <span class="note">· ${pct(r.sim.info[r.sim.idx[id]].p)} amm.</span>${id===r.ripiego?' <span class="tag m">ripiego</span>':''}</li>`).join('')}</ol>
+      <p style="margin:6px 0"><b>Preparazioni che rendono di più:</b> ${vp?vp.prep.filter(a=>a.netto>0.2).slice(0,3).map(a=>`${PREPARAZIONI[a.id].nome}${a.pianificata?'':' <span class="tag w">non pianificata</span>'}`).join('; ')||'nessuna oltre al minimo':'<span class="busy">calcolo in corso…</span>'}</p>
+      ${avvisi.length?`<details><summary class="warn">${avvisi.length} punti da verificare</summary><ul>${avvisi.map(a=>`<li>${a}</li>`).join('')}</ul></details>`:''}
+      <p style="margin:6px 0 0"><b>Prossime scadenze</b></p><ul>${prossimi.map(e=>`<li><span class="n">${dataIt(e.d)}</span> ${esc(e.cosa)}${e.stato==='S'?' <span class="tag m">stima</span>':''}</li>`).join('')||'<li class="note">nessuna</li>'}</ul>
+    </div>`;}
+  const pk=famSer.indexOf(Math.max(...famSer));
+  h+=`</div><div class="cards"><div class="card"><div class="k">Costo atteso dei tre bachelor</div><div class="v">€ ${fmt(fam)}</div><div class="s">media pesata sugli esiti possibili</div></div>
+    <div class="card"><div class="k">Anno più pesante</div><div class="v">€ ${fmt(famSer[pk])}</div><div class="s">${ANNI[pk]}/${String(ANNI[pk]+1).slice(2)}</div></div></div>`;
+  document.getElementById('breve').innerHTML=h;}
 
-function chart(R){
-  const W=760,H=260,pl=58,pr=10,pt=14,pb=34; const iw=W-pl-pr,ih=H-pt-pb;
-  const tot=YEARS.map((_,i)=>CH.reduce((a,c)=>a+R[c.id].expSer[i],0)); const max=Math.max(...tot,1);
-  const step=max>150000?50000:max>60000?25000:10000; const top=Math.ceil(max/step)*step;
-  const y=v=>pt+ih-(v/top)*ih; const bw=iw/YEARS.length;
-  let s=`<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Esborso atteso per anno accademico, barre impilate per figlio">`;
-  for(let v=0;v<=top;v+=step) s+=`<line x1="${pl}" x2="${W-pr}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)" stroke-width="1"/><text x="${pl-6}" y="${y(v)+4}" text-anchor="end" font-size="11" style="font-family:var(--mono)" fill="var(--muted)">${v/1000}k</text>`;
-  YEARS.forEach((yr,i)=>{let acc=0;const x=pl+i*bw+bw*0.18,w=bw*0.64;
-    for(const c of CH){const v=R[c.id].expSer[i];if(v>0){s+=`<rect x="${x}" y="${y(acc+v)}" width="${w}" height="${y(acc)-y(acc+v)}" fill="var(${c.cls})"/>`;acc+=v;}}
-    if(acc>0)s+=`<text x="${x+w/2}" y="${y(acc)-4}" text-anchor="middle" font-size="11" style="font-family:var(--mono)" fill="var(--fg)">${Math.round(acc/1000)}k</text>`;
-    s+=`<text x="${x+w/2}" y="${H-12}" text-anchor="middle" font-size="12" style="font-family:var(--body)" fill="var(--muted)">${yr}/${String(yr+1).slice(2)}</text>`;});
-  s+='</svg>';
-  return s+`<div class="legend">${CH.map(c=>`<span style="--c:var(${c.cls})">${c.name}</span>`).join('')}</div>`;
-}
-
-// ---------- render: simulatore ----------
-function simRows(){return CH.map(c=>{const s=S.sim[c.id];const t=S.tui[s.key]||S.tui[Object.keys(S.tui)[0]];const anni=s.anni===''||s.anni==null?t.anni:+s.anni;const ser=costSeries(s.key,+s.start,anni);return {c,key:s.key,start:+s.start,anni,ser,tot:ser.reduce((a,b)=>a+b,0),t}})}
-function renderSim(){
+// ---------- Preferenze ----------
+function renderPref(){
+  const P=S.param;
+  document.getElementById('pgen').innerHTML=`<div class="f">
+    <label for="lam">Sensibilità al costo (punti di utilità persi ogni 10.000 € di percorso)</label><input class="in" id="lam" type="number" min="0" max="10" step="0.5" value="${P.lambda}"><span class="note">0 = conta solo la preferenza</span>
+    <label for="mu">Valore del tempo (punti per ora di lavoro sulle domande)</label><input class="in" id="mu" type="number" min="0" max="0.5" step="0.01" value="${P.mu}"><span class="note">0,04 = 25 ore valgono 1 punto</span>
+    <label for="maxd">Numero massimo di domande per ragazzo (ripiego escluso)</label><input class="in" id="maxd" type="number" min="1" max="25" step="1" value="${P.maxDomande}"><span></span></div>`;
+  for(const [id,k,mn] of [['lam','lambda',0],['mu','mu',0],['maxd','maxDomande',1]])document.getElementById(id).onchange=e=>{S.param[k]=Math.max(mn,+e.target.value||0);aggiorna();};
+  const citta=[...new Set(Object.values(PROGRAMMI).map(p=>p.citta))];
+  const paesi=[...new Set(Object.values(PROGRAMMI).map(p=>p.paese))];
   let h='';
-  for(const c of CH){const s=S.sim[c.id];
-    h+=`<div class="sim-card" style="--c:var(${c.cls})"><h3>${c.name}</h3><div class="f">
-     <label for="simk-${c.id}">Ateneo e corso</label><div>${optionSelect(`simk-${c.id}`,s.key)}</div>
-     <label for="sims-${c.id}">Anno di ingresso</label><div><input class="in w" type="number" id="sims-${c.id}" min="2027" max="2032" value="${s.start}"></div>
-     <label for="sima-${c.id}">Durata (anni)</label><div><input class="in" type="number" id="sima-${c.id}" min="1" max="6" step="0.5" placeholder="${S.tui[s.key]?S.tui[s.key].anni:3}" value="${s.anni??''}"> <span class="note">vuoto = durata del corso</span></div>
-    </div><div class="out" id="simo-${c.id}"></div></div>`;}
-  document.getElementById('simcards').innerHTML=h;
-  for(const c of CH){const s=S.sim[c.id];
-    document.getElementById(`simk-${c.id}`).onchange=e=>{s.key=e.target.value;s.anni='';save();renderSim();};
-    document.getElementById(`sims-${c.id}`).onchange=e=>{s.start=Math.max(2027,Math.min(2032,+e.target.value||2027));save();renderSim();};
-    document.getElementById(`sima-${c.id}`).onchange=e=>{s.anni=e.target.value===''?'':+e.target.value;save();renderSim();};}
-  const rows=simRows();
-  for(const r of rows){const t=r.t;const retta1=t.retta*Math.pow(1+growth(t),r.start-t.yb);const mant1=(S.cities[t.city]||0)*Math.pow(1+S.param.gMant,r.start-S.param.yBaseM);
-    document.getElementById(`simo-${r.c.id}`).innerHTML=`<div><span>Città</span><span>${t.city}</span></div><div><span>Retta 1° anno</span><span>€ ${fmt(retta1)}</span></div><div><span>Mantenimento 1° anno</span><span>€ ${fmt(mant1)}</span></div><div><span>Una tantum</span><span>€ ${fmt(t.once)}</span></div><div class="t"><span>Totale percorso (${r.anni} anni)</span><span>€ ${fmt(r.tot)}</span></div>`;}
-  const fam=YEARS.map((_,i)=>rows.reduce((a,r)=>a+r.ser[i],0)); let cum=0; const cumS=fam.map(v=>{cum+=v;return cum});
-  let o=`<div class="tbl"><table><thead><tr><th>Combinazione corrente</th>${yearHead()}<th class="n">Totale</th></tr></thead><tbody>`;
-  for(const r of rows) o+=`<tr><td class="name"><b>${r.c.name}</b> · ${r.key}</td>${r.ser.map(v=>`<td class="n">${v?fmt(v):'–'}</td>`).join('')}<td class="n">${fmt(r.tot)}</td></tr>`;
-  o+=`<tr class="total"><td>Famiglia</td>${fam.map(v=>`<td class="n">${fmt(v)}</td>`).join('')}<td class="n">${fmt(fam.reduce((a,b)=>a+b,0))}</td></tr><tr class="dim"><td>Cumulato progressivo</td>${cumS.map(v=>`<td class="n">${fmt(v)}</td>`).join('')}<td></td></tr></tbody></table></div>`;
-  document.getElementById('simout').innerHTML=o;
-  // comparison
-  const slots=['A','B','C'].filter(k=>S.slots[k]);
-  if(!slots.length){document.getElementById('simcmp').innerHTML='<p class="note">Nessuna combinazione salvata. Imposta le scelte sopra e premi "Salva in A".</p>';return;}
-  let cmp=`<div class="tbl"><table><thead><tr><th>Slot</th><th>Scelte</th>${yearHead()}<th class="n">Totale</th></tr></thead><tbody>`;
-  for(const k of slots){const sl=S.slots[k];const rr=CH.map(c=>{const s=sl[c.id];const t=S.tui[s.key];if(!t)return null;const anni=s.anni===''||s.anni==null?t.anni:+s.anni;return {c,s,ser:costSeries(s.key,+s.start,anni)}}).filter(Boolean);
-    const f=YEARS.map((_,i)=>rr.reduce((a,r)=>a+r.ser[i],0));
-    cmp+=`<tr><td><b>${k}</b></td><td style="white-space:normal;font-size:12px;min-width:260px">${rr.map(r=>`<b>${r.c.name[0]}</b> ${r.s.key} (${r.s.start})`).join('<br>')}</td>${f.map(v=>`<td class="n">${fmt(v)}</td>`).join('')}<td class="n"><b>${fmt(f.reduce((a,b)=>a+b,0))}</b></td></tr>`;}
-  document.getElementById('simcmp').innerHTML=cmp+'</tbody></table></div>';
-}
-document.querySelectorAll('[data-slot]').forEach(b=>b.onclick=()=>{S.slots[b.dataset.slot]=clone(S.sim);save();renderSim();});
-document.getElementById('simClear').onclick=()=>{S.slots={};save();renderSim();};
-
-
-
-let _deb=null;
-function bindLive(el,apply,allowEmpty){
-  const run=full=>{const raw=el.value;if(raw===''&&!allowEmpty)return;const v=allowEmpty&&raw===''?NaN:+raw;if(!allowEmpty&&isNaN(v))return;apply(v);save();
-    if(full){renderAll();}else{renderProspetto();renderSim();tipify();stamp();}};
-  el.onchange=()=>run(true);
-  el.oninput=()=>{clearTimeout(_deb);_deb=setTimeout(()=>run(false),350);};
+  for(const k of RAGAZZI){const pref=S.pref[k.id],r=R[k.id];
+    h+=`<div class="child" style="--c:var(${k.cls})"><h2>${k.nome}</h2><h3>Città</h3><div class="f" style="grid-template-columns:repeat(auto-fill,minmax(230px,1fr));">`;
+    for(const c of citta)h+=`<label style="display:flex;justify-content:space-between;gap:6px;align-items:center">${esc(c)} <select class="in" data-c="${k.id}" data-city="${esc(c)}">${[['si','sì'],['dd','da decidere'],['no','no']].map(([v,l])=>`<option value="${v}" ${pref.citta[c]===v?'selected':''}>${l}</option>`).join('')}</select></label>`;
+    h+=`</div><div class="row"><label for="rip-${k.id}">Ripiego (sempre in coda)</label><select class="in" id="rip-${k.id}" data-rip="${k.id}">${['cattolica','bicocca','statale-ema','polimi-ges','polimi-inf'].map(id=>`<option value="${id}" ${pref.ripiego===id?'selected':''}>${breveNome(id)}</option>`).join('')}</select></div>
+      <div class="tbl"><table><thead><tr><th>Paese</th><th>Ateneo e corso</th><th>Voto</th><th>Forza</th><th class="n">P amm.</th><th>Esito del calcolo</th></tr></thead><tbody>`;
+    for(const pa of paesi)for(const id in PROGRAMMI){const P=PROGRAMMI[id];if(P.paese!==pa)continue;const v=pref.voti[id]||0;const o=r.sim.info[r.sim.idx[id]];const inS=r.scala.indexOf(id);
+      const esito=inS>=0?`<span class="tag ok">in scala, posizione ${inS+1}</span>`:r.esclusi[id]?`<span class="tag ${r.esclusi[id].startsWith('requisito')?'w':'m'}">${esc(r.esclusi[id])}</span>`:`<span class="tag m">non conviene (+${(r.marg[id]||0).toFixed(1)} punti)</span>`;
+      h+=`<tr class="${v?'':'off'}"><td>${pa}</td><td class="name">${esc(nome(id))}${pref.citta[P.citta]==='dd'?' <span class="tag dd">città da decidere</span>':''}</td>
+        <td><select class="in" data-v="${k.id}" data-id="${id}">${VOTI.map((l,i)=>`<option value="${i}" ${v===i?'selected':''}>${l}</option>`).join('')}</select></td>
+        <td><select class="in" data-fz="${k.id}" data-id="${id}">${[['','auto'],['si','sempre'],['no','mai']].map(([x,l])=>`<option value="${x}" ${(pref.forza[id]||'')===x?'selected':''}>${l}</option>`).join('')}</select></td>
+        <td class="n">${pct(o.p)}</td><td class="small">${esito}</td></tr>`;}
+    h+='</tbody></table></div></div>';}
+  const el=document.getElementById('pref');el.innerHTML=h;
+  el.querySelectorAll('[data-city]').forEach(s=>s.onchange=()=>{S.pref[s.dataset.c].citta[s.dataset.city]=s.value;aggiorna();});
+  el.querySelectorAll('[data-v]').forEach(s=>s.onchange=()=>{S.pref[s.dataset.v].voti[s.dataset.id]=+s.value;aggiorna();});
+  el.querySelectorAll('[data-fz]').forEach(s=>s.onchange=()=>{const f=S.pref[s.dataset.fz].forza;if(s.value)f[s.dataset.id]=s.value;else delete f[s.dataset.id];aggiorna();});
+  el.querySelectorAll('[data-rip]').forEach(s=>s.onchange=()=>{S.pref[s.dataset.rip].ripiego=s.value;aggiorna();});
 }
 
-// ---------- render: probabilità ----------
+// ---------- Profili e probabilità ----------
+const CAMPI=[['mediaPen','Media del penultimo anno (Olanda, Maastricht, TU/e)',0,10,0.1,true],['mediaBoc','Media Bocconi (terzultimo + penultimo anno)',0,10,0.05,true],
+  ['mate','Voto di matematica',0,10,0.5],['matur','Maturità stimata /100',60,100,1],['pLog','Resa nei test logico-matematici',0,1,0.05,true],['pBoc','Resa nel test Bocconi',0,1,0.05,true],
+  ['pSat','Resa nel SAT (se lo fa)',0,1,0.05],['pCol','Resa in colloqui, essay e motivazioni',0,1,0.05,true],['ompt','Probabilità di superare l\'OMPT richiesto',0,1,0.05,true],['pDiploma','Riconoscimento del diploma all\'estero (0-1)',0,1,0.05]];
 function renderProb(){
-  let h='<div class="sim-grid">';
-  for(const c of CH){const q=S.prof[c.id];
-    h+=`<div class="sim-card" style="--c:var(${c.cls})"><h3>${c.name}</h3><p class="note" style="margin-top:0">${PROF_D[c.id].note}</p><div class="f">`;
-    for(const [k,lab,mn,mx,st,tip] of PROF_FIELDS) h+=`<label for="pf-${c.id}-${k}" title="${tip}">${lab}</label><div><input class="in" type="number" id="pf-${c.id}-${k}" min="${mn}" max="${mx}" step="${st}" value="${q[k]}"></div>`;
-    h+='</div></div>';}
-  h+='</div>';
-  document.getElementById('profiles').innerHTML=h;
-  for(const c of CH) for(const [k,,mn,mx] of PROF_FIELDS){const el=document.getElementById(`pf-${c.id}-${k}`);bindLive(el,v=>{S.prof[c.id][k]=cl(v,mn,mx);});}
+  let h='';
+  for(const k of RAGAZZI){const q=profiloDi(k.id);
+    h+=`<div class="box" style="--c:var(${k.cls})"><h3>${k.nome}</h3><p class="note" style="margin-top:0">${esc(q.note)}</p><div class="f"><span></span><span class="note">senza</span><span class="note">con prep.</span>`;
+    for(const [f,l,mn,mx,st,pair] of CAMPI){const v=q[f];
+      if(pair&&Array.isArray(v))h+=`<label>${l}</label><input class="in" type="number" min="${mn}" max="${mx}" step="${st}" data-k="${k.id}" data-f="${f}" data-i="0" value="${v[0]}"><input class="in" type="number" min="${mn}" max="${mx}" step="${st}" data-k="${k.id}" data-f="${f}" data-i="1" value="${v[1]}">`;
+      else h+=`<label>${l}</label><input class="in" type="number" min="${mn}" max="${mx}" step="${st}" data-k="${k.id}" data-f="${f}" value="${v}"><span></span>`;}
+    const e=q.en||{};
+    h+=`<label>Inglese: certificato attuale (punteggio Cambridge, vuoto = nessuno)</label><input class="in" type="number" min="100" max="230" step="1" data-k="${k.id}" data-en="ces" value="${e.ces??''}"><span class="note">${esc(e.tipo||'')}</span>
+      <label>… punteggio minimo per abilità (vuoto = non noto)</label><input class="in" type="number" min="100" max="230" step="1" data-k="${k.id}" data-en="sez" value="${e.sez??''}"><span></span>
+      <label>… sostenuto da meno di 2 anni alle scadenze?</label><select class="in" data-k="${k.id}" data-en="recente">${[['','non so'],['1','sì'],['0','no']].map(([x,l])=>`<option value="${x}" ${(e.recente==null?'':e.recente?'1':'0')===x?'selected':''}>${l}</option>`).join('')}</select><span></span></div>
+      <p class="note">Scala Cambridge: IELTS 6.0 ≈ 169, 6.5 ≈ 176, 7.0 ≈ 185. Con la preparazione "certificazione" si assume l'obiettivo ${q.enObiettivo.ces} (${q.enObiettivo.sez} per abilità), recente.</p></div>`;}
+  const el=document.getElementById('prof');el.innerHTML=h;
+  el.querySelectorAll('input[data-f]').forEach(i=>i.onchange=()=>{const k=i.dataset.k,f=i.dataset.f,o=S.prof[k];const base=profiloDi(k)[f];
+    if(i.dataset.i!=null){const a=clone(base);a[+i.dataset.i]=+i.value;o[f]=a;}else o[f]=+i.value;aggiorna();});
+  el.querySelectorAll('[data-en]').forEach(i=>i.onchange=()=>{const k=i.dataset.k,o=S.prof[k];o.en=Object.assign({},o.en||{});const f=i.dataset.en;
+    o.en[f]=f==='recente'?(i.value===''?null:i.value==='1'):(i.value===''?null:+i.value);aggiorna();});
   let t='';
-  for(const c of CH){
-    t+=`<div class="child" style="--c:var(${c.cls})"><h2>${c.name}: probabilità di ammissione per ateneo</h2><div class="tbl"><table><thead><tr><th>Ateneo e corso</th><th class="n">Prob. ammissione</th><th>Calcolo con i valori del profilo</th><th>Criteri di selezione (dati)</th></tr></thead><tbody>`;
-    const list=Object.keys(RULES).map(k=>({k,...probFor(c.id,k)})).sort((a,b)=>b.p-a.p);
-    for(const r of list) t+=`<tr><td class="name">${r.k}</td><td class="n"><b>${pct(r.p)}</b></td><td style="white-space:normal;font-size:12px;min-width:260px">${r.calc}</td><td style="white-space:normal;font-size:12px;color:var(--muted);min-width:260px">${r.dati}</td></tr>`;
+  for(const k of RAGAZZI){const r=R[k.id];const rows=Object.keys(PROGRAMMI).map(id=>({id,...r.sim.info[r.sim.idx[id]]})).sort((a,b)=>b.p-a.p);
+    t+=`<div class="child" style="--c:var(${k.cls})"><h2>${k.nome}: probabilità di ammissione (con le preparazioni pianificate)</h2><div class="tbl"><table><thead><tr><th>Ateneo e corso</th><th class="n">P amm.</th><th>Calcolo</th><th>Criteri di selezione (fatti)</th></tr></thead><tbody>`;
+    for(const o of rows)t+=`<tr><td class="name">${esc(nome(o.id))}</td><td class="n"><b>${pct(o.p)}</b></td><td class="small">${o.gate?`<span class="warn">Requisito: ${esc(o.gate)}</span>`:esc(o.calc)}${o.flag?`<br><span class="tag dd">${esc(o.flag)}</span>`:''}</td><td class="small">${esc(o.dati)}</td></tr>`;
     t+='</tbody></table></div></div>';}
-  t+=`<h3>Notazione</h3><p class="note">W(x a→b) = (x − a)/(b − a) limitato tra 0 e 1: vale 0 sotto a, 1 sopra b, lineare in mezzo. I coefficienti riflettono il peso dei criteri nelle procedure ufficiali (es. Bocconi 55/45, IBA 75/25, Maastricht IB 3 × 1/3, TU/e 90% test) e la pressione posti/candidati dove nota. Sono regole di stima, non formule degli atenei: vanno riviste quando cambiano i bandi.</p>`;
-  document.getElementById('probtables').innerHTML=t;
-}
-document.getElementById('resetProf').onclick=()=>{S.prof=clone(PROF_D);save();renderAll();};
+  document.getElementById('probtab').innerHTML=t;}
+document.getElementById('resetProf').onclick=()=>{S.prof={fra:{},mar:{},iac:{}};aggiorna();};
 
-// ---------- render: parametri ----------
-function renderParam(){
-  const P=S.param; const g=[
-   ['gRette','Crescita annua rette (default)',100,'%','Storico Bocconi +1,8% 2025→26; Sciences Po +2-3%/anno; NL indicizzata all\'inflazione'],
-   ['gMant','Crescita annua mantenimento',100,'%','Affitti studenteschi +3-7%/anno nelle grandi città'],
-   ['yBaseM','Anno base del mantenimento',1,'','Le stime di costo della vita sono 2026'],
-   ['yFra','Anno di ingresso Francesca',1,'','a.a. che inizia a settembre'],
-   ['yBoys','Anno di ingresso Marco e Iacopo',1,'',''],
-   ['qBsc2','Quota BSc² se Rotterdam (Francesca)',100,'%','Probabilità che, ammessa a Rotterdam, scelga il doppio bachelor a 4 anni invece di IBEB'],
-   ['soglia','Soglia P(iscrizione) per scenari economico/caro',100,'%','Negli scenari contano solo le opzioni almeno a questa probabilità']];
-  let h='<div class="tbl"><table><thead><tr><th>Parametro</th><th class="n">Valore</th><th>Nota</th></tr></thead><tbody>';
-  for(const [k,lab,mul,u,note] of g) h+=`<tr><td>${lab}</td><td class="n"><input class="in" type="number" step="${mul===100?0.5:1}" id="pg-${k}" value="${Math.round(P[k]*mul*100)/100}">${u}</td><td style="white-space:normal">${note}</td></tr>`;
-  document.getElementById('pgen').innerHTML=h+'</tbody></table></div>';
-  for(const [k,,mul] of g) bindLive(document.getElementById(`pg-${k}`),v=>{P[k]=v/mul;});
-  let l='<div class="tbl"><table><thead><tr><th>Città</th><th class="n">€/anno base 2026</th><th>Composizione</th></tr></thead><tbody>';
-  for(const c in CITIES_D) l+=`<tr><td>${c}</td><td class="n"><input class="in w" type="number" step="500" id="pc-${c}" value="${S.cities[c]}"></td><td style="white-space:normal;font-size:12px;color:var(--muted)">${CITIES_D[c][1]}</td></tr>`;
-  document.getElementById('pliv').innerHTML=l+'</tbody></table></div>';
-  for(const c in CITIES_D) bindLive(document.getElementById(`pc-${c}`),v=>{S.cities[c]=v;});
-  let t='<div class="tbl"><table><thead><tr><th>Ateneo e corso</th><th>Area</th><th class="n">Retta base €</th><th class="n">Anno base</th><th class="n">Anni</th><th class="n">Crescita</th><th class="n">Una tantum €</th><th>Città (mantenimento)</th><th>Nota</th></tr></thead><tbody>';
-  for(const k in TUI_D){const v=S.tui[k];
-    t+=`<tr><td class="name">${k}</td><td>${TUI_D[k][0]}</td><td class="n"><input class="in w" type="number" step="100" data-t="${k}" data-f="retta" value="${v.retta}"></td><td class="n"><input class="in" type="number" data-t="${k}" data-f="yb" value="${v.yb}"></td><td class="n"><input class="in" type="number" step="1" data-t="${k}" data-f="anni" value="${v.anni}"></td><td class="n"><input class="in" type="number" step="0.5" data-t="${k}" data-f="g" placeholder="default" value="${v.g==null?'':Math.round(v.g*1000)/10}">%</td><td class="n"><input class="in w" type="number" step="50" data-t="${k}" data-f="once" value="${v.once}"></td><td><select data-t="${k}" data-f="city">${Object.keys(CITIES_D).map(c=>`<option ${c===v.city?'selected':''}>${c}</option>`).join('')}</select></td><td style="white-space:normal;font-size:12px;color:var(--muted);min-width:260px">${TUI_D[k][7]}</td></tr>`;}
-  document.getElementById('ptui').innerHTML=t+'</tbody></table></div>';
-  document.querySelectorAll('#ptui [data-t]').forEach(el=>{const v=S.tui[el.dataset.t],f=el.dataset.f;
-    if(f==='city'){el.onchange=()=>{v.city=el.value;save();renderAll();};}
-    else if(f==='g'){bindLive(el,val=>{v.g=el.value===''?null:val/100;},true);}
-    else bindLive(el,val=>{v[f]=val;});});
-}
-function renderFonti(){document.getElementById('fonti').innerHTML='<ul>'+FONTI.map(f=>`<li><b>${f[0]}</b> · ${f[1]} · <a href="${f[2]}" target="_blank" rel="noopener">${f[2].replace(/^https?:\/\//,'').slice(0,70)}${f[2].length>78?'…':''}</a></li>`).join('')+'</ul>';}
-function renderAll(){renderProb();renderProspetto();renderSim();renderParam();tipify();stamp();}
-document.getElementById('resetCasc').onclick=()=>{const d=defaultState();S.casc=d.casc;save();renderAll();};
-document.getElementById('resetParam').onclick=()=>{const d=defaultState();S.param=d.param;S.cities=d.cities;S.tui=d.tui;save();renderAll();};
-// tabs
-document.querySelectorAll('nav [role=tab]').forEach(b=>b.onclick=()=>{document.querySelectorAll('nav [role=tab]').forEach(x=>x.setAttribute('aria-selected',x===b));document.querySelectorAll('section.view').forEach(s=>s.hidden=s.id!=='v-'+b.dataset.v);try{localStorage.setItem('prospetto-tab',b.dataset.v)}catch(e){}});
-try{const t=localStorage.getItem('prospetto-tab');if(t){const b=document.querySelector(`nav [data-v="${t}"]`);if(b)b.click();}}catch(e){}
-renderAll();renderFonti();
+// ---------- Scala consigliata ----------
+function motivoNonIncluso(r,id){if(r.esclusi[id])return r.esclusi[id];if(r.marg[id]==null)return 'vincolo di sistema: '+(PROGRAMMI[id].gruppi||[]).map(g=>GRUPPI[g].nome).join('; ');
+  return `aggiunge ${r.marg[id].toFixed(2)} punti di utilità attesa, meno del tempo che richiede (${Math.round((PROGRAMMI[id].ore||0)+((DOMANDE[PROGRAMMI[id].domanda]||{}).ore||0))} ore)`;}
+function renderScala(){
+  let h=`<h2>Scala consigliata</h2><p class="note">Per ogni ragazzo: le domande da presentare, nell'ordine di preferenza (riga 1 = dove andrebbe se ammesso ovunque). "Finire qui" = probabilità di essere ammesso qui e in nessuna riga sopra. "Valore" = punti di utilità attesa che si perderebbero togliendo la riga. Il confronto è con le cascate della rev. 4b del 5/10/2026.</p>`;
+  const pa=param();
+  for(const k of RAGAZZI){const r=R[k.id],pref=S.pref[k.id],old=CASC_V4[k.id];
+    h+=`<div class="child" style="--c:var(${k.cls})"><h2>${k.nome}</h2><div class="cards"><div class="card"><div class="k">In un corso preferito</div><div class="v">${pct(r.val.pTop)}</div></div><div class="card"><div class="k">Preferito o gradito</div><div class="v">${pct(r.val.pGood)}</div></div>
+      <div class="card"><div class="k">Nessuna ammissione</div><div class="v">${pct(r.val.pNessuno,1)}</div></div><div class="card"><div class="k">Domande · ore · quote</div><div class="v">${r.scala.length} · ${Math.round(r.ore)} · ${fmt(r.fee)}€</div></div><div class="card"><div class="k">Costo atteso</div><div class="v">€ ${fmt(r.val.costo)}</div></div></div>
+      <div class="tbl"><table><thead><tr><th class="n">#</th><th>Ateneo e corso</th><th>Voto</th><th class="n">P amm.</th><th class="n">Finire qui</th><th class="n">Percorso €</th><th class="n">Valore</th><th>Rispetto alla rev. 4b</th><th>Note</th></tr></thead><tbody>`;
+    r.scala.forEach((id,i)=>{const o=r.sim.info[r.sim.idx[id]],c=costoPercorso(id,k.id,pa),oi=old.indexOf(id);
+      const cmp=oi<0?'<span class="tag ok">nuova</span>':oi===i?'<span class="tag m">stessa posizione</span>':`<span class="tag">da ${oi+1}ª a ${i+1}ª</span>`;
+      const note=[o.flag?`<span class="tag dd">${esc(o.flag)}</span>`:'',pref.citta[PROGRAMMI[id].citta]==='dd'?'<span class="tag dd">città da decidere</span>':'',id===r.ripiego?'<span class="tag m">ripiego</span>':''].filter(Boolean).join(' ');
+      h+=`<tr><td class="n">${i+1}</td><td class="name">${esc(nome(id))}<div class="note">${esc(PROGRAMMI[id].nota)}</div></td><td>${vtag(pref.voti[id]||0)}</td><td class="n">${pct(o.p)}</td><td class="n"><b>${pct(r.val.pf[i],1)}</b> <span class="bar" style="width:${Math.round(r.val.pf[i]*80)}px;--c:var(${k.cls})"></span></td><td class="n">${fmt(c.tot)}</td><td class="n">${r.marg[id]==null?'—':r.marg[id].toFixed(1)}</td><td>${cmp}</td><td class="small">${note}</td></tr>`;});
+    h+='</tbody></table></div>';
+    const tolte=old.filter(id=>!r.scala.includes(id));
+    if(tolte.length)h+=`<h3>Tolte rispetto alla rev. 4b</h3><ul>${tolte.map(id=>`<li><b>${esc(nome(id))}</b> (P amm. ${pct(r.sim.info[r.sim.idx[id]].p)}): ${esc(motivoNonIncluso(r,id))}</li>`).join('')}</ul>`;
+    const altre=Object.keys(PROGRAMMI).filter(id=>(pref.voti[id]||0)>0&&!r.scala.includes(id)&&!old.includes(id));
+    if(altre.length)h+=`<details><summary>Altri corsi graditi non inclusi (${altre.length})</summary><ul>${altre.map(id=>`<li>${esc(nome(id))} (P amm. ${pct(r.sim.info[r.sim.idx[id]].p)}): ${esc(motivoNonIncluso(r,id))}</li>`).join('')}</ul></details>`;
+    h+='</div>';}
+  document.getElementById('scala').innerHTML=h;}
+
+// ---------- Preparazione ----------
+function calcolaPrep(){const f=JSON.stringify([S.pref,S.prof,S.prep,S.param]);if(f===firmaV)return false;firmaV=f;V={};
+  const pa=param();RAGAZZI.forEach((k,i)=>setTimeout(()=>{V[k.id]=valorePreparazioni(k.id,S.pref[k.id],pa,S.prep[k.id]);if(i===2){renderBreve();if(vista==='prep')renderPrep();}},30*(i+1)));return true;}
+function renderPrep(){
+  let h=`<h2>Preparazione: dove conviene investire tempo e denaro</h2><p class="note">Per ogni preparazione: di quanto cambia la probabilità di finire in un corso preferito (voto 3) o almeno gradito (voto ≥2), con la scala riottimizzata. "Netto" = guadagno di utilità meno il valore del tempo (Preferenze). Spuntare una preparazione la considera pianificata: cambia profilo, probabilità, scala e calendario.</p>`;
+  for(const k of RAGAZZI){const v=V[k.id];
+    h+=`<div class="child" style="--c:var(${k.cls})"><h2>${k.nome}</h2>`;
+    if(!v){h+='<p class="busy">calcolo in corso…</p></div>';continue;}
+    const oreP=S.prep[k.id].reduce((a,x)=>a+(PREPARAZIONI[x].ore||0),0),euroP=S.prep[k.id].reduce((a,x)=>a+(PREPARAZIONI[x].euro||0),0);
+    h+=`<p class="note">Pianificate: ${oreP} ore e circa ${fmt(euroP)} € di preparazione, più ${Math.round(R[k.id].ore)} ore e ${fmt(R[k.id].fee)} € per le domande.</p><div class="tbl"><table><thead><tr><th>Pianificata</th><th>Preparazione</th><th class="n">Δ preferito</th><th class="n">Δ gradito</th><th class="n">Δ utilità</th><th class="n">Ore</th><th class="n">€</th><th class="n">Netto</th><th>Serve a</th></tr></thead><tbody>`;
+    for(const a of v.prep){const A=PREPARAZIONI[a.id];const usati=A.corsi.filter(c=>a.scalaCon.includes(c));
+      h+=`<tr><td><input type="checkbox" data-pk="${k.id}" data-p="${a.id}" ${a.pianificata?'checked':''} aria-label="pianificata"></td><td class="name"><b>${esc(A.nome)}</b><div class="note">${esc(A.descr)}</div></td>
+        <td class="n">${pp(a.dTop)}</td><td class="n">${pp(a.dGood)}</td><td class="n">${a.dEU.toFixed(1)}</td><td class="n">${A.ore}</td><td class="n">${fmt(A.euro)}</td><td class="n ${a.netto>0.2?'okc':a.netto<-0.2?'warn':''}"><b>${a.netto.toFixed(1)}</b></td>
+        <td class="small">${usati.map(breveNome).join(', ')||'nessun corso della scala'}</td></tr>`;}
+    h+='</tbody></table></div></div>';}
+  // matrice inglese
+  const ids=[...new Set(RAGAZZI.flatMap(k=>R[k.id].scala))];
+  h+=`<h2>Requisiti d'inglese dei corsi in scala</h2><p class="note">Un unico certificato recente copre quasi tutto: IELTS Academic 7.0 senza parti sotto 6.5 (a Milano 290 €, risultati in pochi giorni) oppure C1 Advanced ≥180 in ogni abilità (manca solo PPLE, che chiede 185). Molti atenei vogliono un test di non più di 2 anni alla scadenza.</p><div class="tbl"><table><thead><tr><th>Corso</th><th>Requisito</th><th>Per chi</th></tr></thead><tbody>`;
+  for(const id of ids)h+=`<tr><td class="name">${esc(nome(id))}</td><td class="small">${esc(PROGRAMMI[id].en.testo)}</td><td>${RAGAZZI.filter(k=>R[k.id].scala.includes(id)).map(k=>k.nome).join(', ')}</td></tr>`;
+  h+='</tbody></table></div>';
+  const el=document.getElementById('prep');el.innerHTML=h;
+  el.querySelectorAll('[data-pk]').forEach(c=>c.onchange=()=>{const a=S.prep[c.dataset.pk];if(c.checked){if(!a.includes(c.dataset.p))a.push(c.dataset.p);}else S.prep[c.dataset.pk]=a.filter(x=>x!==c.dataset.p);aggiorna();});}
+
+// ---------- Calendario ----------
+function renderCal(){
+  const sel=S.cal;const tutti=[];
+  for(const k of RAGAZZI){if(sel!=='tutti'&&sel!==k.id)continue;for(const e of eventiDi(k.id))tutti.push({...e,k});}
+  const visti=new Set();const lista=tutti.filter(e=>{const key=e.d+e.cosa+(e.chi==='gem'||e.chi==='tutti'?'':e.k.id);if(visti.has(key))return false;visti.add(key);return true;}).sort((a,b)=>a.d.localeCompare(b.d));
+  const fra60=new Date(OGGI);fra60.setDate(fra60.getDate()+60);const lim=fra60.toISOString().slice(0,10);
+  let h=`<h2>Calendario delle candidature</h2><p class="note">Solo gli eventi dei corsi nella scala consigliata e delle preparazioni pianificate. In evidenza i prossimi 60 giorni. "Stima" = data ricavata per analogia con l'anno precedente: da riconfermare quando escono i bandi.</p>
+    <div class="chips">${[['tutti','Tutti'],...RAGAZZI.map(k=>[k.id,k.nome])].map(([v,l])=>`<button class="btn ${sel===v?'on':''}" data-cal="${v}">${l}</button>`).join('')}<button class="btn" id="ics">Scarica per il calendario (.ics)</button></div>
+    <div class="tbl"><table><thead><tr><th>Data</th><th>Chi</th><th>Cosa</th><th>Stato</th></tr></thead><tbody>`;
+  for(const e of lista){const fine=e.a||e.d;const chi=e.chi==='gem'?'Marco, Iacopo':e.chi==='tutti'?'tutti':e.k.nome;
+    h+=`<tr class="${fine<OGGI?'past':e.d<=lim?'soon':''}"><td class="n">${dataIt(e.d)}${e.a?' → '+dataIt(e.a):''}</td><td>${chi}</td><td class="name">${esc(e.cosa)}</td><td>${e.stato==='F'?'<span class="tag ok">ufficiale</span>':'<span class="tag m">stima</span>'}</td></tr>`;}
+  h+='</tbody></table></div>';
+  const el=document.getElementById('cal');el.innerHTML=h;
+  el.querySelectorAll('[data-cal]').forEach(b=>b.onclick=()=>{S.cal=b.dataset.cal;salva();renderCal();});
+  document.getElementById('ics').onclick=()=>{const L=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//piano-candidatura//IT'];
+    lista.forEach((e,i)=>{const d=e.d.replace(/-/g,'');const end=new Date((e.a||e.d)+'T00:00:00Z');end.setUTCDate(end.getUTCDate()+1);
+      L.push('BEGIN:VEVENT',`UID:pc-${i}-${d}@universita-prospetto`,`DTSTAMP:${OGGI.replace(/-/g,'')}T000000Z`,`DTSTART;VALUE=DATE:${d}`,`DTEND;VALUE=DATE:${end.toISOString().slice(0,10).replace(/-/g,'')}`,
+        `SUMMARY:${(e.chi==='gem'?'Gemelli':e.chi==='tutti'?'Tutti':e.k.nome)}: ${e.cosa.replace(/[,;]/g,'\\$&')}${e.stato==='S'?' (stima)':''}`,'END:VEVENT');});
+    L.push('END:VCALENDAR');const b=new Blob([L.join('\r\n')],{type:'text/calendar'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='candidature.ics';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);};}
+
+// ---------- Esborsi ----------
+function renderCosti(){
+  const ser={};let fam=ANNI.map(()=>0);for(const k of RAGAZZI){ser[k.id]=serieAttesa(R[k.id]);ser[k.id].forEach((v,i)=>fam[i]+=v);}
+  const tot=fam.reduce((a,b)=>a+b,0),max=Math.max(...fam,1);const step=max>150000?50000:max>60000?25000:10000,top=Math.ceil(max/step)*step;
+  const Wd=760,Hd=250,pl=58,pr=10,pt=14,pb=34,iw=Wd-pl-pr,ih=Hd-pt-pb,y=v=>pt+ih-(v/top)*ih,bw=iw/ANNI.length;
+  let s=`<svg class="chart" viewBox="0 0 ${Wd} ${Hd}" role="img" aria-label="Esborso atteso per anno accademico">`;
+  for(let v=0;v<=top;v+=step)s+=`<line x1="${pl}" x2="${Wd-pr}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)"/><text x="${pl-6}" y="${y(v)+4}" text-anchor="end" font-size="11" fill="var(--muted)" style="font-family:var(--mono)">${v/1000}k</text>`;
+  ANNI.forEach((a,i)=>{let acc=0;const x=pl+i*bw+bw*.18,w=bw*.64;for(const k of RAGAZZI){const v=ser[k.id][i];if(v>0){s+=`<rect x="${x}" y="${y(acc+v)}" width="${w}" height="${y(acc)-y(acc+v)}" fill="var(${k.cls})"/>`;acc+=v;}}
+    if(acc>0)s+=`<text x="${x+w/2}" y="${y(acc)-4}" text-anchor="middle" font-size="11" fill="var(--fg)" style="font-family:var(--mono)">${Math.round(acc/1000)}k</text>`;
+    s+=`<text x="${x+w/2}" y="${Hd-12}" text-anchor="middle" font-size="12" fill="var(--muted)">${a}/${String(a+1).slice(2)}</text>`;});
+  s+='</svg>';
+  let h=`<h2>Esborsi attesi</h2><p class="note">Retta in fascia massima + mantenimento della città + spese del primo anno, in euro nominali (rette +${(PARAM_D.gRette*100).toFixed(1)}%/anno salvo indicazione, mantenimento +${(PARAM_D.gMant*100).toFixed(0)}%/anno), pesati con la probabilità di finire in ciascun corso della scala consigliata. Le quote di candidatura sono a parte.</p>${s}
+    <div class="legend">${RAGAZZI.map(k=>`<span style="--c:var(${k.cls})">${k.nome}</span>`).join('')}</div>
+    <div class="tbl"><table><thead><tr><th>Valore atteso</th>${ANNI.map(a=>`<th class="n">${a}/${String(a+1).slice(2)}</th>`).join('')}<th class="n">Totale</th></tr></thead><tbody>`;
+  for(const k of RAGAZZI)h+=`<tr><td>${k.nome}</td>${ser[k.id].map(v=>`<td class="n">${fmt(v)}</td>`).join('')}<td class="n">${fmt(ser[k.id].reduce((a,b)=>a+b,0))}</td></tr>`;
+  h+=`<tr class="total"><td>Famiglia</td>${fam.map(v=>`<td class="n">${fmt(v)}</td>`).join('')}<td class="n">${fmt(tot)}</td></tr></tbody></table></div>
+    <h3>Costo dei percorsi in scala</h3><div class="tbl"><table><thead><tr><th>Chi</th><th>Ateneo e corso</th><th class="n">Finire qui</th><th class="n">Anni</th><th class="n">1° anno</th><th class="n">Percorso</th></tr></thead><tbody>`;
+  const pa=param();
+  for(const k of RAGAZZI)R[k.id].scala.forEach((id,i)=>{const c=costoPercorso(id,k.id,pa);h+=`<tr><td>${k.nome}</td><td class="name">${esc(nome(id))}<div class="note">${esc(PROGRAMMI[id].citta)}: ${esc(CITTA[PROGRAMMI[id].citta].nota)}</div></td><td class="n">${pct(R[k.id].val.pf[i],1)}</td><td class="n">${c.anni}</td><td class="n">${fmt(c.ser.find(v=>v>0)||0)}</td><td class="n">${fmt(c.tot)}</td></tr>`;});
+  h+='</tbody></table></div>';
+  document.getElementById('costi').innerHTML=h;}
+
+// ---------- Metodo: fonti ----------
+const RICERCHE=[['2026-10-06-olanda-economia.md','Olanda, economia: EUR (IBEB, BSc², IBA), UvA (EBE, EDS, PPLE), VU, Maastricht, Tilburg'],
+  ['2026-10-06-bocconi-milano.md','Bocconi (bando 2027/28, SAT, HEC–Bocconi, rimborsi), Cattolica, Statale, Bicocca'],
+  ['2026-10-06-ingegneria-polimi.md','Politecnico (TOL anticipato, graduatorie storiche, corsi in inglese), Bocconi quantitativi, VU CS'],
+  ['2026-10-06-delft-tue-leuven-tum.md','TU Delft, TU Eindhoven, KU Leuven/UCLouvain, TUM, OMPT'],
+  ['2026-10-06-francia-spagna.md','Sciences Po (procedura internazionale, PEM, retta), ESCP, IE, ESADE, UC3M/UPF (UNEDasiss, PCE, conversione BOE)'],
+  ['2026-10-06-vienna-danimarca-irlanda.md','WU Vienna, CBS, Aarhus, UCD, Trinity (tabelle ufficiali di conversione della maturità)'],
+  ['2026-10-06-test-e-certificazioni.md','SAT, IELTS/TOEFL/Cambridge, OMPT, PCE: matrici test × atenei e preparazione condivisa'],
+  ['2026-10-05-rette-costi-selettivita.md','Rette e costo della vita (5/10)'],['2026-10-05-ingegneria-iacopo.md','Ingegneria per Iacopo (5/10)'],['2026-10-05-vienna-e-verifiche.md','Vienna e verifiche (5/10)']];
+document.getElementById('fonti').innerHTML=RICERCHE.map(([f,d])=>`<li><a href="https://github.com/igorbonfanti/universita-prospetto/blob/main/docs/ricerche/${f}" target="_blank" rel="noopener">${f}</a> — ${d}</li>`).join('')
+  +'<li><a href="https://github.com/igorbonfanti/universita-prospetto/blob/main/docs/CONTESTO.md" target="_blank" rel="noopener">CONTESTO.md</a> — fatti sulla famiglia, vincoli, decisioni, correzioni</li><li><a href="docs/progetto/prospetto-esborsi-rev4b.html">Prospetto esborsi rev. 4b</a> (versione precedente, archivio)</li>';
+document.getElementById('ncorsi').textContent=`${Object.keys(PROGRAMMI).length} corsi in ${new Set(Object.values(PROGRAMMI).map(p=>p.paese)).size} paesi`;
+document.getElementById('exp').onclick=()=>{const b=new Blob([JSON.stringify(S,null,1)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='piano-impostazioni.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);};
+document.getElementById('imp').onchange=e=>{const f=e.target.files[0];if(!f)return;f.text().then(t=>{try{const l=JSON.parse(t);if(!l.pref||!l.prep)throw 0;S=Object.assign(statoIniziale(),l);aggiorna();document.getElementById('impmsg').textContent='Impostazioni importate.';}catch(x){document.getElementById('impmsg').textContent='File non valido.';}});};
+document.getElementById('resetAll').onclick=()=>{if(confirm('Ripristinare preferenze, profili, preparazioni e parametri iniziali?')){S=statoIniziale();aggiorna();}};
+
+// ---------- viste ----------
+let vista='breve';
+const RENDER={breve:renderBreve,pref:renderPref,prob:renderProb,scala:renderScala,prep:renderPrep,cal:renderCal,costi:renderCosti,metodo:()=>{}};
+function aggiorna(){salva();calcola();calcolaPrep();RENDER[vista]();if(vista!=='breve')renderBreve();}
+function mostra(v){vista=v;document.querySelectorAll('nav [role=tab]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.v===v)));
+  document.querySelectorAll('section.view').forEach(s=>s.hidden=s.id!=='v-'+v);RENDER[v]();try{localStorage.setItem('piano-vista',v)}catch(e){}}
+document.querySelectorAll('nav [role=tab]').forEach(b=>b.onclick=()=>mostra(b.dataset.v));
+calcola();calcolaPrep();
+let v0='breve';try{const t=localStorage.getItem('piano-vista');if(t&&RENDER[t])v0=t;}catch(e){}
+mostra(v0);
 </script>
 <script>
 (function(){var root=document.documentElement;function cur(){try{return localStorage.getItem("tema")||"system"}catch(e){return "system"}}

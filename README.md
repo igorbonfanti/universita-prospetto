@@ -1,26 +1,20 @@
-# Università — prospetto esborsi bachelor
+# Università — piano di candidatura bachelor
 
-Stima degli esborsi della famiglia per i bachelor di Francesca, Marco e Iacopo, con probabilità di ammissione calcolate dal profilo di ciascuno, cascate di preferenze modificabili, simulatore manuale e parametri di costo.
+Piano di candidatura per i bachelor di Francesca (ingresso 2027), Marco e Iacopo (ingresso 2028): preferenze dei ragazzi, probabilità di ammissione calcolate dal profilo con le regole ufficiali di ciascun ateneo, scala di candidature consigliata, valore delle preparazioni (test, SAT, certificazioni), calendario delle scadenze ed esborsi attesi.
 
-**Pagina pubblicata:** https://igorbonfanti.github.io/universita-prospetto/
-
-## Come funziona
-- `index.html` è l'intera applicazione: nessun server, nessuna dipendenza (solo i font Google, con fallback di sistema).
-- Le modifiche fatte nella pagina (ordine delle cascate, profili, parametri) restano salvate nel browser di chi le fa; per renderle visibili a tutti si cambiano i valori iniziali in `index.html` (costanti `PROF_D`, `CASC_D`, `TUI_D`, `CITIES_D`, `PARAM_D`) e si fa commit: GitHub Pages ripubblica in un minuto.
+**Pagina pubblicata:** https://igorbonfanti.github.io/universita-prospetto/ · **Report del 6/10/2026:** https://igorbonfanti.github.io/universita-prospetto/report.html
 
 ## Pagine
-- `index.html`: prospetto esborsi interattivo (probabilità, cascate, simulatore, parametri).
-- `analisi.html`: analisi di orientamento per Francesca, Marco e Iacopo (tutor e ufficio ammissioni).
+- `index.html`: piano di candidatura interattivo (In breve, Preferenze, Profili e probabilità, Scala consigliata, Preparazione, Calendario con export .ics, Esborsi, Metodo e fonti).
+- `report.html`: report finale del 6 ottobre 2026, con fatti e valutazioni distinti.
+- `analisi.html`: analisi del 5 ottobre (superata dal report, conservata per storia).
 
-## Come modificare
-1. Apri `index.html` su GitHub e premi la matita (Edit).
-2. Cambia i valori nelle costanti in cima allo script (rette, mantenimento, profili, regole).
-3. "Commit changes": la pagina si aggiorna da sola.
-
-Fonti e metodo sono nella scheda "Metodo e fonti" della pagina.
+## Come funziona
+- Nessun server e nessuna dipendenza: `index.html` carica `dati.js` (catalogo, profili, preferenze, calendario), `regole.js` (regole di ammissione) e `modello.js` (calcolo). Si apre anche come file locale.
+- Le scelte fatte nella pagina restano nel browser di chi le fa; si possono esportare e importare come file dalla scheda Metodo. Per cambiare i valori iniziali per tutti si modificano `PREF_D`, `PROFILI`, `PREP_D` in `dati.js` e si fa commit: GitHub Pages ripubblica in un minuto.
 
 ## Documentazione per chi lavora sul repository (anche con Claude Code)
-- `CLAUDE.md`: punto di ingresso — struttura, modello di calcolo, test, regole di contenuto.
+- `CLAUDE.md`: punto di ingresso — struttura, modello di calcolo, test (`node tests/verifica.js`), regole di contenuto.
 - `docs/CONTESTO.md`: tutti i fatti sulla famiglia, i vincoli, le decisioni e le correzioni.
-- `docs/ricerche/`: cifre e URL raccolti (rette, costo della vita, selettività, ingegneria, Vienna).
-- `docs/progetto/`: i documenti HTML delle fasi precedenti (archivio).
+- `docs/ricerche/`: cifre e URL raccolti sui siti ufficiali (5 e 6 ottobre 2026).
+- `docs/progetto/`: i documenti delle fasi precedenti, compreso il prospetto esborsi rev. 4b (archivio).

@@ -1,0 +1,256 @@
+<!doctype html><html lang="it"><head><script>try{var t=localStorage.getItem("tema");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}</script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Report di candidatura</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#f7f6f2;--panel:#fff;--fg:#1d1f1c;--muted:#5f655c;--line:#d9dbd3;--accent:#1f5f8b;--accent-soft:#e3eef6;--fra:#1f5f8b;--mar:#b5541c;--iac:#4a7c3f;--warn:#a33a2a;--ok:#2e6b3b;--val:#7a5a00;
+  --display:"IBM Plex Serif",Georgia,serif;--body:"IBM Plex Sans",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#17191a;--panel:#1f2224;--fg:#ebeae4;--muted:#a4a79e;--line:#363a3b;--accent:#7fb3d9;--accent-soft:#223240;--fra:#7fb3d9;--mar:#e3925e;--iac:#8fc47f;--warn:#e07a68;--ok:#7dc48a;--val:#e0c060;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#17191a;--panel:#1f2224;--fg:#ebeae4;--muted:#a4a79e;--line:#363a3b;--accent:#7fb3d9;--accent-soft:#223240;--fra:#7fb3d9;--mar:#e3925e;--iac:#8fc47f;--warn:#e07a68;--ok:#7dc48a;--val:#e0c060;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.55;margin:0;padding:0 16px 60px}
+.wrap{max-width:900px;margin:0 auto}
+header{padding:22px 0 10px;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:10px 20px;align-items:flex-end;justify-content:space-between}
+h1{font-family:var(--display);font-size:26px;margin:0}
+h2{font-family:var(--display);font-size:20px;margin:34px 0 8px;padding-top:6px;border-top:1px solid var(--line)}
+h3{font-size:15px;margin:20px 0 6px}
+.sub{color:var(--muted);margin:4px 0 0;font-size:14px}
+a{color:var(--accent)}
+.toc{columns:2 240px;font-size:14px;margin:14px 0}
+.toc a{display:block;padding:1px 0}
+.f,.v{display:inline-block;font-size:10.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;border-radius:3px;padding:0 5px;margin-right:4px;vertical-align:1px}
+.f{border:1px solid var(--ok);color:var(--ok)}
+.v{border:1px solid var(--val);color:var(--val)}
+.box{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--c,var(--accent));border-radius:6px;padding:12px 14px;margin:12px 0}
+.box p{margin:6px 0}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--panel);margin:10px 0}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+td.n,th.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.child{border-left:4px solid var(--c);padding-left:14px}
+li{margin:4px 0}
+.warn{color:var(--warn)}
+.note{color:var(--muted);font-size:13.5px}
+.theme{display:flex;gap:2px}
+.theme button{font:inherit;font-size:12px;padding:3px 9px;border:1px solid var(--line);background:var(--panel);color:var(--muted);cursor:pointer}
+.theme button:first-child{border-radius:4px 0 0 4px}.theme button:last-child{border-radius:0 4px 4px 0}
+.theme button[aria-pressed="true"]{background:var(--accent);color:#fff;border-color:var(--accent)}
+@media print{.theme,.noprint{display:none} body{font-size:12px} h2{break-after:avoid} .box,.tbl{break-inside:avoid}}
+</style></head><body><div class="wrap">
+<header><div><h1>Piano di candidatura: report</h1><p class="sub">Francesca, Marco e Iacopo · 6 ottobre 2026 · versione interattiva: <a href="index.html">Piano di candidatura</a></p></div>
+<div class="theme noprint" role="group" aria-label="Tema"><button type="button" data-tema="light">Chiaro</button><button type="button" data-tema="system">Sistema</button><button type="button" data-tema="dark">Scuro</button></div></header>
+
+<div class="box"><p><b>Come leggere.</b> <span class="f">fatto</span> = fonte ufficiale dell'ateneo (URL nei file di ricerca) o dichiarazione della famiglia. <span class="v">valutazione</span> = giudizio del consulente o stima del modello. Le percentuali sono stime costruite sui criteri pubblicati: nessun ateneo pubblica la probabilità di un singolo profilo. Le <b>preferenze dei ragazzi usate qui sono ipotesi di partenza</b> ricavate da quanto dichiarato finora e vanno confermate con loro nella scheda Preferenze dell'app, che ricalcola tutto. I numeri di questo report sono quelli dell'app al 6/10/2026 con le impostazioni iniziali.</p></div>
+
+<nav class="toc noprint"><a href="#sintesi">1. Sintesi in dieci punti</a><a href="#cambiato">2. Cosa cambia rispetto al 5 ottobre</a><a href="#regole">3. Vincoli che valgono per tutti</a><a href="#fra">4. Francesca</a><a href="#mar">5. Marco</a><a href="#iac">6. Iacopo</a><a href="#prep">7. Dove investire tempo e denaro</a><a href="#cal">8. Calendario dei prossimi mesi</a><a href="#costi">9. Esborsi</a><a href="#verifiche">10. Verifiche da fare per iscritto</a><a href="#dati">11. Dati che mancano</a><a href="#metodo">12. Metodo e limiti</a></nav>
+
+<h2 id="sintesi">1. Sintesi in dieci punti</h2>
+<ol>
+<li><span class="v">valutazione</span> <b>Francesca</b> ha il profilo più solido: <b>Rotterdam IBEB è l'esito più probabile (62%)</b>, con Sciences Po come unica prima scelta (15%). Il vero rischio non sono i voti ma il <b>riconoscimento del diploma quadriennale</b>, che nessun ateneo estero menziona: vanno chieste conferme scritte ora.</li>
+<li><span class="f">fatto</span> Tre scadenze di Francesca cadono nelle prossime quattro settimane: <b>ESCP Torino 27/10</b>, <b>Sciences Po 4/11</b> (prima finestra), <b>IE 6/11</b>. Per Sciences Po servono due referenze e le pagelle tradotte: va deciso subito se presentarla alla prima o alla seconda finestra (13/1/2027).</li>
+<li><span class="f">fatto</span> Il <b>Cambridge C1 Advanced di Francesca</b> potrebbe non bastare: UvA chiede 180 <i>in ogni abilità</i> e un test sostenuto dopo settembre 2025 e prima del 15/1/2027; molti atenei olandesi accettano test di non più di 2 anni. Servono subito punteggi per abilità e data.</li>
+<li><span class="f">fatto</span> <b>Marco</b>: con il diploma italiano RSM assegna i punti voto dell'IBA (75% del punteggio) <b>solo con media ≥8 nel penultimo anno</b>, cioè la 4ª in corso. <span class="v">valutazione</span> Con la media stimata a 7,3 la sua prima scelta vale circa il 7%; con 8,0 sale al 56%. <b>La media di 4ª è l'investimento di gran lunga più redditizio di tutto il piano.</b></li>
+<li><span class="v">valutazione</span> <b>Iacopo</b>: TU Delft CSE (solo test, voti ignorati) è l'esito più probabile (59%), con il Politecnico come rete forte (90% su Informatica). Senza una certificazione d'inglese recente <b>tutte le opzioni estere tranne Maastricht EOR cadono</b>: è la preparazione che vale di più per lui.</li>
+<li><span class="f">fatto</span> Danimarca e Irlanda vanno quasi tolte: le tabelle ufficiali di conversione danno maturità 90 → 8,5 (CBS chiede 9,4-11,1, cioè 96-100) e 90 → 501 punti CAO (UCD Commerce 554, cioè 100 più bonus). La Spagna pubblica richiede prove PCE scritte in spagnolo.</li>
+<li><span class="f">fatto</span> Rotterdam IBEB passa da 700 a <b>500 posti</b> (primi 250 per media) e aggiunge un'attività online obbligatoria; UvA EBE scende a 550 posti e con il diploma italiano chiede anche un <b>certificato di matematica</b> (OMPT-F).</li>
+<li><span class="v">valutazione</span> <b>Una sola certificazione d'inglese recente</b> (IELTS Academic 7.0 senza parti sotto 6.5, 290 € a Milano) copre tutti i corsi del catalogo. Per i gemelli va presa tra maggio e novembre 2027, non prima (validità di 2 anni alle scadenze di gennaio 2028).</li>
+<li><span class="f">fatto</span> Il <b>SAT</b> vale per Bocconi (equivale al test, conta il migliore), per il Politecnico (anche come TOL anticipato), IE, ESADE e la matematica di PPLE. È l'unico test Bocconi-valido che i gemelli possono fare già in 4ª. <span class="v">valutazione</span> Con le preferenze ipotizzate il suo valore è basso; diventa utile se Bocconi sale nelle preferenze.</li>
+<li><span class="v">valutazione</span> Costo atteso dei tre bachelor <b>circa 232.000 €</b> (contro 292.000 della rev. 4b), perché le scale consigliate pesano di più Rotterdam, Maastricht, Delft e il Politecnico. Dipende soprattutto dalle città: Maastricht e Delft sono "da decidere" con i ragazzi.</li>
+</ol>
+
+<h2 id="cambiato">2. Cosa cambia rispetto al 5 ottobre</h2>
+<p>Sei ricerche parallele (più verifiche dedicate) hanno riletto i siti ufficiali il 5-6 ottobre. Correzioni che cambiano le stime:</p>
+<div class="tbl"><table><thead><tr><th>Tema</th><th>Prima (CONTESTO / rev. 4b)</th><th>Ora (fonte ufficiale)</th></tr></thead><tbody>
+<tr><td>Rotterdam IBEB</td><td>700 posti, top 350 per media</td><td><b>500 posti</b>, 1-250 per media, poi 50% media + 50% sorteggio; attività online pass/fail 22/2-15/3/2027 (regolamento del 22/9/2026)</td></tr>
+<tr><td>Rotterdam IBA</td><td>75% media + 25% motivazione</td><td>Con diploma italiano punti voto <b>solo con media ≥8</b> (scheda Italia RSM del 30/9/2026); handling fee 100 €; ultimo offerto 2026: 1206</td></tr>
+<tr><td>UvA EBE</td><td>solo test online, 550 posti</td><td>Confermati; in più <b>OMPT-F ≥60%</b> (un tentativo) e inglese con <b>180 in ogni abilità</b>, test sostenuto prima del 15/1</td></tr>
+<tr><td>UvA EDS / PPLE</td><td>"OMPT-D?"</td><td>EDS: <b>OMPT-D ≥70% obbligatorio</b>. PPLE: media minima 85/100, IELTS 7.0 o CAE 185, matematica con OMPT-A o SAT Math ≥600</td></tr>
+<tr><td>Studielink</td><td>max 2 numerus fixus</td><td>max 2 fixus <b>e max 4 domande di bachelor in totale</b> per anno</td></tr>
+<tr><td>BSA primo anno</td><td>"45-48 crediti"</td><td>EUR <b>60/60</b>; PPLE 54; UvA 48; Maastricht 47; VU 42-48; Tilburg 42</td></tr>
+<tr><td>Danimarca</td><td>"tabella non pubblica; 90 ≈ 10"</td><td>Tabella pubblica: <b>90 → 8,5; 95 → 9,3; 100 → 11,3</b>. CBS: diploma entro il <b>5 luglio</b> ore 12. CBS chiede CAE ≥185 (o voto 8 + IELTS 7)</td></tr>
+<tr><td>Irlanda (CAO)</td><td>"90 → 574"</td><td><b>90 → 501, 100 → 553, 100L → 600</b>; +25 se mate ≥7 (novità 2026, da verificare per il 2027)</td></tr>
+<tr><td>Spagna pubblica</td><td>"90 → 10"</td><td>Conversione BOE: <b>90 → 8,75</b>; PCE scritte in spagnolo; nuova <b>UC3M Early Admission</b> (8% dei posti, senza PCE)</td></tr>
+<tr><td>Sciences Po</td><td>~10% su 11.000</td><td>Quel dato è Parcoursup. Via internazionale: 3 finestre (4/11, 13/1, 1/3), dossier 50 + colloquio 50; <b>Parigi escluso</b> per diploma estero; stima ~12-13% (da stampa)</td></tr>
+<tr><td>Bocconi</td><td>CLEAM, BIEM, BEMACS…; 3ª e 4ª</td><td>Nuovi nomi 2027/28 (Management 690, Economia aziendale 690, Finance 460, Economics 115…). Per il quadriennale contano verosimilmente <b>2ª e 3ª</b>. I gemelli <b>non possono</b> fare il test del ciclo 2027/28. Prima rata 3.400 € rimborsabile −250 € fino a ~22/4 (Winter)</td></tr>
+<tr><td>HEC–Bocconi</td><td>stessa domanda + statement</td><td><b>Domanda separata</b> (100 €) con CV, lettera e video-colloquio obbligatorio</td></tr>
+<tr><td>Politecnico</td><td>solo TOL, 2 tentativi</td><td>TOL anticipato 2 + standard 2; valgono anche TOLC-I, CEnT-S, <b>SAT</b>; ≥75 garantisce solo i corsi in italiano; nuovo <b>Engineering Science</b> in inglese (soglia 2026: 86/100)</td></tr>
+<tr><td>Ripieghi milanesi</td><td>Cattolica, P = 1</td><td>Cattolica ha esaurito i posti nel 2026/27: serve la prova di febbraio e 1.500 €. <b>Bicocca</b> ammette i gemelli già in 4ª</td></tr>
+<tr><td>WU Vienna</td><td>esame a fine giugno</td><td>Per regolamento solo in presenza, solo alla data fissata, nessuna alternativa: rischio di coincidenza con gli orali</td></tr>
+<tr><td>TUM, KU Leuven</td><td>TUM M&amp;T in inglese; KUL con OMPT-D</td><td>TUM M&amp;T interamente in inglese solo con Computer Engineering: <b>escluso</b>. KU Leuven Business Engineering: per diplomi UE nessun OMPT, ma test online di facoltà, lettera e CV</td></tr>
+<tr><td>IE, ESADE</td><td>IE 29.000 €, SAT 1200</td><td>IE BBA <b>29.880 €</b>, SAT ≥1300, il 1° anno può essere a Segovia; ESADE a Sant Cugat, CAE 190</td></tr>
+</tbody></table></div>
+
+<h2 id="regole">3. Vincoli che valgono per tutti</h2>
+<ul>
+<li><span class="f">fatto</span> Olanda: <b>max 2 numerus fixus e max 4 domande</b> su Studielink per anno; i fixus scadono il 15/1, gli altri l'1/5; graduatorie il 15/4.</li>
+<li><span class="f">fatto</span> Bocconi: una domanda con fino a 4 preferenze in graduatoria unica (l'ordine non penalizza); test valido il migliore tra Bocconi, SAT e ACT; 4 tentativi l'anno.</li>
+<li><span class="f">fatto</span> Sciences Po: una sola candidatura nella vita (Collège oppure doppio titolo come il PEM con ESCP).</li>
+<li><span class="f">fatto</span> L'inglese "della maturità" basta solo per WU, Maastricht, Bocconi (entro l'immatricolazione) e in parte per il CAO: quasi ovunque serve un certificato, spesso di non più di 2 anni.</li>
+<li><span class="v">valutazione</span> La città conta quanto il corso: Delft, Eindhoven, Tilburg, Maastricht, Lovanio e Reims (Sciences Po) sono "da decidere" con i ragazzi e nel modello restano in gioco ma segnalate.</li>
+</ul>
+
+<section class="child" style="--c:var(--fra)">
+<h2 id="fra">4. Francesca · ingresso settembre 2027</h2>
+<h3>Fatti</h3>
+<p><span class="f">fatto</span> Liceo scientifico bilingue quadriennale, diploma luglio 2027; media 8,4-8,5; matematica ~8; Cambridge C1 Advanced (punteggio e data da verificare); esperienze a Chicago, in Inghilterra e all'IE. Test Bocconi del 24/9/2026: 25/50. Nessuna domanda inviata finora. Preferisce l'estero; Bocconi non è la prima scelta.</p>
+<h3>Preferenze ipotizzate (da confermare con lei)</h3>
+<p><span class="v">valutazione</span> Preferito: Sciences Po (Collège e PEM). Gradito: IBEB, BSc², IBA, UvA EBE/EDS/PPLE, CBS, UCD, Trinity, WU, HEC–Bocconi. Accettabile: corsi Bocconi, ESCP, IE, ESADE, UC3M, Maastricht, Tilburg, VU, KU Leuven, ripieghi milanesi.</p>
+<h3>Scala consigliata</h3>
+<div class="tbl"><table><thead><tr><th class="n">#</th><th>Domanda</th><th class="n">P amm.</th><th class="n">Finire qui</th><th>Perché</th></tr></thead><tbody>
+<tr><td class="n">1</td><td>Sciences Po, Bachelor (Reims, Le Havre o Menton)</td><td class="n">15%</td><td class="n">15%</td><td>Unica prima scelta; candidatura unica nella vita, va presentata solo con il dossier pronto</td></tr>
+<tr><td class="n">2</td><td>Rotterdam ESE — IBEB</td><td class="n">75%</td><td class="n">62%</td><td>Primi 250 per media: con 8,4 è in fascia alta; residuo = riconoscimento del diploma e attività online</td></tr>
+<tr><td class="n">3</td><td>Rotterdam RSM — IBA</td><td class="n">65%</td><td class="n">8%</td><td>Media ≥8: prende i punti voto; seconda domanda fixus</td></tr>
+<tr><td class="n">4</td><td>HEC–Bocconi (doppia laurea)</td><td class="n">24%</td><td class="n">4%</td><td>Unica via "Bocconi" con metà percorso all'estero; usa il test Bocconi</td></tr>
+<tr><td class="n">5</td><td>Rotterdam ESE — BSc² Econometrics &amp; Economics</td><td class="n">58%</td><td class="n">2%</td><td>Non fixus, scadenza 1/5; quantitativo</td></tr>
+<tr><td class="n">6</td><td>Milano-Bicocca — Economia</td><td class="n">90%</td><td class="n">9%</td><td>Rete a basso costo (TOLC-E, febbraio-marzo)</td></tr>
+<tr><td class="n">7</td><td>Cattolica — Economia (ripiego)</td><td class="n">90%</td><td class="n">1%</td><td>Solo con la prova di febbraio e la prenotazione</td></tr>
+</tbody></table></div>
+<p class="note">Preferito 15%, preferito o gradito 90%, nessuna ammissione 0,3%. 7 domande, circa 77 ore di lavoro, 545 € di quote. Le probabilità estere includono un 10% di rischio sul riconoscimento del quadriennale (valutazione): con le conferme scritte "preferito o gradito" sale al 96%.</p>
+<h3>Rispetto alla rev. 4b</h3>
+<ul>
+<li><span class="v">valutazione</span> <b>Tolte</b>: CBS (serve maturità ~96-100 e CAE ≥185, più il rischio del 5 luglio), UCD (maturità ~95-100 con le tabelle ufficiali), WU (esame in presenza che può coincidere con gli orali; resta in gioco se si accettano 25 ore di preparazione), UvA EDS (richiede OMPT-D: rientra se si pianifica l'OMPT), IE ed ESCP (accettabili ma costose e poco utili con IBEB al 75%), Bocconi (accettabile: entra se lei la considera gradita).</li>
+<li><span class="v">valutazione</span> <b>Nuove</b>: IBA (con media ≥8 è forte), BSc², HEC–Bocconi, Bicocca.</li>
+<li><span class="v">valutazione</span> <b>Sensibilità</b>: se IBEB fosse "preferito" quanto Sciences Po, Sciences Po uscirebbe dalla scala (40 ore per un 15% che non aggiunge preferenza); se Bocconi fosse "gradita", Economia aziendale e Management entrerebbero al 2°-3° posto.</li>
+</ul>
+<h3>Preparazione</h3>
+<p><span class="v">valutazione</span> Con queste preferenze nessuna preparazione cambia molto la probabilità: IBEB dipende dalla media già fissata. Le leve vere sono <b>documentali</b>: certificato d'inglese valido (punteggi e data) e conferma del quadriennale. Il test Bocconi rende solo per HEC–Bocconi (e per Bocconi se sale di preferenza); il SAT del 5/12 non può peggiorare la posizione Bocconi e aiuta chi soffre il tempo (calcolatrice, nessuna penalità), ma costa 35 ore.</p>
+<h3>Azioni</h3>
+<ol>
+<li><b>Entro il 15/10</b>: recuperare il certificato Cambridge (punteggi per abilità, data); se è precedente a settembre 2025 o sotto 180 in qualche abilità, prenotare un IELTS Academic entro dicembre.</li>
+<li><b>Entro il 20/10</b>: scrivere a ESE, RSM, UvA, Sciences Po, WU, ESCP, IE e alla scuola (vedi §10) per il quadriennale e il "penultimo anno".</li>
+<li><b>Entro il 4/11</b>: decidere se Sciences Po alla prima finestra (referenze e traduzioni pronte) o al 13/1.</li>
+<li><b>14/10 → 21/1</b>: se HEC–Bocconi resta in scala, 2-3 tentativi del test Bocconi; domanda Winter e HEC round II entro il 26/1.</li>
+<li><b>Entro il 15/1/2027</b>: Studielink per IBEB e IBA; dossier ESE completo; OLAF RSM entro il 31/1.</li>
+<li><b>Febbraio-marzo 2027</b>: attività online IBEB (22/2-15/3); TOLC-E per Bicocca; TIEC Cattolica a febbraio solo se resta il ripiego.</li>
+</ol>
+</section>
+
+<section class="child" style="--c:var(--mar)">
+<h2 id="mar">5. Marco · ingresso settembre 2028</h2>
+<h3>Fatti</h3>
+<p><span class="f">fatto</span> Liceo scientifico, 4ª nel 2026/27; media poco sotto il 7 in 3ª, obiettivo 7,5 in 4ª; inglese B2 senza certificazione; preferisce l'estero in città vere; Bocconi gradita; dopo l'Open Day del 3/10 si è orientato su IBA.</p>
+<h3>Preferenze ipotizzate (da confermare con lui)</h3>
+<p><span class="v">valutazione</span> Preferito: RSM IBA. Gradito: IBEB, Bocconi (Economia aziendale, Management), WU, ESADE, Maastricht IB ed EBE, VU, UvA EBE. Accettabile: Tilburg, IE, ESCP, KU Leuven, UC3M, ripieghi milanesi.</p>
+<h3>Scala consigliata (media di 4ª stimata 7,3)</h3>
+<div class="tbl"><table><thead><tr><th class="n">#</th><th>Domanda</th><th class="n">P amm.</th><th class="n">Finire qui</th><th>Perché</th></tr></thead><tbody>
+<tr><td class="n">1</td><td>Rotterdam RSM — IBA</td><td class="n">7%</td><td class="n">7%</td><td>Sotto 8 in 4ª: zero punti voto, resta il 25% di motivazione</td></tr>
+<tr><td class="n">2-3</td><td>Bocconi — Economia aziendale, Management</td><td class="n">15% / 12%</td><td class="n">14% / 8%</td><td>Una domanda, 4 preferenze; vive a casa</td></tr>
+<tr><td class="n">4</td><td>Maastricht — Economics &amp; Business Economics</td><td class="n">77%</td><td class="n">54%</td><td>Solo essay pass/fail; città da decidere</td></tr>
+<tr><td class="n">5</td><td>Maastricht — International Business</td><td class="n">41%</td><td class="n">4%</td><td>Seconda domanda fixus; due terzi non dipendono dai voti</td></tr>
+<tr><td class="n">6</td><td>VU Amsterdam — EBE / IBA</td><td class="n">95%</td><td class="n">13%</td><td>Requisiti; serve il certificato d'inglese</td></tr>
+<tr><td class="n">7</td><td>Milano-Bicocca (ripiego, ammissione anticipata in 4ª)</td><td class="n">95%</td><td class="n">1%</td><td>Si chiude nel 2027</td></tr>
+</tbody></table></div>
+<p class="note">Preferito 7%, gradito 99%. <b>Con media di 4ª a 8,0: IBA 57% di ammissione e 56% di finirci</b> (la scala resta la stessa). Senza Maastricht (se non la accetta): IBEB e VU diventano gli esiti principali (31% e 39%). Senza certificato d'inglese spariscono VU, IBA e IBEB: il preferito scende a 0.</p>
+<h3>Rispetto alla rev. 4b</h3>
+<ul><li><span class="v">valutazione</span> Tolte: WU (19%, esame in presenza a fine giugno 2028), ESADE (28%, attesi media 8 e maturità 80), Tilburg (città piccola, già coperta da VU), Cattolica (sostituita da Bicocca anticipata). Nuove: Bocconi Management, VU, Bicocca. IBA resta prima, ma va letta come "condizionata alla 4ª".</li></ul>
+<h3>Preparazione</h3>
+<div class="tbl"><table><thead><tr><th>Leva</th><th class="n">Δ preferito</th><th class="n">Ore</th><th>Giudizio</th></tr></thead><tbody>
+<tr><td><b>Media di 4ª ≥8</b> (penultimo anno)</td><td class="n">+49 pp</td><td class="n">~120</td><td><span class="v">valutazione</span> La leva principale: entra in IBA (75%), IBEB, Maastricht IB, metà della media Bocconi</td></tr>
+<tr><td>Certificazione d'inglese (mag-nov 2027)</td><td class="n">+7 pp (+10 pp gradito)</td><td class="n">25</td><td>Indispensabile per VU, IBA, IBEB, UvA</td></tr>
+<tr><td>Allenamento logica, test Bocconi, SAT, colloqui</td><td class="n">≈ 0</td><td class="n">20-50</td><td>Poco utili con questa scala; il test Bocconi conta solo se Bocconi diventa preferita</td></tr>
+</tbody></table></div>
+<h3>Azioni</h3>
+<ol><li><b>Ora → giugno 2027</b>: obiettivo esplicito 8 di media in 4ª in tutte le materie (la media RSM non è arrotondata).</li>
+<li><b>Primavera 2027</b>: ammissione anticipata Bicocca (TOLC-E + domanda; bando atteso ~marzo 2027) per chiudere il ripiego un anno prima.</li>
+<li><b>Maggio-novembre 2027</b>: IELTS Academic (obiettivo 6.5-7.0 con tutte le parti ≥6.0).</li>
+<li><b>Estate 2027</b>: decidere con lui Maastricht sì/no e la seconda domanda fixus (Maastricht IB o IBEB); test Bocconi da metà luglio, domanda Early a settembre con i voti finali di 4ª.</li>
+<li><b>15/1/2028</b> Studielink; <b>31/1/2028</b> OLAF con le 2 risposte di motivazione.</li></ol>
+</section>
+
+<section class="child" style="--c:var(--iac)">
+<h2 id="iac">6. Iacopo · ingresso settembre 2028</h2>
+<h3>Fatti</h3>
+<p><span class="f">fatto</span> Liceo scientifico, 4ª nel 2026/27; media sotto il 7; forte attitudine logico-matematica e per la fisica; brillante in test e colloqui; inglese B2 senza certificazione; la famiglia valuta anche ingegneria (gestionale, informatica).</p>
+<h3>Preferenze ipotizzate (da confermare con lui)</h3>
+<p><span class="v">valutazione</span> Preferito: TU Delft CSE. Gradito: Politecnico (Gestionale, Informatica, Engineering Science), TU/e CSE e Industrial Engineering, UvA EBE/EDS, WU, KU Leuven Business Engineering, VU CS. La scelta tra economia e ingegneria è sua: è il primo punto da chiarire.</p>
+<h3>Scala consigliata</h3>
+<div class="tbl"><table><thead><tr><th class="n">#</th><th>Domanda</th><th class="n">P amm.</th><th class="n">Finire qui</th><th>Perché</th></tr></thead><tbody>
+<tr><td class="n">1</td><td>TU Delft — Computer Science &amp; Engineering</td><td class="n">60%</td><td class="n">59%</td><td>Test cognitivo 100%, voti ignorati; primi 210 offerta certa</td></tr>
+<tr><td class="n">2</td><td>Politecnico — Ingegneria Informatica</td><td class="n">90%</td><td class="n">32%</td><td>Solo test; TOL anticipato ≥75 = posto garantito già nel 2027</td></tr>
+<tr><td class="n">3</td><td>Politecnico — Ingegneria Gestionale</td><td class="n">87%</td><td class="n">4%</td><td>Stesso test, preferenza nella stessa graduatoria</td></tr>
+<tr><td class="n">4</td><td>TU Eindhoven — Industrial Engineering</td><td class="n">93%</td><td class="n">4%</td><td>Senza fixus: non usa slot olandesi</td></tr>
+<tr><td class="n">5</td><td>Milano-Bicocca (ripiego)</td><td class="n">95%</td><td class="n">0%</td><td>Superfluo se il TOL anticipato va bene</td></tr>
+</tbody></table></div>
+<p class="note">Preferito 59%, gradito 100%. Senza Delft (se non la accetta come città): Politecnico Informatica 90%. Senza certificato d'inglese il preferito scende a 0.</p>
+<h3>Rispetto alla rev. 4b</h3>
+<ul><li><span class="v">valutazione</span> Tolte: WU (27%, esame a giugno 2028), UvA EBE ed EDS (richiedono OMPT: rientrano se si pianifica), IE (maturità stimata sotto 75 richiesti), KU Leuven, Bocconi, Tilburg, Cattolica. Nuove: Politecnico Informatica, TU/e Industrial Engineering, Bicocca. Il Politecnico passa dalla 5ª posizione (solo Gestionale) alla 2ª-3ª (Informatica e Gestionale).</li></ul>
+<h3>Preparazione</h3>
+<div class="tbl"><table><thead><tr><th>Leva</th><th class="n">Δ preferito</th><th class="n">Ore</th><th>Giudizio</th></tr></thead><tbody>
+<tr><td><b>Certificazione d'inglese</b> (mag-nov 2027, entro il 15/1/2028)</td><td class="n">+60 pp</td><td class="n">25</td><td><span class="v">valutazione</span> Decisiva: senza, Delft e tutto l'estero tranne Maastricht EOR cadono</td></tr>
+<tr><td>Allenamento matematica e logica a tempo</td><td class="n">+7 pp</td><td class="n">50</td><td>Un solo programma copre TOL anticipato, CST Delft, TU/e, UvA, WU</td></tr>
+<tr><td>Media di 4ª, OMPT, SAT, test Bocconi, colloqui</td><td class="n">≈ 0</td><td class="n">—</td><td>Con questa scala non spostano; OMPT serve solo se vuole UvA</td></tr>
+</tbody></table></div>
+<h3>Azioni</h3>
+<ol><li><b>Novembre-dicembre 2026</b>: leggere il bando Politecnico 2027/28 (date del TOL anticipato e validità per il 2028/29).</li>
+<li><b>Gennaio-marzo 2027</b>: preparazione al TOL (Politest, test di autovalutazione, DOL); <b>TOL anticipato marzo-luglio 2027</b>, due finestre.</li>
+<li><b>Maggio-novembre 2027</b>: IELTS Academic (≥6.5, tutte le parti ≥6.0; 7.0 apre anche PPLE e IE).</li>
+<li><b>Estate 2027</b>: decidere con lui Delft, Eindhoven, economia o ingegneria; seconda domanda fixus (TU/e CSE, UvA EBE o Delft AE).</li>
+<li><b>15/1/2028</b> Studielink con certificato già caricato; CST Delft a febbraio 2028.</li></ol>
+</section>
+
+<h2 id="prep">7. Dove investire tempo e denaro</h2>
+<div class="tbl"><table><thead><tr><th>Preparazione</th><th>Serve a</th><th>Quando</th><th>Per chi rende</th></tr></thead><tbody>
+<tr><td><b>Certificato d'inglese unico</b>: IELTS Academic 7.0 (nessuna parte &lt;6.5), 290 €</td><td>Tutti i corsi olandesi, Delft, TU/e, KU Leuven, ESCP, IE, ESADE, CBS, Trinity; con 6.5/6.0 restano fuori solo PPLE, CBS e l'esonero ESADE</td><td>Francesca entro dicembre 2026 se il CAE non basta; gemelli mag-nov 2027</td><td>Iacopo (decisivo), Marco (forte), Francesca (documentale)</td></tr>
+<tr><td><b>Media di 4ª</b></td><td>IBA (soglia 8), IBEB, Maastricht IB, TU/e (10%), Bocconi (metà del 45%)</td><td>Anno in corso</td><td>Marco (decisivo)</td></tr>
+<tr><td>Matematica e logica a tempo (~50 h)</td><td>TOL/TOLC, CST Delft, TU/e, UvA EBE, WU, IE, ESADE, OMPT</td><td>Gen-lug 2027 per i gemelli</td><td>Iacopo</td></tr>
+<tr><td>Test Bocconi (60 € a tentativo)</td><td>Bocconi, HEC–Bocconi</td><td>Francesca entro il 21/1/2027; gemelli da luglio 2027</td><td>Solo se Bocconi o HEC sono graditi</td></tr>
+<tr><td>SAT (111 $, 35 h)</td><td>Bocconi, Politecnico, IE, ESADE, PPLE (Math ≥600), Sciences Po facoltativo</td><td>Francesca 7/11 o 5/12/2026; gemelli marzo-giugno 2027</td><td>Basso con le preferenze ipotizzate</td></tr>
+<tr><td>OMPT (240-270 €)</td><td>UvA EBE (F ≥60%), EDS (D ≥70%), PPLE (A ≥70%)</td><td>Prima delle scadenze UvA</td><td>Solo se UvA entra nelle preferenze</td></tr>
+<tr><td>Colloqui ed essay (~20 h)</td><td>IBA, Maastricht, Sciences Po, HEC, IE, ESCP, PPLE</td><td>Prima delle domande</td><td>Francesca (Sciences Po, HEC), Marco (Maastricht)</td></tr>
+</tbody></table></div>
+<p class="note"><span class="v">valutazione</span> Ore, rese e valori sono stime del modello; la scheda Preparazione dell'app li ricalcola con le preferenze confermate.</p>
+
+<h2 id="cal">8. Calendario dei prossimi mesi</h2>
+<div class="tbl"><table><thead><tr><th>Data</th><th>Chi</th><th>Cosa</th></tr></thead><tbody>
+<tr><td class="n">14/10/2026</td><td>Francesca</td><td>Riapre il test Bocconi (3 tentativi fino al 21/1)</td></tr>
+<tr><td class="n">15/10/2026</td><td>Francesca</td><td>Info meeting CBS (solo se resta la Danimarca)</td></tr>
+<tr><td class="n">23/10/2026</td><td>Francesca</td><td>Iscrizione SAT del 7/11 (poi 20/11 per il 5/12)</td></tr>
+<tr><td class="n">27/10/2026</td><td>Francesca</td><td>ESCP Torino, round 1 (altri campus 18/11)</td></tr>
+<tr><td class="n">4/11/2026</td><td>Francesca</td><td><b>Sciences Po, prima finestra</b> (poi 13/1 e 1/3)</td></tr>
+<tr><td class="n">6/11/2026</td><td>Francesca</td><td>IE Round 1 (poi 15/1, 5/3)</td></tr>
+<tr><td class="n">metà nov. 2026</td><td>tutti</td><td>WU pubblica la procedura 2027/28 (data dell'esame)</td></tr>
+<tr><td class="n">nov-dic 2026</td><td>tutti</td><td>Bando Politecnico 2027/28 e fase anticipata 2028/29</td></tr>
+<tr><td class="n">25/11/2026 → 26/1/2027</td><td>Francesca</td><td>Bocconi Winter e HEC round II (ultimo test 21/1)</td></tr>
+<tr><td class="n">15/1/2027</td><td>Francesca</td><td><b>Studielink numerus fixus</b>; inglese sostenuto prima di questa data per UvA</td></tr>
+<tr><td class="n">31/1/2027</td><td>Francesca</td><td>OLAF RSM IBA</td></tr>
+<tr><td class="n">22/2 → 15/3/2027</td><td>Francesca</td><td>Attività online IBEB</td></tr>
+<tr><td class="n">marzo-luglio 2027</td><td>Marco, Iacopo</td><td>TOL anticipato (stima su date 2026); Bicocca anticipata; SAT facoltativo 6/3, 1/5, 5/6</td></tr>
+<tr><td class="n">15/4/2027</td><td>Francesca</td><td>Graduatorie olandesi; ~22/4 termine rimborso Bocconi Winter</td></tr>
+<tr><td class="n">giugno 2027</td><td>Marco, Iacopo</td><td>Pagella di 4ª (penultimo anno)</td></tr>
+<tr><td class="n">mag-nov 2027</td><td>Marco, Iacopo</td><td>Certificazione d'inglese</td></tr>
+<tr><td class="n">15/1/2028</td><td>Marco, Iacopo</td><td>Studielink numerus fixus (stima)</td></tr>
+</tbody></table></div>
+<p class="note">Il calendario completo, filtrato sulle scale consigliate e scaricabile in formato .ics, è nella scheda Calendario dell'app.</p>
+
+<h2 id="costi">9. Esborsi</h2>
+<p><span class="v">valutazione</span> Costo atteso (retta in fascia massima + mantenimento + spese del primo anno, pesati con le probabilità della scala): Francesca circa 87.000 €, Marco circa 84.000 €, Iacopo circa 61.000 €, <b>famiglia circa 232.000 €</b>; anno più pesante il 2029/30 (circa 78.000 €). Rispetto alla rev. 4b (292.000 €) pesano di meno Sciences Po, ESADE, IE e le opzioni irlandesi, e di più il Politecnico a casa. Quote di candidatura: circa 1.150 € in tutto. Bocconi prevede il 20% di esonero sul secondo figlio iscritto nello stesso anno <span class="f">fatto</span>.</p>
+
+<h2 id="verifiche">10. Verifiche da fare per iscritto (ottobre-novembre 2026)</h2>
+<div class="tbl"><table><thead><tr><th>A chi</th><th>Cosa chiedere</th></tr></thead><tbody>
+<tr><td>ESE (modulo ticket), RSM (modulo ticket), UvA (contatti del corso), VU (bachelors.sbe@vu.nl), Maastricht (ba-admissions-sbe@maastrichtuniversity.nl), Tilburg</td><td>Il diploma di liceo scientifico <b>quadriennale</b> è equivalente al vwo? Quale anno vale come "penultimo"? Servono documenti aggiuntivi?</td></tr>
+<tr><td>Bocconi (Ufficio Ammissioni)</td><td>Anni del curriculum per il quadriennale (2ª e 3ª?); trattamento dello scambio a Chicago; date di immatricolazione e rimborso 2027/28</td></tr>
+<tr><td>Sciences Po</td><td>Pagelle da caricare per il quadriennale; documentazione del reddito per titolare di S.r.l.; se il PEM è valutato in primavera anche con domanda a novembre</td></tr>
+<tr><td>WU (studienzulassung@wu.ac.at)</td><td>Quadriennale; data dell'esame 2027</td></tr>
+<tr><td>ESCP, IE (undergrad.admissions@ie.edu), ESADE (admissions@esade.edu)</td><td>Quadriennale; rimborsabilità del deposito ESCP; campus di Madrid garantito (IE); sede del 1° anno (ESADE)</td></tr>
+<tr><td>Scuola di Francesca</td><td>Data prevista di fine lavori della commissione 2027 (vincolo danese del 5/7); possibilità di non fissare l'orale nel giorno dell'esame WU</td></tr>
+<tr><td>TU Delft, TU/e (selection@tue.nl)</td><td>(per i gemelli) se il voto di inglese della maturità esonera dal certificato; conversione dei voti italiani per il 10% TU/e</td></tr>
+<tr><td>Politecnico (FAQ servizi online)</td><td>Date TOL anticipato 2027 e validità per il 2028/29</td></tr>
+</tbody></table></div>
+
+<h2 id="dati">11. Dati che mancano (da Igor)</h2>
+<ul>
+<li>Francesca: <b>punteggi e data del Cambridge C1 Advanced</b>; media esatta di 2ª e di 3ª; periodo esatto dello scambio a Chicago.</li>
+<li>Marco e Iacopo: medie del primo quadrimestre di 4ª appena disponibili.</li>
+<li>Tutti e tre: <b>conferma delle preferenze</b> (voti per corso e città sì/no), in particolare Sciences Po contro Rotterdam per Francesca, economia contro ingegneria per Iacopo, Maastricht per Marco, Delft per Iacopo.</li>
+</ul>
+
+<h2 id="metodo">12. Metodo e limiti</h2>
+<p>Il modello (file <code>dati.js</code>, <code>regole.js</code>, <code>modello.js</code>) applica a ciascun profilo una regola per corso costruita sui criteri ufficiali; simula 3.000 scenari con esiti correlati (stessi test, stessi colloqui, stessa maturità, stesso riconoscimento del diploma); sceglie le domande che massimizzano l'utilità attesa (preferenze dei ragazzi, costo, ore di lavoro) nel rispetto dei vincoli di sistema; misura il valore di ogni preparazione rifacendo la scelta con e senza. <span class="v">valutazione</span> Le rese nei test e nei colloqui, la maturità stimata e la media di 4ª dei gemelli sono ipotesi: sono gli input da aggiornare man mano (dopo il test Bocconi di Francesca, a giugno 2027 con le pagelle di 4ª, dopo il TOL anticipato). Fonti complete nei file <a href="https://github.com/igorbonfanti/universita-prospetto/tree/main/docs/ricerche">docs/ricerche</a>.</p>
+</div>
+<script>
+(function(){var root=document.documentElement;function cur(){try{return localStorage.getItem("tema")||"system"}catch(e){return "system"}}
+function apply(t){if(t==="light"||t==="dark")root.setAttribute("data-theme",t);else root.removeAttribute("data-theme");try{if(t==="system")localStorage.removeItem("tema");else localStorage.setItem("tema",t)}catch(e){}
+document.querySelectorAll(".theme button").forEach(function(b){b.setAttribute("aria-pressed",String(b.dataset.tema===t))});}
+document.querySelectorAll(".theme button").forEach(function(b){b.addEventListener("click",function(){apply(b.dataset.tema)})});apply(cur());})();
+</script>
+</body></html>
