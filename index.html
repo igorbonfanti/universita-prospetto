@@ -97,7 +97,7 @@ th[title]{cursor:help;text-decoration:underline dotted var(--muted);text-underli
 
 <div class="wrap">
 <header class="top"><div class="wrap">
-  <div><h1>Prospetto esborsi bachelor</h1><p class="sub">Francesca, Marco e Iacopo · euro nominali · aggiornato 5 ottobre 2026 (rev. 4)</p></div>
+  <div><h1>Prospetto esborsi bachelor</h1><p class="sub">Francesca, Marco e Iacopo · euro nominali · aggiornato 5 ottobre 2026 (rev. 4b)</p></div>
   <nav role="tablist">
     <button role="tab" data-v="prospetto" aria-selected="true">Prospetto ponderato</button>
     <button role="tab" data-v="prob" aria-selected="false">Probabilità</button>
@@ -198,7 +198,6 @@ const CITIES_D={
  'Parigi':[24000,'Studio 1.000-1.100/mese (LocService: 917-962), vitto/trasporti/svago 900-1.000/mese, voli 700-900'],
  'Reims':[16000,'Studio 500-600/mese (T1 461), resto 750-850/mese. Campus Sciences Po in alternativa a Parigi'],
  'ESCP (media 3 campus)':[23000,'Media di Parigi 24k, Londra ~29k, Torino/Madrid/Berlino 16-20k: un anno per campus'],
- 'Forward College (Lisbona/Parigi/Berlino)':[21700,'Media dei tre anni: Lisbona ~20k, Parigi ~24k, Berlino ~21k'],
  'Madrid':[26000,'Tra camera (750/mese → 24k) e studio (1.100/mese → 28k); Idealista 2026 camera 550, studio 976'],
  'Barcellona':[27000,'Tra camera (800/mese → 25k) e studio (1.150/mese → 29k); Idealista 2026 camera 600, studio 960'],
  'Monaco di Baviera':[27000,'Camera 808, studio ~1.500 (HousingAnywhere 2026); TUM indica 1.300-2.000/mese; mercato affitti difficile'],
@@ -234,7 +233,6 @@ const TUI_D={
  'TU Eindhoven — Industrial Engineering':['Olanda',2771,2027,3,null,0,'Eindhoven','Accesso aperto (solo matching); sbocco gestionale, in inglese'],
  'Sciences Po — Bachelor Collège universitaire':['Francia',14900,2026,3,null,0,'Parigi','Massimo 2026/27 = 14.900, dovuto sopra ~332.500 € di reddito lordo familiare (formula su revenu brut global / 3,5 parts; es. 150k → ~8.800, 200k → ~12.100): da simulare. 3° anno all\'estero con retta Sciences Po. Campus Reims: ~8k/anno in meno'],
  'ESCP — Bachelor in Management':['Francia',20800,2027,3,null,80,'ESCP (media 3 campus)','Intake 2027: 17.900 + 2.900 fees, uguale per tutti i campus; application fee 80'],
- 'Forward College — Business & Management':['Francia',21850,2027,3,0.05,70,'Forward College (Lisbona/Parigi/Berlino)','2027/28 UE: 21.850, +5%/anno dichiarato; early bird non considerato'],
  'IE University Madrid — BBA':['Spagna',29000,2026,4,0.029,6350,'Madrid','2026/27: 29.000 (Economics 26.500), +2,9%/anno fisso; una tantum: admission 150 + reservation 5.000 + Foundation 1.200'],
  'ESADE Barcellona — BBA / GGELO':['Spagna',21300,2027,4,null,0,'Barcellona','Prezzo 2027/28 già pubblicato; aumenti ≤ inflazione; scambi e lingue inclusi'],
  'UC3M Madrid — Economics / ADE (inglese)':['Spagna',1045,2026,4,null,250,'Madrid','Pubblica: 16,92 €/credito × 60 + tasse; una tantum UNEDasiss + PCE'],
@@ -260,7 +258,6 @@ const CASC_D={
   ['UvA Amsterdam — Econometrics & Data Science',0.9,''],
   ['IE University Madrid — BBA',0.75,'Test IE/SAT ≥1200 + colloquio; benchmark Bachillerato 7,5+; tasso non ufficiale 30-40%.'],
   ['ESCP — Bachelor in Management',0.65,'Valutazione olistica (transcript, statement, CV, C1, colloquio), nessun test obbligatorio.'],
-  ['Forward College — Business & Management',0.55,'Candidatura già inviata; ~1 su 8 offerte; dossier + colloquio; requisito UoL ≈ ABB.'],
   ['Cattolica Milano — Economia',1,'Ripiego a Milano.']
  ],
  mar:[
@@ -312,7 +309,6 @@ const FONTI=[
  ['Sciences Po','Droits de scolarité','https://www.sciencespo.fr/en/admissions-and-financial-aid/tuition-fees/'],
  ['Sciences Po','Procedure di ammissione','https://www.sciencespo.fr/college/en/admission-procedures/'],
  ['ESCP','Bachelor in Management, fees 2027','https://escp.eu/programmes/bachelor-in-management-BSc'],
- ['Forward College','Tuition & living costs','https://forward-college.eu/tuition-feesand-living-costs/'],
  ['Parigi','LocService affitti studenti','https://www.locservice.fr/paris-75/logement-etudiant-paris.html'],
  ['IE University','Fees e payment methods','https://www.ie.edu/university/admission/payment-methods/'],
  ['IE University','Cost of living Madrid','https://docs.ie.edu/student-services/IEU_COST_OF_LIVING_MADRID.pdf'],
@@ -367,7 +363,7 @@ const PROF_FIELDS=[
  ['c1','Inglese C1 certificato (1 = sì, 0 = B2)',0,1,1,'Premiato da Sciences Po ed ESCP; B2 basta ovunque altrove'],
  ['pLog','Resa attesa nei test logico-matematici (0-1)',0,1,0.05,'Probabilità di un buon risultato in TOL, test cognitivi Delft/TU-e/UvA, test IE/ESADE, PCE'],
  ['pBoc','Resa attesa nel test Bocconi (0-1)',0,1,0.05,'Test specifico (comprensione, matematica, logica, inglese) con forte pressione di tempo'],
- ['pCol','Resa attesa in colloqui, essay e dossier (0-1)',0,1,0.05,'Sciences Po, ESCP, Forward, IE, Maastricht IB, TUM, kvote 2']
+ ['pCol','Resa attesa in colloqui, essay e dossier (0-1)',0,1,0.05,'Sciences Po, ESCP, IE, Maastricht IB, TUM, PPLE']
 ];
 const cl=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
 const r2=x=>Math.round(x*100)/100;
@@ -409,8 +405,6 @@ const RULES={
    fn:q=>{const w=W(q.media,7.5,9),e=q.c1?1:0.7;return {p:cl(0.5*q.pCol*w*w*e),calc:`0,5 × resa orale/dossier ${q.pCol} × W(media 7,5→9)²=${r2(w*w)} × inglese C1? ${e}`}}},
  'ESCP — Bachelor in Management':{dati:'Rolling, valutazione olistica: transcript, statement, CV, inglese C1, colloquio; nessun test obbligatorio',
    fn:q=>{const w=W(q.media,6,9);return {p:cl(0.5*q.pCol+0.3*w+(q.c1?0.1:0)),calc:`0,5 × resa colloquio ${q.pCol} + 0,3 × W(media 6→9)=${r2(w)} + C1 ${q.c1?0.1:0}`}}},
- 'Forward College — Business & Management':{dati:'Dossier + colloquio 30\'; ~1 su 8 offerte; requisito UoL ≈ ABB (maturità ~80)',
-   fn:q=>{const w=W(q.media,6.5,9);return {p:cl(0.55*q.pCol+0.25*w),calc:`0,55 × resa colloquio ${q.pCol} + 0,25 × W(media 6,5→9)=${r2(w)}`}}},
  'IE University Madrid — BBA':{dati:'Test IE (verbale/logico/numerico) o SAT ≥1200 + video + colloquio; benchmark Bachillerato 7,5+; tasso non ufficiale 30-40%',
    fn:q=>{const w=W(q.media,6,9);return {p:cl(0.45*q.pLog+0.25*q.pCol+0.3*w),calc:`0,45 × resa test ${q.pLog} + 0,25 × resa colloquio ${q.pCol} + 0,3 × W(media 6→9)=${r2(w)}`}}},
  'ESADE Barcellona — BBA / GGELO':{dati:'Test ESADE/SAT (media ammessi ~1.350) + transcript 3 anni a pari peso; intake ~450',
@@ -558,7 +552,7 @@ function brief(R,famExp,totExp,sProb,sEco,sCaro){
   for(const c of CH){const r=R[c.id];const p=r.prob;const perYear=p.tot/p.anni;
     const second=[...r.rows].sort((a,b)=>b.pisc-a.pisc)[1];
     h+=`<li><b style="color:var(${c.cls})">${c.name}</b> (ingresso ${yr(r.start)}): la strada più probabile è <b>${p.key}</b> (${pct(p.pisc)} di finire lì), che costa circa € ${fmt(perYear)} l'anno per ${p.anni.toLocaleString('it-IT',{maximumFractionDigits:2})} anni, cioè € ${fmt(p.tot)} in tutto. ${second&&second.pisc>=0.05?`La seconda possibilità è ${second.key} (${pct(second.pisc)}, € ${fmt(second.tot)}).`:''} Il costo atteso, mettendo insieme tutte le possibilità, è € ${fmt(r.exp)}.</li>`;}
-  h+=`</ul><p class="note">Ordini di grandezza utili: vivere a casa a Milano costa circa € 3.000 l'anno di spese extra; una città olandese 23-30.000; Parigi, Madrid, Copenhagen 24-27.000; Dublino 30.000. Le rette vanno da zero (Danimarca) a 2.800 (Olanda), 15-21.000 (Sciences Po, ESCP, ESADE, Forward), 17.000 (Bocconi), 29.000 (IE).</p>`;
+  h+=`</ul><p class="note">Ordini di grandezza utili: vivere a casa a Milano costa circa € 3.000 l'anno di spese extra; una città olandese 23-30.000; Parigi, Madrid, Copenhagen 24-27.000; Dublino 30.000. Le rette vanno da zero (Danimarca) a 2.800 (Olanda), 15-21.000 (Sciences Po, ESCP, ESADE), 17.000 (Bocconi), 29.000 (IE).</p>`;
   return h;
 }
 const TIPS={
@@ -580,7 +574,7 @@ const TIPS={
  'Criteri di selezione (dati)':['Dati di selettività','Posti, candidati, soglie e pesi ufficiali da cui è costruita la regola. Fonti nella scheda Metodo e fonti.'],
  'Retta base €':['Retta annua base','Retta in fascia massima (nessuna agevolazione) nell\'anno base indicato; il modello la aumenta ogni anno del tasso di crescita.'],
  'Anno base':['Anno base della retta','Anno accademico a cui si riferisce la retta base (2026 = 2026/27).'],
- 'Crescita':['Crescita annua della retta','Vuoto = tasso di default (Parametri). Forward dichiara +5%/anno, IE +2,9%.'],
+ 'Crescita':['Crescita annua della retta','Vuoto = tasso di default (Parametri). IE dichiara +2,9%/anno.'],
  'Una tantum €':['Spese una tantum','Pagate solo il primo anno: tasse di candidatura, prenotazione del posto, laptop obbligatorio, accreditamento PCE.'],
  'Città (mantenimento)':['Città per il mantenimento','La città usata per il costo della vita di questa opzione (tabella sopra).'],
  '€/anno base 2026':['Mantenimento annuo base','Costo di vivere nella città per 12 mesi nel 2026, escluse rette; aumenta ogni anno del tasso di crescita del mantenimento.'],
