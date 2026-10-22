@@ -1,0 +1,404 @@
+<!doctype html><html lang="it"><head><script>try{var t=localStorage.getItem("tema");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}</script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Piano di candidatura</title>
+<link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-180.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Università"><meta name="theme-color" content="#1F4E6B">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#f7f6f2; --panel:#ffffff; --fg:#1d1f1c; --muted:#5f655c; --line:#d9dbd3;
+  --accent:#1f5f8b; --accent-soft:#e3eef6; --input:#fff7cc; --input-line:#d9c25c;
+  --fra:#1f5f8b; --mar:#b5541c; --iac:#4a7c3f; --warn:#a33a2a; --ok:#2e6b3b; --dd:#8a6d00;
+  --display:"IBM Plex Serif",Georgia,serif; --body:"IBM Plex Sans",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#17191a; --panel:#1f2224; --fg:#ebeae4; --muted:#a4a79e; --line:#363a3b;
+  --accent:#7fb3d9; --accent-soft:#223240; --input:#3a3516; --input-line:#8a7a2c;
+  --fra:#7fb3d9; --mar:#e3925e; --iac:#8fc47f; --warn:#e07a68; --ok:#7dc48a; --dd:#e0c060; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#17191a; --panel:#1f2224; --fg:#ebeae4; --muted:#a4a79e; --line:#363a3b;
+  --accent:#7fb3d9; --accent-soft:#223240; --input:#3a3516; --input-line:#8a7a2c;
+  --fra:#7fb3d9; --mar:#e3925e; --iac:#8fc47f; --warn:#e07a68; --ok:#7dc48a; --dd:#e0c060; color-scheme:dark }
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:14px;line-height:1.45;margin:0;padding-block:0 48px;padding-inline:16px}
+.wrap{max-width:1180px;margin:0 auto}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:5;border-bottom:1px solid var(--line);padding-block:14px 0;margin-inline:-16px;padding-inline:16px}
+header.top .wrap{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:8px 20px}
+h1{font-family:var(--display);font-weight:600;font-size:22px;margin:0;text-wrap:balance}
+.sub{color:var(--muted);font-size:13px;margin:2px 0 0}
+nav{display:flex;gap:2px;flex-wrap:wrap}
+nav button,nav a{background:none;border:0;border-bottom:3px solid transparent;color:var(--muted);font:inherit;font-weight:500;padding:8px 10px;cursor:pointer;text-decoration:none}
+nav button[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent)}
+nav a{color:var(--accent)}
+button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+section.view{padding-top:20px}
+h2{font-family:var(--display);font-weight:600;font-size:18px;margin:26px 0 8px;text-wrap:balance}
+h2:first-child{margin-top:0}
+h3{font-size:14px;font-weight:600;margin:18px 0 6px;letter-spacing:.02em}
+p{max-width:80ch}
+.note{color:var(--muted);font-size:13px;max-width:90ch}
+.tag{display:inline-block;font-size:11px;letter-spacing:.04em;padding:1px 6px;border-radius:3px;background:var(--accent-soft);color:var(--accent);font-weight:600;white-space:nowrap}
+.tag.w{background:transparent;border:1px solid var(--warn);color:var(--warn)}
+.tag.ok{background:transparent;border:1px solid var(--ok);color:var(--ok)}
+.tag.dd{background:transparent;border:1px solid var(--dd);color:var(--dd)}
+.tag.m{background:transparent;border:1px solid var(--line);color:var(--muted)}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--panel);white-space:nowrap}
+td.n,th.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+td.name{min-width:220px}
+td.small{font-size:12px;color:var(--muted);min-width:220px}
+tr.total td{font-weight:600;border-top:2px solid var(--line)}
+tr.off td{color:var(--muted)}
+tr.past td{opacity:.55}
+tr.soon td{background:var(--accent-soft)}
+input[type=number],select,input[type=text]{font:inherit;font-family:var(--mono);font-size:13px;padding:3px 5px;border:1px solid var(--line);border-radius:4px;background:var(--panel);color:var(--fg);min-width:0}
+input.in{background:var(--input);border-color:var(--input-line);width:64px;text-align:right}
+select.in{background:var(--input);border-color:var(--input-line);font-family:var(--body)}
+.btn{font:inherit;font-size:12px;padding:4px 9px;border:1px solid var(--line);border-radius:4px;background:var(--panel);color:var(--fg);cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+.btn.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.row{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin:8px 0}
+.row label{font-size:13px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:10px 0 4px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:10px 12px;min-width:0}
+.card .k{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.card .v{font-family:var(--mono);font-size:20px;font-weight:500;font-variant-numeric:tabular-nums;margin-top:2px}
+.card .s{font-size:12px;color:var(--muted)}
+.child{border-left:4px solid var(--c);padding-left:12px;margin:22px 0}
+.child h2{margin-top:0}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;margin:10px 0}
+.box{background:var(--panel);border:1px solid var(--line);border-top:4px solid var(--c,var(--accent));border-radius:6px;padding:12px;min-width:0}
+.box h3{margin-top:0}
+.box ol,.box ul{margin:6px 0;padding-left:20px}
+.box li{margin:3px 0}
+.f{display:grid;grid-template-columns:1fr auto auto;gap:6px 8px;align-items:center;font-size:13px}
+.f.two{grid-template-columns:1fr auto}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin:6px 0}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--c);margin-right:5px;vertical-align:-1px}
+.chart{width:100%;height:auto;max-width:100%;display:block;margin:6px 0}
+.bar{display:inline-block;height:8px;border-radius:2px;background:var(--c,var(--accent));vertical-align:middle}
+.src li{margin:4px 0}
+.src a,.lnk{color:var(--accent)}
+details{margin:8px 0}
+summary{cursor:pointer;font-weight:500}
+.warn{color:var(--warn)}
+.okc{color:var(--ok)}
+.busy{color:var(--muted);font-style:italic}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.theme{display:flex;gap:2px;align-items:center}
+.theme button{font:inherit;font-size:12px;padding:3px 9px;border:1px solid var(--line);background:var(--panel);color:var(--muted);cursor:pointer}
+.theme button:first-child{border-radius:4px 0 0 4px}.theme button:last-child{border-radius:0 4px 4px 0}
+.theme button[aria-pressed="true"]{background:var(--accent);color:#fff;border-color:var(--accent)}
+@media (max-width:900px){ header.top{position:static} nav{flex-wrap:nowrap;overflow-x:auto;width:100%;scrollbar-width:thin} nav button,nav a{white-space:nowrap;padding:8px 8px} }
+@media (max-width:600px){ h1{font-size:19px} td.name{min-width:170px} .theme{order:3} }
+</style></head><body>
+<header class="top"><div class="wrap">
+  <div><h1>Piano di candidatura</h1><p class="sub">Francesca (ingresso 2027) · Marco e Iacopo (ingresso 2028) · fonti verificate il 5-6 ottobre 2026</p></div>
+  <div class="theme" role="group" aria-label="Tema"><button type="button" data-tema="light">Chiaro</button><button type="button" data-tema="system">Sistema</button><button type="button" data-tema="dark">Scuro</button></div>
+  <nav role="tablist" aria-label="Sezioni">
+    <a href="index.html">← Home</a>
+    <button role="tab" data-v="breve" aria-selected="true">In breve</button>
+    <button role="tab" data-v="pref" aria-selected="false">Preferenze</button>
+    <button role="tab" data-v="prob" aria-selected="false">Profili e probabilità</button>
+    <button role="tab" data-v="scala" aria-selected="false">Scala consigliata</button>
+    <button role="tab" data-v="prep" aria-selected="false">Preparazione</button>
+    <button role="tab" data-v="cal" aria-selected="false">Calendario</button>
+    <button role="tab" data-v="costi" aria-selected="false">Esborsi</button>
+    <button role="tab" data-v="metodo" aria-selected="false">Metodo e fonti</button>
+    <a href="report.html">Report →</a>
+  </nav>
+</div></header>
+<div class="wrap">
+
+<section class="view" id="v-breve"><div id="breve"></div></section>
+
+<section class="view" id="v-pref" hidden>
+  <h2>Preferenze dei ragazzi</h2>
+  <p class="note">I valori iniziali sono <b>ipotesi di partenza</b> ricavate da quanto dichiarato finora (CONTESTO): vanno confermati con i ragazzi. Voto: 0 = escluso, 1 = accettabile, 2 = gradito, 3 = preferito. Città: sì, no o da decidere (le città "da decidere" restano in gioco ma sono segnalate). "Forza" include o esclude un corso a prescindere dal calcolo. Ogni modifica ricalcola tutto e resta salvata in questo browser.</p>
+  <div class="box" style="--c:var(--accent)"><h3>Criteri per la scala (valgono per tutti)</h3><div id="pgen"></div></div>
+  <div id="pref"></div>
+</section>
+
+<section class="view" id="v-prob" hidden>
+  <h2>Profili e probabilità di ammissione</h2>
+  <p class="note">Le probabilità derivano dalle regole di ciascun ateneo (scheda Metodo) applicate al profilo: si cambiano modificando gli input, mai i numeri. Le coppie di valori sono "senza / con" la preparazione mirata (scheda Preparazione). Tutte le rese sono valutazioni del consulente; voti, certificati e date sono fatti da confermare.</p>
+  <div id="prof" class="grid3"></div>
+  <div class="row"><button class="btn" id="resetProf">Ripristina i profili iniziali</button></div>
+  <div id="probtab"></div>
+</section>
+
+<section class="view" id="v-scala" hidden><div id="scala"></div></section>
+<section class="view" id="v-prep" hidden><div id="prep"></div></section>
+<section class="view" id="v-cal" hidden><div id="cal"></div></section>
+<section class="view" id="v-costi" hidden><div id="costi"></div></section>
+
+<section class="view" id="v-metodo" hidden>
+  <h2>Metodo</h2>
+  <ol>
+    <li><b>Catalogo</b> (<code>dati.js</code>): <span id="ncorsi"></span> con retta, città, requisiti d'inglese, quote di candidatura, ore di lavoro e vincoli di sistema. Ogni cifra viene dalle ricerche del 5-6/10/2026 sui siti ufficiali (file sotto).</li>
+    <li><b>Probabilità di ammissione</b> (<code>regole.js</code>): per ogni corso una regola costruita sui pesi ufficiali (es. IBA 75% media + 25% motivazione, con la soglia ≥8 per il diploma italiano; UvA solo test; Bocconi 55/45) applicata al profilo. Danimarca e Irlanda usano le tabelle ufficiali di conversione della maturità, con un'incertezza di ±4 punti sulla maturità stimata. Requisiti mancanti (inglese, OMPT) azzerano la probabilità e indicano la preparazione che li sblocca.</li>
+    <li><b>Correlazione</b>: gli esiti che dipendono dalla stessa leva (test logici, test Bocconi, colloqui, voti, maturità) sono correlati; per Francesca il riconoscimento del diploma quadriennale è un unico evento comune a tutti gli atenei esteri. Si simulano 3.000 scenari: la probabilità di ogni singolo corso resta quella della regola.</li>
+    <li><b>Scala consigliata</b>: l'ordine segue il voto del ragazzo (a parità di voto: costo, poi probabilità). Si sceglie quali domande presentare massimizzando "utilità attesa − valore del tempo × ore", rispettando i vincoli (2 numerus fixus e 4 domande su Studielink, 4 preferenze Bocconi, Sciences Po una volta, CAO, optagelse). Utilità: preferito 100, gradito 65, accettabile 30 punti, meno la sensibilità al costo per ogni 10.000 € di percorso.</li>
+    <li><b>Preparazioni</b>: ogni preparazione cambia il profilo (resa nei test, certificato, OMPT, media di 4ª). Il suo valore è la differenza di utilità attesa con e senza, con la scala riottimizzata; il "netto" sottrae il valore del tempo.</li>
+    <li><b>Esborsi</b>: retta × (1+crescita)^anni + mantenimento della città × 1,03^anni + spese del primo anno, pesati con la probabilità di finire in ciascun corso.</li>
+  </ol>
+  <h3>Limiti dichiarati</h3>
+  <ul class="note">
+    <li>Nessun ateneo europeo pubblica la probabilità di ammissione di un profilo: le percentuali sono stime su regole dichiarate e vanno lette come ordini di grandezza.</li>
+    <li>Le preferenze iniziali sono ipotesi; le rese nei test e nei colloqui sono valutazioni; la maturità e la media di 4ª dei gemelli non sono ancora note.</li>
+    <li>Le date 2028 sono stime per analogia con il 2027 (calendario: stato "S").</li>
+  </ul>
+  <h2>Fonti</h2>
+  <ul class="src" id="fonti"></ul>
+  <h2>Salvataggio</h2>
+  <p class="note">Le scelte fatte nella pagina restano nel browser che le ha fatte. Per portarle su un altro dispositivo o condividerle si esporta un file e lo si importa dall'altra parte; per renderle i valori iniziali per tutti si modificano <code>PREF_D</code>, <code>PROFILI</code> e <code>PREP_D</code> in <code>dati.js</code>.</p>
+  <div class="row"><button class="btn" id="exp">Esporta le impostazioni (.json)</button><label class="btn" for="imp">Importa…</label><input type="file" id="imp" accept="application/json" hidden><button class="btn" id="resetAll">Ripristina tutto</button><span class="note" id="impmsg"></span></div>
+</section>
+</div>
+
+<script src="dati.js"></script>
+<script src="regole.js"></script>
+<script src="modello.js"></script>
+<script>
+'use strict';
+// ---------- stato ----------
+const clone=o=>JSON.parse(JSON.stringify(o));
+const CHIAVE='piano-v5';
+function statoIniziale(){return {pref:clone(PREF_D),prof:{fra:{},mar:{},iac:{}},prep:clone(PREP_D),param:{lambda:PARAM_D.lambda,mu:PARAM_D.mu,maxDomande:PARAM_D.maxDomande},cal:'tutti'}}
+let S=statoIniziale();
+try{const raw=localStorage.getItem(CHIAVE);if(raw){const l=JSON.parse(raw);
+  for(const k of ['fra','mar','iac']){if(l.pref&&l.pref[k]){const p=l.pref[k];Object.assign(S.pref[k].voti,p.voti||{});Object.assign(S.pref[k].citta,p.citta||{});if(p.ripiego&&PROGRAMMI[p.ripiego])S.pref[k].ripiego=p.ripiego;S.pref[k].forza=p.forza||{};}
+    if(l.prof&&l.prof[k])S.prof[k]=l.prof[k]; if(l.prep&&l.prep[k])S.prep[k]=l.prep[k].filter(x=>PREPARAZIONI[x]);}
+  if(l.param)Object.assign(S.param,l.param); if(l.cal)S.cal=l.cal;}}catch(e){}
+function salva(){try{localStorage.setItem(CHIAVE,JSON.stringify(S))}catch(e){}}
+// profilo con le modifiche dell'utente
+profiloDi=kid=>{const b=PROFILI[kid],o=S.prof[kid]||{};const r=Object.assign({},b);
+  for(const k in o){if(k==='en')r.en=Object.assign({},b.en,o.en);else r[k]=o[k];} return r;};
+const param=()=>Object.assign({},PARAM_D,S.param);
+
+// ---------- formati ----------
+const fmt=n=>Math.round(n).toLocaleString('it-IT');
+const pct=(p,d=0)=>(p*100).toLocaleString('it-IT',{maximumFractionDigits:d,minimumFractionDigits:d})+'%';
+const pp=x=>(x>=0?'+':'−')+Math.abs(x*100).toLocaleString('it-IT',{maximumFractionDigits:1})+' pp';
+const nome=id=>{const P=PROGRAMMI[id];return `${P.ateneo} — ${P.corso}`};
+const breveNome=id=>{const P=PROGRAMMI[id];return P.ateneo+' '+P.corso.split(' (')[0]};
+const VOTI=['0 escluso','1 accettabile','2 gradito','3 preferito'];
+const vtag=v=>v>=3?'<span class="tag ok">preferito</span>':v===2?'<span class="tag">gradito</span>':v===1?'<span class="tag m">accettabile</span>':'<span class="tag w">escluso</span>';
+const dataIt=s=>{const [y,m,d]=s.split('-');return `${+d}/${+m}/${y}`};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+// ---------- calcolo ----------
+let R={},V={},firmaV='';
+function calcola(){const pa=param();for(const k of RAGAZZI)R[k.id]=ottimizza(k.id,S.pref[k.id],pa,S.prep[k.id]);}
+function serieAttesa(r){const pa=param();const s=ANNI.map(()=>0);r.scala.forEach((id,i)=>{const c=costoPercorso(id,r.kid,pa);c.ser.forEach((v,j)=>s[j]+=v*r.val.pf[i]);});return s;}
+function eventiDi(kid){const r=R[kid];const twin=kid!=='fra';
+  return EVENTI.filter(e=>(e.chi===kid||e.chi==='tutti'||(e.chi==='gem'&&twin))&&(e.chi!=='tutti'||!e.corsi||e.corsi.some(c=>r.scala.includes(c)))
+    &&((!e.corsi&&!e.prep)||(e.corsi&&e.corsi.some(c=>r.scala.includes(c)))||(e.prep&&S.prep[kid].includes(e.prep))))
+    .filter(e=>!(e.chi==='tutti'&&kid!=='fra'&&e.d<'2027-06-30'&&!e.corsi)).sort((a,b)=>a.d.localeCompare(b.d));}
+
+// ---------- In breve ----------
+function renderBreve(){
+  let fam=0,famSer=ANNI.map(()=>0);
+  let h=`<h2>In breve</h2><p class="note">Sintesi calcolata dalle preferenze, dai profili e dalle preparazioni pianificate (schede successive). Tutte le percentuali sono stime da regole dichiarate; le preferenze iniziali sono ipotesi da confermare con i ragazzi.</p><div class="grid3">`;
+  for(const k of RAGAZZI){const r=R[k.id],pref=S.pref[k.id];const ser=serieAttesa(r);ser.forEach((v,i)=>famSer[i]+=v);fam+=r.val.costo;
+    const best=r.scala.map((id,i)=>({id,p:r.val.pf[i]})).sort((a,b)=>b.p-a.p);
+    const avvisi=[];
+    for(const id in pref.voti){if(pref.voti[id]>=2&&r.esclusi[id]&&r.esclusi[id].startsWith('requisito'))avvisi.push(`<b>${breveNome(id)}</b>: ${r.esclusi[id].replace('requisito: ','')}`);}
+    r.scala.forEach(id=>{const o=r.sim.info[r.sim.idx[id]];if(o.flag)avvisi.push(`<b>${breveNome(id)}</b>: ${o.flag}`);if(pref.citta[PROGRAMMI[id].citta]==='dd')avvisi.push(`<b>${breveNome(id)}</b>: città "${PROGRAMMI[id].citta}" da decidere con ${k.nome}`);});
+    const prossimi=eventiDi(k.id).filter(e=>(e.a||e.d)>=OGGI).slice(0,6);
+    const vp=V[k.id];
+    h+=`<div class="box" style="--c:var(${k.cls})"><h3>${k.nome} <span class="tag m">ingresso ${PROFILI[k.id].ciclo}</span></h3>
+      <div class="cards" style="grid-template-columns:repeat(3,1fr)"><div class="card"><div class="k">In un corso preferito</div><div class="v">${pct(r.val.pTop)}</div></div>
+      <div class="card"><div class="k">Preferito o gradito</div><div class="v">${pct(r.val.pGood)}</div></div><div class="card"><div class="k">Costo atteso</div><div class="v">${fmt(r.val.costo/1000)}k</div></div></div>
+      <p style="margin:6px 0"><b>Esito più probabile:</b> ${nome(best[0].id)} (${pct(best[0].p)})${best[1]&&best[1].p>=0.05?`; poi ${breveNome(best[1].id)} (${pct(best[1].p)})`:''}.</p>
+      <p style="margin:6px 0"><b>Domande consigliate</b> (${r.scala.length}, ${Math.round(r.ore)} ore di lavoro, ${fmt(r.fee)} € di quote):</p>
+      <ol>${r.scala.map((id,i)=>`<li>${breveNome(id)} <span class="note">· ${pct(r.sim.info[r.sim.idx[id]].p)} amm.</span>${id===r.ripiego?' <span class="tag m">ripiego</span>':''}</li>`).join('')}</ol>
+      <p style="margin:6px 0"><b>Preparazioni che rendono di più:</b> ${vp?vp.prep.filter(a=>a.netto>0.2).slice(0,3).map(a=>`${PREPARAZIONI[a.id].nome}${a.pianificata?'':' <span class="tag w">non pianificata</span>'}`).join('; ')||'nessuna oltre al minimo':'<span class="busy">calcolo in corso…</span>'}</p>
+      ${avvisi.length?`<details><summary class="warn">${avvisi.length} punti da verificare</summary><ul>${avvisi.map(a=>`<li>${a}</li>`).join('')}</ul></details>`:''}
+      <p style="margin:6px 0 0"><b>Prossime scadenze</b></p><ul>${prossimi.map(e=>`<li><span class="n">${dataIt(e.d)}</span> ${esc(e.cosa)}${e.stato==='S'?' <span class="tag m">stima</span>':''}</li>`).join('')||'<li class="note">nessuna</li>'}</ul>
+    </div>`;}
+  const pk=famSer.indexOf(Math.max(...famSer));
+  h+=`</div><div class="cards"><div class="card"><div class="k">Costo atteso dei tre bachelor</div><div class="v">€ ${fmt(fam)}</div><div class="s">media pesata sugli esiti possibili</div></div>
+    <div class="card"><div class="k">Anno più pesante</div><div class="v">€ ${fmt(famSer[pk])}</div><div class="s">${ANNI[pk]}/${String(ANNI[pk]+1).slice(2)}</div></div></div>`;
+  document.getElementById('breve').innerHTML=h;}
+
+// ---------- Preferenze ----------
+function renderPref(){
+  const P=S.param;
+  document.getElementById('pgen').innerHTML=`<div class="f">
+    <label for="lam">Sensibilità al costo (punti di utilità persi ogni 10.000 € di percorso)</label><input class="in" id="lam" type="number" min="0" max="10" step="0.5" value="${P.lambda}"><span class="note">0 = conta solo la preferenza</span>
+    <label for="mu">Valore del tempo (punti per ora di lavoro sulle domande)</label><input class="in" id="mu" type="number" min="0" max="0.5" step="0.01" value="${P.mu}"><span class="note">0,04 = 25 ore valgono 1 punto</span>
+    <label for="maxd">Numero massimo di domande per ragazzo (ripiego escluso)</label><input class="in" id="maxd" type="number" min="1" max="25" step="1" value="${P.maxDomande}"><span></span></div>`;
+  for(const [id,k,mn] of [['lam','lambda',0],['mu','mu',0],['maxd','maxDomande',1]])document.getElementById(id).onchange=e=>{S.param[k]=Math.max(mn,+e.target.value||0);aggiorna();};
+  const citta=[...new Set(Object.values(PROGRAMMI).map(p=>p.citta))];
+  const paesi=[...new Set(Object.values(PROGRAMMI).map(p=>p.paese))];
+  let h='';
+  for(const k of RAGAZZI){const pref=S.pref[k.id],r=R[k.id];
+    h+=`<div class="child" style="--c:var(${k.cls})"><h2>${k.nome}</h2><h3>Città</h3><div class="f" style="grid-template-columns:repeat(auto-fill,minmax(230px,1fr));">`;
+    for(const c of citta)h+=`<label style="display:flex;justify-content:space-between;gap:6px;align-items:center">${esc(c)} <select class="in" data-c="${k.id}" data-city="${esc(c)}">${[['si','sì'],['dd','da decidere'],['no','no']].map(([v,l])=>`<option value="${v}" ${pref.citta[c]===v?'selected':''}>${l}</option>`).join('')}</select></label>`;
+    h+=`</div><div class="row"><label for="rip-${k.id}">Ripiego (sempre in coda)</label><select class="in" id="rip-${k.id}" data-rip="${k.id}">${['cattolica','bicocca','statale-ema','polimi-ges','polimi-inf'].map(id=>`<option value="${id}" ${pref.ripiego===id?'selected':''}>${breveNome(id)}</option>`).join('')}</select></div>
+      <div class="tbl"><table><thead><tr><th>Paese</th><th>Ateneo e corso</th><th>Voto</th><th>Forza</th><th class="n">P amm.</th><th>Esito del calcolo</th></tr></thead><tbody>`;
+    for(const pa of paesi)for(const id in PROGRAMMI){const P=PROGRAMMI[id];if(P.paese!==pa)continue;const v=pref.voti[id]||0;const o=r.sim.info[r.sim.idx[id]];const inS=r.scala.indexOf(id);
+      const esito=inS>=0?`<span class="tag ok">in scala, posizione ${inS+1}</span>`:r.esclusi[id]?`<span class="tag ${r.esclusi[id].startsWith('requisito')?'w':'m'}">${esc(r.esclusi[id])}</span>`:`<span class="tag m">non conviene (+${(r.marg[id]||0).toFixed(1)} punti)</span>`;
+      h+=`<tr class="${v?'':'off'}"><td>${pa}</td><td class="name">${esc(nome(id))}${pref.citta[P.citta]==='dd'?' <span class="tag dd">città da decidere</span>':''}</td>
+        <td><select class="in" data-v="${k.id}" data-id="${id}">${VOTI.map((l,i)=>`<option value="${i}" ${v===i?'selected':''}>${l}</option>`).join('')}</select></td>
+        <td><select class="in" data-fz="${k.id}" data-id="${id}">${[['','auto'],['si','sempre'],['no','mai']].map(([x,l])=>`<option value="${x}" ${(pref.forza[id]||'')===x?'selected':''}>${l}</option>`).join('')}</select></td>
+        <td class="n">${pct(o.p)}</td><td class="small">${esito}</td></tr>`;}
+    h+='</tbody></table></div></div>';}
+  const el=document.getElementById('pref');el.innerHTML=h;
+  el.querySelectorAll('[data-city]').forEach(s=>s.onchange=()=>{S.pref[s.dataset.c].citta[s.dataset.city]=s.value;aggiorna();});
+  el.querySelectorAll('[data-v]').forEach(s=>s.onchange=()=>{S.pref[s.dataset.v].voti[s.dataset.id]=+s.value;aggiorna();});
+  el.querySelectorAll('[data-fz]').forEach(s=>s.onchange=()=>{const f=S.pref[s.dataset.fz].forza;if(s.value)f[s.dataset.id]=s.value;else delete f[s.dataset.id];aggiorna();});
+  el.querySelectorAll('[data-rip]').forEach(s=>s.onchange=()=>{S.pref[s.dataset.rip].ripiego=s.value;aggiorna();});
+}
+
+// ---------- Profili e probabilità ----------
+const CAMPI=[['mediaPen','Media del penultimo anno (Olanda, Maastricht, TU/e)',0,10,0.1,true],['mediaBoc','Media Bocconi (terzultimo + penultimo anno)',0,10,0.05,true],
+  ['mate','Voto di matematica',0,10,0.5],['matur','Maturità stimata /100',60,100,1],['pLog','Resa nei test logico-matematici',0,1,0.05,true],['pBoc','Resa nel test Bocconi',0,1,0.05,true],
+  ['pSat','Resa nel SAT (se lo fa)',0,1,0.05],['pCol','Resa in colloqui, essay e motivazioni',0,1,0.05,true],['ompt','Probabilità di superare l\'OMPT richiesto',0,1,0.05,true],['pDiploma','Riconoscimento del diploma all\'estero (0-1)',0,1,0.05]];
+function renderProb(){
+  let h='';
+  for(const k of RAGAZZI){const q=profiloDi(k.id);
+    h+=`<div class="box" style="--c:var(${k.cls})"><h3>${k.nome}</h3><p class="note" style="margin-top:0">${esc(q.note)}</p><div class="f"><span></span><span class="note">senza</span><span class="note">con prep.</span>`;
+    for(const [f,l,mn,mx,st,pair] of CAMPI){const v=q[f];
+      if(pair&&Array.isArray(v))h+=`<label>${l}</label><input class="in" type="number" min="${mn}" max="${mx}" step="${st}" data-k="${k.id}" data-f="${f}" data-i="0" value="${v[0]}"><input class="in" type="number" min="${mn}" max="${mx}" step="${st}" data-k="${k.id}" data-f="${f}" data-i="1" value="${v[1]}">`;
+      else h+=`<label>${l}</label><input class="in" type="number" min="${mn}" max="${mx}" step="${st}" data-k="${k.id}" data-f="${f}" value="${v}"><span></span>`;}
+    const e=q.en||{};
+    h+=`<label>Inglese: certificato attuale (punteggio Cambridge, vuoto = nessuno)</label><input class="in" type="number" min="100" max="230" step="1" data-k="${k.id}" data-en="ces" value="${e.ces??''}"><span class="note">${esc(e.tipo||'')}</span>
+      <label>… punteggio minimo per abilità (vuoto = non noto)</label><input class="in" type="number" min="100" max="230" step="1" data-k="${k.id}" data-en="sez" value="${e.sez??''}"><span></span>
+      <label>… sostenuto da meno di 2 anni alle scadenze?</label><select class="in" data-k="${k.id}" data-en="recente">${[['','non so'],['1','sì'],['0','no']].map(([x,l])=>`<option value="${x}" ${(e.recente==null?'':e.recente?'1':'0')===x?'selected':''}>${l}</option>`).join('')}</select><span></span></div>
+      <p class="note">Scala Cambridge: IELTS 6.0 ≈ 169, 6.5 ≈ 176, 7.0 ≈ 185. Con la preparazione "certificazione" si assume l'obiettivo ${q.enObiettivo.ces} (${q.enObiettivo.sez} per abilità), recente.</p></div>`;}
+  const el=document.getElementById('prof');el.innerHTML=h;
+  el.querySelectorAll('input[data-f]').forEach(i=>i.onchange=()=>{const k=i.dataset.k,f=i.dataset.f,o=S.prof[k];const base=profiloDi(k)[f];
+    if(i.dataset.i!=null){const a=clone(base);a[+i.dataset.i]=+i.value;o[f]=a;}else o[f]=+i.value;aggiorna();});
+  el.querySelectorAll('[data-en]').forEach(i=>i.onchange=()=>{const k=i.dataset.k,o=S.prof[k];o.en=Object.assign({},o.en||{});const f=i.dataset.en;
+    o.en[f]=f==='recente'?(i.value===''?null:i.value==='1'):(i.value===''?null:+i.value);aggiorna();});
+  let t='';
+  for(const k of RAGAZZI){const r=R[k.id];const rows=Object.keys(PROGRAMMI).map(id=>({id,...r.sim.info[r.sim.idx[id]]})).sort((a,b)=>b.p-a.p);
+    t+=`<div class="child" style="--c:var(${k.cls})"><h2>${k.nome}: probabilità di ammissione (con le preparazioni pianificate)</h2><div class="tbl"><table><thead><tr><th>Ateneo e corso</th><th class="n">P amm.</th><th>Calcolo</th><th>Criteri di selezione (fatti)</th></tr></thead><tbody>`;
+    for(const o of rows)t+=`<tr><td class="name">${esc(nome(o.id))}</td><td class="n"><b>${pct(o.p)}</b></td><td class="small">${o.gate?`<span class="warn">Requisito: ${esc(o.gate)}</span>`:esc(o.calc)}${o.flag?`<br><span class="tag dd">${esc(o.flag)}</span>`:''}</td><td class="small">${esc(o.dati)}</td></tr>`;
+    t+='</tbody></table></div></div>';}
+  document.getElementById('probtab').innerHTML=t;}
+document.getElementById('resetProf').onclick=()=>{S.prof={fra:{},mar:{},iac:{}};aggiorna();};
+
+// ---------- Scala consigliata ----------
+function motivoNonIncluso(r,id){if(r.esclusi[id])return r.esclusi[id];if(r.marg[id]==null)return 'vincolo di sistema: '+(PROGRAMMI[id].gruppi||[]).map(g=>GRUPPI[g].nome).join('; ');
+  return `aggiunge ${r.marg[id].toFixed(2)} punti di utilità attesa, meno del tempo che richiede (${Math.round((PROGRAMMI[id].ore||0)+((DOMANDE[PROGRAMMI[id].domanda]||{}).ore||0))} ore)`;}
+function renderScala(){
+  let h=`<h2>Scala consigliata</h2><p class="note">Per ogni ragazzo: le domande da presentare, nell'ordine di preferenza (riga 1 = dove andrebbe se ammesso ovunque). "Finire qui" = probabilità di essere ammesso qui e in nessuna riga sopra. "Valore" = punti di utilità attesa che si perderebbero togliendo la riga. Il confronto è con le cascate della rev. 4b del 5/10/2026.</p>`;
+  const pa=param();
+  for(const k of RAGAZZI){const r=R[k.id],pref=S.pref[k.id],old=CASC_V4[k.id];
+    h+=`<div class="child" style="--c:var(${k.cls})"><h2>${k.nome}</h2><div class="cards"><div class="card"><div class="k">In un corso preferito</div><div class="v">${pct(r.val.pTop)}</div></div><div class="card"><div class="k">Preferito o gradito</div><div class="v">${pct(r.val.pGood)}</div></div>
+      <div class="card"><div class="k">Nessuna ammissione</div><div class="v">${pct(r.val.pNessuno,1)}</div></div><div class="card"><div class="k">Domande · ore · quote</div><div class="v">${r.scala.length} · ${Math.round(r.ore)} · ${fmt(r.fee)}€</div></div><div class="card"><div class="k">Costo atteso</div><div class="v">€ ${fmt(r.val.costo)}</div></div></div>
+      <div class="tbl"><table><thead><tr><th class="n">#</th><th>Ateneo e corso</th><th>Voto</th><th class="n">P amm.</th><th class="n">Finire qui</th><th class="n">Percorso €</th><th class="n">Valore</th><th>Rispetto alla rev. 4b</th><th>Note</th></tr></thead><tbody>`;
+    r.scala.forEach((id,i)=>{const o=r.sim.info[r.sim.idx[id]],c=costoPercorso(id,k.id,pa),oi=old.indexOf(id);
+      const cmp=oi<0?'<span class="tag ok">nuova</span>':oi===i?'<span class="tag m">stessa posizione</span>':`<span class="tag">da ${oi+1}ª a ${i+1}ª</span>`;
+      const note=[o.flag?`<span class="tag dd">${esc(o.flag)}</span>`:'',pref.citta[PROGRAMMI[id].citta]==='dd'?'<span class="tag dd">città da decidere</span>':'',id===r.ripiego?'<span class="tag m">ripiego</span>':''].filter(Boolean).join(' ');
+      h+=`<tr><td class="n">${i+1}</td><td class="name">${esc(nome(id))}<div class="note">${esc(PROGRAMMI[id].nota)}</div></td><td>${vtag(pref.voti[id]||0)}</td><td class="n">${pct(o.p)}</td><td class="n"><b>${pct(r.val.pf[i],1)}</b> <span class="bar" style="width:${Math.round(r.val.pf[i]*80)}px;--c:var(${k.cls})"></span></td><td class="n">${fmt(c.tot)}</td><td class="n">${r.marg[id]==null?'—':r.marg[id].toFixed(1)}</td><td>${cmp}</td><td class="small">${note}</td></tr>`;});
+    h+='</tbody></table></div>';
+    const tolte=old.filter(id=>!r.scala.includes(id));
+    if(tolte.length)h+=`<h3>Tolte rispetto alla rev. 4b</h3><ul>${tolte.map(id=>`<li><b>${esc(nome(id))}</b> (P amm. ${pct(r.sim.info[r.sim.idx[id]].p)}): ${esc(motivoNonIncluso(r,id))}</li>`).join('')}</ul>`;
+    const altre=Object.keys(PROGRAMMI).filter(id=>(pref.voti[id]||0)>0&&!r.scala.includes(id)&&!old.includes(id));
+    if(altre.length)h+=`<details><summary>Altri corsi graditi non inclusi (${altre.length})</summary><ul>${altre.map(id=>`<li>${esc(nome(id))} (P amm. ${pct(r.sim.info[r.sim.idx[id]].p)}): ${esc(motivoNonIncluso(r,id))}</li>`).join('')}</ul></details>`;
+    h+='</div>';}
+  document.getElementById('scala').innerHTML=h;}
+
+// ---------- Preparazione ----------
+function calcolaPrep(){const f=JSON.stringify([S.pref,S.prof,S.prep,S.param]);if(f===firmaV)return false;firmaV=f;V={};
+  const pa=param();RAGAZZI.forEach((k,i)=>setTimeout(()=>{V[k.id]=valorePreparazioni(k.id,S.pref[k.id],pa,S.prep[k.id]);if(i===2){renderBreve();if(vista==='prep')renderPrep();}},30*(i+1)));return true;}
+function renderPrep(){
+  let h=`<h2>Preparazione: dove conviene investire tempo e denaro</h2><p class="note">Per ogni preparazione: di quanto cambia la probabilità di finire in un corso preferito (voto 3) o almeno gradito (voto ≥2), con la scala riottimizzata. "Netto" = guadagno di utilità meno il valore del tempo (Preferenze). Spuntare una preparazione la considera pianificata: cambia profilo, probabilità, scala e calendario.</p>`;
+  for(const k of RAGAZZI){const v=V[k.id];
+    h+=`<div class="child" style="--c:var(${k.cls})"><h2>${k.nome}</h2>`;
+    if(!v){h+='<p class="busy">calcolo in corso…</p></div>';continue;}
+    const oreP=S.prep[k.id].reduce((a,x)=>a+(PREPARAZIONI[x].ore||0),0),euroP=S.prep[k.id].reduce((a,x)=>a+(PREPARAZIONI[x].euro||0),0);
+    h+=`<p class="note">Pianificate: ${oreP} ore e circa ${fmt(euroP)} € di preparazione, più ${Math.round(R[k.id].ore)} ore e ${fmt(R[k.id].fee)} € per le domande.</p><div class="tbl"><table><thead><tr><th>Pianificata</th><th>Preparazione</th><th class="n">Δ preferito</th><th class="n">Δ gradito</th><th class="n">Δ utilità</th><th class="n">Ore</th><th class="n">€</th><th class="n">Netto</th><th>Serve a</th></tr></thead><tbody>`;
+    for(const a of v.prep){const A=PREPARAZIONI[a.id];const usati=A.corsi.filter(c=>a.scalaCon.includes(c));
+      h+=`<tr><td><input type="checkbox" data-pk="${k.id}" data-p="${a.id}" ${a.pianificata?'checked':''} aria-label="pianificata"></td><td class="name"><b>${esc(A.nome)}</b><div class="note">${esc(A.descr)}</div></td>
+        <td class="n">${pp(a.dTop)}</td><td class="n">${pp(a.dGood)}</td><td class="n">${a.dEU.toFixed(1)}</td><td class="n">${A.ore}</td><td class="n">${fmt(A.euro)}</td><td class="n ${a.netto>0.2?'okc':a.netto<-0.2?'warn':''}"><b>${a.netto.toFixed(1)}</b></td>
+        <td class="small">${usati.map(breveNome).join(', ')||'nessun corso della scala'}</td></tr>`;}
+    h+='</tbody></table></div></div>';}
+  // matrice inglese
+  const ids=[...new Set(RAGAZZI.flatMap(k=>R[k.id].scala))];
+  h+=`<h2>Requisiti d'inglese dei corsi in scala</h2><p class="note">Un unico certificato recente copre quasi tutto: IELTS Academic 7.0 senza parti sotto 6.5 (a Milano 290 €, risultati in pochi giorni) oppure C1 Advanced ≥180 in ogni abilità (manca solo PPLE, che chiede 185). Molti atenei vogliono un test di non più di 2 anni alla scadenza.</p><div class="tbl"><table><thead><tr><th>Corso</th><th>Requisito</th><th>Per chi</th></tr></thead><tbody>`;
+  for(const id of ids)h+=`<tr><td class="name">${esc(nome(id))}</td><td class="small">${esc(PROGRAMMI[id].en.testo)}</td><td>${RAGAZZI.filter(k=>R[k.id].scala.includes(id)).map(k=>k.nome).join(', ')}</td></tr>`;
+  h+='</tbody></table></div>';
+  const el=document.getElementById('prep');el.innerHTML=h;
+  el.querySelectorAll('[data-pk]').forEach(c=>c.onchange=()=>{const a=S.prep[c.dataset.pk];if(c.checked){if(!a.includes(c.dataset.p))a.push(c.dataset.p);}else S.prep[c.dataset.pk]=a.filter(x=>x!==c.dataset.p);aggiorna();});}
+
+// ---------- Calendario ----------
+function renderCal(){
+  const sel=S.cal;const tutti=[];
+  for(const k of RAGAZZI){if(sel!=='tutti'&&sel!==k.id)continue;for(const e of eventiDi(k.id))tutti.push({...e,k});}
+  const visti=new Set();const lista=tutti.filter(e=>{const key=e.d+e.cosa+(e.chi==='gem'||e.chi==='tutti'?'':e.k.id);if(visti.has(key))return false;visti.add(key);return true;}).sort((a,b)=>a.d.localeCompare(b.d));
+  const fra60=new Date(OGGI);fra60.setDate(fra60.getDate()+60);const lim=fra60.toISOString().slice(0,10);
+  let h=`<h2>Calendario delle candidature</h2><p class="note">Solo gli eventi dei corsi nella scala consigliata e delle preparazioni pianificate. In evidenza i prossimi 60 giorni. "Stima" = data ricavata per analogia con l'anno precedente: da riconfermare quando escono i bandi.</p>
+    <div class="chips">${[['tutti','Tutti'],...RAGAZZI.map(k=>[k.id,k.nome])].map(([v,l])=>`<button class="btn ${sel===v?'on':''}" data-cal="${v}">${l}</button>`).join('')}<button class="btn" id="ics">Scarica per il calendario (.ics)</button></div>
+    <div class="tbl"><table><thead><tr><th>Data</th><th>Chi</th><th>Cosa</th><th>Stato</th></tr></thead><tbody>`;
+  for(const e of lista){const fine=e.a||e.d;const chi=e.chi==='gem'?'Marco, Iacopo':e.chi==='tutti'?'tutti':e.k.nome;
+    h+=`<tr class="${fine<OGGI?'past':e.d<=lim?'soon':''}"><td class="n">${dataIt(e.d)}${e.a?' → '+dataIt(e.a):''}</td><td>${chi}</td><td class="name">${esc(e.cosa)}</td><td>${e.stato==='F'?'<span class="tag ok">ufficiale</span>':'<span class="tag m">stima</span>'}</td></tr>`;}
+  h+='</tbody></table></div>';
+  const el=document.getElementById('cal');el.innerHTML=h;
+  el.querySelectorAll('[data-cal]').forEach(b=>b.onclick=()=>{S.cal=b.dataset.cal;salva();renderCal();});
+  document.getElementById('ics').onclick=()=>{const L=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//piano-candidatura//IT'];
+    lista.forEach((e,i)=>{const d=e.d.replace(/-/g,'');const end=new Date((e.a||e.d)+'T00:00:00Z');end.setUTCDate(end.getUTCDate()+1);
+      L.push('BEGIN:VEVENT',`UID:pc-${i}-${d}@universita-prospetto`,`DTSTAMP:${OGGI.replace(/-/g,'')}T000000Z`,`DTSTART;VALUE=DATE:${d}`,`DTEND;VALUE=DATE:${end.toISOString().slice(0,10).replace(/-/g,'')}`,
+        `SUMMARY:${(e.chi==='gem'?'Gemelli':e.chi==='tutti'?'Tutti':e.k.nome)}: ${e.cosa.replace(/[,;]/g,'\\$&')}${e.stato==='S'?' (stima)':''}`,'END:VEVENT');});
+    L.push('END:VCALENDAR');const b=new Blob([L.join('\r\n')],{type:'text/calendar'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='candidature.ics';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);};}
+
+// ---------- Esborsi ----------
+function renderCosti(){
+  const ser={};let fam=ANNI.map(()=>0);for(const k of RAGAZZI){ser[k.id]=serieAttesa(R[k.id]);ser[k.id].forEach((v,i)=>fam[i]+=v);}
+  const tot=fam.reduce((a,b)=>a+b,0),max=Math.max(...fam,1);const step=max>150000?50000:max>60000?25000:10000,top=Math.ceil(max/step)*step;
+  const Wd=760,Hd=250,pl=58,pr=10,pt=14,pb=34,iw=Wd-pl-pr,ih=Hd-pt-pb,y=v=>pt+ih-(v/top)*ih,bw=iw/ANNI.length;
+  let s=`<svg class="chart" viewBox="0 0 ${Wd} ${Hd}" role="img" aria-label="Esborso atteso per anno accademico">`;
+  for(let v=0;v<=top;v+=step)s+=`<line x1="${pl}" x2="${Wd-pr}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)"/><text x="${pl-6}" y="${y(v)+4}" text-anchor="end" font-size="11" fill="var(--muted)" style="font-family:var(--mono)">${v/1000}k</text>`;
+  ANNI.forEach((a,i)=>{let acc=0;const x=pl+i*bw+bw*.18,w=bw*.64;for(const k of RAGAZZI){const v=ser[k.id][i];if(v>0){s+=`<rect x="${x}" y="${y(acc+v)}" width="${w}" height="${y(acc)-y(acc+v)}" fill="var(${k.cls})"/>`;acc+=v;}}
+    if(acc>0)s+=`<text x="${x+w/2}" y="${y(acc)-4}" text-anchor="middle" font-size="11" fill="var(--fg)" style="font-family:var(--mono)">${Math.round(acc/1000)}k</text>`;
+    s+=`<text x="${x+w/2}" y="${Hd-12}" text-anchor="middle" font-size="12" fill="var(--muted)">${a}/${String(a+1).slice(2)}</text>`;});
+  s+='</svg>';
+  let h=`<h2>Esborsi attesi</h2><p class="note">Retta in fascia massima + mantenimento della città + spese del primo anno, in euro nominali (rette +${(PARAM_D.gRette*100).toFixed(1)}%/anno salvo indicazione, mantenimento +${(PARAM_D.gMant*100).toFixed(0)}%/anno), pesati con la probabilità di finire in ciascun corso della scala consigliata. Le quote di candidatura sono a parte.</p>${s}
+    <div class="legend">${RAGAZZI.map(k=>`<span style="--c:var(${k.cls})">${k.nome}</span>`).join('')}</div>
+    <div class="tbl"><table><thead><tr><th>Valore atteso</th>${ANNI.map(a=>`<th class="n">${a}/${String(a+1).slice(2)}</th>`).join('')}<th class="n">Totale</th></tr></thead><tbody>`;
+  for(const k of RAGAZZI)h+=`<tr><td>${k.nome}</td>${ser[k.id].map(v=>`<td class="n">${fmt(v)}</td>`).join('')}<td class="n">${fmt(ser[k.id].reduce((a,b)=>a+b,0))}</td></tr>`;
+  h+=`<tr class="total"><td>Famiglia</td>${fam.map(v=>`<td class="n">${fmt(v)}</td>`).join('')}<td class="n">${fmt(tot)}</td></tr></tbody></table></div>
+    <h3>Costo dei percorsi in scala</h3><div class="tbl"><table><thead><tr><th>Chi</th><th>Ateneo e corso</th><th class="n">Finire qui</th><th class="n">Anni</th><th class="n">1° anno</th><th class="n">Percorso</th></tr></thead><tbody>`;
+  const pa=param();
+  for(const k of RAGAZZI)R[k.id].scala.forEach((id,i)=>{const c=costoPercorso(id,k.id,pa);h+=`<tr><td>${k.nome}</td><td class="name">${esc(nome(id))}<div class="note">${esc(PROGRAMMI[id].citta)}: ${esc(CITTA[PROGRAMMI[id].citta].nota)}</div></td><td class="n">${pct(R[k.id].val.pf[i],1)}</td><td class="n">${c.anni}</td><td class="n">${fmt(c.ser.find(v=>v>0)||0)}</td><td class="n">${fmt(c.tot)}</td></tr>`;});
+  h+='</tbody></table></div>';
+  document.getElementById('costi').innerHTML=h;}
+
+// ---------- Metodo: fonti ----------
+const RICERCHE=[['2026-10-06-olanda-economia.md','Olanda, economia: EUR (IBEB, BSc², IBA), UvA (EBE, EDS, PPLE), VU, Maastricht, Tilburg'],
+  ['2026-10-06-bocconi-milano.md','Bocconi (bando 2027/28, SAT, HEC–Bocconi, rimborsi), Cattolica, Statale, Bicocca'],
+  ['2026-10-06-ingegneria-polimi.md','Politecnico (TOL anticipato, graduatorie storiche, corsi in inglese), Bocconi quantitativi, VU CS'],
+  ['2026-10-06-delft-tue-leuven-tum.md','TU Delft, TU Eindhoven, KU Leuven/UCLouvain, TUM, OMPT'],
+  ['2026-10-06-francia-spagna.md','Sciences Po (procedura internazionale, PEM, retta), ESCP, IE, ESADE, UC3M/UPF (UNEDasiss, PCE, conversione BOE)'],
+  ['2026-10-06-vienna-danimarca-irlanda.md','WU Vienna, CBS, Aarhus, UCD, Trinity (tabelle ufficiali di conversione della maturità)'],
+  ['2026-10-06-test-e-certificazioni.md','SAT, IELTS/TOEFL/Cambridge, OMPT, PCE: matrici test × atenei e preparazione condivisa'],
+  ['2026-10-05-rette-costi-selettivita.md','Rette e costo della vita (5/10)'],['2026-10-05-ingegneria-iacopo.md','Ingegneria per Iacopo (5/10)'],['2026-10-05-vienna-e-verifiche.md','Vienna e verifiche (5/10)']];
+document.getElementById('fonti').innerHTML=RICERCHE.map(([f,d])=>`<li><a href="https://github.com/igorbonfanti/universita-prospetto/blob/main/docs/ricerche/${f}" target="_blank" rel="noopener">${f}</a> — ${d}</li>`).join('')
+  +'<li><a href="https://github.com/igorbonfanti/universita-prospetto/blob/main/docs/CONTESTO.md" target="_blank" rel="noopener">CONTESTO.md</a> — fatti sulla famiglia, vincoli, decisioni, correzioni</li><li><a href="docs/progetto/prospetto-esborsi-rev4b.html">Prospetto esborsi rev. 4b</a> (versione precedente, archivio)</li>';
+document.getElementById('ncorsi').textContent=`${Object.keys(PROGRAMMI).length} corsi in ${new Set(Object.values(PROGRAMMI).map(p=>p.paese)).size} paesi`;
+document.getElementById('exp').onclick=()=>{const b=new Blob([JSON.stringify(S,null,1)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='piano-impostazioni.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);};
+document.getElementById('imp').onchange=e=>{const f=e.target.files[0];if(!f)return;f.text().then(t=>{try{const l=JSON.parse(t);if(!l.pref||!l.prep)throw 0;S=Object.assign(statoIniziale(),l);aggiorna();document.getElementById('impmsg').textContent='Impostazioni importate.';}catch(x){document.getElementById('impmsg').textContent='File non valido.';}});};
+document.getElementById('resetAll').onclick=()=>{if(confirm('Ripristinare preferenze, profili, preparazioni e parametri iniziali?')){S=statoIniziale();aggiorna();}};
+
+// ---------- viste ----------
+let vista='breve';
+const RENDER={breve:renderBreve,pref:renderPref,prob:renderProb,scala:renderScala,prep:renderPrep,cal:renderCal,costi:renderCosti,metodo:()=>{}};
+function aggiorna(){salva();calcola();calcolaPrep();RENDER[vista]();if(vista!=='breve')renderBreve();}
+function mostra(v){vista=v;document.querySelectorAll('nav [role=tab]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.v===v)));
+  document.querySelectorAll('section.view').forEach(s=>s.hidden=s.id!=='v-'+v);RENDER[v]();try{localStorage.setItem('piano-vista',v)}catch(e){}}
+document.querySelectorAll('nav [role=tab]').forEach(b=>b.onclick=()=>mostra(b.dataset.v));
+calcola();calcolaPrep();
+let v0='breve';try{const t=localStorage.getItem('piano-vista');if(t&&RENDER[t])v0=t;}catch(e){}
+mostra(v0);
+</script>
+<script>
+(function(){var root=document.documentElement;function cur(){try{return localStorage.getItem("tema")||"system"}catch(e){return "system"}}
+function apply(t){if(t==="light"||t==="dark")root.setAttribute("data-theme",t);else root.removeAttribute("data-theme");try{if(t==="system")localStorage.removeItem("tema");else localStorage.setItem("tema",t)}catch(e){}
+document.querySelectorAll(".theme button").forEach(function(b){b.setAttribute("aria-pressed",String(b.dataset.tema===t))});}
+document.querySelectorAll(".theme button").forEach(function(b){b.addEventListener("click",function(){apply(b.dataset.tema)})});apply(cur());})();
+</script>
+</body></html>

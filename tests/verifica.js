@@ -1,5 +1,5 @@
 // Test rapido, senza dipendenze: node tests/verifica.js
-// Carica dati.js, regole.js e modello.js come fa la pagina, controlla la sintassi degli script di index.html
+// Carica dati.js, regole.js e modello.js come fa la pagina, controlla la sintassi degli script di piano.html
 // e verifica gli invarianti del catalogo e del modello. Esce con codice 1 se trova errori.
 'use strict';
 const fs = require('fs');
@@ -10,17 +10,17 @@ const dir = path.join(__dirname, '..');
 let errori = 0;
 const ko = msg => { errori++; console.log('ERRORE  ' + msg); };
 
-// 1. sintassi degli script inline di index.html e report.html
-for (const pagina of ['index.html', 'report.html']) {
+// 1. sintassi degli script inline di piano.html e report.html
+for (const pagina of ['piano.html', 'report.html']) {
   const f = path.join(dir, pagina);
-  if (!fs.existsSync(f)) { if (pagina === 'index.html') ko('index.html mancante'); continue; }
+  if (!fs.existsSync(f)) { if (pagina === 'piano.html') ko('piano.html mancante'); continue; }
   const html = fs.readFileSync(f, 'utf8');
   [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].forEach((m, i) => {
     try { new vm.Script(m[1], {filename: `${pagina}#script${i}`}); } catch (e) { ko(`${pagina}, script ${i}: ${e.message}`); }
   });
 }
 for (const s of ['dati.js', 'regole.js', 'modello.js'])
-  if (!fs.readFileSync(path.join(dir, 'index.html'), 'utf8').includes(`<script src="${s}">`)) ko(`index.html non carica ${s}`);
+  if (!fs.readFileSync(path.join(dir, 'piano.html'), 'utf8').includes(`<script src="${s}">`)) ko(`piano.html non carica ${s}`);
 
 // 2. caricamento del modello (stesso ordine della pagina)
 const ctx = {console, Math, JSON, Object, Array, Set, Map, Number, String, Date, Float64Array, Uint8Array, Infinity, isNaN};

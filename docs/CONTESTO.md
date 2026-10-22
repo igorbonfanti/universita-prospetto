@@ -64,6 +64,8 @@ Aggiornato al 6 ottobre 2026 (regole di ammissione riverificate sui siti ufficia
 
 - **6/10/2026**: sei ricerche parallele sui siti ufficiali (`docs/ricerche/2026-10-06-*.md`); nuova app **Piano di candidatura** (`index.html` + `dati.js`, `regole.js`, `modello.js`): preferenze per voto e città, probabilità con esiti correlati, scala consigliata ottimizzata sotto i vincoli, valore delle preparazioni, calendario con .ics; **report finale** `report.html`. Il prospetto rev. 4b è archiviato in `docs/progetto/prospetto-esborsi-rev4b.html`. Dichiarato da Igor: nessuna domanda ancora inviata per Francesca; il suo certificato è un Cambridge C1 Advanced.
 
+- **22/10/2026**: il sito diventa un'app: nuova home `index.html` (il piano passa a `piano.html`), `guida.html` (guida del 21/10, 27 atenei: KU Leuven Business Engineering nella rosa di tutti e tre; in Germania tenute solo TUM, WHU e Frankfurt School) e `mappa.html`; manifest e icone per la schermata Home.
+
 ## Correzioni già fatte (non ripetere gli errori)
 
 1. Bocconi costa 17.000 €/anno di listino, non "3.000-16.000 secondo ISEE" (Bocconi4Access è a esaurimento fondi).

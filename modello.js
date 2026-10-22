@@ -1,5 +1,5 @@
 // modello.js — motore di calcolo del piano di candidatura (nessuna dipendenza).
-// Caricato da index.html con <script src="modello.js"> dopo dati.js; funziona anche aprendo il file in locale.
+// Caricato da piano.html con <script src="modello.js"> dopo dati.js; funziona anche aprendo il file in locale.
 //
 // Idee chiave
 // 1. Probabilità marginali: ogni corso ha una regola RULES[id].fn(q) → {p, calc, f}; p deriva solo dal profilo
