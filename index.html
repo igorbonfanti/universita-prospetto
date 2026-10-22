@@ -2,6 +2,7 @@
 <html lang="it">
 <head>
 <meta charset="utf-8">
+<script>try{var t=localStorage.getItem("tema");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Università Bonfanti</title>
 <link rel="manifest" href="manifest.webmanifest">
@@ -22,18 +23,27 @@
   --sans:"Schibsted Grotesk","Segoe UI",system-ui,-apple-system,Roboto,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
 }
-@media (prefers-color-scheme: dark){:root{
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#0F1A22; --card:#16222B; --ink:#E7EDF0; --soft:#A9B6BF; --faint:#7D8B95; --rule:#2A3841; --hover:#1E2C36;
   --accent:#8FC0DC; --accent-soft:#1C2E3A;
   --t-map:#6E9BE3; --t-guide:#4FB08A; --t-plan:#A68BDB; --t-rep:#D9973F;
   color-scheme:dark;
 }}
+:root[data-theme="dark"]{
+  --bg:#0F1A22; --card:#16222B; --ink:#E7EDF0; --soft:#A9B6BF; --faint:#7D8B95; --rule:#2A3841; --hover:#1E2C36;
+  --accent:#8FC0DC; --accent-soft:#1C2E3A;
+  --t-map:#6E9BE3; --t-guide:#4FB08A; --t-plan:#A68BDB; --t-rep:#D9973F;
+  color-scheme:dark;
+}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 var(--sans)}
 .wrap{max-width:860px;margin:0 auto;padding-block:calc(28px + env(safe-area-inset-top,0px)) calc(40px + env(safe-area-inset-bottom,0px));
   padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
 header{display:flex;gap:16px;align-items:center;margin-bottom:24px}
+header .t{flex:1;min-width:0}
+.temabtn{font:inherit;font-size:.84rem;color:var(--ink);background:var(--card);border:1px solid var(--rule);border-radius:999px;padding:6px 12px;cursor:pointer;white-space:nowrap;align-self:flex-start}
+.temabtn:hover{background:var(--hover)}
 header img{width:58px;height:58px;border-radius:14px;flex:0 0 auto}
 h1{margin:0;font-size:1.7rem;line-height:1.15;letter-spacing:-.02em}
 .who{margin:4px 0 0;color:var(--soft);font-size:.92rem;display:flex;flex-wrap:wrap;gap:2px 14px}
@@ -70,10 +80,11 @@ footer a{color:var(--soft)}
 <div class="wrap">
   <header>
     <img src="icon-180.png" alt="">
-    <div>
+    <div class="t">
       <h1>Università Bonfanti</h1>
       <p class="who"><span><b>Francesca</b> · ingresso settembre 2027</span><span><b>Marco</b> e <b>Iacopo</b> · ingresso settembre 2028</span></p>
     </div>
+    <button type="button" class="temabtn" id="temabtn">◐ Auto</button>
   </header>
 
   <nav class="grid" aria-label="Sezioni">
@@ -89,21 +100,9 @@ footer a{color:var(--soft)}
       <p>Classifica, schede con corsi, come si entra, test, scadenze 2027 e 2028, costi e la rosa di candidature per ciascuno.</p>
       <span class="go" style="color:var(--t-guide)">Apri la guida →</span>
     </a>
-    <a class="tile" href="piano.html">
-      <span class="glyph" style="background:color-mix(in srgb,var(--t-plan) 16%,transparent);color:var(--t-plan)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span>
-      <h2>Piano di candidatura <span>6/10/2026</span></h2>
-      <p>Probabilità di ammissione calcolate dal profilo, scala consigliata, preparazioni, calendario ed esborsi.</p>
-      <span class="go" style="color:var(--t-plan)">Apri il piano →</span>
-    </a>
-    <a class="tile" href="report.html">
-      <span class="glyph" style="background:color-mix(in srgb,var(--t-rep) 16%,transparent);color:var(--t-rep)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></svg></span>
-      <h2>Report <span>6/10/2026</span></h2>
-      <p>Sintesi in dieci punti, scala per ciascuno, dove investire tempo e denaro, verifiche da fare per iscritto.</p>
-      <span class="go" style="color:var(--t-rep)">Apri il report →</span>
-    </a>
   </nav>
 
-  <p class="note"><b>Quale vale.</b> Per atenei, corsi e date fanno fede la guida e la mappa, verificate sui siti ufficiali il 21 ottobre 2026. Piano e report sono del 6 ottobre: utili per probabilità ed esborsi, ma non contengono le decisioni prese dopo.</p>
+  <p class="note"><b>Come usarle.</b> Nella mappa vedi dove sono gli atenei e quali corsi hanno; nella guida trovi per ognuno cosa si studia, come si entra, le scadenze e quanto costa. Dati verificati sui siti ufficiali il 21 ottobre 2026.</p>
 
   <h3>Tenerla come un'app sul telefono</h3>
   <div class="install">
@@ -114,8 +113,14 @@ footer a{color:var(--soft)}
 
   <footer>
     <span>Aggiornata il 22 ottobre 2026</span>
-    <a href="analisi.html">Archivio: analisi del 5 ottobre</a>
+    <a href="https://claude.ai/artifact/XRKn4ChaqHZkAbfbMACgG6" target="_blank" rel="noopener">Cruscotto candidature (riservato)</a>
+    <a href="piano.html">Archivio: piano e report del 6 ottobre</a>
   </footer>
 </div>
+<script>(function(){var b=document.getElementById("temabtn");if(!b)return;var L={system:"Auto",light:"Chiaro",dark:"Scuro"},N={system:"light",light:"dark",dark:"system"};
+function cur(){try{var t=localStorage.getItem("tema");return t==="light"||t==="dark"?t:"system"}catch(e){return "system"}}
+function show(){b.textContent="◐ "+L[cur()];b.title="Tema: "+L[cur()]+" · tocca per cambiare"}
+b.addEventListener("click",function(){var n=N[cur()];try{n==="system"?localStorage.removeItem("tema"):localStorage.setItem("tema",n)}catch(e){}
+if(n==="system")document.documentElement.removeAttribute("data-theme");else document.documentElement.setAttribute("data-theme",n);show()});show()})();</script>
 </body>
 </html>

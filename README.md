@@ -5,10 +5,11 @@ Piano di candidatura per i bachelor di Francesca (ingresso 2027), Marco e Iacopo
 **App pubblicata:** https://igorbonfanti.github.io/universita-prospetto/ (si può aggiungere alla schermata Home del telefono)
 
 ## Pagine
-- `index.html`: home dell'app, con i collegamenti a mappa, guida, piano e report.
+- `index.html`: home dell'app per i ragazzi (mappa e guida), con tema Auto/Chiaro/Scuro ricordato su tutte le pagine.
 - `mappa.html`: mappa interattiva dei 27 atenei della guida (22/10/2026), file unico con le librerie incorporate e una versione statica per le anteprime senza JavaScript.
 - `guida.html`: guida agli atenei del 21/10/2026 (classifica, schede, ammissione, scadenze, costi, rosa per ciascuno). Per atenei, corsi e date è il riferimento più recente.
-- `piano.html`: piano di candidatura interattivo (In breve, Preferenze, Profili e probabilità, Scala consigliata, Preparazione, Calendario con export .ics, Esborsi, Metodo e fonti).
+- Le liste di candidatura e gli esborsi sono in un cruscotto riservato su claude.ai (link in fondo alla home), che salva profili e preferenze su ogni dispositivo.
+- `piano.html` (archivio dal 22/10): piano di candidatura interattivo (In breve, Preferenze, Profili e probabilità, Scala consigliata, Preparazione, Calendario con export .ics, Esborsi, Metodo e fonti).
 - `report.html`: report finale del 6 ottobre 2026, con fatti e valutazioni distinti.
 - `analisi.html`: analisi del 5 ottobre (superata dal report, conservata per storia).
 

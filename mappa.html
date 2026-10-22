@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<script>document.documentElement.classList.add("js")</script>
+<script>document.documentElement.classList.add("js");try{var t=localStorage.getItem("tema");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-180.png">
@@ -65,6 +65,8 @@ header{display:flex;flex-wrap:wrap;align-items:center;gap:10px 20px;padding-bloc
 .brand{min-width:0;flex:1 1 260px}
 .brand h1{margin:0;font-size:1.15rem;font-weight:700;letter-spacing:-.01em;text-wrap:balance}
 .brand p{margin:0;color:var(--soft);font-size:.82rem}
+.temabtn{font:inherit;font-size:.82rem;color:var(--ink);background:var(--tint);border:0;border-radius:999px;padding:6px 12px;cursor:pointer;white-space:nowrap}
+.temabtn:hover{background:var(--hover)}
 .homelink{display:inline-block;font-size:.78rem;font-weight:600;text-decoration:none;color:var(--accent);margin-bottom:2px}
 .toguide{display:inline-block;font-weight:600;font-size:.88rem;text-decoration:none;border:1px solid var(--rule);border-radius:999px;padding:7px 14px}
 .toguide:hover{background:var(--hover)}
@@ -217,6 +219,7 @@ details.more>summary{cursor:pointer;font-size:.84rem;font-weight:600;padding:4px
   .kids{flex-wrap:nowrap;width:100%;justify-content:space-between}
   .kids button{padding:5px 10px;font-size:.84rem;flex:1 1 auto}
   .kids button small{display:none}
+  header .temabtn{position:absolute;top:10px;right:max(16px,env(safe-area-inset-right,0px));padding:4px 10px}
   .legend{font-size:.72rem;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
   aside.detail-open{position:fixed;left:0;right:0;bottom:0;top:auto;height:86%;z-index:20;border-radius:16px 16px 0 0;box-shadow:0 -10px 40px rgba(0,0,0,.25);border-top:0;padding-bottom:env(safe-area-inset-bottom,0px);animation:up .22s ease-out}
   .scrim{position:fixed;inset:0;background:rgba(10,18,26,.35);z-index:19}
@@ -262,6 +265,7 @@ html:not(.js) .static{display:block;max-width:820px;margin:0 auto;padding-block:
       <button type="button" data-kid="mar" aria-pressed="false">Marco<small>2028</small></button>
       <button type="button" data-kid="iac" aria-pressed="false">Iacopo<small>2028</small></button>
     </div>
+    <button type="button" class="temabtn" id="temabtn">◐ Auto</button>
     <div class="legend" id="legend"></div>
   </header>
   <div class="main">
@@ -2180,6 +2184,9 @@ document.getElementById("zeu").onclick = () => svg.transition().duration(500).ca
 document.addEventListener("keydown", e => { if (e.key === "Escape" && selected) deselect(); });
 svg.on("click", () => { hideTip(); });
 
+function ritema() { legend(); if (selected) renderDetail(byId[selected]); else renderList(); render(); }
+document.addEventListener("temacambiato", ritema);
+try { window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ritema); } catch (e) {}
 window.addEventListener("resize", () => { fit(); svg.call(zoom.transform, T); render(); });
 
 fit();
@@ -2187,5 +2194,10 @@ syncKids();
 const h = (location.hash || "").slice(1);
 if (byId[h]) select(h, true);
 </script>
+<script>(function(){var b=document.getElementById("temabtn");if(!b)return;var L={system:"Auto",light:"Chiaro",dark:"Scuro"},N={system:"light",light:"dark",dark:"system"};
+function cur(){try{var t=localStorage.getItem("tema");return t==="light"||t==="dark"?t:"system"}catch(e){return "system"}}
+function show(){b.textContent="◐ "+L[cur()];b.title="Tema: "+L[cur()]+" · tocca per cambiare"}
+b.addEventListener("click",function(){var n=N[cur()];try{n==="system"?localStorage.removeItem("tema"):localStorage.setItem("tema",n)}catch(e){}
+if(n==="system")document.documentElement.removeAttribute("data-theme");else document.documentElement.setAttribute("data-theme",n);show();document.dispatchEvent(new Event("temacambiato"))});show()})();</script>
 </body>
 </html>
