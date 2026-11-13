@@ -34,7 +34,7 @@ Aggiornato al 6 ottobre 2026 (regole di ammissione riverificate sui siti ufficia
 
 - Criteri di Igor per i corsi: economia aziendale, economia politica, econometria, data science, filosofia applicata all'economia, doppie lauree (interesse particolare per il **BSc² Econometrics & Economics** di Rotterdam, 4 anni). Per gli atenei italiani valgono anche i corsi in italiano.
 - Vincolo dei ragazzi (set 2026): in Italia **solo Bocconi o atenei di Milano**; all'estero **solo città vere**, non località piccole/di provincia (Tilburg, Maastricht, Delft, Eindhoven sono "da decidere con i ragazzi").
-- Esclusi: **Regno Unito** (costi), **Groningen**, **Svizzera/San Gallo** (anche per il tedesco), Padova/Trento; Bologna e Venezia solo come riferimento. **Forward College non interessa** (vedi correzioni).
+- Esclusi: **Regno Unito** (costi), **Groningen**, Padova/Trento; la **Svizzera/San Gallo**, esclusa a settembre 2026 anche per il tedesco, è stata **reinserita da Igor il 13/11/2026** con i bachelor economici della HSG; Bologna e Venezia solo come riferimento. **Forward College non interessa** (vedi correzioni).
 - Inclusi per scelta: ESCP; Amsterdam (UvA, VU); da ottobre 2026 WU Vienna, HEC–Bocconi, UvA Econometrics & Data Science, PPLE; per Iacopo Politecnico, TU Delft, TU/e, KU Leuven/UCLouvain Bruxelles, VU CS/AI, TUM Management & Technology (escluso il 6/10: non interamente in inglese), IE; dal 6/10 anche Politecnico Engineering Science, TU/e Industrial Engineering, KU Leuven Engineering Technology, VU CS, Bicocca e Statale come ripieghi.
 - Master: rinviati; si farà un prospetto a parte.
 
@@ -50,6 +50,7 @@ Aggiornato al 6 ottobre 2026 (regole di ammissione riverificate sui siti ufficia
 - **Danimarca**: tabella ufficiale Italia → 7-trin pubblica: **90 → 8,5; 95 → 9,3; 99 → 9,9; 100 → 11,3; 100L → 11,6**. CBS 2026: IB 11,1 e IBP 10,7 (= 100), BADM 9,8 (~98), BASM 9,4 (~96); CAE ≥185 (o inglese 8 + IELTS 7). Aarhus EBA: 9,2 (~95). **Diploma entro il 5/7 ore 12**: rischio per chi si diploma a luglio. Università di Copenhagen: solo in danese.
 - **Irlanda**: CAO **100L 600, 100 553, 95 527, 90 501, 80 445**; +25 se mate ≥7 da liceo scientifico (novità 2026, da verificare per il 2027). UCD Economics 544 (≈ 95 + bonus), Commerce 554 (≈ 100 + bonus); Trinity BESS 567, PPES 591 (solo 100L); mate ≥8; Trinity chiede un test d'inglese. CAO 2027: apertura 5/11/2026, scadenze 20/1 e 1/2/2027.
 - **Austria**: WU BBE 240 posti, esame **solo in presenza** a Vienna alla data fissata (2026: 30/6), nessuna alternativa; voti irrilevanti; inglese B2 col diploma UE; procedura 2027/28 a metà novembre 2026.
+- **Svizzera (St. Gallen, HSG; verificato il 13/11/2026)**: con la maturità italiana si entra **solo con il test attitudinale online** di 70 minuti (problemi quantitativi, grafici e tabelle; in inglese se si sceglie il 1° anno in inglese), voti ignorati; quota stranieri ≤25%; un solo test all'anno, non anticipabile. Ciclo 2027: domanda dal 1/10/2026, **completa entro il 10/1/2027 per il test del 16/2** (esito 18/2), oppure entro il 30/4 per il test dell'8/6 (esito 10/6). Ammissione unica al 1° anno (Assessment Year, in inglese o tedesco); poi major BWL (≥12 crediti in tedesco), VWL (≥8), BIA (≥9, inglese C2 alla laurea); **Law and Economics e Computer Science solo in tedesco**. Retta stranieri CHF 6.687/anno (≈7.300 €), domanda CHF 268; vita ≈26.000 €/anno; totale ≈100k € in 3 anni. Dal 2026 il 1° anno si supera con al massimo 8 punti negativi.
 - **Germania**: TUM Management & Technology interamente in inglese solo con la specializzazione Computer Engineering; sede di Heilbronn chiusa ai nuovi iscritti: **escluso** dal catalogo.
 - **Test e certificazioni**: un IELTS Academic 7.0 senza parti sotto 6.5 (290 € a Milano) copre tutti i corsi del catalogo; molti atenei vogliono un test di non più di 2 anni (gemelli: maggio-novembre 2027). SAT 111 $, date 7/11 e 5/12/2026, 6/3, 1/5, 5/6/2027. OMPT su omptest.org, 240-270 € a tentativo.
 
@@ -66,6 +67,7 @@ Aggiornato al 6 ottobre 2026 (regole di ammissione riverificate sui siti ufficia
 
 - **22/10/2026**: il sito diventa un'app: nuova home `index.html` (il piano passa a `piano.html`), `guida.html` (guida del 21/10, 27 atenei: KU Leuven Business Engineering nella rosa di tutti e tre; in Germania tenute solo TUM, WHU e Frankfurt School) e `mappa.html`; manifest e icone per la schermata Home.
 - **22/10/2026 (2)**: decisioni di Igor: piano e report servono solo a lui e vanno tolti dalla home; vanno rifatti più semplici e autoaggiornanti, con profili e preferenze salvati su ogni dispositivo; liste di candidatura più lunghe perché test, essay e colloqui hanno esito incerto; i ragazzi possono tentare anche dove sembra improbo se se la sentono; servono a colpo d'occhio dove puntare ed esborso anno per anno e cumulato. Scelte: cruscotto come pagina privata su claude.ai (salvataggio condiviso tra dispositivi), tema Carta per tutte le pagine con interruttore chiaro/scuro, probabilità in fasce (alta, media, bassa, improba) con il motivo invece delle percentuali. Piano e report restano come archivio.
+- **13/11/2026**: su richiesta di Igor entra la **Università di San Gallo (HSG)** con i cinque bachelor (BWL, VWL, BIA, BLE, BCS): due ricerche indipendenti sui siti ufficiali (unisg.ch, swissuniversities.ch), scheda nella guida (11ª su 28, punteggio 7,9; 83 corsi), sede sulla mappa, regole e costi nel cruscotto (ammissione unica: in lista ne entra un solo corso; BLE e BCS esclusi perché solo in tedesco). Nella rosa: Francesca "possibile" (Economics o Business Administration), Marco "ambiziosa" (Business Administration), Iacopo "possibile" (Economics).
 
 ## Correzioni già fatte (non ripetere gli errori)
 
@@ -99,6 +101,7 @@ Aggiornato al 6 ottobre 2026 (regole di ammissione riverificate sui siti ufficia
 7. Delft, Maastricht, Tilburg, Eindhoven, Lovanio, Reims come "città vere": decisione dei ragazzi.
 8. Retta Bocconi 2027/28 e date di immatricolazione/rimborso 2027/28.
 9. **Preferenze dei ragazzi** da confermare nella scheda Preferenze dell'app (le iniziali sono ipotesi).
+10. **St. Gallen**: conferma scritta (admissions@unisg.ch, prima del 10/1/2027) che il quadriennale di Francesca è ammesso e se i crediti "other language" del major devono essere in tedesco; esistenza di un video-colloquio (le pagine si contraddicono); costo del test, posti, calendario 2027/28; tempo di viaggio Milano–San Gallo.
 
 ## Prossimi passi ipotizzati
 

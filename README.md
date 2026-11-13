@@ -6,7 +6,7 @@ Piano di candidatura per i bachelor di Francesca (ingresso 2027), Marco e Iacopo
 
 ## Pagine
 - `index.html`: home dell'app per i ragazzi (mappa e guida), con tema Auto/Chiaro/Scuro ricordato su tutte le pagine.
-- `mappa.html`: mappa interattiva dei 27 atenei della guida (22/10/2026), file unico con le librerie incorporate e una versione statica per le anteprime senza JavaScript.
+- `mappa.html`: mappa interattiva dei 28 atenei della guida (22/10/2026), file unico con le librerie incorporate e una versione statica per le anteprime senza JavaScript.
 - `guida.html`: guida agli atenei del 21/10/2026 (classifica, schede, ammissione, scadenze, costi, rosa per ciascuno). Per atenei, corsi e date è il riferimento più recente.
 - Le liste di candidatura e gli esborsi sono in un cruscotto riservato su claude.ai (link in fondo alla home), che salva profili e preferenze su ogni dispositivo.
 - `piano.html` (archivio dal 22/10): piano di candidatura interattivo (In breve, Preferenze, Profili e probabilità, Scala consigliata, Preparazione, Calendario con export .ics, Esborsi, Metodo e fonti).
